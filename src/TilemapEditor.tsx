@@ -47,30 +47,30 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   };
 
   return (
-    <EditorContext.Provider
-      value={{
-        config,
-        state: editorState,
-        dispatch,
-        selectedTile,
-        setSelectedTile,
-        selectedTool,
-        setSelectedTool,
-        camera,
-        setCamera,
-      }}
-    >
-      <div className="editor-container">
-        <div className="palette-container">
+    <div style={{ position: "relative", width: "100vw", height: "100vh" }}>
+      <EditorContext.Provider
+        value={{
+          config,
+          state: editorState,
+          dispatch,
+          selectedTile,
+          setSelectedTile,
+          selectedTool,
+          setSelectedTool,
+          camera,
+          setCamera,
+        }}
+      >
+        <div className="editor-container">
+          <div className="canvas-container">
+            <Canvas />
+            <div className="camera-controls">
+              <CameraControls />
+            </div>
+          </div>
           <TilePalette />
         </div>
-        <div className="canvas-container">
-          <Canvas />
-          <div className="camera-controls">
-            <CameraControls />
-          </div>
-        </div>
-      </div>
-    </EditorContext.Provider>
+      </EditorContext.Provider>
+    </div>
   );
 };

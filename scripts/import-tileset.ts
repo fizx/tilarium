@@ -1,23 +1,62 @@
 import { XMLParser } from "fast-xml-parser";
 import fs from "fs";
 import path from "path";
-import { TileConfig, TileDefinition } from "../src/config";
+import { TileConfig, TileDefinition, TileGroup } from "../src/config";
 
-const getZIndexFromFilename = (filename: string): number => {
-  const lowercased = filename.toLowerCase();
-  if (lowercased.includes("background")) {
+const getZIndex = (name: string): number => {
+  // Background terrain and liquids
+  if (
+    name.startsWith("terrain_") ||
+    name.startsWith("water") ||
+    name.startsWith("lava") ||
+    name === "grass" ||
+    name === "snow"
+  ) {
     return 0;
   }
-  if (lowercased.includes("tiles")) {
+  // Scenery and large static objects
+  if (
+    name.startsWith("bush") ||
+    name.startsWith("cactus") ||
+    name.startsWith("fence") ||
+    name.startsWith("hill") ||
+    name.startsWith("mushroom") ||
+    name.startsWith("rock")
+  ) {
     return 1;
   }
-  if (lowercased.includes("enemies")) {
+  // Platforms, blocks, and other solid, interactive structures
+  if (
+    name.startsWith("block_") ||
+    name.startsWith("brick") ||
+    name.startsWith("bridge") ||
+    name.startsWith("ladder") ||
+    name.startsWith("ramp")
+  ) {
     return 2;
   }
-  if (lowercased.includes("characters")) {
+  // Small items, collectibles, and interactables that sit on top of other things
+  if (
+    name.startsWith("coin_") ||
+    name.startsWith("door_") ||
+    name.startsWith("gem_") ||
+    name.startsWith("heart") ||
+    name.startsWith("key_") ||
+    name.startsWith("lever") ||
+    name.startsWith("lock_") ||
+    name.startsWith("sign") ||
+    name.startsWith("spikes") ||
+    name.startsWith("spring") ||
+    name.startsWith("star") ||
+    name.startsWith("switch") ||
+    name.startsWith("torch")
+  ) {
     return 3;
   }
-  return 4; // Default for HUD or other foreground elements
+  if (name.startsWith("character") || name.startsWith("enemy")) {
+    return 4;
+  }
+  return 5; // Default for HUD or other foreground elements
 };
 
 const inputFile = process.argv[2];
@@ -30,7 +69,19 @@ if (!inputFile || !outputFile) {
   process.exit(1);
 }
 
-const baseZIndex = getZIndexFromFilename(path.basename(inputFile));
+// Load existing config if it exists, otherwise create a new one
+let tileConfig: TileConfig;
+if (fs.existsSync(outputFile)) {
+  const fileContent = fs.readFileSync(outputFile, "utf-8");
+  tileConfig = JSON.parse(fileContent);
+} else {
+  tileConfig = {
+    mapSize: "infinite",
+    tiles: {},
+    groups: {},
+  };
+}
+
 const xmlData = fs.readFileSync(inputFile, "utf-8");
 const parser = new XMLParser({
   ignoreAttributes: false,
@@ -40,15 +91,25 @@ const result = parser.parse(xmlData);
 
 const textureAtlas = result.TextureAtlas;
 const imagePath = textureAtlas.imagePath;
-const tiles: Record<string, TileDefinition> = {};
+const groupName = path
+  .basename(inputFile)
+  .replace("spritesheet-", "")
+  .replace("-default.xml", "")
+  .replace(".xml", "");
+
+const newGroup: TileGroup = {
+  displayName: groupName,
+  tileIds: [],
+};
 
 for (const subTexture of textureAtlas.SubTexture) {
   const name = subTexture.name.replace(".png", "");
+  newGroup.tileIds.push(name);
 
-  tiles[name] = {
+  tileConfig.tiles[name] = {
     displayName: name,
-    src: path.join(path.dirname(inputFile), imagePath),
-    zIndex: baseZIndex,
+    src: path.join(path.dirname(inputFile), imagePath).replace("example/", ""),
+    zIndex: getZIndex(name),
     spritesheet: {
       x: parseInt(subTexture.x, 10),
       y: parseInt(subTexture.y, 10),
@@ -59,11 +120,8 @@ for (const subTexture of textureAtlas.SubTexture) {
   };
 }
 
-const tileConfig: TileConfig = {
-  mapSize: "infinite",
-  tiles,
-};
+tileConfig.groups[groupName] = newGroup;
 
 fs.writeFileSync(outputFile, JSON.stringify(tileConfig, null, 2));
 
-console.log(`Successfully converted ${inputFile} to ${outputFile}`);
+console.log(`Successfully merged ${inputFile} into ${outputFile}`);

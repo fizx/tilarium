@@ -3,8 +3,8 @@
   "tiles": {
     "block_blue": {
       "displayName": "block_blue",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 0,
         "y": 0,
@@ -15,8 +15,8 @@
     },
     "block_coin": {
       "displayName": "block_coin",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 512,
         "y": 768,
@@ -27,8 +27,8 @@
     },
     "block_coin_active": {
       "displayName": "block_coin_active",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1088,
         "y": 384,
@@ -39,8 +39,8 @@
     },
     "block_empty": {
       "displayName": "block_empty",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1088,
         "y": 320,
@@ -51,8 +51,8 @@
     },
     "block_empty_warning": {
       "displayName": "block_empty_warning",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1088,
         "y": 256,
@@ -63,8 +63,8 @@
     },
     "block_exclamation": {
       "displayName": "block_exclamation",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1088,
         "y": 192,
@@ -75,8 +75,8 @@
     },
     "block_exclamation_active": {
       "displayName": "block_exclamation_active",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1088,
         "y": 128,
@@ -87,8 +87,8 @@
     },
     "block_green": {
       "displayName": "block_green",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1088,
         "y": 64,
@@ -99,8 +99,8 @@
     },
     "block_plank": {
       "displayName": "block_plank",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1088,
         "y": 0,
@@ -111,8 +111,8 @@
     },
     "block_planks": {
       "displayName": "block_planks",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1024,
         "y": 1088,
@@ -123,8 +123,8 @@
     },
     "block_red": {
       "displayName": "block_red",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1024,
         "y": 1024,
@@ -135,8 +135,8 @@
     },
     "block_spikes": {
       "displayName": "block_spikes",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1024,
         "y": 960,
@@ -147,8 +147,8 @@
     },
     "block_strong_coin": {
       "displayName": "block_strong_coin",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1024,
         "y": 896,
@@ -159,8 +159,8 @@
     },
     "block_strong_coin_active": {
       "displayName": "block_strong_coin_active",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1024,
         "y": 832,
@@ -171,8 +171,8 @@
     },
     "block_strong_danger": {
       "displayName": "block_strong_danger",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1024,
         "y": 768,
@@ -183,8 +183,8 @@
     },
     "block_strong_danger_active": {
       "displayName": "block_strong_danger_active",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1024,
         "y": 704,
@@ -195,8 +195,8 @@
     },
     "block_strong_empty": {
       "displayName": "block_strong_empty",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1024,
         "y": 640,
@@ -207,8 +207,8 @@
     },
     "block_strong_empty_active": {
       "displayName": "block_strong_empty_active",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1024,
         "y": 576,
@@ -219,8 +219,8 @@
     },
     "block_strong_exclamation": {
       "displayName": "block_strong_exclamation",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1024,
         "y": 512,
@@ -231,8 +231,8 @@
     },
     "block_strong_exclamation_active": {
       "displayName": "block_strong_exclamation_active",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1024,
         "y": 448,
@@ -243,8 +243,8 @@
     },
     "block_yellow": {
       "displayName": "block_yellow",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1024,
         "y": 384,
@@ -255,8 +255,8 @@
     },
     "bomb": {
       "displayName": "bomb",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 1024,
         "y": 320,
@@ -267,8 +267,8 @@
     },
     "bomb_active": {
       "displayName": "bomb_active",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 1024,
         "y": 256,
@@ -279,8 +279,8 @@
     },
     "brick_brown": {
       "displayName": "brick_brown",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1024,
         "y": 192,
@@ -291,8 +291,8 @@
     },
     "brick_brown_diagonal": {
       "displayName": "brick_brown_diagonal",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1024,
         "y": 128,
@@ -303,8 +303,8 @@
     },
     "brick_grey": {
       "displayName": "brick_grey",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1024,
         "y": 64,
@@ -315,8 +315,8 @@
     },
     "brick_grey_diagonal": {
       "displayName": "brick_grey_diagonal",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 1024,
         "y": 0,
@@ -327,8 +327,8 @@
     },
     "bricks_brown": {
       "displayName": "bricks_brown",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 960,
         "y": 1088,
@@ -339,8 +339,8 @@
     },
     "bricks_grey": {
       "displayName": "bricks_grey",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 960,
         "y": 1024,
@@ -351,8 +351,8 @@
     },
     "bridge": {
       "displayName": "bridge",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 960,
         "y": 960,
@@ -363,8 +363,8 @@
     },
     "bridge_logs": {
       "displayName": "bridge_logs",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 960,
         "y": 896,
@@ -375,7 +375,7 @@
     },
     "bush": {
       "displayName": "bush",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
       "zIndex": 1,
       "spritesheet": {
         "x": 960,
@@ -387,7 +387,7 @@
     },
     "cactus": {
       "displayName": "cactus",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
       "zIndex": 1,
       "spritesheet": {
         "x": 960,
@@ -399,8 +399,8 @@
     },
     "chain": {
       "displayName": "chain",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 960,
         "y": 704,
@@ -411,8 +411,8 @@
     },
     "coin_bronze": {
       "displayName": "coin_bronze",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 960,
         "y": 640,
@@ -423,8 +423,8 @@
     },
     "coin_bronze_side": {
       "displayName": "coin_bronze_side",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 960,
         "y": 576,
@@ -435,8 +435,8 @@
     },
     "coin_gold": {
       "displayName": "coin_gold",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 960,
         "y": 512,
@@ -447,8 +447,8 @@
     },
     "coin_gold_side": {
       "displayName": "coin_gold_side",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 960,
         "y": 448,
@@ -459,8 +459,8 @@
     },
     "coin_silver": {
       "displayName": "coin_silver",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 960,
         "y": 384,
@@ -471,8 +471,8 @@
     },
     "coin_silver_side": {
       "displayName": "coin_silver_side",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 960,
         "y": 320,
@@ -483,8 +483,8 @@
     },
     "conveyor": {
       "displayName": "conveyor",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 960,
         "y": 256,
@@ -495,8 +495,8 @@
     },
     "door_closed": {
       "displayName": "door_closed",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 960,
         "y": 192,
@@ -507,8 +507,8 @@
     },
     "door_closed_top": {
       "displayName": "door_closed_top",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 960,
         "y": 128,
@@ -519,8 +519,8 @@
     },
     "door_open": {
       "displayName": "door_open",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 960,
         "y": 64,
@@ -531,8 +531,8 @@
     },
     "door_open_top": {
       "displayName": "door_open_top",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 960,
         "y": 0,
@@ -543,7 +543,7 @@
     },
     "fence": {
       "displayName": "fence",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
       "zIndex": 1,
       "spritesheet": {
         "x": 896,
@@ -555,7 +555,7 @@
     },
     "fence_broken": {
       "displayName": "fence_broken",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
       "zIndex": 1,
       "spritesheet": {
         "x": 896,
@@ -567,8 +567,8 @@
     },
     "fireball": {
       "displayName": "fireball",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 896,
         "y": 960,
@@ -579,8 +579,8 @@
     },
     "flag_blue_a": {
       "displayName": "flag_blue_a",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 896,
         "y": 896,
@@ -591,8 +591,8 @@
     },
     "flag_blue_b": {
       "displayName": "flag_blue_b",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 896,
         "y": 832,
@@ -603,8 +603,8 @@
     },
     "flag_green_a": {
       "displayName": "flag_green_a",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 896,
         "y": 768,
@@ -615,8 +615,8 @@
     },
     "flag_green_b": {
       "displayName": "flag_green_b",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 896,
         "y": 704,
@@ -627,8 +627,8 @@
     },
     "flag_off": {
       "displayName": "flag_off",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 896,
         "y": 640,
@@ -639,8 +639,8 @@
     },
     "flag_red_a": {
       "displayName": "flag_red_a",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 896,
         "y": 576,
@@ -651,8 +651,8 @@
     },
     "flag_red_b": {
       "displayName": "flag_red_b",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 896,
         "y": 512,
@@ -663,8 +663,8 @@
     },
     "flag_yellow_a": {
       "displayName": "flag_yellow_a",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 896,
         "y": 448,
@@ -675,8 +675,8 @@
     },
     "flag_yellow_b": {
       "displayName": "flag_yellow_b",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 896,
         "y": 384,
@@ -687,8 +687,8 @@
     },
     "gem_blue": {
       "displayName": "gem_blue",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 896,
         "y": 320,
@@ -699,8 +699,8 @@
     },
     "gem_green": {
       "displayName": "gem_green",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 896,
         "y": 256,
@@ -711,8 +711,8 @@
     },
     "gem_red": {
       "displayName": "gem_red",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 896,
         "y": 192,
@@ -723,8 +723,8 @@
     },
     "gem_yellow": {
       "displayName": "gem_yellow",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 896,
         "y": 128,
@@ -735,8 +735,8 @@
     },
     "grass": {
       "displayName": "grass",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 896,
         "y": 64,
@@ -747,8 +747,8 @@
     },
     "grass_purple": {
       "displayName": "grass_purple",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 896,
         "y": 0,
@@ -759,8 +759,8 @@
     },
     "heart": {
       "displayName": "heart",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 832,
         "y": 1088,
@@ -771,7 +771,7 @@
     },
     "hill": {
       "displayName": "hill",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
       "zIndex": 1,
       "spritesheet": {
         "x": 832,
@@ -783,7 +783,7 @@
     },
     "hill_top": {
       "displayName": "hill_top",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
       "zIndex": 1,
       "spritesheet": {
         "x": 832,
@@ -795,7 +795,7 @@
     },
     "hill_top_smile": {
       "displayName": "hill_top_smile",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
       "zIndex": 1,
       "spritesheet": {
         "x": 832,
@@ -807,8 +807,8 @@
     },
     "hud_character_0": {
       "displayName": "hud_character_0",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 832,
         "y": 832,
@@ -819,8 +819,8 @@
     },
     "hud_character_1": {
       "displayName": "hud_character_1",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 832,
         "y": 768,
@@ -831,8 +831,8 @@
     },
     "hud_character_2": {
       "displayName": "hud_character_2",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 832,
         "y": 704,
@@ -843,8 +843,8 @@
     },
     "hud_character_3": {
       "displayName": "hud_character_3",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 832,
         "y": 640,
@@ -855,8 +855,8 @@
     },
     "hud_character_4": {
       "displayName": "hud_character_4",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 832,
         "y": 576,
@@ -867,8 +867,8 @@
     },
     "hud_character_5": {
       "displayName": "hud_character_5",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 832,
         "y": 512,
@@ -879,8 +879,8 @@
     },
     "hud_character_6": {
       "displayName": "hud_character_6",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 832,
         "y": 448,
@@ -891,8 +891,8 @@
     },
     "hud_character_7": {
       "displayName": "hud_character_7",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 832,
         "y": 384,
@@ -903,8 +903,8 @@
     },
     "hud_character_8": {
       "displayName": "hud_character_8",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 832,
         "y": 320,
@@ -915,8 +915,8 @@
     },
     "hud_character_9": {
       "displayName": "hud_character_9",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 832,
         "y": 256,
@@ -927,8 +927,8 @@
     },
     "hud_character_multiply": {
       "displayName": "hud_character_multiply",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 832,
         "y": 192,
@@ -939,8 +939,8 @@
     },
     "hud_character_percent": {
       "displayName": "hud_character_percent",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 832,
         "y": 128,
@@ -951,8 +951,8 @@
     },
     "hud_coin": {
       "displayName": "hud_coin",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 832,
         "y": 64,
@@ -963,8 +963,8 @@
     },
     "hud_heart": {
       "displayName": "hud_heart",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 832,
         "y": 0,
@@ -975,8 +975,8 @@
     },
     "hud_heart_empty": {
       "displayName": "hud_heart_empty",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 768,
         "y": 1088,
@@ -987,8 +987,8 @@
     },
     "hud_heart_half": {
       "displayName": "hud_heart_half",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 768,
         "y": 1024,
@@ -999,8 +999,8 @@
     },
     "hud_key_blue": {
       "displayName": "hud_key_blue",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 768,
         "y": 960,
@@ -1011,8 +1011,8 @@
     },
     "hud_key_green": {
       "displayName": "hud_key_green",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 768,
         "y": 896,
@@ -1023,8 +1023,8 @@
     },
     "hud_key_red": {
       "displayName": "hud_key_red",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 768,
         "y": 832,
@@ -1035,8 +1035,8 @@
     },
     "hud_key_yellow": {
       "displayName": "hud_key_yellow",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 768,
         "y": 768,
@@ -1047,8 +1047,8 @@
     },
     "hud_player_beige": {
       "displayName": "hud_player_beige",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 768,
         "y": 704,
@@ -1059,8 +1059,8 @@
     },
     "hud_player_green": {
       "displayName": "hud_player_green",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 768,
         "y": 640,
@@ -1071,8 +1071,8 @@
     },
     "hud_player_helmet_beige": {
       "displayName": "hud_player_helmet_beige",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 768,
         "y": 576,
@@ -1083,8 +1083,8 @@
     },
     "hud_player_helmet_green": {
       "displayName": "hud_player_helmet_green",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 768,
         "y": 512,
@@ -1095,8 +1095,8 @@
     },
     "hud_player_helmet_pink": {
       "displayName": "hud_player_helmet_pink",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 768,
         "y": 448,
@@ -1107,8 +1107,8 @@
     },
     "hud_player_helmet_purple": {
       "displayName": "hud_player_helmet_purple",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 768,
         "y": 384,
@@ -1119,8 +1119,8 @@
     },
     "hud_player_helmet_yellow": {
       "displayName": "hud_player_helmet_yellow",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 768,
         "y": 320,
@@ -1131,8 +1131,8 @@
     },
     "hud_player_pink": {
       "displayName": "hud_player_pink",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 768,
         "y": 256,
@@ -1143,8 +1143,8 @@
     },
     "hud_player_purple": {
       "displayName": "hud_player_purple",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 768,
         "y": 192,
@@ -1155,8 +1155,8 @@
     },
     "hud_player_yellow": {
       "displayName": "hud_player_yellow",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 768,
         "y": 128,
@@ -1167,8 +1167,8 @@
     },
     "key_blue": {
       "displayName": "key_blue",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 768,
         "y": 64,
@@ -1179,8 +1179,8 @@
     },
     "key_green": {
       "displayName": "key_green",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 768,
         "y": 0,
@@ -1191,8 +1191,8 @@
     },
     "key_red": {
       "displayName": "key_red",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 704,
         "y": 1088,
@@ -1203,8 +1203,8 @@
     },
     "key_yellow": {
       "displayName": "key_yellow",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 704,
         "y": 1024,
@@ -1215,8 +1215,8 @@
     },
     "ladder_bottom": {
       "displayName": "ladder_bottom",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 704,
         "y": 960,
@@ -1227,8 +1227,8 @@
     },
     "ladder_middle": {
       "displayName": "ladder_middle",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 704,
         "y": 896,
@@ -1239,8 +1239,8 @@
     },
     "ladder_top": {
       "displayName": "ladder_top",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 704,
         "y": 832,
@@ -1251,8 +1251,8 @@
     },
     "lava": {
       "displayName": "lava",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 704,
         "y": 768,
@@ -1263,8 +1263,8 @@
     },
     "lava_top": {
       "displayName": "lava_top",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 704,
         "y": 704,
@@ -1275,8 +1275,8 @@
     },
     "lava_top_low": {
       "displayName": "lava_top_low",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 704,
         "y": 640,
@@ -1287,8 +1287,8 @@
     },
     "lever": {
       "displayName": "lever",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 704,
         "y": 576,
@@ -1299,8 +1299,8 @@
     },
     "lever_left": {
       "displayName": "lever_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 704,
         "y": 512,
@@ -1311,8 +1311,8 @@
     },
     "lever_right": {
       "displayName": "lever_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 704,
         "y": 448,
@@ -1323,8 +1323,8 @@
     },
     "lock_blue": {
       "displayName": "lock_blue",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 704,
         "y": 384,
@@ -1335,8 +1335,8 @@
     },
     "lock_green": {
       "displayName": "lock_green",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 704,
         "y": 320,
@@ -1347,8 +1347,8 @@
     },
     "lock_red": {
       "displayName": "lock_red",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 704,
         "y": 256,
@@ -1359,8 +1359,8 @@
     },
     "lock_yellow": {
       "displayName": "lock_yellow",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 704,
         "y": 192,
@@ -1371,7 +1371,7 @@
     },
     "mushroom_brown": {
       "displayName": "mushroom_brown",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
       "zIndex": 1,
       "spritesheet": {
         "x": 704,
@@ -1383,7 +1383,7 @@
     },
     "mushroom_red": {
       "displayName": "mushroom_red",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
       "zIndex": 1,
       "spritesheet": {
         "x": 704,
@@ -1395,8 +1395,8 @@
     },
     "ramp": {
       "displayName": "ramp",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
       "spritesheet": {
         "x": 704,
         "y": 0,
@@ -1407,7 +1407,7 @@
     },
     "rock": {
       "displayName": "rock",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
       "zIndex": 1,
       "spritesheet": {
         "x": 640,
@@ -1419,8 +1419,8 @@
     },
     "rop_attached": {
       "displayName": "rop_attached",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 640,
         "y": 1024,
@@ -1431,8 +1431,8 @@
     },
     "rope": {
       "displayName": "rope",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 640,
         "y": 960,
@@ -1443,8 +1443,8 @@
     },
     "saw": {
       "displayName": "saw",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 640,
         "y": 896,
@@ -1455,8 +1455,8 @@
     },
     "sign": {
       "displayName": "sign",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 640,
         "y": 832,
@@ -1467,8 +1467,8 @@
     },
     "sign_exit": {
       "displayName": "sign_exit",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 640,
         "y": 768,
@@ -1479,8 +1479,8 @@
     },
     "sign_left": {
       "displayName": "sign_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 640,
         "y": 704,
@@ -1491,8 +1491,8 @@
     },
     "sign_right": {
       "displayName": "sign_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 640,
         "y": 640,
@@ -1503,8 +1503,8 @@
     },
     "snow": {
       "displayName": "snow",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 640,
         "y": 576,
@@ -1515,8 +1515,8 @@
     },
     "spikes": {
       "displayName": "spikes",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 640,
         "y": 512,
@@ -1527,8 +1527,8 @@
     },
     "spring": {
       "displayName": "spring",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 640,
         "y": 448,
@@ -1539,8 +1539,8 @@
     },
     "spring_out": {
       "displayName": "spring_out",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 640,
         "y": 384,
@@ -1551,8 +1551,8 @@
     },
     "star": {
       "displayName": "star",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 640,
         "y": 320,
@@ -1563,8 +1563,8 @@
     },
     "switch_blue": {
       "displayName": "switch_blue",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 640,
         "y": 256,
@@ -1575,8 +1575,8 @@
     },
     "switch_blue_pressed": {
       "displayName": "switch_blue_pressed",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 640,
         "y": 192,
@@ -1587,8 +1587,8 @@
     },
     "switch_green": {
       "displayName": "switch_green",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 640,
         "y": 128,
@@ -1599,8 +1599,8 @@
     },
     "switch_green_pressed": {
       "displayName": "switch_green_pressed",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 640,
         "y": 64,
@@ -1611,8 +1611,8 @@
     },
     "switch_red": {
       "displayName": "switch_red",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 640,
         "y": 0,
@@ -1623,8 +1623,8 @@
     },
     "switch_red_pressed": {
       "displayName": "switch_red_pressed",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 576,
         "y": 1088,
@@ -1635,8 +1635,8 @@
     },
     "switch_yellow": {
       "displayName": "switch_yellow",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 576,
         "y": 1024,
@@ -1647,8 +1647,8 @@
     },
     "switch_yellow_pressed": {
       "displayName": "switch_yellow_pressed",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 576,
         "y": 960,
@@ -1659,8 +1659,8 @@
     },
     "terrain_dirt_block": {
       "displayName": "terrain_dirt_block",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 576,
         "y": 896,
@@ -1671,8 +1671,8 @@
     },
     "terrain_dirt_block_bottom": {
       "displayName": "terrain_dirt_block_bottom",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 576,
         "y": 832,
@@ -1683,8 +1683,8 @@
     },
     "terrain_dirt_block_bottom_left": {
       "displayName": "terrain_dirt_block_bottom_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 576,
         "y": 768,
@@ -1695,8 +1695,8 @@
     },
     "terrain_dirt_block_bottom_right": {
       "displayName": "terrain_dirt_block_bottom_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 576,
         "y": 704,
@@ -1707,8 +1707,8 @@
     },
     "terrain_dirt_block_center": {
       "displayName": "terrain_dirt_block_center",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 576,
         "y": 640,
@@ -1719,8 +1719,8 @@
     },
     "terrain_dirt_block_left": {
       "displayName": "terrain_dirt_block_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 576,
         "y": 576,
@@ -1731,8 +1731,8 @@
     },
     "terrain_dirt_block_right": {
       "displayName": "terrain_dirt_block_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 576,
         "y": 512,
@@ -1743,8 +1743,8 @@
     },
     "terrain_dirt_block_top": {
       "displayName": "terrain_dirt_block_top",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 576,
         "y": 448,
@@ -1755,8 +1755,8 @@
     },
     "terrain_dirt_block_top_left": {
       "displayName": "terrain_dirt_block_top_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 576,
         "y": 384,
@@ -1767,8 +1767,8 @@
     },
     "terrain_dirt_block_top_right": {
       "displayName": "terrain_dirt_block_top_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 576,
         "y": 320,
@@ -1779,8 +1779,8 @@
     },
     "terrain_dirt_cloud": {
       "displayName": "terrain_dirt_cloud",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 576,
         "y": 256,
@@ -1791,8 +1791,8 @@
     },
     "terrain_dirt_cloud_background": {
       "displayName": "terrain_dirt_cloud_background",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 576,
         "y": 192,
@@ -1803,8 +1803,8 @@
     },
     "terrain_dirt_cloud_left": {
       "displayName": "terrain_dirt_cloud_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 576,
         "y": 128,
@@ -1815,8 +1815,8 @@
     },
     "terrain_dirt_cloud_middle": {
       "displayName": "terrain_dirt_cloud_middle",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 576,
         "y": 64,
@@ -1827,8 +1827,8 @@
     },
     "terrain_dirt_cloud_right": {
       "displayName": "terrain_dirt_cloud_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 576,
         "y": 0,
@@ -1839,8 +1839,8 @@
     },
     "terrain_dirt_horizontal_left": {
       "displayName": "terrain_dirt_horizontal_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 512,
         "y": 1088,
@@ -1851,8 +1851,8 @@
     },
     "terrain_dirt_horizontal_middle": {
       "displayName": "terrain_dirt_horizontal_middle",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 512,
         "y": 1024,
@@ -1863,8 +1863,8 @@
     },
     "terrain_dirt_horizontal_overhang_left": {
       "displayName": "terrain_dirt_horizontal_overhang_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 512,
         "y": 960,
@@ -1875,8 +1875,8 @@
     },
     "terrain_dirt_horizontal_overhang_right": {
       "displayName": "terrain_dirt_horizontal_overhang_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 512,
         "y": 896,
@@ -1887,8 +1887,8 @@
     },
     "terrain_dirt_horizontal_right": {
       "displayName": "terrain_dirt_horizontal_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 512,
         "y": 832,
@@ -1899,8 +1899,8 @@
     },
     "terrain_dirt_ramp_long_a": {
       "displayName": "terrain_dirt_ramp_long_a",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 1088,
         "y": 448,
@@ -1911,8 +1911,8 @@
     },
     "terrain_dirt_ramp_long_b": {
       "displayName": "terrain_dirt_ramp_long_b",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 512,
         "y": 704,
@@ -1923,8 +1923,8 @@
     },
     "terrain_dirt_ramp_long_c": {
       "displayName": "terrain_dirt_ramp_long_c",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 512,
         "y": 640,
@@ -1935,8 +1935,8 @@
     },
     "terrain_dirt_ramp_short_a": {
       "displayName": "terrain_dirt_ramp_short_a",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 512,
         "y": 576,
@@ -1947,8 +1947,8 @@
     },
     "terrain_dirt_ramp_short_b": {
       "displayName": "terrain_dirt_ramp_short_b",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 512,
         "y": 512,
@@ -1959,8 +1959,8 @@
     },
     "terrain_dirt_vertical_bottom": {
       "displayName": "terrain_dirt_vertical_bottom",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 512,
         "y": 448,
@@ -1971,8 +1971,8 @@
     },
     "terrain_dirt_vertical_middle": {
       "displayName": "terrain_dirt_vertical_middle",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 512,
         "y": 384,
@@ -1983,8 +1983,8 @@
     },
     "terrain_dirt_vertical_top": {
       "displayName": "terrain_dirt_vertical_top",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 512,
         "y": 320,
@@ -1995,8 +1995,8 @@
     },
     "terrain_grass_block": {
       "displayName": "terrain_grass_block",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 512,
         "y": 256,
@@ -2007,8 +2007,8 @@
     },
     "terrain_grass_block_bottom": {
       "displayName": "terrain_grass_block_bottom",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 512,
         "y": 192,
@@ -2019,8 +2019,8 @@
     },
     "terrain_grass_block_bottom_left": {
       "displayName": "terrain_grass_block_bottom_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 512,
         "y": 128,
@@ -2031,8 +2031,8 @@
     },
     "terrain_grass_block_bottom_right": {
       "displayName": "terrain_grass_block_bottom_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 512,
         "y": 64,
@@ -2043,8 +2043,8 @@
     },
     "terrain_grass_block_center": {
       "displayName": "terrain_grass_block_center",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 512,
         "y": 0,
@@ -2055,8 +2055,8 @@
     },
     "terrain_grass_block_left": {
       "displayName": "terrain_grass_block_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 448,
         "y": 1088,
@@ -2067,8 +2067,8 @@
     },
     "terrain_grass_block_right": {
       "displayName": "terrain_grass_block_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 448,
         "y": 1024,
@@ -2079,8 +2079,8 @@
     },
     "terrain_grass_block_top": {
       "displayName": "terrain_grass_block_top",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 448,
         "y": 960,
@@ -2091,8 +2091,8 @@
     },
     "terrain_grass_block_top_left": {
       "displayName": "terrain_grass_block_top_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 448,
         "y": 896,
@@ -2103,8 +2103,8 @@
     },
     "terrain_grass_block_top_right": {
       "displayName": "terrain_grass_block_top_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 448,
         "y": 832,
@@ -2115,8 +2115,8 @@
     },
     "terrain_grass_cloud": {
       "displayName": "terrain_grass_cloud",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 448,
         "y": 768,
@@ -2127,8 +2127,8 @@
     },
     "terrain_grass_cloud_background": {
       "displayName": "terrain_grass_cloud_background",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 448,
         "y": 704,
@@ -2139,8 +2139,8 @@
     },
     "terrain_grass_cloud_left": {
       "displayName": "terrain_grass_cloud_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 448,
         "y": 640,
@@ -2151,8 +2151,8 @@
     },
     "terrain_grass_cloud_middle": {
       "displayName": "terrain_grass_cloud_middle",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 448,
         "y": 576,
@@ -2163,8 +2163,8 @@
     },
     "terrain_grass_cloud_right": {
       "displayName": "terrain_grass_cloud_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 448,
         "y": 512,
@@ -2175,8 +2175,8 @@
     },
     "terrain_grass_horizontal_left": {
       "displayName": "terrain_grass_horizontal_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 448,
         "y": 448,
@@ -2187,8 +2187,8 @@
     },
     "terrain_grass_horizontal_middle": {
       "displayName": "terrain_grass_horizontal_middle",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 448,
         "y": 384,
@@ -2199,8 +2199,8 @@
     },
     "terrain_grass_horizontal_overhang_left": {
       "displayName": "terrain_grass_horizontal_overhang_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 448,
         "y": 320,
@@ -2211,8 +2211,8 @@
     },
     "terrain_grass_horizontal_overhang_right": {
       "displayName": "terrain_grass_horizontal_overhang_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 448,
         "y": 256,
@@ -2223,8 +2223,8 @@
     },
     "terrain_grass_horizontal_right": {
       "displayName": "terrain_grass_horizontal_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 448,
         "y": 192,
@@ -2235,8 +2235,8 @@
     },
     "terrain_grass_ramp_long_a": {
       "displayName": "terrain_grass_ramp_long_a",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 448,
         "y": 128,
@@ -2247,8 +2247,8 @@
     },
     "terrain_grass_ramp_long_b": {
       "displayName": "terrain_grass_ramp_long_b",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 448,
         "y": 64,
@@ -2259,8 +2259,8 @@
     },
     "terrain_grass_ramp_long_c": {
       "displayName": "terrain_grass_ramp_long_c",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 448,
         "y": 0,
@@ -2271,8 +2271,8 @@
     },
     "terrain_grass_ramp_short_a": {
       "displayName": "terrain_grass_ramp_short_a",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 384,
         "y": 1088,
@@ -2283,8 +2283,8 @@
     },
     "terrain_grass_ramp_short_b": {
       "displayName": "terrain_grass_ramp_short_b",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 384,
         "y": 1024,
@@ -2295,8 +2295,8 @@
     },
     "terrain_grass_vertical_bottom": {
       "displayName": "terrain_grass_vertical_bottom",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 384,
         "y": 960,
@@ -2307,8 +2307,8 @@
     },
     "terrain_grass_vertical_middle": {
       "displayName": "terrain_grass_vertical_middle",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 384,
         "y": 896,
@@ -2319,8 +2319,8 @@
     },
     "terrain_grass_vertical_top": {
       "displayName": "terrain_grass_vertical_top",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 384,
         "y": 832,
@@ -2331,8 +2331,8 @@
     },
     "terrain_purple_block": {
       "displayName": "terrain_purple_block",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 384,
         "y": 768,
@@ -2343,8 +2343,8 @@
     },
     "terrain_purple_block_bottom": {
       "displayName": "terrain_purple_block_bottom",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 384,
         "y": 704,
@@ -2355,8 +2355,8 @@
     },
     "terrain_purple_block_bottom_left": {
       "displayName": "terrain_purple_block_bottom_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 384,
         "y": 640,
@@ -2367,8 +2367,8 @@
     },
     "terrain_purple_block_bottom_right": {
       "displayName": "terrain_purple_block_bottom_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 384,
         "y": 576,
@@ -2379,8 +2379,8 @@
     },
     "terrain_purple_block_center": {
       "displayName": "terrain_purple_block_center",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 384,
         "y": 512,
@@ -2391,8 +2391,8 @@
     },
     "terrain_purple_block_left": {
       "displayName": "terrain_purple_block_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 384,
         "y": 448,
@@ -2403,8 +2403,8 @@
     },
     "terrain_purple_block_right": {
       "displayName": "terrain_purple_block_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 384,
         "y": 384,
@@ -2415,8 +2415,8 @@
     },
     "terrain_purple_block_top": {
       "displayName": "terrain_purple_block_top",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 384,
         "y": 320,
@@ -2427,8 +2427,8 @@
     },
     "terrain_purple_block_top_left": {
       "displayName": "terrain_purple_block_top_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 384,
         "y": 256,
@@ -2439,8 +2439,8 @@
     },
     "terrain_purple_block_top_right": {
       "displayName": "terrain_purple_block_top_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 384,
         "y": 192,
@@ -2451,8 +2451,8 @@
     },
     "terrain_purple_cloud": {
       "displayName": "terrain_purple_cloud",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 384,
         "y": 128,
@@ -2463,8 +2463,8 @@
     },
     "terrain_purple_cloud_background": {
       "displayName": "terrain_purple_cloud_background",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 384,
         "y": 64,
@@ -2475,8 +2475,8 @@
     },
     "terrain_purple_cloud_left": {
       "displayName": "terrain_purple_cloud_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 384,
         "y": 0,
@@ -2487,8 +2487,8 @@
     },
     "terrain_purple_cloud_middle": {
       "displayName": "terrain_purple_cloud_middle",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 320,
         "y": 1088,
@@ -2499,8 +2499,8 @@
     },
     "terrain_purple_cloud_right": {
       "displayName": "terrain_purple_cloud_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 320,
         "y": 1024,
@@ -2511,8 +2511,8 @@
     },
     "terrain_purple_horizontal_left": {
       "displayName": "terrain_purple_horizontal_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 320,
         "y": 960,
@@ -2523,8 +2523,8 @@
     },
     "terrain_purple_horizontal_middle": {
       "displayName": "terrain_purple_horizontal_middle",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 320,
         "y": 896,
@@ -2535,8 +2535,8 @@
     },
     "terrain_purple_horizontal_overhang_left": {
       "displayName": "terrain_purple_horizontal_overhang_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 320,
         "y": 832,
@@ -2547,8 +2547,8 @@
     },
     "terrain_purple_horizontal_overhang_right": {
       "displayName": "terrain_purple_horizontal_overhang_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 320,
         "y": 768,
@@ -2559,8 +2559,8 @@
     },
     "terrain_purple_horizontal_right": {
       "displayName": "terrain_purple_horizontal_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 320,
         "y": 704,
@@ -2571,8 +2571,8 @@
     },
     "terrain_purple_ramp_long_a": {
       "displayName": "terrain_purple_ramp_long_a",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 320,
         "y": 640,
@@ -2583,8 +2583,8 @@
     },
     "terrain_purple_ramp_long_b": {
       "displayName": "terrain_purple_ramp_long_b",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 320,
         "y": 576,
@@ -2595,8 +2595,8 @@
     },
     "terrain_purple_ramp_long_c": {
       "displayName": "terrain_purple_ramp_long_c",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 320,
         "y": 512,
@@ -2607,8 +2607,8 @@
     },
     "terrain_purple_ramp_short_a": {
       "displayName": "terrain_purple_ramp_short_a",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 320,
         "y": 448,
@@ -2619,8 +2619,8 @@
     },
     "terrain_purple_ramp_short_b": {
       "displayName": "terrain_purple_ramp_short_b",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 320,
         "y": 384,
@@ -2631,8 +2631,8 @@
     },
     "terrain_purple_vertical_bottom": {
       "displayName": "terrain_purple_vertical_bottom",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 320,
         "y": 320,
@@ -2643,8 +2643,8 @@
     },
     "terrain_purple_vertical_middle": {
       "displayName": "terrain_purple_vertical_middle",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 320,
         "y": 256,
@@ -2655,8 +2655,8 @@
     },
     "terrain_purple_vertical_top": {
       "displayName": "terrain_purple_vertical_top",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 320,
         "y": 192,
@@ -2667,8 +2667,8 @@
     },
     "terrain_sand_block": {
       "displayName": "terrain_sand_block",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 320,
         "y": 128,
@@ -2679,8 +2679,8 @@
     },
     "terrain_sand_block_bottom": {
       "displayName": "terrain_sand_block_bottom",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 320,
         "y": 64,
@@ -2691,8 +2691,8 @@
     },
     "terrain_sand_block_bottom_left": {
       "displayName": "terrain_sand_block_bottom_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 320,
         "y": 0,
@@ -2703,8 +2703,8 @@
     },
     "terrain_sand_block_bottom_right": {
       "displayName": "terrain_sand_block_bottom_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 256,
         "y": 1088,
@@ -2715,8 +2715,8 @@
     },
     "terrain_sand_block_center": {
       "displayName": "terrain_sand_block_center",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 256,
         "y": 1024,
@@ -2727,8 +2727,8 @@
     },
     "terrain_sand_block_left": {
       "displayName": "terrain_sand_block_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 256,
         "y": 960,
@@ -2739,8 +2739,8 @@
     },
     "terrain_sand_block_right": {
       "displayName": "terrain_sand_block_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 256,
         "y": 896,
@@ -2751,8 +2751,8 @@
     },
     "terrain_sand_block_top": {
       "displayName": "terrain_sand_block_top",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 256,
         "y": 832,
@@ -2763,8 +2763,8 @@
     },
     "terrain_sand_block_top_left": {
       "displayName": "terrain_sand_block_top_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 256,
         "y": 768,
@@ -2775,8 +2775,8 @@
     },
     "terrain_sand_block_top_right": {
       "displayName": "terrain_sand_block_top_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 256,
         "y": 704,
@@ -2787,8 +2787,8 @@
     },
     "terrain_sand_cloud": {
       "displayName": "terrain_sand_cloud",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 256,
         "y": 640,
@@ -2799,8 +2799,8 @@
     },
     "terrain_sand_cloud_background": {
       "displayName": "terrain_sand_cloud_background",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 256,
         "y": 576,
@@ -2811,8 +2811,8 @@
     },
     "terrain_sand_cloud_left": {
       "displayName": "terrain_sand_cloud_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 256,
         "y": 512,
@@ -2823,8 +2823,8 @@
     },
     "terrain_sand_cloud_middle": {
       "displayName": "terrain_sand_cloud_middle",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 256,
         "y": 448,
@@ -2835,8 +2835,8 @@
     },
     "terrain_sand_cloud_right": {
       "displayName": "terrain_sand_cloud_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 256,
         "y": 384,
@@ -2847,8 +2847,8 @@
     },
     "terrain_sand_horizontal_left": {
       "displayName": "terrain_sand_horizontal_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 256,
         "y": 320,
@@ -2859,8 +2859,8 @@
     },
     "terrain_sand_horizontal_middle": {
       "displayName": "terrain_sand_horizontal_middle",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 256,
         "y": 256,
@@ -2871,8 +2871,8 @@
     },
     "terrain_sand_horizontal_overhang_left": {
       "displayName": "terrain_sand_horizontal_overhang_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 256,
         "y": 192,
@@ -2883,8 +2883,8 @@
     },
     "terrain_sand_horizontal_overhang_right": {
       "displayName": "terrain_sand_horizontal_overhang_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 256,
         "y": 128,
@@ -2895,8 +2895,8 @@
     },
     "terrain_sand_horizontal_right": {
       "displayName": "terrain_sand_horizontal_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 256,
         "y": 64,
@@ -2907,8 +2907,8 @@
     },
     "terrain_sand_ramp_long_a": {
       "displayName": "terrain_sand_ramp_long_a",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 256,
         "y": 0,
@@ -2919,8 +2919,8 @@
     },
     "terrain_sand_ramp_long_b": {
       "displayName": "terrain_sand_ramp_long_b",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 192,
         "y": 1088,
@@ -2931,8 +2931,8 @@
     },
     "terrain_sand_ramp_long_c": {
       "displayName": "terrain_sand_ramp_long_c",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 192,
         "y": 1024,
@@ -2943,8 +2943,8 @@
     },
     "terrain_sand_ramp_short_a": {
       "displayName": "terrain_sand_ramp_short_a",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 192,
         "y": 960,
@@ -2955,8 +2955,8 @@
     },
     "terrain_sand_ramp_short_b": {
       "displayName": "terrain_sand_ramp_short_b",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 192,
         "y": 896,
@@ -2967,8 +2967,8 @@
     },
     "terrain_sand_vertical_bottom": {
       "displayName": "terrain_sand_vertical_bottom",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 192,
         "y": 832,
@@ -2979,8 +2979,8 @@
     },
     "terrain_sand_vertical_middle": {
       "displayName": "terrain_sand_vertical_middle",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 192,
         "y": 768,
@@ -2991,8 +2991,8 @@
     },
     "terrain_sand_vertical_top": {
       "displayName": "terrain_sand_vertical_top",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 192,
         "y": 704,
@@ -3003,8 +3003,8 @@
     },
     "terrain_snow_block": {
       "displayName": "terrain_snow_block",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 192,
         "y": 640,
@@ -3015,8 +3015,8 @@
     },
     "terrain_snow_block_bottom": {
       "displayName": "terrain_snow_block_bottom",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 192,
         "y": 576,
@@ -3027,8 +3027,8 @@
     },
     "terrain_snow_block_bottom_left": {
       "displayName": "terrain_snow_block_bottom_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 192,
         "y": 512,
@@ -3039,8 +3039,8 @@
     },
     "terrain_snow_block_bottom_right": {
       "displayName": "terrain_snow_block_bottom_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 192,
         "y": 448,
@@ -3051,8 +3051,8 @@
     },
     "terrain_snow_block_center": {
       "displayName": "terrain_snow_block_center",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 192,
         "y": 384,
@@ -3063,8 +3063,8 @@
     },
     "terrain_snow_block_left": {
       "displayName": "terrain_snow_block_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 192,
         "y": 320,
@@ -3075,8 +3075,8 @@
     },
     "terrain_snow_block_right": {
       "displayName": "terrain_snow_block_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 192,
         "y": 256,
@@ -3087,8 +3087,8 @@
     },
     "terrain_snow_block_top": {
       "displayName": "terrain_snow_block_top",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 192,
         "y": 192,
@@ -3099,8 +3099,8 @@
     },
     "terrain_snow_block_top_left": {
       "displayName": "terrain_snow_block_top_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 192,
         "y": 128,
@@ -3111,8 +3111,8 @@
     },
     "terrain_snow_block_top_right": {
       "displayName": "terrain_snow_block_top_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 192,
         "y": 64,
@@ -3123,8 +3123,8 @@
     },
     "terrain_snow_cloud": {
       "displayName": "terrain_snow_cloud",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 192,
         "y": 0,
@@ -3135,8 +3135,8 @@
     },
     "terrain_snow_cloud_background": {
       "displayName": "terrain_snow_cloud_background",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 128,
         "y": 1088,
@@ -3147,8 +3147,8 @@
     },
     "terrain_snow_cloud_left": {
       "displayName": "terrain_snow_cloud_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 128,
         "y": 1024,
@@ -3159,8 +3159,8 @@
     },
     "terrain_snow_cloud_middle": {
       "displayName": "terrain_snow_cloud_middle",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 128,
         "y": 960,
@@ -3171,8 +3171,8 @@
     },
     "terrain_snow_cloud_right": {
       "displayName": "terrain_snow_cloud_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 128,
         "y": 896,
@@ -3183,8 +3183,8 @@
     },
     "terrain_snow_horizontal_left": {
       "displayName": "terrain_snow_horizontal_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 128,
         "y": 832,
@@ -3195,8 +3195,8 @@
     },
     "terrain_snow_horizontal_middle": {
       "displayName": "terrain_snow_horizontal_middle",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 128,
         "y": 768,
@@ -3207,8 +3207,8 @@
     },
     "terrain_snow_horizontal_overhang_left": {
       "displayName": "terrain_snow_horizontal_overhang_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 128,
         "y": 704,
@@ -3219,8 +3219,8 @@
     },
     "terrain_snow_horizontal_overhang_right": {
       "displayName": "terrain_snow_horizontal_overhang_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 128,
         "y": 640,
@@ -3231,8 +3231,8 @@
     },
     "terrain_snow_horizontal_right": {
       "displayName": "terrain_snow_horizontal_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 128,
         "y": 576,
@@ -3243,8 +3243,8 @@
     },
     "terrain_snow_ramp_long_a": {
       "displayName": "terrain_snow_ramp_long_a",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 128,
         "y": 512,
@@ -3255,8 +3255,8 @@
     },
     "terrain_snow_ramp_long_b": {
       "displayName": "terrain_snow_ramp_long_b",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 128,
         "y": 448,
@@ -3267,8 +3267,8 @@
     },
     "terrain_snow_ramp_long_c": {
       "displayName": "terrain_snow_ramp_long_c",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 128,
         "y": 384,
@@ -3279,8 +3279,8 @@
     },
     "terrain_snow_ramp_short_a": {
       "displayName": "terrain_snow_ramp_short_a",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 128,
         "y": 320,
@@ -3291,8 +3291,8 @@
     },
     "terrain_snow_ramp_short_b": {
       "displayName": "terrain_snow_ramp_short_b",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 128,
         "y": 256,
@@ -3303,8 +3303,8 @@
     },
     "terrain_snow_vertical_bottom": {
       "displayName": "terrain_snow_vertical_bottom",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 128,
         "y": 192,
@@ -3315,8 +3315,8 @@
     },
     "terrain_snow_vertical_middle": {
       "displayName": "terrain_snow_vertical_middle",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 128,
         "y": 128,
@@ -3327,8 +3327,8 @@
     },
     "terrain_snow_vertical_top": {
       "displayName": "terrain_snow_vertical_top",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 128,
         "y": 64,
@@ -3339,8 +3339,8 @@
     },
     "terrain_stone_block": {
       "displayName": "terrain_stone_block",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 128,
         "y": 0,
@@ -3351,8 +3351,8 @@
     },
     "terrain_stone_block_bottom": {
       "displayName": "terrain_stone_block_bottom",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 64,
         "y": 1088,
@@ -3363,8 +3363,8 @@
     },
     "terrain_stone_block_bottom_left": {
       "displayName": "terrain_stone_block_bottom_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 64,
         "y": 1024,
@@ -3375,8 +3375,8 @@
     },
     "terrain_stone_block_bottom_right": {
       "displayName": "terrain_stone_block_bottom_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 64,
         "y": 960,
@@ -3387,8 +3387,8 @@
     },
     "terrain_stone_block_center": {
       "displayName": "terrain_stone_block_center",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 64,
         "y": 896,
@@ -3399,8 +3399,8 @@
     },
     "terrain_stone_block_left": {
       "displayName": "terrain_stone_block_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 64,
         "y": 832,
@@ -3411,8 +3411,8 @@
     },
     "terrain_stone_block_right": {
       "displayName": "terrain_stone_block_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 64,
         "y": 768,
@@ -3423,8 +3423,8 @@
     },
     "terrain_stone_block_top": {
       "displayName": "terrain_stone_block_top",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 64,
         "y": 704,
@@ -3435,8 +3435,8 @@
     },
     "terrain_stone_block_top_left": {
       "displayName": "terrain_stone_block_top_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 64,
         "y": 640,
@@ -3447,8 +3447,8 @@
     },
     "terrain_stone_block_top_right": {
       "displayName": "terrain_stone_block_top_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 64,
         "y": 576,
@@ -3459,8 +3459,8 @@
     },
     "terrain_stone_cloud": {
       "displayName": "terrain_stone_cloud",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 64,
         "y": 512,
@@ -3471,8 +3471,8 @@
     },
     "terrain_stone_cloud_background": {
       "displayName": "terrain_stone_cloud_background",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 64,
         "y": 448,
@@ -3483,8 +3483,8 @@
     },
     "terrain_stone_cloud_left": {
       "displayName": "terrain_stone_cloud_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 64,
         "y": 384,
@@ -3495,8 +3495,8 @@
     },
     "terrain_stone_cloud_middle": {
       "displayName": "terrain_stone_cloud_middle",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 64,
         "y": 320,
@@ -3507,8 +3507,8 @@
     },
     "terrain_stone_cloud_right": {
       "displayName": "terrain_stone_cloud_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 64,
         "y": 256,
@@ -3519,8 +3519,8 @@
     },
     "terrain_stone_horizontal_left": {
       "displayName": "terrain_stone_horizontal_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 64,
         "y": 192,
@@ -3531,8 +3531,8 @@
     },
     "terrain_stone_horizontal_middle": {
       "displayName": "terrain_stone_horizontal_middle",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 64,
         "y": 128,
@@ -3543,8 +3543,8 @@
     },
     "terrain_stone_horizontal_overhang_left": {
       "displayName": "terrain_stone_horizontal_overhang_left",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 64,
         "y": 64,
@@ -3555,8 +3555,8 @@
     },
     "terrain_stone_horizontal_overhang_right": {
       "displayName": "terrain_stone_horizontal_overhang_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 64,
         "y": 0,
@@ -3567,8 +3567,8 @@
     },
     "terrain_stone_horizontal_right": {
       "displayName": "terrain_stone_horizontal_right",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 0,
         "y": 1088,
@@ -3579,8 +3579,8 @@
     },
     "terrain_stone_ramp_long_a": {
       "displayName": "terrain_stone_ramp_long_a",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 0,
         "y": 1024,
@@ -3591,8 +3591,8 @@
     },
     "terrain_stone_ramp_long_b": {
       "displayName": "terrain_stone_ramp_long_b",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 0,
         "y": 960,
@@ -3603,8 +3603,8 @@
     },
     "terrain_stone_ramp_long_c": {
       "displayName": "terrain_stone_ramp_long_c",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 0,
         "y": 896,
@@ -3615,8 +3615,8 @@
     },
     "terrain_stone_ramp_short_a": {
       "displayName": "terrain_stone_ramp_short_a",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 0,
         "y": 832,
@@ -3627,8 +3627,8 @@
     },
     "terrain_stone_ramp_short_b": {
       "displayName": "terrain_stone_ramp_short_b",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 0,
         "y": 768,
@@ -3639,8 +3639,8 @@
     },
     "terrain_stone_vertical_bottom": {
       "displayName": "terrain_stone_vertical_bottom",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 0,
         "y": 704,
@@ -3651,8 +3651,8 @@
     },
     "terrain_stone_vertical_middle": {
       "displayName": "terrain_stone_vertical_middle",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 0,
         "y": 640,
@@ -3663,8 +3663,8 @@
     },
     "terrain_stone_vertical_top": {
       "displayName": "terrain_stone_vertical_top",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 0,
         "y": 576,
@@ -3675,8 +3675,8 @@
     },
     "torch_off": {
       "displayName": "torch_off",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 0,
         "y": 512,
@@ -3687,8 +3687,8 @@
     },
     "torch_on_a": {
       "displayName": "torch_on_a",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 0,
         "y": 448,
@@ -3699,8 +3699,8 @@
     },
     "torch_on_b": {
       "displayName": "torch_on_b",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
       "spritesheet": {
         "x": 0,
         "y": 384,
@@ -3711,8 +3711,8 @@
     },
     "water": {
       "displayName": "water",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 0,
         "y": 320,
@@ -3723,8 +3723,8 @@
     },
     "water_top": {
       "displayName": "water_top",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 0,
         "y": 256,
@@ -3735,8 +3735,8 @@
     },
     "water_top_low": {
       "displayName": "water_top_low",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 0,
       "spritesheet": {
         "x": 0,
         "y": 192,
@@ -3747,8 +3747,8 @@
     },
     "weight": {
       "displayName": "weight",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 0,
         "y": 128,
@@ -3759,8 +3759,8 @@
     },
     "window": {
       "displayName": "window",
-      "src": "example/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 5,
       "spritesheet": {
         "x": 0,
         "y": 64,
@@ -3768,6 +3768,1889 @@
         "height": 64
       },
       "scale": 0.5
+    },
+    "character_beige_climb_a": {
+      "displayName": "character_beige_climb_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 256,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_beige_climb_b": {
+      "displayName": "character_beige_climb_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 640,
+        "y": 384,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_beige_duck": {
+      "displayName": "character_beige_duck",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 640,
+        "y": 256,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_beige_front": {
+      "displayName": "character_beige_front",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 640,
+        "y": 128,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_beige_hit": {
+      "displayName": "character_beige_hit",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 640,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_beige_idle": {
+      "displayName": "character_beige_idle",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 512,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_beige_jump": {
+      "displayName": "character_beige_jump",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 512,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_beige_walk_a": {
+      "displayName": "character_beige_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 512,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_beige_walk_b": {
+      "displayName": "character_beige_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 512,
+        "y": 512,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_green_climb_a": {
+      "displayName": "character_green_climb_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 512,
+        "y": 384,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_green_climb_b": {
+      "displayName": "character_green_climb_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 512,
+        "y": 256,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_green_duck": {
+      "displayName": "character_green_duck",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 512,
+        "y": 128,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_green_front": {
+      "displayName": "character_green_front",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 512,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_green_hit": {
+      "displayName": "character_green_hit",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 384,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_green_idle": {
+      "displayName": "character_green_idle",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 384,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_green_jump": {
+      "displayName": "character_green_jump",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 384,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_green_walk_a": {
+      "displayName": "character_green_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 384,
+        "y": 512,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_green_walk_b": {
+      "displayName": "character_green_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 384,
+        "y": 384,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_pink_climb_a": {
+      "displayName": "character_pink_climb_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 384,
+        "y": 256,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_pink_climb_b": {
+      "displayName": "character_pink_climb_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 384,
+        "y": 128,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_pink_duck": {
+      "displayName": "character_pink_duck",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 384,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_pink_front": {
+      "displayName": "character_pink_front",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 256,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_pink_hit": {
+      "displayName": "character_pink_hit",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 640,
+        "y": 512,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_pink_idle": {
+      "displayName": "character_pink_idle",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 256,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_pink_jump": {
+      "displayName": "character_pink_jump",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 256,
+        "y": 512,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_pink_walk_a": {
+      "displayName": "character_pink_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 256,
+        "y": 384,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_pink_walk_b": {
+      "displayName": "character_pink_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 256,
+        "y": 256,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_purple_climb_a": {
+      "displayName": "character_purple_climb_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 256,
+        "y": 128,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_purple_climb_b": {
+      "displayName": "character_purple_climb_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 256,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_purple_duck": {
+      "displayName": "character_purple_duck",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 128,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_purple_front": {
+      "displayName": "character_purple_front",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 128,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_purple_hit": {
+      "displayName": "character_purple_hit",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 128,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_purple_idle": {
+      "displayName": "character_purple_idle",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 128,
+        "y": 512,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_purple_jump": {
+      "displayName": "character_purple_jump",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 128,
+        "y": 384,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_purple_walk_a": {
+      "displayName": "character_purple_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 128,
+        "y": 256,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_purple_walk_b": {
+      "displayName": "character_purple_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 128,
+        "y": 128,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_yellow_climb_a": {
+      "displayName": "character_yellow_climb_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 128,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_yellow_climb_b": {
+      "displayName": "character_yellow_climb_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 0,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_yellow_duck": {
+      "displayName": "character_yellow_duck",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 0,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_yellow_front": {
+      "displayName": "character_yellow_front",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 0,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_yellow_hit": {
+      "displayName": "character_yellow_hit",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 0,
+        "y": 512,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_yellow_idle": {
+      "displayName": "character_yellow_idle",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 0,
+        "y": 384,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_yellow_jump": {
+      "displayName": "character_yellow_jump",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 0,
+        "y": 256,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_yellow_walk_a": {
+      "displayName": "character_yellow_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 0,
+        "y": 128,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "character_yellow_walk_b": {
+      "displayName": "character_yellow_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 4,
+      "spritesheet": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      },
+      "scale": 0.5
+    },
+    "barnacle_attack_a": {
+      "displayName": "barnacle_attack_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 0,
+        "y": 128,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "barnacle_attack_b": {
+      "displayName": "barnacle_attack_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 0,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "barnacle_attack_rest": {
+      "displayName": "barnacle_attack_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "bee_a": {
+      "displayName": "bee_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 192,
+        "y": 320,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "bee_b": {
+      "displayName": "bee_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 448,
+        "y": 128,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "bee_rest": {
+      "displayName": "bee_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 448,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "block_fall": {
+      "displayName": "block_fall",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 2,
+      "spritesheet": {
+        "x": 448,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "block_idle": {
+      "displayName": "block_idle",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 2,
+      "spritesheet": {
+        "x": 384,
+        "y": 448,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "block_rest": {
+      "displayName": "block_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 2,
+      "spritesheet": {
+        "x": 384,
+        "y": 384,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "fish_blue_rest": {
+      "displayName": "fish_blue_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 384,
+        "y": 320,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "fish_blue_swim_a": {
+      "displayName": "fish_blue_swim_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 384,
+        "y": 256,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "fish_blue_swim_b": {
+      "displayName": "fish_blue_swim_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 384,
+        "y": 192,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "fish_purple_down": {
+      "displayName": "fish_purple_down",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 384,
+        "y": 128,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "fish_purple_rest": {
+      "displayName": "fish_purple_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 384,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "fish_purple_up": {
+      "displayName": "fish_purple_up",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 384,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "fish_yellow_rest": {
+      "displayName": "fish_yellow_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 320,
+        "y": 448,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "fish_yellow_swim_a": {
+      "displayName": "fish_yellow_swim_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 320,
+        "y": 384,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "fish_yellow_swim_b": {
+      "displayName": "fish_yellow_swim_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 320,
+        "y": 320,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "fly_a": {
+      "displayName": "fly_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 320,
+        "y": 256,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "fly_b": {
+      "displayName": "fly_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 320,
+        "y": 192,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "fly_rest": {
+      "displayName": "fly_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 320,
+        "y": 128,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "frog_idle": {
+      "displayName": "frog_idle",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 320,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "frog_jump": {
+      "displayName": "frog_jump",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 320,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "frog_rest": {
+      "displayName": "frog_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 256,
+        "y": 448,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "ladybug_fly": {
+      "displayName": "ladybug_fly",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 256,
+        "y": 384,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "ladybug_rest": {
+      "displayName": "ladybug_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 256,
+        "y": 320,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "ladybug_walk_a": {
+      "displayName": "ladybug_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 256,
+        "y": 256,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "ladybug_walk_b": {
+      "displayName": "ladybug_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 256,
+        "y": 192,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "mouse_rest": {
+      "displayName": "mouse_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 256,
+        "y": 128,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "mouse_walk_a": {
+      "displayName": "mouse_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 256,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "mouse_walk_b": {
+      "displayName": "mouse_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 256,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "saw_a": {
+      "displayName": "saw_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 192,
+        "y": 448,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "saw_b": {
+      "displayName": "saw_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 192,
+        "y": 384,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "saw_rest": {
+      "displayName": "saw_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 448,
+        "y": 192,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "slime_block_jump": {
+      "displayName": "slime_block_jump",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 192,
+        "y": 256,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "slime_block_rest": {
+      "displayName": "slime_block_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 192,
+        "y": 192,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "slime_block_walk_a": {
+      "displayName": "slime_block_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 192,
+        "y": 128,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "slime_block_walk_b": {
+      "displayName": "slime_block_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 192,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "slime_fire_flat": {
+      "displayName": "slime_fire_flat",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 192,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "slime_fire_rest": {
+      "displayName": "slime_fire_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 128,
+        "y": 448,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "slime_fire_walk_a": {
+      "displayName": "slime_fire_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 128,
+        "y": 384,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "slime_fire_walk_b": {
+      "displayName": "slime_fire_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 128,
+        "y": 320,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "slime_normal_flat": {
+      "displayName": "slime_normal_flat",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 128,
+        "y": 256,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "slime_normal_rest": {
+      "displayName": "slime_normal_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 128,
+        "y": 192,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "slime_normal_walk_a": {
+      "displayName": "slime_normal_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 128,
+        "y": 128,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "slime_normal_walk_b": {
+      "displayName": "slime_normal_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 128,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "slime_spike_flat": {
+      "displayName": "slime_spike_flat",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 128,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "slime_spike_rest": {
+      "displayName": "slime_spike_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 64,
+        "y": 448,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "slime_spike_walk_a": {
+      "displayName": "slime_spike_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 64,
+        "y": 384,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "slime_spike_walk_b": {
+      "displayName": "slime_spike_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 64,
+        "y": 320,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "snail_rest": {
+      "displayName": "snail_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 64,
+        "y": 256,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "snail_shell": {
+      "displayName": "snail_shell",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 64,
+        "y": 192,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "snail_walk_a": {
+      "displayName": "snail_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 64,
+        "y": 128,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "snail_walk_b": {
+      "displayName": "snail_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 64,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "worm_normal_move_a": {
+      "displayName": "worm_normal_move_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 64,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "worm_normal_move_b": {
+      "displayName": "worm_normal_move_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 0,
+        "y": 448,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "worm_normal_rest": {
+      "displayName": "worm_normal_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 0,
+        "y": 384,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "worm_ring_move_a": {
+      "displayName": "worm_ring_move_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 0,
+        "y": 320,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "worm_ring_move_b": {
+      "displayName": "worm_ring_move_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 0,
+        "y": 256,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "worm_ring_rest": {
+      "displayName": "worm_ring_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 0,
+        "y": 192,
+        "width": 64,
+        "height": 64
+      },
+      "scale": 0.5
+    },
+    "background_clouds": {
+      "displayName": "background_clouds",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 256,
+        "y": 512,
+        "width": 256,
+        "height": 256
+      },
+      "scale": 0.5
+    },
+    "background_color_desert": {
+      "displayName": "background_color_desert",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 768,
+        "y": 0,
+        "width": 256,
+        "height": 256
+      },
+      "scale": 0.5
+    },
+    "background_color_hills": {
+      "displayName": "background_color_hills",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 512,
+        "y": 768,
+        "width": 256,
+        "height": 256
+      },
+      "scale": 0.5
+    },
+    "background_color_mushrooms": {
+      "displayName": "background_color_mushrooms",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 512,
+        "y": 512,
+        "width": 256,
+        "height": 256
+      },
+      "scale": 0.5
+    },
+    "background_color_trees": {
+      "displayName": "background_color_trees",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 512,
+        "y": 256,
+        "width": 256,
+        "height": 256
+      },
+      "scale": 0.5
+    },
+    "background_fade_desert": {
+      "displayName": "background_fade_desert",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 512,
+        "y": 0,
+        "width": 256,
+        "height": 256
+      },
+      "scale": 0.5
+    },
+    "background_fade_hills": {
+      "displayName": "background_fade_hills",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 256,
+        "y": 768,
+        "width": 256,
+        "height": 256
+      },
+      "scale": 0.5
+    },
+    "background_fade_mushrooms": {
+      "displayName": "background_fade_mushrooms",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 768,
+        "y": 256,
+        "width": 256,
+        "height": 256
+      },
+      "scale": 0.5
+    },
+    "background_fade_trees": {
+      "displayName": "background_fade_trees",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 256,
+        "y": 256,
+        "width": 256,
+        "height": 256
+      },
+      "scale": 0.5
+    },
+    "background_solid_cloud": {
+      "displayName": "background_solid_cloud",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 256,
+        "y": 0,
+        "width": 256,
+        "height": 256
+      },
+      "scale": 0.5
+    },
+    "background_solid_dirt": {
+      "displayName": "background_solid_dirt",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 0,
+        "y": 768,
+        "width": 256,
+        "height": 256
+      },
+      "scale": 0.5
+    },
+    "background_solid_grass": {
+      "displayName": "background_solid_grass",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 0,
+        "y": 512,
+        "width": 256,
+        "height": 256
+      },
+      "scale": 0.5
+    },
+    "background_solid_sand": {
+      "displayName": "background_solid_sand",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 0,
+        "y": 256,
+        "width": 256,
+        "height": 256
+      },
+      "scale": 0.5
+    },
+    "background_solid_sky": {
+      "displayName": "background_solid_sky",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 5,
+      "spritesheet": {
+        "x": 0,
+        "y": 0,
+        "width": 256,
+        "height": 256
+      },
+      "scale": 0.5
+    }
+  },
+  "groups": {
+    "tiles": {
+      "displayName": "tiles",
+      "tileIds": [
+        "block_blue",
+        "block_coin",
+        "block_coin_active",
+        "block_empty",
+        "block_empty_warning",
+        "block_exclamation",
+        "block_exclamation_active",
+        "block_green",
+        "block_plank",
+        "block_planks",
+        "block_red",
+        "block_spikes",
+        "block_strong_coin",
+        "block_strong_coin_active",
+        "block_strong_danger",
+        "block_strong_danger_active",
+        "block_strong_empty",
+        "block_strong_empty_active",
+        "block_strong_exclamation",
+        "block_strong_exclamation_active",
+        "block_yellow",
+        "bomb",
+        "bomb_active",
+        "brick_brown",
+        "brick_brown_diagonal",
+        "brick_grey",
+        "brick_grey_diagonal",
+        "bricks_brown",
+        "bricks_grey",
+        "bridge",
+        "bridge_logs",
+        "bush",
+        "cactus",
+        "chain",
+        "coin_bronze",
+        "coin_bronze_side",
+        "coin_gold",
+        "coin_gold_side",
+        "coin_silver",
+        "coin_silver_side",
+        "conveyor",
+        "door_closed",
+        "door_closed_top",
+        "door_open",
+        "door_open_top",
+        "fence",
+        "fence_broken",
+        "fireball",
+        "flag_blue_a",
+        "flag_blue_b",
+        "flag_green_a",
+        "flag_green_b",
+        "flag_off",
+        "flag_red_a",
+        "flag_red_b",
+        "flag_yellow_a",
+        "flag_yellow_b",
+        "gem_blue",
+        "gem_green",
+        "gem_red",
+        "gem_yellow",
+        "grass",
+        "grass_purple",
+        "heart",
+        "hill",
+        "hill_top",
+        "hill_top_smile",
+        "hud_character_0",
+        "hud_character_1",
+        "hud_character_2",
+        "hud_character_3",
+        "hud_character_4",
+        "hud_character_5",
+        "hud_character_6",
+        "hud_character_7",
+        "hud_character_8",
+        "hud_character_9",
+        "hud_character_multiply",
+        "hud_character_percent",
+        "hud_coin",
+        "hud_heart",
+        "hud_heart_empty",
+        "hud_heart_half",
+        "hud_key_blue",
+        "hud_key_green",
+        "hud_key_red",
+        "hud_key_yellow",
+        "hud_player_beige",
+        "hud_player_green",
+        "hud_player_helmet_beige",
+        "hud_player_helmet_green",
+        "hud_player_helmet_pink",
+        "hud_player_helmet_purple",
+        "hud_player_helmet_yellow",
+        "hud_player_pink",
+        "hud_player_purple",
+        "hud_player_yellow",
+        "key_blue",
+        "key_green",
+        "key_red",
+        "key_yellow",
+        "ladder_bottom",
+        "ladder_middle",
+        "ladder_top",
+        "lava",
+        "lava_top",
+        "lava_top_low",
+        "lever",
+        "lever_left",
+        "lever_right",
+        "lock_blue",
+        "lock_green",
+        "lock_red",
+        "lock_yellow",
+        "mushroom_brown",
+        "mushroom_red",
+        "ramp",
+        "rock",
+        "rop_attached",
+        "rope",
+        "saw",
+        "sign",
+        "sign_exit",
+        "sign_left",
+        "sign_right",
+        "snow",
+        "spikes",
+        "spring",
+        "spring_out",
+        "star",
+        "switch_blue",
+        "switch_blue_pressed",
+        "switch_green",
+        "switch_green_pressed",
+        "switch_red",
+        "switch_red_pressed",
+        "switch_yellow",
+        "switch_yellow_pressed",
+        "terrain_dirt_block",
+        "terrain_dirt_block_bottom",
+        "terrain_dirt_block_bottom_left",
+        "terrain_dirt_block_bottom_right",
+        "terrain_dirt_block_center",
+        "terrain_dirt_block_left",
+        "terrain_dirt_block_right",
+        "terrain_dirt_block_top",
+        "terrain_dirt_block_top_left",
+        "terrain_dirt_block_top_right",
+        "terrain_dirt_cloud",
+        "terrain_dirt_cloud_background",
+        "terrain_dirt_cloud_left",
+        "terrain_dirt_cloud_middle",
+        "terrain_dirt_cloud_right",
+        "terrain_dirt_horizontal_left",
+        "terrain_dirt_horizontal_middle",
+        "terrain_dirt_horizontal_overhang_left",
+        "terrain_dirt_horizontal_overhang_right",
+        "terrain_dirt_horizontal_right",
+        "terrain_dirt_ramp_long_a",
+        "terrain_dirt_ramp_long_b",
+        "terrain_dirt_ramp_long_c",
+        "terrain_dirt_ramp_short_a",
+        "terrain_dirt_ramp_short_b",
+        "terrain_dirt_vertical_bottom",
+        "terrain_dirt_vertical_middle",
+        "terrain_dirt_vertical_top",
+        "terrain_grass_block",
+        "terrain_grass_block_bottom",
+        "terrain_grass_block_bottom_left",
+        "terrain_grass_block_bottom_right",
+        "terrain_grass_block_center",
+        "terrain_grass_block_left",
+        "terrain_grass_block_right",
+        "terrain_grass_block_top",
+        "terrain_grass_block_top_left",
+        "terrain_grass_block_top_right",
+        "terrain_grass_cloud",
+        "terrain_grass_cloud_background",
+        "terrain_grass_cloud_left",
+        "terrain_grass_cloud_middle",
+        "terrain_grass_cloud_right",
+        "terrain_grass_horizontal_left",
+        "terrain_grass_horizontal_middle",
+        "terrain_grass_horizontal_overhang_left",
+        "terrain_grass_horizontal_overhang_right",
+        "terrain_grass_horizontal_right",
+        "terrain_grass_ramp_long_a",
+        "terrain_grass_ramp_long_b",
+        "terrain_grass_ramp_long_c",
+        "terrain_grass_ramp_short_a",
+        "terrain_grass_ramp_short_b",
+        "terrain_grass_vertical_bottom",
+        "terrain_grass_vertical_middle",
+        "terrain_grass_vertical_top",
+        "terrain_purple_block",
+        "terrain_purple_block_bottom",
+        "terrain_purple_block_bottom_left",
+        "terrain_purple_block_bottom_right",
+        "terrain_purple_block_center",
+        "terrain_purple_block_left",
+        "terrain_purple_block_right",
+        "terrain_purple_block_top",
+        "terrain_purple_block_top_left",
+        "terrain_purple_block_top_right",
+        "terrain_purple_cloud",
+        "terrain_purple_cloud_background",
+        "terrain_purple_cloud_left",
+        "terrain_purple_cloud_middle",
+        "terrain_purple_cloud_right",
+        "terrain_purple_horizontal_left",
+        "terrain_purple_horizontal_middle",
+        "terrain_purple_horizontal_overhang_left",
+        "terrain_purple_horizontal_overhang_right",
+        "terrain_purple_horizontal_right",
+        "terrain_purple_ramp_long_a",
+        "terrain_purple_ramp_long_b",
+        "terrain_purple_ramp_long_c",
+        "terrain_purple_ramp_short_a",
+        "terrain_purple_ramp_short_b",
+        "terrain_purple_vertical_bottom",
+        "terrain_purple_vertical_middle",
+        "terrain_purple_vertical_top",
+        "terrain_sand_block",
+        "terrain_sand_block_bottom",
+        "terrain_sand_block_bottom_left",
+        "terrain_sand_block_bottom_right",
+        "terrain_sand_block_center",
+        "terrain_sand_block_left",
+        "terrain_sand_block_right",
+        "terrain_sand_block_top",
+        "terrain_sand_block_top_left",
+        "terrain_sand_block_top_right",
+        "terrain_sand_cloud",
+        "terrain_sand_cloud_background",
+        "terrain_sand_cloud_left",
+        "terrain_sand_cloud_middle",
+        "terrain_sand_cloud_right",
+        "terrain_sand_horizontal_left",
+        "terrain_sand_horizontal_middle",
+        "terrain_sand_horizontal_overhang_left",
+        "terrain_sand_horizontal_overhang_right",
+        "terrain_sand_horizontal_right",
+        "terrain_sand_ramp_long_a",
+        "terrain_sand_ramp_long_b",
+        "terrain_sand_ramp_long_c",
+        "terrain_sand_ramp_short_a",
+        "terrain_sand_ramp_short_b",
+        "terrain_sand_vertical_bottom",
+        "terrain_sand_vertical_middle",
+        "terrain_sand_vertical_top",
+        "terrain_snow_block",
+        "terrain_snow_block_bottom",
+        "terrain_snow_block_bottom_left",
+        "terrain_snow_block_bottom_right",
+        "terrain_snow_block_center",
+        "terrain_snow_block_left",
+        "terrain_snow_block_right",
+        "terrain_snow_block_top",
+        "terrain_snow_block_top_left",
+        "terrain_snow_block_top_right",
+        "terrain_snow_cloud",
+        "terrain_snow_cloud_background",
+        "terrain_snow_cloud_left",
+        "terrain_snow_cloud_middle",
+        "terrain_snow_cloud_right",
+        "terrain_snow_horizontal_left",
+        "terrain_snow_horizontal_middle",
+        "terrain_snow_horizontal_overhang_left",
+        "terrain_snow_horizontal_overhang_right",
+        "terrain_snow_horizontal_right",
+        "terrain_snow_ramp_long_a",
+        "terrain_snow_ramp_long_b",
+        "terrain_snow_ramp_long_c",
+        "terrain_snow_ramp_short_a",
+        "terrain_snow_ramp_short_b",
+        "terrain_snow_vertical_bottom",
+        "terrain_snow_vertical_middle",
+        "terrain_snow_vertical_top",
+        "terrain_stone_block",
+        "terrain_stone_block_bottom",
+        "terrain_stone_block_bottom_left",
+        "terrain_stone_block_bottom_right",
+        "terrain_stone_block_center",
+        "terrain_stone_block_left",
+        "terrain_stone_block_right",
+        "terrain_stone_block_top",
+        "terrain_stone_block_top_left",
+        "terrain_stone_block_top_right",
+        "terrain_stone_cloud",
+        "terrain_stone_cloud_background",
+        "terrain_stone_cloud_left",
+        "terrain_stone_cloud_middle",
+        "terrain_stone_cloud_right",
+        "terrain_stone_horizontal_left",
+        "terrain_stone_horizontal_middle",
+        "terrain_stone_horizontal_overhang_left",
+        "terrain_stone_horizontal_overhang_right",
+        "terrain_stone_horizontal_right",
+        "terrain_stone_ramp_long_a",
+        "terrain_stone_ramp_long_b",
+        "terrain_stone_ramp_long_c",
+        "terrain_stone_ramp_short_a",
+        "terrain_stone_ramp_short_b",
+        "terrain_stone_vertical_bottom",
+        "terrain_stone_vertical_middle",
+        "terrain_stone_vertical_top",
+        "torch_off",
+        "torch_on_a",
+        "torch_on_b",
+        "water",
+        "water_top",
+        "water_top_low",
+        "weight",
+        "window"
+      ]
+    },
+    "characters": {
+      "displayName": "characters",
+      "tileIds": [
+        "character_beige_climb_a",
+        "character_beige_climb_b",
+        "character_beige_duck",
+        "character_beige_front",
+        "character_beige_hit",
+        "character_beige_idle",
+        "character_beige_jump",
+        "character_beige_walk_a",
+        "character_beige_walk_b",
+        "character_green_climb_a",
+        "character_green_climb_b",
+        "character_green_duck",
+        "character_green_front",
+        "character_green_hit",
+        "character_green_idle",
+        "character_green_jump",
+        "character_green_walk_a",
+        "character_green_walk_b",
+        "character_pink_climb_a",
+        "character_pink_climb_b",
+        "character_pink_duck",
+        "character_pink_front",
+        "character_pink_hit",
+        "character_pink_idle",
+        "character_pink_jump",
+        "character_pink_walk_a",
+        "character_pink_walk_b",
+        "character_purple_climb_a",
+        "character_purple_climb_b",
+        "character_purple_duck",
+        "character_purple_front",
+        "character_purple_hit",
+        "character_purple_idle",
+        "character_purple_jump",
+        "character_purple_walk_a",
+        "character_purple_walk_b",
+        "character_yellow_climb_a",
+        "character_yellow_climb_b",
+        "character_yellow_duck",
+        "character_yellow_front",
+        "character_yellow_hit",
+        "character_yellow_idle",
+        "character_yellow_jump",
+        "character_yellow_walk_a",
+        "character_yellow_walk_b"
+      ]
+    },
+    "enemies": {
+      "displayName": "enemies",
+      "tileIds": [
+        "barnacle_attack_a",
+        "barnacle_attack_b",
+        "barnacle_attack_rest",
+        "bee_a",
+        "bee_b",
+        "bee_rest",
+        "block_fall",
+        "block_idle",
+        "block_rest",
+        "fish_blue_rest",
+        "fish_blue_swim_a",
+        "fish_blue_swim_b",
+        "fish_purple_down",
+        "fish_purple_rest",
+        "fish_purple_up",
+        "fish_yellow_rest",
+        "fish_yellow_swim_a",
+        "fish_yellow_swim_b",
+        "fly_a",
+        "fly_b",
+        "fly_rest",
+        "frog_idle",
+        "frog_jump",
+        "frog_rest",
+        "ladybug_fly",
+        "ladybug_rest",
+        "ladybug_walk_a",
+        "ladybug_walk_b",
+        "mouse_rest",
+        "mouse_walk_a",
+        "mouse_walk_b",
+        "saw_a",
+        "saw_b",
+        "saw_rest",
+        "slime_block_jump",
+        "slime_block_rest",
+        "slime_block_walk_a",
+        "slime_block_walk_b",
+        "slime_fire_flat",
+        "slime_fire_rest",
+        "slime_fire_walk_a",
+        "slime_fire_walk_b",
+        "slime_normal_flat",
+        "slime_normal_rest",
+        "slime_normal_walk_a",
+        "slime_normal_walk_b",
+        "slime_spike_flat",
+        "slime_spike_rest",
+        "slime_spike_walk_a",
+        "slime_spike_walk_b",
+        "snail_rest",
+        "snail_shell",
+        "snail_walk_a",
+        "snail_walk_b",
+        "worm_normal_move_a",
+        "worm_normal_move_b",
+        "worm_normal_rest",
+        "worm_ring_move_a",
+        "worm_ring_move_b",
+        "worm_ring_rest"
+      ]
+    },
+    "backgrounds": {
+      "displayName": "backgrounds",
+      "tileIds": [
+        "background_clouds",
+        "background_color_desert",
+        "background_color_hills",
+        "background_color_mushrooms",
+        "background_color_trees",
+        "background_fade_desert",
+        "background_fade_hills",
+        "background_fade_mushrooms",
+        "background_fade_trees",
+        "background_solid_cloud",
+        "background_solid_dirt",
+        "background_solid_grass",
+        "background_solid_sand",
+        "background_solid_sky"
+      ]
     }
   }
 }

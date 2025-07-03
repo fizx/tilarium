@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useRef } from "react";
 import { useEditor } from "../EditorContext";
 import { Tile } from "./Tile";
 import { TileDefinition } from "../config";
@@ -12,17 +12,13 @@ export const TilePalette = () => {
     selectedTool,
   } = useEditor();
   const [activeTab, setActiveTab] = useState<string | number>("Tools");
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const layers = useMemo(() => {
-    const layerMap: Record<number, TileDefinition[]> = {};
-    for (const tile of Object.values(config.tiles)) {
-      if (!layerMap[tile.zIndex]) {
-        layerMap[tile.zIndex] = [];
-      }
-      layerMap[tile.zIndex].push(tile);
-    }
-    return Object.entries(layerMap).sort(([a], [b]) => Number(a) - Number(b));
-  }, [config.tiles]);
+  const tileGroups = useMemo(() => {
+    return Object.values(config.groups).sort((a, b) =>
+      a.displayName.localeCompare(b.displayName)
+    );
+  }, [config.groups]);
 
   const handleSelectTile = (tile: TileDefinition) => {
     setSelectedTile(tile);
@@ -34,6 +30,16 @@ export const TilePalette = () => {
     setSelectedTile(undefined);
   };
 
+  const scroll = (direction: "left" | "right") => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = direction === "left" ? -300 : 300;
+      scrollContainerRef.current.scrollBy({
+        left: scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <div className="palette">
       <div className="tabs">
@@ -43,15 +49,15 @@ export const TilePalette = () => {
         >
           Tools
         </button>
-        {layers.map(([zIndex]) => (
+        {tileGroups.map((group) => (
           <button
-            key={zIndex}
+            key={group.displayName}
             className={`tab-button ${
-              activeTab === Number(zIndex) ? "active" : ""
+              activeTab === group.displayName ? "active" : ""
             }`}
-            onClick={() => setActiveTab(Number(zIndex))}
+            onClick={() => setActiveTab(group.displayName)}
           >
-            Layer {zIndex}
+            {group.displayName}
           </button>
         ))}
       </div>
@@ -68,21 +74,39 @@ export const TilePalette = () => {
             </button>
           </div>
         )}
-        {layers.map(([zIndex, tiles]) => {
-          if (activeTab === Number(zIndex)) {
+        {tileGroups.map((group) => {
+          if (activeTab === group.displayName) {
             return (
-              <div key={zIndex} className="tile-grid">
-                {tiles.map((tile) => (
-                  <Tile
-                    key={tile.displayName}
-                    tile={tile}
-                    onClick={() => handleSelectTile(tile)}
-                    isSelected={
-                      selectedTool === "place" &&
-                      selectedTile?.displayName === tile.displayName
-                    }
-                  />
-                ))}
+              <div key={group.displayName} className="carousel-container">
+                <button
+                  className="scroll-button left"
+                  onClick={() => scroll("left")}
+                >
+                  &lt;
+                </button>
+                <div className="tile-grid" ref={scrollContainerRef}>
+                  {group.tileIds.map((tileId) => {
+                    const tile = config.tiles[tileId];
+                    if (!tile) return null;
+                    return (
+                      <Tile
+                        key={tile.displayName}
+                        tile={tile}
+                        onClick={() => handleSelectTile(tile)}
+                        isSelected={
+                          selectedTool === "place" &&
+                          selectedTile?.displayName === tile.displayName
+                        }
+                      />
+                    );
+                  })}
+                </div>
+                <button
+                  className="scroll-button right"
+                  onClick={() => scroll("right")}
+                >
+                  &gt;
+                </button>
               </div>
             );
           }

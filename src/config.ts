@@ -11,7 +11,13 @@ export interface TileDefinition {
   scale?: number;
 }
 
+export interface TileGroup {
+  displayName: string;
+  tileIds: string[];
+}
+
 export interface TileConfig {
   tiles: Record<string, TileDefinition>;
+  groups: Record<string, TileGroup>;
   mapSize: { width: number; height: number } | "infinite";
 }

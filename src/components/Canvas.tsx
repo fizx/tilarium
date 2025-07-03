@@ -82,6 +82,7 @@ export const Canvas = () => {
         {state.placedTiles.map((placedTile) => {
           const tileDef = config.tiles[placedTile.tileId];
           if (!tileDef) return null;
+
           return (
             <div
               key={`${placedTile.x}-${placedTile.y}`}
