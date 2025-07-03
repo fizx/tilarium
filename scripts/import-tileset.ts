@@ -3,22 +3,21 @@ import fs from "fs";
 import path from "path";
 import { TileConfig, TileDefinition } from "../src/config";
 
-const getZIndex = (src: string): number => {
-  if (src.includes("terrain")) {
+const getZIndexFromFilename = (filename: string): number => {
+  const lowercased = filename.toLowerCase();
+  if (lowercased.includes("background")) {
     return 0;
   }
-  if (
-    src.includes("block") ||
-    src.includes("brick") ||
-    src.includes("bridge") ||
-    src.includes("chain")
-  ) {
+  if (lowercased.includes("tiles")) {
     return 1;
   }
-  if (src.includes("character") || src.includes("enemy")) {
+  if (lowercased.includes("enemies")) {
     return 2;
   }
-  return 3;
+  if (lowercased.includes("characters")) {
+    return 3;
+  }
+  return 4; // Default for HUD or other foreground elements
 };
 
 const inputFile = process.argv[2];
@@ -31,6 +30,7 @@ if (!inputFile || !outputFile) {
   process.exit(1);
 }
 
+const baseZIndex = getZIndexFromFilename(path.basename(inputFile));
 const xmlData = fs.readFileSync(inputFile, "utf-8");
 const parser = new XMLParser({
   ignoreAttributes: false,
@@ -48,7 +48,7 @@ for (const subTexture of textureAtlas.SubTexture) {
   tiles[name] = {
     displayName: name,
     src: path.join(path.dirname(inputFile), imagePath),
-    zIndex: getZIndex(name),
+    zIndex: baseZIndex,
     spritesheet: {
       x: parseInt(subTexture.x, 10),
       y: parseInt(subTexture.y, 10),
