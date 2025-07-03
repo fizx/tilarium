@@ -42,7 +42,7 @@ export const Toolbar = () => {
     <div className="toolbar">
       <ToolButton
         tool="pointer"
-        emoji="👆"
+        emoji="🖐️"
         onClick={() => setSelectedTool("pointer")}
       />
       <ToolButton
