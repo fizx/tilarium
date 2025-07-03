@@ -2,7 +2,7 @@ import React, { createContext, useContext } from "react";
 import { TilemapState, PlacedTile } from "./state";
 import { TileConfig, TileDefinition } from "./config";
 
-export type Tool = "place" | "erase";
+export type Tool = "pointer" | "place" | "erase" | "magic-wand";
 
 export interface Camera {
   x: number;

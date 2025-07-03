@@ -4,6 +4,7 @@ import { TilemapState, PlacedTile } from "./state";
 import { TilePalette } from "./components/TilePalette";
 import { Canvas } from "./components/Canvas";
 import { CameraControls } from "./components/CameraControls";
+import { Toolbar } from "./components/Toolbar";
 import { EditorContext, Camera, Tool } from "./EditorContext";
 import "./TilemapEditor.css";
 
@@ -39,7 +40,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
     initialState?.placedTiles || []
   );
   const [selectedTile, setSelectedTile] = useState<any>();
-  const [selectedTool, setSelectedTool] = useState<Tool>("place");
+  const [selectedTool, setSelectedTool] = useState<Tool>("pointer");
   const [camera, setCamera] = useState<Camera>({ x: 0, y: 0, zoom: 1 });
 
   const editorState: TilemapState = {
@@ -47,7 +48,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   };
 
   return (
-    <div style={{ position: "relative", width: "100vw", height: "100vh" }}>
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
       <EditorContext.Provider
         value={{
           config,
@@ -64,6 +65,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         <div className="editor-container">
           <div className="canvas-container">
             <Canvas />
+            <Toolbar />
             <div className="camera-controls">
               <CameraControls />
             </div>

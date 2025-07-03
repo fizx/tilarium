@@ -11,7 +11,11 @@ export const TilePalette = () => {
     setSelectedTool,
     selectedTool,
   } = useEditor();
-  const [activeTab, setActiveTab] = useState<string | number>("Tools");
+  const [activeTab, setActiveTab] = useState(
+    Object.values(config.groups).sort((a, b) =>
+      a.displayName.localeCompare(b.displayName)
+    )[0]?.displayName || ""
+  );
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const tileGroups = useMemo(() => {
@@ -23,11 +27,6 @@ export const TilePalette = () => {
   const handleSelectTile = (tile: TileDefinition) => {
     setSelectedTile(tile);
     setSelectedTool("place");
-  };
-
-  const handleSelectEraser = () => {
-    setSelectedTool("erase");
-    setSelectedTile(undefined);
   };
 
   const scroll = (direction: "left" | "right") => {
@@ -43,12 +42,6 @@ export const TilePalette = () => {
   return (
     <div className="palette">
       <div className="tabs">
-        <button
-          className={`tab-button ${activeTab === "Tools" ? "active" : ""}`}
-          onClick={() => setActiveTab("Tools")}
-        >
-          Tools
-        </button>
         {tileGroups.map((group) => (
           <button
             key={group.displayName}
@@ -62,18 +55,6 @@ export const TilePalette = () => {
         ))}
       </div>
       <div className="tab-content">
-        {activeTab === "Tools" && (
-          <div className="tool-panel">
-            <button
-              className={`tool-button ${
-                selectedTool === "erase" ? "selected" : ""
-              }`}
-              onClick={handleSelectEraser}
-            >
-              Eraser
-            </button>
-          </div>
-        )}
         {tileGroups.map((group) => {
           if (activeTab === group.displayName) {
             return (
