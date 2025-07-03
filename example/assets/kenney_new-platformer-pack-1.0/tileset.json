@@ -1,4 +1,5 @@
 {
+  "gridSize": 32,
   "mapSize": {
     "width": 32,
     "height": 32

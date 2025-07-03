@@ -3,7 +3,7 @@ import { useEditor } from "../EditorContext";
 import { Tile } from "./Tile";
 
 export const CustomCursor = () => {
-  const { selectedTool, selectedTile, mouse, camera } = useEditor();
+  const { selectedTool, selectedTile, mouse, camera, config } = useEditor();
 
   const isVisible =
     (selectedTool === "place" || selectedTool === "erase") && mouse;
@@ -26,7 +26,11 @@ export const CustomCursor = () => {
   const renderContent = () => {
     switch (selectedTool) {
       case "erase":
-        return <span style={{ fontSize: `${32 / camera.zoom}px` }}>🧼</span>;
+        return (
+          <span style={{ fontSize: `${config.gridSize / camera.zoom}px` }}>
+            🧼
+          </span>
+        );
       case "place":
         if (selectedTile) {
           return <Tile tile={selectedTile} />;

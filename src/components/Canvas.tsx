@@ -47,10 +47,10 @@ export const Canvas = () => {
 
     const rect = e.currentTarget.getBoundingClientRect();
     const x = Math.floor(
-      (e.clientX - rect.left - camera.x) / (32 * camera.zoom)
+      (e.clientX - rect.left - camera.x) / (config.gridSize * camera.zoom)
     );
     const y = Math.floor(
-      (e.clientY - rect.top - camera.y) / (32 * camera.zoom)
+      (e.clientY - rect.top - camera.y) / (config.gridSize * camera.zoom)
     );
 
     if (selectedTool === "place" && selectedTile) {
@@ -60,6 +60,21 @@ export const Canvas = () => {
       });
     } else if (selectedTool === "erase") {
       dispatch({ type: "REMOVE_TILE", payload: { x, y } });
+    } else {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = Math.floor(
+        (e.clientX - rect.left - camera.x) / (config.gridSize * camera.zoom)
+      );
+      const y = Math.floor(
+        (e.clientY - rect.top - camera.y) / (config.gridSize * camera.zoom)
+      );
+
+      const snappedX =
+        x * (config.gridSize * camera.zoom) + camera.x + rect.left;
+      const snappedY =
+        y * (config.gridSize * camera.zoom) + camera.y + rect.top;
+
+      setMouse({ x: snappedX, y: snappedY });
     }
   };
 
@@ -73,14 +88,16 @@ export const Canvas = () => {
     } else {
       const rect = e.currentTarget.getBoundingClientRect();
       const x = Math.floor(
-        (e.clientX - rect.left - camera.x) / (32 * camera.zoom)
+        (e.clientX - rect.left - camera.x) / (config.gridSize * camera.zoom)
       );
       const y = Math.floor(
-        (e.clientY - rect.top - camera.y) / (32 * camera.zoom)
+        (e.clientY - rect.top - camera.y) / (config.gridSize * camera.zoom)
       );
 
-      const snappedX = x * (32 * camera.zoom) + camera.x + rect.left;
-      const snappedY = y * (32 * camera.zoom) + camera.y + rect.top;
+      const snappedX =
+        x * (config.gridSize * camera.zoom) + camera.x + rect.left;
+      const snappedY =
+        y * (config.gridSize * camera.zoom) + camera.y + rect.top;
 
       setMouse({ x: snappedX, y: snappedY });
     }
@@ -121,8 +138,8 @@ export const Canvas = () => {
     config.mapSize === "infinite"
       ? null
       : {
-          width: config.mapSize.width * 32,
-          height: config.mapSize.height * 32,
+          width: config.mapSize.width * config.gridSize,
+          height: config.mapSize.height * config.gridSize,
         };
 
   return (
@@ -153,11 +170,13 @@ export const Canvas = () => {
               ? {
                   ...mapSize,
                   position: "relative",
+                  backgroundSize: `${config.gridSize}px ${config.gridSize}px`,
                 }
               : {
                   width: "100%",
                   height: "100%",
                   position: "relative",
+                  backgroundSize: `${config.gridSize}px ${config.gridSize}px`,
                 }
           }
         >
@@ -217,8 +236,8 @@ export const Canvas = () => {
                     key={`${placedTile.x}-${placedTile.y}`}
                     style={{
                       position: "absolute",
-                      left: placedTile.x * 32, // Assuming a grid size of 32 for now
-                      top: placedTile.y * 32,
+                      left: placedTile.x * config.gridSize,
+                      top: placedTile.y * config.gridSize,
                       zIndex: tileDef.zIndex,
                     }}
                   >

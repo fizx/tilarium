@@ -89,13 +89,7 @@ export const TilePalette = () => {
                         title={tile.displayName}
                       >
                         <div className="tile-image-wrapper">
-                          <div
-                            style={{
-                              transform: `scale(${config.defaultZoom})`,
-                            }}
-                          >
-                            <Tile tile={tile} />
-                          </div>
+                          <Tile tile={tile} />
                         </div>
                       </div>
                     );
