@@ -4,8 +4,13 @@ import { Tile } from "./Tile";
 import { TileDefinition } from "../config";
 
 export const TilePalette = () => {
-  const { config, selectedTile, setSelectedTile, setSelectedTool } =
-    useEditor();
+  const {
+    config,
+    selectedTile,
+    setSelectedTile,
+    setSelectedTool,
+    selectedTool,
+  } = useEditor();
   const [activeTab, setActiveTab] = useState<string | number>("Tools");
 
   const layers = useMemo(() => {
@@ -24,32 +29,58 @@ export const TilePalette = () => {
     setSelectedTool("place");
   };
 
+  const handleSelectEraser = () => {
+    setSelectedTool("erase");
+    setSelectedTile(undefined);
+  };
+
   return (
-    <div>
-      <div>
-        <button onClick={() => setActiveTab("Tools")}>Tools</button>
+    <div className="palette">
+      <div className="tabs">
+        <button
+          className={`tab-button ${activeTab === "Tools" ? "active" : ""}`}
+          onClick={() => setActiveTab("Tools")}
+        >
+          Tools
+        </button>
         {layers.map(([zIndex]) => (
-          <button key={zIndex} onClick={() => setActiveTab(Number(zIndex))}>
+          <button
+            key={zIndex}
+            className={`tab-button ${
+              activeTab === Number(zIndex) ? "active" : ""
+            }`}
+            onClick={() => setActiveTab(Number(zIndex))}
+          >
             Layer {zIndex}
           </button>
         ))}
       </div>
-      <div>
+      <div className="tab-content">
         {activeTab === "Tools" && (
-          <div>
-            <button onClick={() => setSelectedTool("erase")}>Eraser</button>
+          <div className="tool-panel">
+            <button
+              className={`tool-button ${
+                selectedTool === "erase" ? "selected" : ""
+              }`}
+              onClick={handleSelectEraser}
+            >
+              Eraser
+            </button>
           </div>
         )}
         {layers.map(([zIndex, tiles]) => {
           if (activeTab === Number(zIndex)) {
             return (
-              <div key={zIndex}>
+              <div key={zIndex} className="tile-grid">
                 {tiles.map((tile) => (
                   <Tile
                     key={tile.displayName}
                     tile={tile}
                     onClick={() => handleSelectTile(tile)}
-                    isSelected={selectedTile?.displayName === tile.displayName}
+                    isSelected={
+                      selectedTool === "place" &&
+                      selectedTile?.displayName === tile.displayName
+                    }
                   />
                 ))}
               </div>
