@@ -65,10 +65,17 @@ export const TilePalette = () => {
                 >
                   ❮
                 </div>
-                <div className="tile-grid" ref={scrollContainerRef}>
+                <div
+                  className={`tile-grid ${
+                    group.displayName === "backgrounds"
+                      ? "backgrounds-grid"
+                      : ""
+                  }`}
+                  ref={scrollContainerRef}
+                >
                   {group.tileIds.map((tileId) => {
                     const tile = config.tiles[tileId];
-                    if (!tile || tile.type === "background") return null;
+                    if (!tile) return null;
                     const isSelected =
                       selectedTool === "place" &&
                       selectedTile?.displayName === tile.displayName;

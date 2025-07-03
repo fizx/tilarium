@@ -125,6 +125,15 @@
   overflow: hidden;
 }
 
+.backgrounds-grid {
+  grid-template-rows: auto;
+}
+
+.backgrounds-grid .tile-image-wrapper {
+  width: 128px;
+  height: 128px;
+}
+
 .toolbar {
   position: absolute;
   top: 15px;
