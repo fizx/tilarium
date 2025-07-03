@@ -1,5 +1,8 @@
 {
-  "mapSize": "infinite",
+  "mapSize": {
+    "width": 32,
+    "height": 32
+  },
   "tiles": {
     "block_blue": {
       "displayName": "block_blue",

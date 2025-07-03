@@ -39,11 +39,17 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
     initialState?.placedTiles || []
   );
   const [selectedTile, setSelectedTile] = useState<any>();
-  const [selectedTool, setSelectedTool] = useState<Tool>("pointer");
+  const [selectedTool, setSelectedTool] = useState<Tool>("drag");
   const [camera, setCamera] = useState<Camera>({ x: 0, y: 0, zoom: 1 });
+  const canvasRef = React.useRef<HTMLDivElement>(null!);
 
   const editorState: TilemapState = {
     placedTiles,
+  };
+
+  const handleSelectTile = (tile: any) => {
+    setSelectedTile(tile);
+    setSelectedTool("place");
   };
 
   return (
@@ -54,11 +60,12 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           state: editorState,
           dispatch,
           selectedTile,
-          setSelectedTile,
+          setSelectedTile: handleSelectTile,
           selectedTool,
           setSelectedTool,
           camera,
           setCamera,
+          canvasRef,
         }}
       >
         <div className="editor-container">

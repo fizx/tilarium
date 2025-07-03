@@ -2,7 +2,7 @@ import React, { createContext, useContext } from "react";
 import { TilemapState, PlacedTile } from "./state";
 import { TileConfig, TileDefinition } from "./config";
 
-export type Tool = "pointer" | "place" | "erase" | "magic-wand";
+export type Tool = "place" | "drag" | "erase" | "magic-wand";
 
 export interface Camera {
   x: number;
@@ -20,6 +20,7 @@ interface EditorContextType {
   setSelectedTool: (tool: Tool) => void;
   camera: Camera;
   setCamera: (camera: Camera) => void;
+  canvasRef: React.RefObject<HTMLDivElement | null>;
 }
 
 export const EditorContext = createContext<EditorContextType | null>(null);

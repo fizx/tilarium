@@ -11,40 +11,41 @@ export const Canvas = () => {
     selectedTool,
     camera,
     setCamera,
+    canvasRef,
   } = useEditor();
   const isDragging = useRef(false);
   const lastMousePosition = useRef({ x: 0, y: 0 });
 
   const handleMouseDown = (e: MouseEvent) => {
-    isDragging.current = true;
-    lastMousePosition.current = { x: e.clientX, y: e.clientY };
+    if (selectedTool === "drag") {
+      isDragging.current = true;
+      lastMousePosition.current = { x: e.clientX, y: e.clientY };
+    }
   };
 
   const handleMouseUp = (e: MouseEvent) => {
     isDragging.current = false;
-    // If not dragging, treat as a click
-    if (e.target === e.currentTarget) {
-      const rect = e.currentTarget.getBoundingClientRect();
-      const x = Math.floor(
-        (e.clientX - rect.left - camera.x) / (32 * camera.zoom)
-      );
-      const y = Math.floor(
-        (e.clientY - rect.top - camera.y) / (32 * camera.zoom)
-      );
 
-      if (selectedTool === "place" && selectedTile) {
-        dispatch({
-          type: "ADD_TILE",
-          payload: { x, y, tileId: selectedTile.displayName },
-        });
-      } else if (selectedTool === "erase") {
-        dispatch({ type: "REMOVE_TILE", payload: { x, y } });
-      }
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = Math.floor(
+      (e.clientX - rect.left - camera.x) / (32 * camera.zoom)
+    );
+    const y = Math.floor(
+      (e.clientY - rect.top - camera.y) / (32 * camera.zoom)
+    );
+
+    if (selectedTool === "place" && selectedTile) {
+      dispatch({
+        type: "ADD_TILE",
+        payload: { x, y, tileId: selectedTile.displayName },
+      });
+    } else if (selectedTool === "erase") {
+      dispatch({ type: "REMOVE_TILE", payload: { x, y } });
     }
   };
 
   const handleMouseMove = (e: MouseEvent) => {
-    if (isDragging.current) {
+    if (isDragging.current && selectedTool === "drag") {
       const dx = e.clientX - lastMousePosition.current.x;
       const dy = e.clientY - lastMousePosition.current.y;
       setCamera({ ...camera, x: camera.x + dx, y: camera.y + dy });
@@ -53,88 +54,136 @@ export const Canvas = () => {
   };
 
   const handleWheel = (e: React.WheelEvent) => {
-    const newZoom = camera.zoom - e.deltaY * 0.001;
-    setCamera({ ...camera, zoom: Math.max(0.1, newZoom) });
+    e.preventDefault();
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    const worldX = (mouseX - camera.x) / camera.zoom;
+    const worldY = (mouseY - camera.y) / camera.zoom;
+
+    const newZoom = Math.max(0.1, camera.zoom - e.deltaY * 0.001);
+
+    const newCameraX = mouseX - worldX * newZoom;
+    const newCameraY = mouseY - worldY * newZoom;
+
+    setCamera({
+      zoom: newZoom,
+      x: newCameraX,
+      y: newCameraY,
+    });
   };
+
+  const mapSize =
+    config.mapSize === "infinite"
+      ? null
+      : {
+          width: config.mapSize.width * 32,
+          height: config.mapSize.height * 32,
+        };
 
   return (
     <div
+      ref={canvasRef}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => (isDragging.current = false)}
       onWheel={handleWheel}
-      style={{
-        width: "100%",
-        height: "100%",
-        backgroundColor: "#f0f0f0",
-        overflow: "hidden",
-        position: "relative",
-      }}
+      className="canvas-container"
     >
       <div
-        className="background-container"
+        className="transform-container"
         style={{
-          position: "absolute",
-          width: "100%",
-          height: "100%",
           transform: `translate(${camera.x}px, ${camera.y}px) scale(${camera.zoom})`,
           transformOrigin: "top left",
+          width: mapSize ? "max-content" : "100%",
+          height: mapSize ? "max-content" : "100%",
         }}
       >
-        {state.placedTiles
-          .filter(
-            (placedTile) =>
-              config.tiles[placedTile.tileId]?.type === "background"
-          )
-          .map((placedTile) => {
-            const tileDef = config.tiles[placedTile.tileId];
-            if (!tileDef) return null;
-            return (
-              <img
-                key={placedTile.tileId}
-                src={tileDef.src}
-                alt={tileDef.displayName}
-                style={{
-                  position: "absolute",
+        <div
+          className="map-boundary"
+          style={
+            mapSize
+              ? {
+                  ...mapSize,
+                  position: "relative",
+                }
+              : {
                   width: "100%",
                   height: "100%",
-                  objectFit: "cover",
-                  zIndex: tileDef.zIndex,
-                }}
-              />
-            );
-          })}
-      </div>
-      <div
-        className="tile-container"
-        style={{
-          position: "absolute",
-          transform: `translate(${camera.x}px, ${camera.y}px) scale(${camera.zoom})`,
-          transformOrigin: "top left",
-        }}
-      >
-        {state.placedTiles
-          .filter(
-            (placedTile) => config.tiles[placedTile.tileId]?.type === "tile"
-          )
-          .map((placedTile) => {
-            const tileDef = config.tiles[placedTile.tileId];
-            if (!tileDef) return null;
-            return (
-              <div
-                key={`${placedTile.x}-${placedTile.y}`}
-                style={{
-                  position: "absolute",
-                  left: placedTile.x * 32, // Assuming a grid size of 32 for now
-                  top: placedTile.y * 32,
-                  zIndex: tileDef.zIndex,
-                }}
-              >
-                <Tile tile={tileDef} />
-              </div>
-            );
-          })}
+                  position: "relative",
+                }
+          }
+        >
+          <div
+            className="background-container"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            {state.placedTiles
+              .filter(
+                (placedTile) =>
+                  config.tiles[placedTile.tileId]?.type === "background"
+              )
+              .map((placedTile) => {
+                const tileDef = config.tiles[placedTile.tileId];
+                if (!tileDef) return null;
+                return (
+                  <img
+                    key={placedTile.tileId}
+                    src={tileDef.src}
+                    alt={tileDef.displayName}
+                    style={{
+                      position: "absolute",
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      zIndex: tileDef.zIndex,
+                    }}
+                  />
+                );
+              })}
+          </div>
+          <div
+            className="tile-container"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            {state.placedTiles
+              .filter(
+                (placedTile) => config.tiles[placedTile.tileId]?.type === "tile"
+              )
+              .map((placedTile) => {
+                const tileDef = config.tiles[placedTile.tileId];
+                if (!tileDef) return null;
+                return (
+                  <div
+                    key={`${placedTile.x}-${placedTile.y}`}
+                    style={{
+                      position: "absolute",
+                      left: placedTile.x * 32, // Assuming a grid size of 32 for now
+                      top: placedTile.y * 32,
+                      zIndex: tileDef.zIndex,
+                    }}
+                  >
+                    <Tile tile={tileDef} />
+                  </div>
+                );
+              })}
+          </div>
+        </div>
       </div>
     </div>
   );

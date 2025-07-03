@@ -28,22 +28,39 @@ const ToolButton: React.FC<ToolButtonProps> = ({
 };
 
 export const Toolbar = () => {
-  const { setSelectedTool, camera, setCamera } = useEditor();
+  const { setSelectedTool, camera, setCamera, canvasRef } = useEditor();
 
-  const handleZoomIn = () => {
-    setCamera({ ...camera, zoom: camera.zoom * 1.2 });
+  const handleZoom = (zoomFactor: number) => {
+    if (!canvasRef?.current) return;
+
+    const rect = canvasRef.current.getBoundingClientRect();
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const worldX = (centerX - camera.x) / camera.zoom;
+    const worldY = (centerY - camera.y) / camera.zoom;
+
+    const newZoom = Math.max(0.1, camera.zoom * zoomFactor);
+
+    const newCameraX = centerX - worldX * newZoom;
+    const newCameraY = centerY - worldY * newZoom;
+
+    setCamera({
+      zoom: newZoom,
+      x: newCameraX,
+      y: newCameraY,
+    });
   };
 
-  const handleZoomOut = () => {
-    setCamera({ ...camera, zoom: camera.zoom / 1.2 });
-  };
+  const handleZoomIn = () => handleZoom(1.2);
+  const handleZoomOut = () => handleZoom(1 / 1.2);
 
   return (
     <div className="toolbar">
       <ToolButton
-        tool="pointer"
+        tool="drag"
         emoji="🖐️"
-        onClick={() => setSelectedTool("pointer")}
+        onClick={() => setSelectedTool("drag")}
       />
       <ToolButton
         tool="erase"

@@ -19,6 +19,6 @@ export interface TileGroup {
 export interface TileConfig {
   tiles: Record<string, TileDefinition>;
   groups: Record<string, TileGroup>;
-  mapSize: { width: number; height: number } | "infinite";
+  mapSize: { width: number; height: number } | "infinite"; // in tiles, not pixels
   defaultZoom: number;
 }
