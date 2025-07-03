@@ -1,0 +1,22 @@
+# Dependencies
+/node_modules
+
+# Build artifacts
+/dist
+
+# IDE-specific
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Vite-specific
+.vite
+/public
+
+# OS-specific
+.DS_Store
+Thumbs.db 
