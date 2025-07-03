@@ -3,7 +3,6 @@ import { TileConfig } from "./config";
 import { TilemapState, PlacedTile } from "./state";
 import { TilePalette } from "./components/TilePalette";
 import { Canvas } from "./components/Canvas";
-import { CameraControls } from "./components/CameraControls";
 import { Toolbar } from "./components/Toolbar";
 import { EditorContext, Camera, Tool } from "./EditorContext";
 import "./TilemapEditor.css";
@@ -66,9 +65,6 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           <div className="canvas-container">
             <Canvas />
             <Toolbar />
-            <div className="camera-controls">
-              <CameraControls />
-            </div>
           </div>
           <TilePalette />
         </div>

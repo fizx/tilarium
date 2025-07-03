@@ -59,35 +59,43 @@ export const TilePalette = () => {
           if (activeTab === group.displayName) {
             return (
               <div key={group.displayName} className="carousel-container">
-                <button
+                <div
                   className="scroll-button left"
                   onClick={() => scroll("left")}
                 >
-                  &lt;
-                </button>
+                  ❮
+                </div>
                 <div className="tile-grid" ref={scrollContainerRef}>
                   {group.tileIds.map((tileId) => {
                     const tile = config.tiles[tileId];
-                    if (!tile) return null;
+                    if (!tile || tile.type === "background") return null;
+                    const isSelected =
+                      selectedTool === "place" &&
+                      selectedTile?.displayName === tile.displayName;
                     return (
-                      <Tile
+                      <div
                         key={tile.displayName}
-                        tile={tile}
+                        className={`tile-wrapper ${
+                          isSelected ? "selected" : ""
+                        }`}
                         onClick={() => handleSelectTile(tile)}
-                        isSelected={
-                          selectedTool === "place" &&
-                          selectedTile?.displayName === tile.displayName
-                        }
-                      />
+                      >
+                        <div
+                          style={{ transform: `scale(${config.defaultZoom})` }}
+                        >
+                          <Tile tile={tile} />
+                        </div>
+                        <div className="tile-caption">{tile.displayName}</div>
+                      </div>
                     );
                   })}
                 </div>
-                <button
+                <div
                   className="scroll-button right"
                   onClick={() => scroll("right")}
                 >
-                  &gt;
-                </button>
+                  ❯
+                </div>
               </div>
             );
           }

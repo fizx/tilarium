@@ -24,7 +24,7 @@
   right: 10px;
   z-index: 20;
 
-  height: 200px;
+  height: 160px;
 
   background-color: #fdfdfd;
   border: 1px solid #ccc;
@@ -98,7 +98,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   cursor: pointer;
   position: relative;
   border: 2px solid transparent;
@@ -107,13 +107,12 @@
   transition: all 0.2s ease-in-out;
   padding: 5px;
   min-width: 80px;
+  height: 90px;
 }
 
 .tile-wrapper:hover {
   border-color: #007bff;
   transform: scale(1.05);
-  transform-origin: top left;
-  width: 100%;
 }
 
 .tile-wrapper.selected {
@@ -122,8 +121,7 @@
 }
 
 .tile-image {
-  position: absolute;
-  transform-origin: top left;
+  position: relative;
 }
 
 .tile-caption {
@@ -142,11 +140,18 @@
   right: 15px;
   z-index: 10;
   display: flex;
+  flex-direction: column;
   gap: 5px;
   background-color: rgba(255, 255, 255, 0.8);
   padding: 5px;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.toolbar hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 5px 0;
 }
 
 .toolbar .tool-button {
@@ -173,13 +178,18 @@
 }
 
 .scroll-button {
-  background-color: #e9e9e9;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #555;
   cursor: pointer;
-  z-index: 1;
+  padding: 0 10px;
+  user-select: none;
+}
+
+.scroll-button:hover {
+  color: #000;
 }
 
 /* Camera Controls */

@@ -73,30 +73,68 @@ export const Canvas = () => {
       }}
     >
       <div
+        className="background-container"
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          transform: `translate(${camera.x}px, ${camera.y}px) scale(${camera.zoom})`,
+          transformOrigin: "top left",
+        }}
+      >
+        {state.placedTiles
+          .filter(
+            (placedTile) =>
+              config.tiles[placedTile.tileId]?.type === "background"
+          )
+          .map((placedTile) => {
+            const tileDef = config.tiles[placedTile.tileId];
+            if (!tileDef) return null;
+            return (
+              <img
+                key={placedTile.tileId}
+                src={tileDef.src}
+                alt={tileDef.displayName}
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  zIndex: tileDef.zIndex,
+                }}
+              />
+            );
+          })}
+      </div>
+      <div
+        className="tile-container"
         style={{
           position: "absolute",
           transform: `translate(${camera.x}px, ${camera.y}px) scale(${camera.zoom})`,
           transformOrigin: "top left",
         }}
       >
-        {state.placedTiles.map((placedTile) => {
-          const tileDef = config.tiles[placedTile.tileId];
-          if (!tileDef) return null;
-
-          return (
-            <div
-              key={`${placedTile.x}-${placedTile.y}`}
-              style={{
-                position: "absolute",
-                left: placedTile.x * 32, // Assuming a grid size of 32 for now
-                top: placedTile.y * 32,
-                zIndex: tileDef.zIndex,
-              }}
-            >
-              <Tile tile={tileDef} onClick={() => {}} isSelected={false} />
-            </div>
-          );
-        })}
+        {state.placedTiles
+          .filter(
+            (placedTile) => config.tiles[placedTile.tileId]?.type === "tile"
+          )
+          .map((placedTile) => {
+            const tileDef = config.tiles[placedTile.tileId];
+            if (!tileDef) return null;
+            return (
+              <div
+                key={`${placedTile.x}-${placedTile.y}`}
+                style={{
+                  position: "absolute",
+                  left: placedTile.x * 32, // Assuming a grid size of 32 for now
+                  top: placedTile.y * 32,
+                  zIndex: tileDef.zIndex,
+                }}
+              >
+                <Tile tile={tileDef} />
+              </div>
+            );
+          })}
       </div>
     </div>
   );
