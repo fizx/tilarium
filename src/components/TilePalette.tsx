@@ -79,13 +79,17 @@ export const TilePalette = () => {
                           isSelected ? "selected" : ""
                         }`}
                         onClick={() => handleSelectTile(tile)}
+                        title={tile.displayName}
                       >
-                        <div
-                          style={{ transform: `scale(${config.defaultZoom})` }}
-                        >
-                          <Tile tile={tile} />
+                        <div className="tile-image-wrapper">
+                          <div
+                            style={{
+                              transform: `scale(${config.defaultZoom})`,
+                            }}
+                          >
+                            <Tile tile={tile} />
+                          </div>
                         </div>
-                        <div className="tile-caption">{tile.displayName}</div>
                       </div>
                     );
                   })}
