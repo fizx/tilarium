@@ -1,4 +1,4 @@
-import React, { useRef, MouseEvent } from "react";
+import React, { useRef, MouseEvent, useState, useMemo } from "react";
 import { useEditor } from "../EditorContext";
 import { Tile } from "./Tile";
 
@@ -12,19 +12,38 @@ export const Canvas = () => {
     camera,
     setCamera,
     canvasRef,
+    setMouse,
   } = useEditor();
-  const isDragging = useRef(false);
+  const [isDragging, setIsDragging] = useState(false);
   const lastMousePosition = useRef({ x: 0, y: 0 });
+
+  const cursor = useMemo(() => {
+    if (isDragging) {
+      return "grabbing";
+    }
+
+    switch (selectedTool) {
+      case "drag":
+        return "grab";
+      case "erase":
+      case "place":
+        return "none";
+      case "magic-wand":
+        return "pointer";
+      default:
+        return "default";
+    }
+  }, [selectedTool, isDragging]);
 
   const handleMouseDown = (e: MouseEvent) => {
     if (selectedTool === "drag") {
-      isDragging.current = true;
+      setIsDragging(true);
       lastMousePosition.current = { x: e.clientX, y: e.clientY };
     }
   };
 
   const handleMouseUp = (e: MouseEvent) => {
-    isDragging.current = false;
+    setIsDragging(false);
 
     const rect = e.currentTarget.getBoundingClientRect();
     const x = Math.floor(
@@ -45,12 +64,35 @@ export const Canvas = () => {
   };
 
   const handleMouseMove = (e: MouseEvent) => {
-    if (isDragging.current && selectedTool === "drag") {
+    if (isDragging && selectedTool === "drag") {
+      setMouse(null);
       const dx = e.clientX - lastMousePosition.current.x;
       const dy = e.clientY - lastMousePosition.current.y;
       setCamera({ ...camera, x: camera.x + dx, y: camera.y + dy });
       lastMousePosition.current = { x: e.clientX, y: e.clientY };
+    } else {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = Math.floor(
+        (e.clientX - rect.left - camera.x) / (32 * camera.zoom)
+      );
+      const y = Math.floor(
+        (e.clientY - rect.top - camera.y) / (32 * camera.zoom)
+      );
+
+      const snappedX = x * (32 * camera.zoom) + camera.x + rect.left;
+      const snappedY = y * (32 * camera.zoom) + camera.y + rect.top;
+
+      setMouse({ x: snappedX, y: snappedY });
     }
+  };
+
+  const handleMouseEnter = (e: MouseEvent) => {
+    setMouse({ x: e.clientX, y: e.clientY });
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+    setMouse(null);
   };
 
   const handleWheel = (e: React.WheelEvent) => {
@@ -89,9 +131,11 @@ export const Canvas = () => {
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseMove={handleMouseMove}
-      onMouseLeave={() => (isDragging.current = false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       onWheel={handleWheel}
       className="canvas-container"
+      style={{ cursor }}
     >
       <div
         className="transform-container"

@@ -4,7 +4,8 @@ import { TilemapState, PlacedTile } from "./state";
 import { TilePalette } from "./components/TilePalette";
 import { Canvas } from "./components/Canvas";
 import { Toolbar } from "./components/Toolbar";
-import { EditorContext, Camera, Tool } from "./EditorContext";
+import { EditorContext, Camera, Tool, Mouse } from "./EditorContext";
+import { CustomCursor } from "./components/CustomCursor";
 import "./TilemapEditor.css";
 
 interface TilemapEditorProps {
@@ -41,6 +42,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   const [selectedTile, setSelectedTile] = useState<any>();
   const [selectedTool, setSelectedTool] = useState<Tool>("drag");
   const [camera, setCamera] = useState<Camera>({ x: 0, y: 0, zoom: 1 });
+  const [mouse, setMouse] = useState<Mouse | null>(null);
   const canvasRef = React.useRef<HTMLDivElement>(null!);
 
   const editorState: TilemapState = {
@@ -66,6 +68,8 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           camera,
           setCamera,
           canvasRef,
+          mouse,
+          setMouse,
         }}
       >
         <div className="editor-container">
@@ -75,6 +79,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           </div>
           <TilePalette />
         </div>
+        <CustomCursor />
       </EditorContext.Provider>
     </div>
   );

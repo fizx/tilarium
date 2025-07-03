@@ -10,6 +10,11 @@ export interface Camera {
   zoom: number;
 }
 
+export interface Mouse {
+  x: number;
+  y: number;
+}
+
 interface EditorContextType {
   config: TileConfig;
   state: TilemapState;
@@ -20,7 +25,9 @@ interface EditorContextType {
   setSelectedTool: (tool: Tool) => void;
   camera: Camera;
   setCamera: (camera: Camera) => void;
-  canvasRef: React.RefObject<HTMLDivElement | null>;
+  canvasRef: React.RefObject<HTMLDivElement>;
+  mouse: Mouse | null;
+  setMouse: (mouse: Mouse | null) => void;
 }
 
 export const EditorContext = createContext<EditorContextType | null>(null);
