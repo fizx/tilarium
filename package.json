@@ -1,6 +1,7 @@
 {
-  "name": "tilemapper",
-  "version": "1.0.0",
+  "name": "tilarium",
+  "private": true,
+  "version": "0.0.0",
   "description": "Let's make a web-based 2D tilemap editor that runs inside Devvit. Think: Super Mario Maker vibes, but for Reddit. This is an MVP and shipped as an npm library that doesn't need server components.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

@@ -1,6 +1,6 @@
-# Devvit Tilemap Editor [[live demo](https://pages.github.snooguts.net/kyle-maxwell/tilemapper/)]
+# Devvit Tilemap Editor [[live demo](https://pages.github.snooguts.net/kyle-maxwell/tilarium/)]
 
-[![Build Status](https://drone.build.ue1.snooguts.net/api/badges/kyle-maxwell/tilemapper/status.svg)](https://drone.build.ue1.snooguts.net/kyle-maxwell/tilemapper)
+[![Build Status](https://drone.build.ue1.snooguts.net/api/badges/kyle-maxwell/tilarium/status.svg)](https://drone.build.ue1.snooguts.net/kyle-maxwell/tilarium)
 
 Let's make a web-based 2D tilemap editor that runs inside Devvit. Think: Super Mario Maker vibes, but for Reddit. This is an MVP and shipped as an npm library that doesn't need server components.
 
