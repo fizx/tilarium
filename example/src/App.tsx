@@ -8,14 +8,26 @@ import pako from "pako";
 // Helper to compress and encode state for URL
 const encodeState = (state: TilemapState): string => {
   const json = JSON.stringify(state);
-  const compressed = pako.deflate(json, { to: "string" });
-  return btoa(compressed);
+  const compressed = pako.deflate(json);
+  const binaryString = Array.from(compressed, (byte) =>
+    String.fromCharCode(byte)
+  ).join("");
+  const base64 = btoa(binaryString);
+  return base64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
 };
 
 // Helper to decode and decompress state from URL
 const decodeState = (encoded: string): TilemapState | null => {
   try {
-    const compressed = atob(encoded);
+    let base64 = encoded.replace(/-/g, "+").replace(/_/g, "/");
+    while (base64.length % 4) {
+      base64 += "=";
+    }
+    const binaryString = atob(base64);
+    const compressed = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+      compressed[i] = binaryString.charCodeAt(i);
+    }
     const json = pako.inflate(compressed, { to: "string" });
     return JSON.parse(json);
   } catch (e) {
