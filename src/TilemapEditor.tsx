@@ -153,7 +153,9 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
       setSelectedTile(undefined);
     } else {
       setSelectedTile(tile);
-      setSelectedTool("place");
+      if (selectedTool !== "drag") {
+        setSelectedTool("place");
+      }
     }
   };
 
