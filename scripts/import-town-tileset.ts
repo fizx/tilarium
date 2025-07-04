@@ -65,6 +65,30 @@ const getZIndex = (name: string): number => {
   return 1;
 };
 
+const getGroupKey = (name: string): string => {
+  const groupNameMatch = name.match(/^([a-zA-Z_]+?)_/);
+  let groupKey = (groupNameMatch ? groupNameMatch[1] : "other").toLowerCase();
+
+  const groupMappings: { [key: string]: string } = {
+    dirt: "terrain",
+    grass: "terrain",
+    cobblestone: "terrain",
+    castle: "castles",
+    parapet: "castles",
+    arch: "castles",
+    porticulis: "castles",
+    wall: "homes",
+    roof: "homes",
+    door: "homes",
+    window: "homes",
+    water: "other",
+    well: "other",
+    archery: "other",
+  };
+
+  return groupMappings[groupKey] || groupKey;
+};
+
 const inputFile = "example/public/assets/kenney_tiny-town/tiles.txt";
 const outputFile = "example/src/tileset-town.json";
 
@@ -82,6 +106,10 @@ if (fs.existsSync(outputFile)) {
     gridSize: 16,
   };
 }
+
+// Clear existing tiles and groups to prevent duplicates on re-run
+tileConfig.tiles = {};
+tileConfig.groups = {};
 
 const txtData = fs.readFileSync(inputFile, "utf-8");
 const lines = txtData.split("\n").filter((line) => line.trim() !== "");
@@ -117,8 +145,7 @@ for (const line of lines) {
 
   tileConfig.tiles[name] = tileDefinition;
 
-  const groupNameMatch = name.match(/^([a-zA-Z_]+?)_/);
-  const groupKey = groupNameMatch ? groupNameMatch[1] : "other";
+  const groupKey = getGroupKey(name);
 
   if (!tileConfig.groups[groupKey]) {
     tileConfig.groups[groupKey] = {

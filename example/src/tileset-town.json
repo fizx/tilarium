@@ -6,42 +6,6 @@
     "height": 32
   },
   "tiles": {
-    "ground_0": {
-      "displayName": "Ground 0",
-      "src": "assets/kenney_tiny-town/Tilemap/tilemap_packed.png",
-      "zIndex": 0,
-      "type": "tile",
-      "spritesheet": {
-        "x": 0,
-        "y": 0,
-        "width": 16,
-        "height": 16
-      }
-    },
-    "house_0": {
-      "displayName": "House 0",
-      "src": "assets/kenney_tiny-town/Tilemap/tilemap_packed.png",
-      "zIndex": 1,
-      "type": "tile",
-      "spritesheet": {
-        "x": 0,
-        "y": 16,
-        "width": 32,
-        "height": 32
-      }
-    },
-    "tree_0": {
-      "displayName": "Tree 0",
-      "src": "assets/kenney_tiny-town/Tilemap/tilemap_packed.png",
-      "zIndex": 1,
-      "type": "tile",
-      "spritesheet": {
-        "x": 32,
-        "y": 16,
-        "width": 16,
-        "height": 32
-      }
-    },
     "grass_smooth": {
       "displayName": "grass_smooth",
       "src": "public/assets/kenney_tiny-town/Tilemap/tilemap_packed.png",
@@ -589,7 +553,7 @@
       "type": "tile",
       "spritesheet": {
         "x": 144,
-        "y": 96,
+        "y": 48,
         "width": 16,
         "height": 16
       }
@@ -1009,6 +973,18 @@
       "type": "tile",
       "spritesheet": {
         "x": 128,
+        "y": 96,
+        "width": 16,
+        "height": 16
+      }
+    },
+    "fence_H_alt1": {
+      "displayName": "fence_H_alt1",
+      "src": "public/assets/kenney_tiny-town/Tilemap/tilemap_packed.png",
+      "zIndex": 2,
+      "type": "tile",
+      "spritesheet": {
+        "x": 144,
         "y": 96,
         "width": 16,
         "height": 16
@@ -1616,371 +1592,166 @@
     }
   },
   "groups": {
-    "arch": {
-      "displayName": "arch",
+    "castles": {
+      "displayName": "castles",
       "tileIds": [
-        "arch_NE",
         "arch_NE",
         "arch_NW",
-        "arch_NW"
-      ]
-    },
-    "archery": {
-      "displayName": "archery",
-      "tileIds": [
-        "archery_target",
-        "archery_target"
-      ]
-    },
-    "buildings": {
-      "displayName": "Buildings",
-      "tileIds": [
-        "house_0"
-      ]
-    },
-    "castle": {
-      "displayName": "castle",
-      "tileIds": [
-        "castle_wall",
         "castle_wall",
         "castle_window",
-        "castle_window"
-      ]
-    },
-    "cobblestone": {
-      "displayName": "cobblestone",
-      "tileIds": [
-        "cobblestone_on_grass",
-        "cobblestone_on_grass"
-      ]
-    },
-    "dirt": {
-      "displayName": "dirt",
-      "tileIds": [
-        "dirt_E ",
-        "dirt_E ",
-        "dirt_N",
-        "dirt_N",
-        "dirt_NE",
-        "dirt_NE",
-        "dirt_NW",
-        "dirt_NW",
-        "dirt_S",
-        "dirt_S",
-        "dirt_SE",
-        "dirt_SE",
-        "dirt_SW",
-        "dirt_SW",
-        "dirt_W",
-        "dirt_W",
-        "dirt_alt1",
-        "dirt_alt1",
-        "dirt_alt2",
-        "dirt_alt2",
-        "dirt_alt3",
-        "dirt_alt3",
-        "dirt_alt4",
-        "dirt_alt4"
-      ]
-    },
-    "door": {
-      "displayName": "door",
-      "tileIds": [
-        "door_stone_closed",
-        "door_stone_closed",
-        "door_stone_double_closed_LEFT",
-        "door_stone_double_closed_LEFT",
-        "door_stone_double_closed_RIGHT",
-        "door_stone_double_closed_RIGHT",
-        "door_stone_open",
-        "door_stone_open",
-        "door_wood_closed",
-        "door_wood_closed",
-        "door_wood_double_closed_LEFT",
-        "door_wood_double_closed_LEFT",
-        "door_wood_double_closed_RIGHT",
-        "door_wood_double_closed_RIGHT",
-        "door_wood_open",
-        "door_wood_open"
+        "parapet_E",
+        "parapet_H",
+        "parapet_LEFT",
+        "parapet_N",
+        "parapet_NE",
+        "parapet_NW",
+        "parapet_RIGHT",
+        "parapet_S",
+        "parapet_SE",
+        "parapet_SW",
+        "parapet_W",
+        "parapet_ladder",
+        "parapet_small",
+        "porticulis_E",
+        "porticulis_NE",
+        "porticulis_NW",
+        "porticulis_W"
       ]
     },
     "fence": {
       "displayName": "fence",
       "tileIds": [
         "fence_BOTTOM",
-        "fence_BOTTOM",
-        "fence_E",
         "fence_E",
         "fence_H",
-        "fence_H",
-        "fence_H",
-        "fence_H",
-        "fence_LEFT",
+        "fence_H_alt1",
         "fence_LEFT",
         "fence_NE",
-        "fence_NE",
-        "fence_NW",
         "fence_NW",
         "fence_RIGHT",
-        "fence_RIGHT",
-        "fence_SE",
         "fence_SE",
         "fence_SW",
-        "fence_SW",
-        "fence_TOP",
         "fence_TOP",
         "fence_V",
-        "fence_V",
         "fence_W",
-        "fence_W",
-        "fence_gate",
         "fence_gate"
       ]
     },
-    "grass": {
-      "displayName": "grass",
+    "homes": {
+      "displayName": "homes",
       "tileIds": [
-        "grass_flowers",
-        "grass_flowers",
-        "grass_rough",
-        "grass_rough",
-        "grass_smooth",
-        "grass_smooth"
-      ]
-    },
-    "nature": {
-      "displayName": "Nature",
-      "tileIds": [
-        "tree_0"
+        "door_stone_closed",
+        "door_stone_double_closed_LEFT",
+        "door_stone_double_closed_RIGHT",
+        "door_stone_open",
+        "door_wood_closed",
+        "door_wood_double_closed_LEFT",
+        "door_wood_double_closed_RIGHT",
+        "door_wood_open",
+        "roof_slate",
+        "roof_slate_alt1",
+        "roof_slate_alt2",
+        "roof_slate_alt3",
+        "roof_slate_alt4",
+        "roof_slate_alt5",
+        "roof_slate_dormer",
+        "roof_slate_peak",
+        "roof_tile",
+        "roof_tile_alt1",
+        "roof_tile_alt2",
+        "roof_tile_alt3",
+        "roof_tile_alt4",
+        "roof_tile_alt5",
+        "roof_tile_dormer",
+        "roof_tile_peak",
+        "wall_stone",
+        "wall_stone_E",
+        "wall_stone_W",
+        "wall_wood",
+        "wall_wood_E",
+        "wall_wood_W",
+        "window_stone_shutters",
+        "window_wood_shutters"
       ]
     },
     "other": {
       "displayName": "other",
       "tileIds": [
-        "arrow",
+        "archery_target",
         "arrow",
         "axe",
-        "axe",
-        "beehive",
         "beehive",
         "bomb",
-        "bomb",
-        "bow",
         "bow",
         "coin",
-        "coin",
-        "dirt",
         "dirt",
         "jar",
-        "jar",
-        "key",
         "key",
         "log",
-        "log",
-        "mushrooms",
         "mushrooms",
         "parapet",
-        "parapet",
-        "pickaxe",
         "pickaxe",
         "pitchfork",
-        "pitchfork",
-        "scythe",
         "scythe",
         "shovel",
-        "shovel",
-        "sign",
         "sign",
         "vines",
-        "vines",
-        "wheelbarrow",
+        "water_jug_empty",
+        "water_jug_full",
+        "well_N",
+        "well_S",
         "wheelbarrow"
       ]
     },
-    "parapet": {
-      "displayName": "parapet",
-      "tileIds": [
-        "parapet_E",
-        "parapet_E",
-        "parapet_H",
-        "parapet_H",
-        "parapet_LEFT",
-        "parapet_LEFT",
-        "parapet_N",
-        "parapet_N",
-        "parapet_NE",
-        "parapet_NE",
-        "parapet_NW",
-        "parapet_NW",
-        "parapet_RIGHT",
-        "parapet_RIGHT",
-        "parapet_S",
-        "parapet_S",
-        "parapet_SE",
-        "parapet_SE",
-        "parapet_SW",
-        "parapet_SW",
-        "parapet_W",
-        "parapet_W",
-        "parapet_ladder",
-        "parapet_ladder",
-        "parapet_small",
-        "parapet_small"
-      ]
-    },
-    "porticulis": {
-      "displayName": "porticulis",
-      "tileIds": [
-        "porticulis_E",
-        "porticulis_E",
-        "porticulis_NE",
-        "porticulis_NE",
-        "porticulis_NW",
-        "porticulis_NW",
-        "porticulis_W",
-        "porticulis_W"
-      ]
-    },
-    "roof": {
-      "displayName": "roof",
-      "tileIds": [
-        "roof_slate",
-        "roof_slate",
-        "roof_slate_alt1",
-        "roof_slate_alt1",
-        "roof_slate_alt2",
-        "roof_slate_alt2",
-        "roof_slate_alt3",
-        "roof_slate_alt3",
-        "roof_slate_alt4",
-        "roof_slate_alt4",
-        "roof_slate_alt5",
-        "roof_slate_alt5",
-        "roof_slate_dormer",
-        "roof_slate_dormer",
-        "roof_slate_peak",
-        "roof_slate_peak",
-        "roof_tile",
-        "roof_tile",
-        "roof_tile_alt1",
-        "roof_tile_alt1",
-        "roof_tile_alt2",
-        "roof_tile_alt2",
-        "roof_tile_alt3",
-        "roof_tile_alt3",
-        "roof_tile_alt4",
-        "roof_tile_alt4",
-        "roof_tile_alt5",
-        "roof_tile_alt5",
-        "roof_tile_dormer",
-        "roof_tile_dormer",
-        "roof_tile_peak",
-        "roof_tile_peak"
-      ]
-    },
     "terrain": {
-      "displayName": "Terrain",
+      "displayName": "terrain",
       "tileIds": [
-        "ground_0"
+        "cobblestone_on_grass",
+        "dirt_E ",
+        "dirt_N",
+        "dirt_NE",
+        "dirt_NW",
+        "dirt_S",
+        "dirt_SE",
+        "dirt_SW",
+        "dirt_W",
+        "dirt_alt1",
+        "dirt_alt2",
+        "dirt_alt3",
+        "dirt_alt4",
+        "grass_flowers",
+        "grass_rough",
+        "grass_smooth"
       ]
     },
     "tree": {
       "displayName": "tree",
       "tileIds": [
         "tree_bushy_N",
-        "tree_bushy_N",
-        "tree_fall",
         "tree_fall",
         "tree_fall_S",
-        "tree_fall_S",
-        "tree_fall_cluster",
         "tree_fall_cluster",
         "tree_fall_cluster_E",
-        "tree_fall_cluster_E",
-        "tree_fall_cluster_N",
         "tree_fall_cluster_N",
         "tree_fall_cluster_NE",
-        "tree_fall_cluster_NE",
-        "tree_fall_cluster_NW",
         "tree_fall_cluster_NW",
         "tree_fall_cluster_S",
-        "tree_fall_cluster_S",
-        "tree_fall_cluster_SE",
         "tree_fall_cluster_SE",
         "tree_fall_cluster_SW",
-        "tree_fall_cluster_SW",
-        "tree_fall_cluster_W",
         "tree_fall_cluster_W",
         "tree_fall_tall_N",
-        "tree_fall_tall_N",
-        "tree_green",
         "tree_green",
         "tree_green_S",
-        "tree_green_S",
-        "tree_green_cluster",
         "tree_green_cluster",
         "tree_green_cluster_E",
-        "tree_green_cluster_E",
-        "tree_green_cluster_N",
         "tree_green_cluster_N",
         "tree_green_cluster_NE",
-        "tree_green_cluster_NE",
-        "tree_green_cluster_NW",
         "tree_green_cluster_NW",
         "tree_green_cluster_S",
-        "tree_green_cluster_S",
-        "tree_green_cluster_SE",
         "tree_green_cluster_SE",
         "tree_green_cluster_SW",
-        "tree_green_cluster_SW",
         "tree_green_cluster_W",
-        "tree_green_cluster_W",
-        "tree_green_tall_N",
         "tree_green_tall_N"
-      ]
-    },
-    "wall": {
-      "displayName": "wall",
-      "tileIds": [
-        "wall_stone",
-        "wall_stone",
-        "wall_stone_E",
-        "wall_stone_E",
-        "wall_stone_W",
-        "wall_stone_W",
-        "wall_wood",
-        "wall_wood",
-        "wall_wood_E",
-        "wall_wood_E",
-        "wall_wood_W",
-        "wall_wood_W"
-      ]
-    },
-    "water": {
-      "displayName": "water",
-      "tileIds": [
-        "water_jug_empty",
-        "water_jug_empty",
-        "water_jug_full",
-        "water_jug_full"
-      ]
-    },
-    "well": {
-      "displayName": "well",
-      "tileIds": [
-        "well_N",
-        "well_N",
-        "well_S",
-        "well_S"
-      ]
-    },
-    "window": {
-      "displayName": "window",
-      "tileIds": [
-        "window_stone_shutters",
-        "window_stone_shutters",
-        "window_wood_shutters",
-        "window_wood_shutters"
       ]
     }
   }
