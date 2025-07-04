@@ -12,12 +12,14 @@ interface TilemapEditorProps {
   config: TileConfig;
   initialState?: TilemapState;
   onChange?: (state: TilemapState) => void;
+  canvasStyle?: React.CSSProperties;
 }
 
 export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   config,
   initialState,
   onChange,
+  canvasStyle,
 }) => {
   const editorReducer = (state: TilemapState, action: any): TilemapState => {
     switch (action.type) {
@@ -85,7 +87,13 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   };
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        height: "100%",
+      }}
+    >
       <EditorContext.Provider
         value={{
           config,
@@ -105,7 +113,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         }}
       >
         <div className="editor-container">
-          <div className="canvas-container">
+          <div className="canvas-container" style={canvasStyle}>
             <Canvas />
             <Toolbar />
           </div>

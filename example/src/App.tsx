@@ -5,9 +5,13 @@ import { TileConfig } from "../../src/config";
 import "./App.css";
 
 function App() {
+  const canvasStyle = {
+    background: "url('/dragons.png') center/cover",
+  };
+
   return (
     <div className="editor-wrapper">
-      <TilemapEditor config={tileset as TileConfig} />
+      <TilemapEditor config={tileset as TileConfig} canvasStyle={canvasStyle} />
     </div>
   );
 }

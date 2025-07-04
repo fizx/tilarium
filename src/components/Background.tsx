@@ -1,7 +1,11 @@
 import React from "react";
 import { useEditor } from "../EditorContext";
 
-export const Background = () => {
+interface BackgroundProps {
+  mapSize: { width: number; height: number } | null;
+}
+
+export const Background: React.FC<BackgroundProps> = ({ mapSize }) => {
   const { config, state } = useEditor();
   const { backgroundTileId } = state;
 
@@ -25,10 +29,17 @@ export const Background = () => {
     );
   }
 
+  if (!mapSize) return null; // Or some fallback for infinite map
+
+  const scaleX = mapSize.width / tileDef.spritesheet.width;
+  const scaleY = mapSize.height / tileDef.spritesheet.height;
+
   const imageStyle: React.CSSProperties = {
     position: "absolute",
-    left: `${-tileDef.spritesheet.x}px`,
-    top: `${-tileDef.spritesheet.y}px`,
+    left: `${-tileDef.spritesheet.x * scaleX}px`,
+    top: `${-tileDef.spritesheet.y * scaleY}px`,
+    transform: `scale(${scaleX}, ${scaleY})`,
+    transformOrigin: "top left",
   };
 
   return (

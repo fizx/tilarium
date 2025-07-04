@@ -197,13 +197,13 @@ export const Canvas = () => {
               ? {
                   ...mapSize,
                   position: "relative",
-                  backgroundSize: `${config.gridSize}px ${config.gridSize}px`,
+                  backgroundColor: "#f0f0f0",
                 }
               : {
                   width: "100%",
                   height: "100%",
                   position: "relative",
-                  backgroundSize: `${config.gridSize}px ${config.gridSize}px`,
+                  backgroundColor: "#f0f0f0",
                 }
           }
         >
@@ -215,11 +215,24 @@ export const Canvas = () => {
               left: 0,
               width: "100%",
               height: "100%",
-              zIndex: -1,
+              zIndex: 1,
             }}
           >
-            <Background />
+            <Background mapSize={mapSize} />
           </div>
+          <div
+            className="grid-container"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.1) 1px, transparent 1px)`,
+              backgroundSize: `${config.gridSize}px ${config.gridSize}px`,
+              zIndex: 2,
+            }}
+          />
           <div
             className="tile-container"
             style={{
@@ -228,6 +241,7 @@ export const Canvas = () => {
               left: 0,
               width: "100%",
               height: "100%",
+              zIndex: 3,
             }}
           >
             {state.placedTiles
