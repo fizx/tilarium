@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsup",
-    "build:example": "vite build example",
+    "build:example": "vite build",
     "import-tileset": "TS_NODE_COMPILER_OPTIONS=\"{\\\"module\\\":\\\"commonjs\\\"}\" node -r ts-node/register scripts/import-tileset.ts"
   },
   "peerDependencies": {
