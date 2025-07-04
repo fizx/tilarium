@@ -6,9 +6,17 @@ import { TileConfig } from "../../src/config";
 import "./App.css";
 import pako from "pako";
 
+type Tileset = "platformer" | "town";
+
+interface SavedState {
+  tileset: Tileset;
+  state: TilemapState;
+}
+
 // Helper to compress and encode state for URL
-const encodeState = (state: TilemapState): string => {
-  const json = JSON.stringify(state);
+const encodeState = (state: TilemapState, tileset: Tileset): string => {
+  const data: SavedState = { state, tileset };
+  const json = JSON.stringify(data);
   const compressed = pako.deflate(json);
   const binaryString = Array.from(compressed, (byte) =>
     String.fromCharCode(byte)
@@ -18,7 +26,7 @@ const encodeState = (state: TilemapState): string => {
 };
 
 // Helper to decode and decompress state from URL
-const decodeState = (encoded: string): TilemapState | null => {
+const decodeState = (encoded: string): SavedState | null => {
   try {
     let base64 = encoded.replace(/-/g, "+").replace(/_/g, "/");
     while (base64.length % 4) {
@@ -30,14 +38,27 @@ const decodeState = (encoded: string): TilemapState | null => {
       compressed[i] = binaryString.charCodeAt(i);
     }
     const json = pako.inflate(compressed, { to: "string" });
-    return JSON.parse(json);
+    const decoded = JSON.parse(json);
+
+    // New format
+    if (decoded.state && decoded.tileset) {
+      return decoded as SavedState;
+    }
+
+    // Legacy format
+    if (decoded.placedTiles) {
+      return {
+        state: decoded as TilemapState,
+        tileset: "platformer", // default to platformer for old links
+      };
+    }
+
+    return null;
   } catch (e) {
     console.error("Failed to decode state from URL", e);
     return null;
   }
 };
-
-type Tileset = "platformer" | "town";
 
 const tilesets: Record<Tileset, TileConfig> = {
   platformer: platformerTileset as TileConfig,
@@ -54,9 +75,10 @@ function App() {
     // Check for state in URL on initial load
     const hash = window.location.hash.slice(1);
     if (hash) {
-      const decodedState = decodeState(hash);
-      if (decodedState) {
-        setInitialState(decodedState);
+      const decoded = decodeState(hash);
+      if (decoded) {
+        setSelectedTileset(decoded.tileset);
+        setInitialState(decoded.state);
       }
     }
     setIsLoading(false);
@@ -73,11 +95,14 @@ function App() {
     [initialState]
   );
 
-  const handleStateChange = useCallback((newState: TilemapState) => {
-    const encodedState = encodeState(newState);
-    // Use pushState to avoid adding to browser history for every change
-    window.history.pushState(null, "", `#${encodedState}`);
-  }, []);
+  const handleStateChange = useCallback(
+    (newState: TilemapState) => {
+      const encodedState = encodeState(newState, selectedTileset);
+      // Use pushState to avoid adding to browser history for every change
+      window.history.pushState(null, "", `#${encodedState}`);
+    },
+    [selectedTileset]
+  );
 
   const handleTilesetChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newTileset = event.target.value as Tileset;

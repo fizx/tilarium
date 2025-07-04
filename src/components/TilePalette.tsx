@@ -30,6 +30,16 @@ export const TilePalette = () => {
   }, [config.groups]);
 
   useEffect(() => {
+    // if the active tab is not in the tile groups, set it to the first one
+    if (
+      !tileGroups.find((group) => group.displayName === activeTab) &&
+      tileGroups.length > 0
+    ) {
+      setActiveTab(tileGroups[0].displayName);
+    }
+  }, [tileGroups, activeTab]);
+
+  useEffect(() => {
     const checkScroll = () => {
       const el = scrollContainerRef.current;
       if (el) {
