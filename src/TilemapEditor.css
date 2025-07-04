@@ -44,11 +44,12 @@
   background-color: #f7f7f7;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+  padding: 0 5px;
 }
 
 .tabs {
   display: flex;
-  padding: 5px 5px 0 5px;
+  padding: 5px 0 0 0;
   overflow-x: auto;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
