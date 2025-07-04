@@ -17,8 +17,17 @@ export const TilePalette = () => {
     )[0]?.displayName || ""
   );
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const tabsScrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
+  const [canTabsScrollLeft, setCanTabsScrollLeft] = useState(false);
+  const [canTabsScrollRight, setCanTabsScrollRight] = useState(false);
+
+  const tileGroups = useMemo(() => {
+    return Object.values(config.groups).sort((a, b) =>
+      a.displayName.localeCompare(b.displayName)
+    );
+  }, [config.groups]);
 
   useEffect(() => {
     const checkScroll = () => {
@@ -34,6 +43,8 @@ export const TilePalette = () => {
     if (el) {
       checkScroll();
       el.addEventListener("scroll", checkScroll);
+      // listen for resize
+      window.addEventListener("resize", checkScroll);
     }
 
     // Also check when the active tab changes
@@ -42,15 +53,35 @@ export const TilePalette = () => {
     return () => {
       if (el) {
         el.removeEventListener("scroll", checkScroll);
+        window.removeEventListener("resize", checkScroll);
       }
     };
   }, [activeTab]);
 
-  const tileGroups = useMemo(() => {
-    return Object.values(config.groups).sort((a, b) =>
-      a.displayName.localeCompare(b.displayName)
-    );
-  }, [config.groups]);
+  useEffect(() => {
+    const checkTabsScroll = () => {
+      const el = tabsScrollRef.current;
+      if (el) {
+        const { scrollLeft, scrollWidth, clientWidth } = el;
+        setCanTabsScrollLeft(scrollLeft > 0);
+        setCanTabsScrollRight(scrollLeft < scrollWidth - clientWidth - 1); // -1 for subpixel rendering
+      }
+    };
+
+    const el = tabsScrollRef.current;
+    if (el) {
+      checkTabsScroll();
+      el.addEventListener("scroll", checkTabsScroll);
+      window.addEventListener("resize", checkTabsScroll);
+    }
+
+    return () => {
+      if (el) {
+        el.removeEventListener("scroll", checkTabsScroll);
+        window.removeEventListener("resize", checkTabsScroll);
+      }
+    };
+  }, [tileGroups]);
 
   const handleSelectTile = (tile: TileDefinition, groupName: string) => {
     setSelectedTile(tile);
@@ -69,20 +100,48 @@ export const TilePalette = () => {
     }
   };
 
+  const scrollTabs = (direction: "left" | "right") => {
+    if (tabsScrollRef.current) {
+      const scrollAmount = direction === "left" ? -150 : 150;
+      tabsScrollRef.current.scrollBy({
+        left: scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <div className="palette">
-      <div className="tabs">
-        {tileGroups.map((group) => (
-          <button
-            key={group.displayName}
-            className={`tab-button ${
-              activeTab === group.displayName ? "active" : ""
-            }`}
-            onClick={() => setActiveTab(group.displayName)}
+      <div className="tabs-container">
+        {canTabsScrollLeft && (
+          <div
+            className="scroll-button-tabs left"
+            onClick={() => scrollTabs("left")}
           >
-            {group.displayName}
-          </button>
-        ))}
+            ❮
+          </div>
+        )}
+        <div className="tabs" ref={tabsScrollRef}>
+          {tileGroups.map((group) => (
+            <button
+              key={group.displayName}
+              className={`tab-button ${
+                activeTab === group.displayName ? "active" : ""
+              }`}
+              onClick={() => setActiveTab(group.displayName)}
+            >
+              {group.displayName}
+            </button>
+          ))}
+        </div>
+        {canTabsScrollRight && (
+          <div
+            className="scroll-button-tabs right"
+            onClick={() => scrollTabs("right")}
+          >
+            ❯
+          </div>
+        )}
       </div>
       <div className="tab-content">
         {tileGroups.map((group) => {
