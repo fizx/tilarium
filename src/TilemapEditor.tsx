@@ -1,5 +1,5 @@
-import React, { useReducer, useState } from "react";
-import { TileConfig } from "./config";
+import React, { useReducer, useState, useEffect, useRef } from "react";
+import { TileConfig, TileDefinition } from "./config";
 import { TilemapState, PlacedTile } from "./state";
 import { TilePalette } from "./components/TilePalette";
 import { Canvas } from "./components/Canvas";
@@ -8,20 +8,33 @@ import { EditorContext, Camera, Tool, Mouse } from "./EditorContext";
 import { CustomCursor } from "./components/CustomCursor";
 import "./TilemapEditor.css";
 
+export interface EditorActions {
+  getState: () => TilemapState;
+  loadState: (state: TilemapState) => void;
+}
+
 interface TilemapEditorProps {
   config: TileConfig;
   initialState?: TilemapState;
-  onChange?: (state: TilemapState) => void;
+  onReady?: (actions: EditorActions) => void;
+  onStateChange?: (state: TilemapState) => void;
+  onCameraChange?: (camera: Camera) => void;
+  onToolSelect?: (tool: Tool) => void;
+  onTileSelect?: (tile?: TileDefinition) => void;
   canvasStyle?: React.CSSProperties;
 }
 
 export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   config,
   initialState,
-  onChange,
+  onReady,
+  onStateChange,
+  onCameraChange,
+  onToolSelect,
+  onTileSelect,
   canvasStyle,
 }) => {
-  const editorReducer = (state: TilemapState, action: any): TilemapState => {
+  const reducer = (state: TilemapState, action: any): TilemapState => {
     switch (action.type) {
       case "ADD_TILE": {
         const newTile = action.payload;
@@ -55,30 +68,74 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           ...state,
           backgroundTileId: action.payload,
         };
+      case "LOAD_STATE":
+        return action.payload;
       default:
         return state;
     }
   };
 
-  const [editorState, dispatch] = useReducer(
-    editorReducer,
+  const [state, dispatch] = useReducer(
+    reducer,
     initialState || {
       placedTiles: [],
-      tileToReplace: null,
       backgroundTileId: null,
+      tileToReplace: null,
     }
   );
 
-  const [selectedTile, setSelectedTile] = useState<any>();
-  const [selectedTool, setSelectedTool] = useState<Tool>("drag");
-  const [camera, setCamera] = useState<Camera>({ x: 0, y: 0, zoom: 1 });
+  const [selectedTile, rawSetSelectedTile] = useState<
+    TileDefinition | undefined
+  >();
+  const [selectedTool, rawSetSelectedTool] = useState<Tool>("drag");
+  const [camera, rawSetCamera] = useState<Camera>({ x: 0, y: 0, zoom: 1 });
   const [mouse, setMouse] = useState<Mouse | null>(null);
   const [tileToReplace, setTileToReplace] = useState<PlacedTile | null>(null);
-  const canvasRef = React.useRef<HTMLDivElement>(null!);
+  const canvasRef = useRef<HTMLDivElement>(null!);
+  const isReady = useRef(false);
 
-  const handleSelectTile = (tile: any) => {
+  // Wrapped dispatch to notify of state changes
+  const dispatchAndNotify = (action: any) => {
+    const newState = reducer(state, action);
+    dispatch(action);
+    if (onStateChange && isReady.current) {
+      onStateChange(newState);
+    }
+  };
+
+  // Wrapped state setters to fire hooks
+  const setCamera = (newCamera: Camera) => {
+    rawSetCamera(newCamera);
+    if (onCameraChange) onCameraChange(newCamera);
+  };
+  const setSelectedTool = (newTool: Tool) => {
+    rawSetSelectedTool(newTool);
+    if (onToolSelect) onToolSelect(newTool);
+  };
+  const setSelectedTile = (newTile?: TileDefinition) => {
+    rawSetSelectedTile(newTile);
+    if (onTileSelect) onTileSelect(newTile);
+  };
+
+  useEffect(() => {
+    if (onReady) {
+      onReady({
+        getState: () => state,
+        loadState: (newState) =>
+          dispatch({ type: "LOAD_STATE", payload: newState }),
+      });
+    }
+    isReady.current = true;
+  }, []);
+
+  const handleSelectTile = (tile?: TileDefinition) => {
+    if (!tile) {
+      setSelectedTile(undefined);
+      return;
+    }
+
     if (tile.type === "background") {
-      dispatch({ type: "SET_BACKGROUND", payload: tile.displayName });
+      dispatchAndNotify({ type: "SET_BACKGROUND", payload: tile.displayName });
       setSelectedTile(undefined);
     } else {
       setSelectedTile(tile);
@@ -97,8 +154,8 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
       <EditorContext.Provider
         value={{
           config,
-          state: { ...editorState, tileToReplace },
-          dispatch,
+          state: { ...state, tileToReplace },
+          dispatch: dispatchAndNotify,
           selectedTile,
           setSelectedTile: handleSelectTile,
           selectedTool,
