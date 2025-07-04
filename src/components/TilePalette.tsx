@@ -83,7 +83,16 @@ export const TilePalette = () => {
     };
   }, [tileGroups]);
 
-  const handleSelectTile = (tile: TileDefinition, groupName: string) => {
+  const handleSelectTile = (
+    e: React.MouseEvent<HTMLDivElement>,
+    tile: TileDefinition,
+    groupName: string
+  ) => {
+    e.currentTarget.scrollIntoView({
+      behavior: "smooth",
+      inline: "center",
+      block: "nearest",
+    });
     setSelectedTile(tile);
     if (groupName !== "backgrounds") {
       setSelectedTool("place");
@@ -128,7 +137,14 @@ export const TilePalette = () => {
               className={`tab-button ${
                 activeTab === group.displayName ? "active" : ""
               }`}
-              onClick={() => setActiveTab(group.displayName)}
+              onClick={(e) => {
+                setActiveTab(group.displayName);
+                e.currentTarget.scrollIntoView({
+                  behavior: "smooth",
+                  inline: "center",
+                  block: "nearest",
+                });
+              }}
             >
               {group.displayName}
             </button>
@@ -176,8 +192,8 @@ export const TilePalette = () => {
                         className={`tile-wrapper ${
                           isSelected ? "selected" : ""
                         }`}
-                        onClick={() =>
-                          handleSelectTile(tile, group.displayName)
+                        onClick={(e) =>
+                          handleSelectTile(e, tile, group.displayName)
                         }
                         title={tile.displayName}
                       >
