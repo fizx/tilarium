@@ -1,6 +1,6 @@
 import React, { useRef, useCallback } from "react";
 import { TilemapEditor, EditorActions, TilemapState } from "../../src";
-import tileset from "../assets/kenney_new-platformer-pack-1.0/tileset.json";
+import tileset from "./tileset.json";
 import { TileConfig } from "../../src/config";
 import "./App.css";
 
