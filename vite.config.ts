@@ -7,5 +7,8 @@ export default defineConfig({
   publicDir: ".",
   build: {
     outDir: "../docs",
+    rollupOptions: {
+      input: "example/entry.html",
+    },
   },
 });
