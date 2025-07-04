@@ -23,13 +23,13 @@ steps:
   - ls -R docs
 
 - name: publish
-  image: plugins/gh-pages
+  image: appleboy/drone-gh-pages
   settings:
     username: git
     password:
       from_secret: github_token
-    pages_directory: docs/
+    source: docs
     target_branch: gh-pages
-    remote_url: https://github.snooguts.net/kyle-maxwell/tilemapper.git
+    commit_message: "feat(docs): publish example app to github pages"
   when:
     event: push 
