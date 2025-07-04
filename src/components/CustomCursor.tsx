@@ -15,7 +15,7 @@ export const CustomCursor = () => {
     top: mouse.y,
     pointerEvents: "none",
     zIndex: 1000,
-    opacity: 0.5,
+    opacity: selectedTool === "erase" ? 1 : 0.5,
     transform: `scale(${camera.zoom})`,
     transformOrigin: "top left",
   };

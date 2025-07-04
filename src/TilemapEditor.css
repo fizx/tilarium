@@ -17,7 +17,6 @@
 }
 
 .map-boundary {
-  background-color: #e9e9e9; /* Light background for the map area */
   box-shadow: 0 0 0 1px #999; /* Edge of the map */
   background-image: linear-gradient(
       to right,
@@ -143,7 +142,13 @@
 
 .backgrounds-grid .tile-image-wrapper {
   width: 128px;
-  height: 128px;
+  height: 192px;
+}
+
+.backgrounds-grid .tile-image-wrapper .tile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .toolbar {

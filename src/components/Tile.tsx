@@ -17,6 +17,7 @@ export const Tile: React.FC<TileProps> = ({ tile }) => {
         alt={tile.displayName}
         className="tile-image"
         style={{ width: gridSize, height: gridSize }}
+        onDragStart={(e) => e.preventDefault()}
       />
     );
   }
@@ -39,8 +40,13 @@ export const Tile: React.FC<TileProps> = ({ tile }) => {
   };
 
   return (
-    <div style={wrapperStyle}>
-      <img src={tile.src} alt={tile.displayName} style={imageStyle} />
+    <div style={wrapperStyle} onDragStart={(e) => e.preventDefault()}>
+      <img
+        src={tile.src}
+        alt={tile.displayName}
+        style={imageStyle}
+        onDragStart={(e) => e.preventDefault()}
+      />
     </div>
   );
 };

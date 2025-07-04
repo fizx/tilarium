@@ -19,15 +19,15 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   initialState,
   onChange,
 }) => {
-  const tilesReducer = (state: PlacedTile[], action: any): PlacedTile[] => {
+  const editorReducer = (state: TilemapState, action: any): TilemapState => {
     switch (action.type) {
       case "ADD_TILE": {
         const newTile = action.payload;
         const newTileDef = config.tiles[newTile.tileId];
-        if (!newTileDef) return state;
+        if (!newTileDef || newTileDef.type === "background") return state;
 
         // Remove any existing tile with the same zIndex at the same position
-        const filteredState = state.filter((tile) => {
+        const filteredState = state.placedTiles.filter((tile) => {
           const existingTileDef = config.tiles[tile.tileId];
           if (!existingTileDef) return true;
 
@@ -38,22 +38,35 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           );
         });
 
-        return [...filteredState, newTile];
+        return { ...state, placedTiles: [...filteredState, newTile] };
       }
       case "REMOVE_TILE":
-        return state.filter(
-          (tile) =>
-            !(tile.x === action.payload.x && tile.y === action.payload.y)
-        );
+        return {
+          ...state,
+          placedTiles: state.placedTiles.filter(
+            (tile) =>
+              !(tile.x === action.payload.x && tile.y === action.payload.y)
+          ),
+        };
+      case "SET_BACKGROUND":
+        return {
+          ...state,
+          backgroundTileId: action.payload,
+        };
       default:
         return state;
     }
   };
 
-  const [placedTiles, dispatch] = useReducer(
-    tilesReducer,
-    initialState?.placedTiles || []
+  const [editorState, dispatch] = useReducer(
+    editorReducer,
+    initialState || {
+      placedTiles: [],
+      tileToReplace: null,
+      backgroundTileId: null,
+    }
   );
+
   const [selectedTile, setSelectedTile] = useState<any>();
   const [selectedTool, setSelectedTool] = useState<Tool>("drag");
   const [camera, setCamera] = useState<Camera>({ x: 0, y: 0, zoom: 1 });
@@ -61,14 +74,14 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   const [tileToReplace, setTileToReplace] = useState<PlacedTile | null>(null);
   const canvasRef = React.useRef<HTMLDivElement>(null!);
 
-  const editorState: TilemapState = {
-    placedTiles,
-    tileToReplace,
-  };
-
   const handleSelectTile = (tile: any) => {
-    setSelectedTile(tile);
-    setSelectedTool("place");
+    if (tile.type === "background") {
+      dispatch({ type: "SET_BACKGROUND", payload: tile.displayName });
+      setSelectedTile(undefined);
+    } else {
+      setSelectedTile(tile);
+      setSelectedTool("place");
+    }
   };
 
   return (
@@ -76,7 +89,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
       <EditorContext.Provider
         value={{
           config,
-          state: editorState,
+          state: { ...editorState, tileToReplace },
           dispatch,
           selectedTile,
           setSelectedTile: handleSelectTile,

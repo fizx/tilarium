@@ -1,6 +1,7 @@
 import React, { useRef, MouseEvent, useState, useMemo } from "react";
 import { useEditor } from "../EditorContext";
 import { Tile } from "./Tile";
+import { Background } from "./Background";
 
 export const Canvas = () => {
   const {
@@ -16,10 +17,12 @@ export const Canvas = () => {
     setTileToReplace,
   } = useEditor();
   const [isDragging, setIsDragging] = useState(false);
+  const [isPainting, setIsPainting] = useState(false);
   const lastMousePosition = useRef({ x: 0, y: 0 });
+  const lastPaintedCell = useRef<{ x: number; y: number } | null>(null);
 
   const cursor = useMemo(() => {
-    if (isDragging) {
+    if (isDragging || isPainting) {
       return "grabbing";
     }
 
@@ -34,44 +37,34 @@ export const Canvas = () => {
       default:
         return "default";
     }
-  }, [selectedTool, isDragging]);
+  }, [selectedTool, isDragging, isPainting]);
+
+  const applyToolAt = (gridX: number, gridY: number) => {
+    if (
+      lastPaintedCell.current?.x === gridX &&
+      lastPaintedCell.current?.y === gridY
+    ) {
+      return;
+    }
+
+    if (selectedTool === "place" && selectedTile) {
+      dispatch({
+        type: "ADD_TILE",
+        payload: { x: gridX, y: gridY, tileId: selectedTile.displayName },
+      });
+    } else if (selectedTool === "erase") {
+      dispatch({ type: "REMOVE_TILE", payload: { x: gridX, y: gridY } });
+    }
+
+    lastPaintedCell.current = { x: gridX, y: gridY };
+  };
 
   const handleMouseDown = (e: MouseEvent) => {
     if (selectedTool === "drag") {
       setIsDragging(true);
       lastMousePosition.current = { x: e.clientX, y: e.clientY };
-    }
-  };
-
-  const handleMouseUp = (e: MouseEvent) => {
-    setIsDragging(false);
-
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = Math.floor(
-      (e.clientX - rect.left - camera.x) / (config.gridSize * camera.zoom)
-    );
-    const y = Math.floor(
-      (e.clientY - rect.top - camera.y) / (config.gridSize * camera.zoom)
-    );
-
-    if (selectedTool === "place" && selectedTile) {
-      dispatch({
-        type: "ADD_TILE",
-        payload: { x, y, tileId: selectedTile.displayName },
-      });
-    } else if (selectedTool === "erase") {
-      dispatch({ type: "REMOVE_TILE", payload: { x, y } });
-    }
-  };
-
-  const handleMouseMove = (e: MouseEvent) => {
-    if (isDragging && selectedTool === "drag") {
-      setMouse(null);
-      const dx = e.clientX - lastMousePosition.current.x;
-      const dy = e.clientY - lastMousePosition.current.y;
-      setCamera({ ...camera, x: camera.x + dx, y: camera.y + dy });
-      lastMousePosition.current = { x: e.clientX, y: e.clientY };
-    } else {
+    } else if (selectedTool === "place" || selectedTool === "erase") {
+      setIsPainting(true);
       const rect = e.currentTarget.getBoundingClientRect();
       const x = Math.floor(
         (e.clientX - rect.left - camera.x) / (config.gridSize * camera.zoom)
@@ -79,14 +72,51 @@ export const Canvas = () => {
       const y = Math.floor(
         (e.clientY - rect.top - camera.y) / (config.gridSize * camera.zoom)
       );
+      applyToolAt(x, y);
+    }
+  };
 
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    setIsPainting(false);
+    lastPaintedCell.current = null;
+  };
+
+  const handleMouseMove = (e: MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const gridX = Math.floor(
+      (e.clientX - rect.left - camera.x) / (config.gridSize * camera.zoom)
+    );
+    const gridY = Math.floor(
+      (e.clientY - rect.top - camera.y) / (config.gridSize * camera.zoom)
+    );
+
+    const snappedX =
+      gridX * (config.gridSize * camera.zoom) + camera.x + rect.left;
+    const snappedY =
+      gridY * (config.gridSize * camera.zoom) + camera.y + rect.top;
+
+    setMouse({ x: snappedX, y: snappedY });
+
+    if (isPainting) {
+      applyToolAt(gridX, gridY);
+      return;
+    }
+
+    if (isDragging && selectedTool === "drag") {
+      setMouse(null);
+      const dx = e.clientX - lastMousePosition.current.x;
+      const dy = e.clientY - lastMousePosition.current.y;
+      setCamera({ ...camera, x: camera.x + dx, y: camera.y + dy });
+      lastMousePosition.current = { x: e.clientX, y: e.clientY };
+    } else {
       if (selectedTool === "place" && selectedTile) {
         const tileToReplace =
           state.placedTiles.find((pt) => {
             const existingTileDef = config.tiles[pt.tileId];
             return (
-              pt.x === x &&
-              pt.y === y &&
+              pt.x === gridX &&
+              pt.y === gridY &&
               existingTileDef?.zIndex === selectedTile.zIndex
             );
           }) || null;
@@ -94,13 +124,6 @@ export const Canvas = () => {
       } else {
         setTileToReplace(null);
       }
-
-      const snappedX =
-        x * (config.gridSize * camera.zoom) + camera.x + rect.left;
-      const snappedY =
-        y * (config.gridSize * camera.zoom) + camera.y + rect.top;
-
-      setMouse({ x: snappedX, y: snappedY });
     }
   };
 
@@ -110,6 +133,8 @@ export const Canvas = () => {
 
   const handleMouseLeave = () => {
     setIsDragging(false);
+    setIsPainting(false);
+    lastPaintedCell.current = null;
     setMouse(null);
     setTileToReplace(null);
   };
@@ -190,36 +215,10 @@ export const Canvas = () => {
               left: 0,
               width: "100%",
               height: "100%",
+              zIndex: -1,
             }}
           >
-            {state.placedTiles
-              .filter(
-                (placedTile) =>
-                  config.tiles[placedTile.tileId]?.type === "background" &&
-                  !(
-                    placedTile.x === state.tileToReplace?.x &&
-                    placedTile.y === state.tileToReplace?.y &&
-                    placedTile.tileId === state.tileToReplace?.tileId
-                  )
-              )
-              .map((placedTile) => {
-                const tileDef = config.tiles[placedTile.tileId];
-                if (!tileDef) return null;
-                return (
-                  <img
-                    key={placedTile.tileId}
-                    src={tileDef.src}
-                    alt={tileDef.displayName}
-                    style={{
-                      position: "absolute",
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      zIndex: tileDef.zIndex,
-                    }}
-                  />
-                );
-              })}
+            <Background />
           </div>
           <div
             className="tile-container"
@@ -246,7 +245,7 @@ export const Canvas = () => {
                 if (!tileDef) return null;
                 return (
                   <div
-                    key={`${placedTile.x}-${placedTile.y}`}
+                    key={`${placedTile.x}-${placedTile.y}-${placedTile.tileId}`}
                     style={{
                       position: "absolute",
                       left: placedTile.x * config.gridSize,
