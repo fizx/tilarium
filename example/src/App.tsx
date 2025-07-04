@@ -38,7 +38,7 @@ function App() {
   }, []);
 
   const canvasStyle = {
-    background: "url('/dragons.png') center/cover",
+    background: "url('./assets/dragons.png') center/cover",
   };
 
   return (
