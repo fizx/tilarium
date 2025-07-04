@@ -1,0 +1,33 @@
+kind: pipeline
+type: docker
+name: deploy-example
+
+trigger:
+  branch:
+  - main
+  event:
+  - push
+
+steps:
+- name: install
+  image: node:18
+  commands:
+  - npm install
+
+- name: build
+  image: node:18
+  commands:
+  - npm run build
+  - npm run build --prefix example
+
+- name: publish
+  image: plugins/gh-pages
+  settings:
+    username: git
+    password:
+      from_secret: github_token
+    pages_dir: example/dist
+    target_branch: gh-pages
+    remote_url: https://github.snooguts.net/kyle-maxwell/tilemapper.git
+  when:
+    event: push 
