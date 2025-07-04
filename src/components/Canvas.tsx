@@ -55,6 +55,17 @@ export const Canvas = () => {
         return;
       }
 
+      if (config.mapSize !== "infinite") {
+        if (
+          gridX < 0 ||
+          gridX >= config.mapSize.width ||
+          gridY < 0 ||
+          gridY >= config.mapSize.height
+        ) {
+          return;
+        }
+      }
+
       if (selectedTool === "place" && selectedTile) {
         dispatch({
           type: "ADD_TILE",
@@ -66,7 +77,7 @@ export const Canvas = () => {
 
       lastPaintedCell.current = { x: gridX, y: gridY };
     },
-    [dispatch, selectedTile, selectedTool]
+    [dispatch, selectedTile, selectedTool, config.mapSize]
   );
 
   const getEventCoords = useCallback((e: MouseEvent | TouchEvent) => {
@@ -146,6 +157,19 @@ export const Canvas = () => {
         (clientY - rect.top - camera.y) / (config.gridSize * camera.zoom)
       );
 
+      if (config.mapSize !== "infinite") {
+        if (
+          gridX < 0 ||
+          gridX >= config.mapSize.width ||
+          gridY < 0 ||
+          gridY >= config.mapSize.height
+        ) {
+          setMouse(null);
+          setTileToReplace(null);
+          return;
+        }
+      }
+
       const snappedX =
         gridX * (config.gridSize * camera.zoom) + camera.x + rect.left;
       const snappedY =
@@ -190,6 +214,7 @@ export const Canvas = () => {
       setMouse,
       setTileToReplace,
       state.placedTiles,
+      config.mapSize,
     ]
   );
 
