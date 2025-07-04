@@ -26,7 +26,7 @@ steps:
     username: git
     password:
       from_secret: github_token
-    pages_directory: example/dist
+    pages_directory: example/dist/
     target_branch: gh-pages
     remote_url: https://github.snooguts.net/kyle-maxwell/tilemapper.git
   when:
