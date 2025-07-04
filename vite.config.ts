@@ -5,5 +5,7 @@ export default defineConfig({
   root: "example",
   base: "/kyle-maxwell/tilemapper/",
   publicDir: ".",
-  outDir: "../docs",
+  build: {
+    outDir: "../docs",
+  },
 });
