@@ -132,15 +132,16 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   useEffect(() => {
     if (canvasRef.current && config.mapSize !== "infinite") {
       const canvasRect = canvasRef.current.getBoundingClientRect();
-      const mapWidth = config.mapSize.width * config.gridSize * camera.zoom;
-      const mapHeight = config.mapSize.height * config.gridSize * camera.zoom;
+      const zoom = 1;
+      const mapWidth = config.mapSize.width * config.gridSize * zoom;
+      const mapHeight = config.mapSize.height * config.gridSize * zoom;
       setCamera({
-        ...camera,
+        zoom,
         x: (canvasRect.width - mapWidth) / 2,
         y: (canvasRect.height - mapHeight) / 2,
       });
     }
-  }, [canvasRef.current]);
+  }, [config]);
 
   const handleSelectTile = (tile?: TileDefinition) => {
     if (!tile) {
