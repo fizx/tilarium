@@ -6,7 +6,7 @@ export default defineConfig({
   root: "example",
   base: "/tilarium/",
   build: {
-    outDir: "docs",
+    outDir: "../docs",
     emptyOutDir: true,
   },
   plugins: [react()],
