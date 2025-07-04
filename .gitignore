@@ -3,6 +3,7 @@
 
 # Build artifacts
 /dist
+/example/dist
 
 # IDE-specific
 .idea

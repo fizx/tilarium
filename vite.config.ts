@@ -1,19 +1,10 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { viteStaticCopy } from "vite-plugin-static-copy";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
   root: "example",
   base: "/kyle-maxwell/tilemapper/",
-  build: {
-    outDir: "../docs",
-    rollupOptions: {
-      output: {
-        entryFileNames: `[name]-[hash].js`,
-        chunkFileNames: `[name]-[hash].js`,
-        assetFileNames: `[name]-[hash].[ext]`,
-      },
-    },
-  },
+  publicDir: "assets",
 });
