@@ -5,7 +5,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   root: "example",
-  base: "/tilemapper/",
+  base: "/kyle-maxwell/tilemapper/",
   build: {
     outDir: "../docs",
     rollupOptions: {
