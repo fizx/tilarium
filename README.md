@@ -4,7 +4,9 @@
 
 Let's make a web-based 2D tilemap editor that runs inside Devvit. Think: Super Mario Maker vibes, but for Reddit. This is an MVP and shipped as an npm library that doesn't need server components.
 
-![Example Tilemap Editor](example.png)
+![Example Tilemap Editor](screenshot.png)
+
+# Check out the [live demo](https://kyle-maxwell.snooguts.net/tilemapper) to try it yourself!
 
 ## Features
 
