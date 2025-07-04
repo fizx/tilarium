@@ -110,6 +110,7 @@ if (fs.existsSync(outputFile)) {
   tileConfig = JSON.parse(fileContent);
 } else {
   tileConfig = {
+    gridSize: 32,
     mapSize: "infinite",
     tiles: {},
     groups: {},

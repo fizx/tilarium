@@ -4,7 +4,7 @@ import { TileConfig, TileDefinition, TileGroup } from "../src/config";
 
 const TILE_WIDTH = 16;
 const TILE_HEIGHT = 16;
-const TILE_SPACING = 1;
+const TILE_SPACING = 0;
 const TILES_PER_ROW = 12;
 const IMAGE_PATH = "assets/kenney_tiny-town/Tilemap/tilemap_packed.png";
 const TILESHEET_PATH = "example/public/assets/kenney_tiny-town/Tilesheet.txt";
