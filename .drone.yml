@@ -18,7 +18,7 @@ steps:
   image: node:18
   commands:
   - npm run build
-  - npm run build --prefix example
+  - npm run build:example
 
 - name: publish
   image: plugins/gh-pages
