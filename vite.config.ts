@@ -6,4 +6,7 @@ export default defineConfig({
   plugins: [react()],
   root: "example",
   base: "/tilemapper/",
+  build: {
+    outDir: "../dist",
+  },
 });
