@@ -29,6 +29,9 @@ jobs:
       - name: Build Example
         run: npm run build:example
 
+      - name: Add .nojekyll file
+        run: touch docs/.nojekyll
+
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
