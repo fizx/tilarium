@@ -1,4 +1,4 @@
-# Devvit Tilemap Editor [[live demo](https://fizx.github.io/tilarium/)]
+# Devvit Tilemap Editor [[live demo](https://fizx.github.io/tilarium/#eJyV00trwzAMAOD_onMO69LHln-w6-htDOGHlpq4VvCDtZT-94VmFM8ZwzsZpA8hJOsCoxWK9N5YCtC9XeAE3apt4Dw9uwbiFH_R0IH0Rg0BpedPB9dmdutKt6l020q3q3RPle75f26bOSVUTKHsLBcyhcM93y7zmtkjj-Qw8li2nsMPK3qUNhGKcrI_mOcejbZUNrXJkBVak0fJMfKxhO0SHo3-peK6Fj7WwtUS5lP5Vg-5YjWgJ_3XkoLpHdLJxPLn5uiQNA50nmu9NyCFGnrPyd2OY17lPYSK7bS26Gk6m7nInl_pdkzQuWTt9QsoZQqZ)]
 
 [![CI](https://github.com/fizx/tilarium/actions/workflows/ci.yml/badge.svg)](https://github.com/fizx/tilarium/actions/workflows/ci.yml)
 
