@@ -1,4 +1,10 @@
-import React, { useRef, MouseEvent, useState, useMemo } from "react";
+import React, {
+  useRef,
+  useState,
+  useMemo,
+  TouchEvent,
+  MouseEvent,
+} from "react";
 import { useEditor } from "../EditorContext";
 import { Tile } from "./Tile";
 import { Background } from "./Background";
@@ -20,6 +26,7 @@ export const Canvas = () => {
   const [isPainting, setIsPainting] = useState(false);
   const lastMousePosition = useRef({ x: 0, y: 0 });
   const lastPaintedCell = useRef<{ x: number; y: number } | null>(null);
+  const pinchDist = useRef(0);
 
   const cursor = useMemo(() => {
     if (isDragging || isPainting) {
@@ -59,36 +66,57 @@ export const Canvas = () => {
     lastPaintedCell.current = { x: gridX, y: gridY };
   };
 
-  const handleMouseDown = (e: MouseEvent) => {
+  const getEventCoords = (e: MouseEvent | TouchEvent) => {
+    if ("touches" in e) {
+      return { clientX: e.touches[0].clientX, clientY: e.touches[0].clientY };
+    }
+    return { clientX: e.clientX, clientY: e.clientY };
+  };
+
+  const handlePanStart = (e: MouseEvent | TouchEvent) => {
+    if ("touches" in e && e.touches.length > 1) {
+      return;
+    }
     if (selectedTool === "drag") {
       setIsDragging(true);
-      lastMousePosition.current = { x: e.clientX, y: e.clientY };
-    } else if (selectedTool === "place" || selectedTool === "erase") {
+      const { clientX, clientY } = getEventCoords(e);
+      lastMousePosition.current = { x: clientX, y: clientY };
+    }
+  };
+
+  const handlePaintStart = (e: MouseEvent | TouchEvent) => {
+    if ("touches" in e && e.touches.length > 1) {
+      return;
+    }
+    if (selectedTool === "place" || selectedTool === "erase") {
       setIsPainting(true);
-      const rect = e.currentTarget.getBoundingClientRect();
+      const { clientX, clientY } = getEventCoords(e);
+      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
       const x = Math.floor(
-        (e.clientX - rect.left - camera.x) / (config.gridSize * camera.zoom)
+        (clientX - rect.left - camera.x) / (config.gridSize * camera.zoom)
       );
       const y = Math.floor(
-        (e.clientY - rect.top - camera.y) / (config.gridSize * camera.zoom)
+        (clientY - rect.top - camera.y) / (config.gridSize * camera.zoom)
       );
       applyToolAt(x, y);
     }
   };
 
-  const handleMouseUp = () => {
+  const handleInteractionEnd = () => {
     setIsDragging(false);
     setIsPainting(false);
     lastPaintedCell.current = null;
+    pinchDist.current = 0;
   };
 
-  const handleMouseMove = (e: MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect();
+  const handleInteractionMove = (e: MouseEvent | TouchEvent) => {
+    const { clientX, clientY } = getEventCoords(e);
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
     const gridX = Math.floor(
-      (e.clientX - rect.left - camera.x) / (config.gridSize * camera.zoom)
+      (clientX - rect.left - camera.x) / (config.gridSize * camera.zoom)
     );
     const gridY = Math.floor(
-      (e.clientY - rect.top - camera.y) / (config.gridSize * camera.zoom)
+      (clientY - rect.top - camera.y) / (config.gridSize * camera.zoom)
     );
 
     const snappedX =
@@ -105,10 +133,10 @@ export const Canvas = () => {
 
     if (isDragging && selectedTool === "drag") {
       setMouse(null);
-      const dx = e.clientX - lastMousePosition.current.x;
-      const dy = e.clientY - lastMousePosition.current.y;
+      const dx = clientX - lastMousePosition.current.x;
+      const dy = clientY - lastMousePosition.current.y;
       setCamera({ ...camera, x: camera.x + dx, y: camera.y + dy });
-      lastMousePosition.current = { x: e.clientX, y: e.clientY };
+      lastMousePosition.current = { x: clientX, y: clientY };
     } else {
       if (selectedTool === "place" && selectedTile) {
         const tileToReplace =
@@ -125,6 +153,78 @@ export const Canvas = () => {
         setTileToReplace(null);
       }
     }
+  };
+
+  const handleMouseDown = (e: MouseEvent) => {
+    handlePanStart(e);
+    handlePaintStart(e);
+  };
+
+  const handleMouseUp = () => {
+    handleInteractionEnd();
+  };
+
+  const handleMouseMove = (e: MouseEvent) => {
+    handleInteractionMove(e);
+  };
+
+  const handleTouchStart = (e: TouchEvent) => {
+    if (e.touches.length === 2) {
+      // pinch
+      e.preventDefault();
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      pinchDist.current = Math.sqrt(dx * dx + dy * dy);
+    } else {
+      handlePanStart(e);
+      handlePaintStart(e);
+    }
+  };
+
+  const handleTouchMove = (e: TouchEvent) => {
+    e.preventDefault();
+    if (e.touches.length === 2) {
+      // pinch
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      const newPinchDist = Math.sqrt(dx * dx + dy * dy);
+      const delta = newPinchDist - pinchDist.current;
+      pinchDist.current = newPinchDist;
+
+      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+
+      const c1 = {
+        x: e.touches[0].clientX - rect.left,
+        y: e.touches[0].clientY - rect.top,
+      };
+      const c2 = {
+        x: e.touches[1].clientX - rect.left,
+        y: e.touches[1].clientY - rect.top,
+      };
+
+      const midX = (c1.x + c2.x) / 2;
+      const midY = (c1.y + c2.y) / 2;
+
+      const worldX = (midX - camera.x) / camera.zoom;
+      const worldY = (midY - camera.y) / camera.zoom;
+
+      const newZoom = Math.max(0.1, camera.zoom + delta * 0.01);
+
+      const newCameraX = midX - worldX * newZoom;
+      const newCameraY = midY - worldY * newZoom;
+
+      setCamera({
+        zoom: newZoom,
+        x: newCameraX,
+        y: newCameraY,
+      });
+    } else {
+      handleInteractionMove(e);
+    }
+  };
+
+  const handleTouchEnd = (e: TouchEvent) => {
+    handleInteractionEnd();
   };
 
   const handleMouseEnter = (e: MouseEvent) => {
@@ -175,6 +275,9 @@ export const Canvas = () => {
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseMove={handleMouseMove}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onWheel={handleWheel}
