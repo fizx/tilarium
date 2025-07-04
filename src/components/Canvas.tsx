@@ -23,6 +23,7 @@ export const Canvas = () => {
     canvasRef,
     setMouse,
     setTileToReplace,
+    setSelectedTool,
   } = useEditor();
   const isDragging = useRef(false);
   const isPainting = useRef(false);
@@ -217,6 +218,7 @@ export const Canvas = () => {
       if (e.touches.length === 2) {
         // pinch
         e.preventDefault();
+        setSelectedTool("drag");
         const dx = e.touches[0].clientX - e.touches[1].clientX;
         const dy = e.touches[0].clientY - e.touches[1].clientY;
         pinchDist.current = Math.sqrt(dx * dx + dy * dy);
@@ -225,7 +227,7 @@ export const Canvas = () => {
         handlePaintStart(e);
       }
     },
-    [handlePanStart, handlePaintStart]
+    [handlePanStart, handlePaintStart, setSelectedTool]
   );
 
   const handleTouchMove = useCallback(
