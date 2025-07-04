@@ -4,6 +4,7 @@ import React, {
   useMemo,
   TouchEvent,
   MouseEvent,
+  useEffect,
 } from "react";
 import { useEditor } from "../EditorContext";
 import { Tile } from "./Tile";
@@ -269,18 +270,48 @@ export const Canvas = () => {
           height: config.mapSize.height * config.gridSize,
         };
 
+  useEffect(() => {
+    const canvasElement = canvasRef.current;
+    if (!canvasElement) return;
+
+    const options = { passive: false };
+
+    const handleTouchStartNative = handleTouchStart as unknown as EventListener;
+    const handleTouchMoveNative = handleTouchMove as unknown as EventListener;
+    const handleTouchEndNative = handleTouchEnd as unknown as EventListener;
+    const handleWheelNative = handleWheel as unknown as EventListener;
+
+    canvasElement.addEventListener(
+      "touchstart",
+      handleTouchStartNative,
+      options
+    );
+    canvasElement.addEventListener("touchmove", handleTouchMoveNative, options);
+    canvasElement.addEventListener("touchend", handleTouchEndNative, options);
+    canvasElement.addEventListener("wheel", handleWheelNative, options);
+
+    return () => {
+      canvasElement.removeEventListener("touchstart", handleTouchStartNative);
+      canvasElement.removeEventListener("touchmove", handleTouchMoveNative);
+      canvasElement.removeEventListener("touchend", handleTouchEndNative);
+      canvasElement.removeEventListener("wheel", handleWheelNative);
+    };
+  }, [
+    canvasRef,
+    handleTouchStart,
+    handleTouchMove,
+    handleTouchEnd,
+    handleWheel,
+  ]);
+
   return (
     <div
       ref={canvasRef}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseMove={handleMouseMove}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onWheel={handleWheel}
       className="canvas-container"
       style={{ cursor }}
     >

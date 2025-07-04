@@ -218,36 +218,3 @@
 .camera-controls button:hover {
   background-color: white;
 }
-
-@media (max-width: 768px) {
-  .toolbar {
-    top: 10px;
-    right: 10px;
-    left: auto;
-    flex-direction: row; /* Horizontal layout for buttons */
-    gap: 10px;
-  }
-
-  .camera-controls {
-    top: 50px; /* Position below toolbar */
-    right: 10px;
-    bottom: auto;
-    left: auto;
-    flex-direction: row;
-    gap: 10px;
-  }
-
-  .palette {
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-  }
-
-  .tab-button {
-    padding: 8px 10px;
-    font-size: 12px;
-  }
-}

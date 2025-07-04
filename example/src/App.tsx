@@ -48,7 +48,6 @@ function App() {
         canvasStyle={canvasStyle}
         onReady={handleReady}
         onStateChange={handleStateChange}
-        onCameraChange={(camera) => console.log("onCameraChange", camera)}
         onTileSelect={(tile) => console.log("onTileSelect", tile)}
         onToolSelect={(tool) => console.log("onToolSelect", tool)}
       />

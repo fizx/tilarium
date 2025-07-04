@@ -91,8 +91,9 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   const [camera, rawSetCamera] = useState<Camera>({ x: 0, y: 0, zoom: 1 });
   const [mouse, setMouse] = useState<Mouse | null>(null);
   const [tileToReplace, setTileToReplace] = useState<PlacedTile | null>(null);
-  const canvasRef = useRef<HTMLDivElement>(null!);
+  const canvasRef = useRef<HTMLDivElement>(null);
   const isReady = useRef(false);
+  const actionsRef = useRef<EditorActions | null>(null);
 
   // Wrapped dispatch to notify of state changes
   const dispatchAndNotify = (action: any) => {
@@ -127,6 +128,19 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
     }
     isReady.current = true;
   }, []);
+
+  useEffect(() => {
+    if (canvasRef.current && config.mapSize !== "infinite") {
+      const canvasRect = canvasRef.current.getBoundingClientRect();
+      const mapWidth = config.mapSize.width * config.gridSize * camera.zoom;
+      const mapHeight = config.mapSize.height * config.gridSize * camera.zoom;
+      setCamera({
+        ...camera,
+        x: (canvasRect.width - mapWidth) / 2,
+        y: (canvasRect.height - mapHeight) / 2,
+      });
+    }
+  }, [canvasRef.current]);
 
   const handleSelectTile = (tile?: TileDefinition) => {
     if (!tile) {
