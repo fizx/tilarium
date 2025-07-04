@@ -93,6 +93,64 @@ For use in non-React contexts, you can use the `mount` helper to render the edit
 - Configurable: map size, tile size, asset pack, and layer groupingss.
 - Exportable: simple json format for use the play mode of your game
 
-## CI/CD
+## Data Format
 
-This project uses GitHub Actions to automatically deploy the example application to GitHub Pages.
+The editor's input and output format is a JSON object that describes the tileset and map configuration. This allows you to load and save the editor's state, as well as create your own tilesets.
+
+Here is a light example of the `tileset.json` format:
+
+```json
+{
+  "gridSize": 32,
+  "mapSize": {
+    "width": 16,
+    "height": 16
+  },
+  "tiles": {
+    "block_blue": {
+      "displayName": "Blue Block",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 2,
+      "type": "tile",
+      "spritesheet": {
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "coin_gold": {
+      "displayName": "Gold Coin",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 3,
+      "type": "tile",
+      "spritesheet": {
+        "x": 960,
+        "y": 512,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "bush": {
+      "displayName": "Bush",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
+      "zIndex": 1,
+      "type": "tile",
+      "spritesheet": {
+        "x": 960,
+        "y": 832,
+        "width": 64,
+        "height": 64
+      }
+    }
+  },
+  "palettes": [
+    {
+      "name": "Essentials",
+      "tiles": ["block_blue", "coin_gold", "bush"]
+    }
+  ]
+}
+```
+
+For an example of how to transform a TexturePacker spritesheet XML into this format, see the `scripts/import-tileset.ts` script.
