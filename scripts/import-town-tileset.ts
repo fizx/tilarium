@@ -4,9 +4,11 @@ import { TileConfig, TileDefinition, TileGroup } from "../src/config";
 
 const TILE_WIDTH = 16;
 const TILE_HEIGHT = 16;
-const TILE_SPACING = 0;
+const TILE_SPACING = 1;
 const TILES_PER_ROW = 12;
-const IMAGE_PATH = "public/assets/kenney_tiny-town/Tilemap/tilemap_packed.png";
+const IMAGE_PATH = "assets/kenney_tiny-town/Tilemap/tilemap_packed.png";
+const TILESHEET_PATH = "example/public/assets/kenney_tiny-town/Tilesheet.txt";
+const OUTPUT_PATH = "example/src/tileset-town.json";
 
 const getZIndex = (name: string): number => {
   if (

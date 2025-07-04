@@ -143,7 +143,9 @@ for (const subTexture of textureAtlas.SubTexture) {
 
   tileConfig.tiles[name] = {
     displayName: name,
-    src: path.join(path.dirname(inputFile), imagePath).replace("example/", ""),
+    src: path
+      .join(path.dirname(inputFile), imagePath)
+      .replace("example/public/", ""),
     zIndex: getZIndex(name),
     type: groupName === "backgrounds" ? "background" : "tile",
     spritesheet: {
