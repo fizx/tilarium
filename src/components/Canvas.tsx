@@ -13,6 +13,7 @@ export const Canvas = () => {
     setCamera,
     canvasRef,
     setMouse,
+    setTileToReplace,
   } = useEditor();
   const [isDragging, setIsDragging] = useState(false);
   const lastMousePosition = useRef({ x: 0, y: 0 });
@@ -60,21 +61,6 @@ export const Canvas = () => {
       });
     } else if (selectedTool === "erase") {
       dispatch({ type: "REMOVE_TILE", payload: { x, y } });
-    } else {
-      const rect = e.currentTarget.getBoundingClientRect();
-      const x = Math.floor(
-        (e.clientX - rect.left - camera.x) / (config.gridSize * camera.zoom)
-      );
-      const y = Math.floor(
-        (e.clientY - rect.top - camera.y) / (config.gridSize * camera.zoom)
-      );
-
-      const snappedX =
-        x * (config.gridSize * camera.zoom) + camera.x + rect.left;
-      const snappedY =
-        y * (config.gridSize * camera.zoom) + camera.y + rect.top;
-
-      setMouse({ x: snappedX, y: snappedY });
     }
   };
 
@@ -94,6 +80,21 @@ export const Canvas = () => {
         (e.clientY - rect.top - camera.y) / (config.gridSize * camera.zoom)
       );
 
+      if (selectedTool === "place" && selectedTile) {
+        const tileToReplace =
+          state.placedTiles.find((pt) => {
+            const existingTileDef = config.tiles[pt.tileId];
+            return (
+              pt.x === x &&
+              pt.y === y &&
+              existingTileDef?.zIndex === selectedTile.zIndex
+            );
+          }) || null;
+        setTileToReplace(tileToReplace);
+      } else {
+        setTileToReplace(null);
+      }
+
       const snappedX =
         x * (config.gridSize * camera.zoom) + camera.x + rect.left;
       const snappedY =
@@ -110,6 +111,7 @@ export const Canvas = () => {
   const handleMouseLeave = () => {
     setIsDragging(false);
     setMouse(null);
+    setTileToReplace(null);
   };
 
   const handleWheel = (e: React.WheelEvent) => {
@@ -193,7 +195,12 @@ export const Canvas = () => {
             {state.placedTiles
               .filter(
                 (placedTile) =>
-                  config.tiles[placedTile.tileId]?.type === "background"
+                  config.tiles[placedTile.tileId]?.type === "background" &&
+                  !(
+                    placedTile.x === state.tileToReplace?.x &&
+                    placedTile.y === state.tileToReplace?.y &&
+                    placedTile.tileId === state.tileToReplace?.tileId
+                  )
               )
               .map((placedTile) => {
                 const tileDef = config.tiles[placedTile.tileId];
@@ -226,7 +233,13 @@ export const Canvas = () => {
           >
             {state.placedTiles
               .filter(
-                (placedTile) => config.tiles[placedTile.tileId]?.type === "tile"
+                (placedTile) =>
+                  config.tiles[placedTile.tileId]?.type === "tile" &&
+                  !(
+                    placedTile.x === state.tileToReplace?.x &&
+                    placedTile.y === state.tileToReplace?.y &&
+                    placedTile.tileId === state.tileToReplace?.tileId
+                  )
               )
               .map((placedTile) => {
                 const tileDef = config.tiles[placedTile.tileId];

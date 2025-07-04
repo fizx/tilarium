@@ -6,4 +6,5 @@ export interface PlacedTile {
 
 export interface TilemapState {
   placedTiles: PlacedTile[];
+  tileToReplace: PlacedTile | null;
 }

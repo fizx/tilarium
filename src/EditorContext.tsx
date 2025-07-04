@@ -28,6 +28,8 @@ interface EditorContextType {
   canvasRef: React.RefObject<HTMLDivElement>;
   mouse: Mouse | null;
   setMouse: (mouse: Mouse | null) => void;
+  tileToReplace: PlacedTile | null;
+  setTileToReplace: (tile: PlacedTile | null) => void;
 }
 
 export const EditorContext = createContext<EditorContextType | null>(null);

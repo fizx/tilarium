@@ -5,10 +5,7 @@ import { Tile } from "./Tile";
 export const CustomCursor = () => {
   const { selectedTool, selectedTile, mouse, camera, config } = useEditor();
 
-  const isVisible =
-    (selectedTool === "place" || selectedTool === "erase") && mouse;
-
-  if (!isVisible) {
+  if (!mouse) {
     return null;
   }
 
