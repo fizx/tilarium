@@ -26,7 +26,7 @@ steps:
     username: git
     password:
       from_secret: github_token
-    pages_directory: example/dist
+    pages_directory: docs/
     target_branch: gh-pages
   when:
     event: push 
