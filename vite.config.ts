@@ -7,6 +7,6 @@ export default defineConfig({
   root: "example",
   base: "/tilemapper/",
   build: {
-    outDir: "../dist",
+    outDir: "../docs",
   },
 });
