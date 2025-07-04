@@ -19,6 +19,8 @@ steps:
   commands:
   - npm run build
   - npm run build:example
+  - echo "--- BUILT FILES ---"
+  - ls -R docs
 
 - name: publish
   image: plugins/gh-pages
