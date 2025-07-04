@@ -19,17 +19,14 @@ steps:
   commands:
   - npm run build
   - npm run build:example
-  - echo "--- BUILT FILES ---"
-  - ls -R docs
 
 - name: publish
-  image: appleboy/drone-gh-pages
+  image: plugins/gh-pages
   settings:
     username: git
     password:
       from_secret: github_token
-    source: docs
+    pages_directory: docs/
     target_branch: gh-pages
-    commit_message: "feat(docs): publish example app to github pages"
   when:
     event: push 
