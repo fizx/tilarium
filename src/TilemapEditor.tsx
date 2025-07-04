@@ -13,7 +13,7 @@ export interface EditorActions {
   loadState: (state: TilemapState) => void;
 }
 
-interface TilemapEditorProps {
+export interface TilemapEditorProps {
   config: TileConfig;
   initialState?: TilemapState;
   onReady?: (actions: EditorActions) => void;

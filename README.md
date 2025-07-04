@@ -45,6 +45,43 @@ function MyMapEditor() {
 export default MyMapEditor;
 ```
 
+## Usage with Vanilla JS
+
+For use in non-React contexts, you can use the `mount` helper to render the editor into a DOM element.
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tilarium Editor</title>
+    <link
+      rel="stylesheet"
+      href="node_modules/tilarium/dist/TilemapEditor.css"
+    />
+  </head>
+  <body>
+    <div id="editor-container" style="width: 100vw; height: 100vh;"></div>
+
+    <script type="module">
+      import { mount } from "tilarium";
+      import tileset from "./tileset.json";
+
+      const editor = mount("#editor-container", {
+        config: tileset,
+        onStateChange: (state) => {
+          console.log("state changed:", state);
+          // You can save the state to localStorage, for example.
+          localStorage.setItem("tilarium-state", JSON.stringify(state));
+        },
+      });
+
+      // To unmount the editor later:
+      // editor.unmount();
+    </script>
+  </body>
+</html>
+```
+
 ## Editor
 
 - Grid-based: all tiles are the same size and shape for simplicity.
