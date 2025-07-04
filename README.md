@@ -88,20 +88,20 @@ For use in non-React contexts, you can use the `mount` helper to render the edit
 - Simple toolset: place tile, scroll, eraser
 - Multiple layers: each tile has an inherent zIndex (e.g. ocean-tile: 0, shark: 1). Conflicting tiles can't be placed at the same layer and position. Eraser targets the top tile at that location. No pick-a-layer affordances for simplicity.
 
-## Developers
+## For Developers
 
-- Configurable: map size, tile size, asset pack, and layer groupingss.
-- Exportable: simple json format for use the play mode of your game
+Tilarium is designed to be configurable and extensible. This section covers the data formats and lifecycle hooks available for developers.
 
-## Data Format
+### Data Format
 
 The editor's input and output format is a JSON object that describes the tileset and map configuration. This allows you to load and save the editor's state, as well as create your own tilesets.
 
-Here is a light example of the `tileset.json` format:
+The `config` prop of the `TilemapEditor` component expects an object that conforms to the `TileConfig` interface. Here is a light example of the data structure:
 
 ```json
 {
   "gridSize": 32,
+  "defaultZoom": 0.5,
   "mapSize": {
     "width": 16,
     "height": 16
@@ -118,39 +118,43 @@ Here is a light example of the `tileset.json` format:
         "width": 64,
         "height": 64
       }
-    },
-    "coin_gold": {
-      "displayName": "Gold Coin",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 3,
-      "type": "tile",
-      "spritesheet": {
-        "x": 960,
-        "y": 512,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "bush": {
-      "displayName": "Bush",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 1,
-      "type": "tile",
-      "spritesheet": {
-        "x": 960,
-        "y": 832,
-        "width": 64,
-        "height": 64
-      }
     }
   },
-  "palettes": [
-    {
-      "name": "Essentials",
-      "tiles": ["block_blue", "coin_gold", "bush"]
+  "groups": {
+    "essentials": {
+      "displayName": "Essentials",
+      "tileIds": ["block_blue"]
     }
-  ]
+  }
 }
 ```
 
 For an example of how to transform a TexturePacker spritesheet XML into this format, see the `scripts/import-tileset.ts` script.
+
+### Lifecycle Hooks
+
+The `TilemapEditor` component provides several lifecycle hooks that allow you to respond to events within the editor.
+
+- `onReady(actions: EditorActions)`: Fires when the editor is initialized. The `actions` object contains functions to interact with the editor state:
+  - `getState(): TilemapState`: Returns the current state of the tilemap.
+  - `loadState(state: TilemapState)`: Loads a new state into the editor.
+- `onStateChange(state: TilemapState)`: Fires whenever the tilemap state is modified (e.g., adding or removing a tile).
+- `onCameraChange(camera: Camera)`: Fires when the camera's position or zoom level changes.
+- `onToolSelect(tool: Tool)`: Fires when a new tool is selected from the toolbar.
+- `onTileSelect(tile?: TileDefinition)`: Fires when a tile is selected from the palette.
+
+The `onStateChange` hook provides a `TilemapState` object. Here is an example of its structure:
+
+```json
+{
+  "placedTiles": [
+    {
+      "x": 1,
+      "y": 2,
+      "tileId": "block_blue"
+    }
+  ],
+  "tileToReplace": null,
+  "backgroundTileId": "background_sky"
+}
+```
