@@ -38,9 +38,8 @@ const decodeState = (encoded: string): TilemapState | null => {
 
 function App() {
   const actionsRef = useRef<EditorActions | null>(null);
-  const [initialState, setInitialState] = useState<TilemapState | undefined>(
-    undefined
-  );
+  const [initialState, setInitialState] = useState<TilemapState | undefined>();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Check for state in URL on initial load
@@ -51,6 +50,7 @@ function App() {
         setInitialState(decodedState);
       }
     }
+    setIsLoading(false);
   }, []);
 
   const handleReady = useCallback(
@@ -73,6 +73,10 @@ function App() {
   const canvasStyle = {
     background: "url('./assets/dragons.png') center/cover",
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="editor-wrapper">
