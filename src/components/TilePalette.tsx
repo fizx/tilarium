@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useRef } from "react";
+import React, { useMemo, useState, useRef, useEffect } from "react";
 import { useEditor } from "../EditorContext";
 import { Tile } from "./Tile";
 import { TileDefinition } from "../config";
@@ -17,6 +17,34 @@ export const TilePalette = () => {
     )[0]?.displayName || ""
   );
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  useEffect(() => {
+    const checkScroll = () => {
+      const el = scrollContainerRef.current;
+      if (el) {
+        const { scrollLeft, scrollWidth, clientWidth } = el;
+        setCanScrollLeft(scrollLeft > 0);
+        setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
+      }
+    };
+
+    const el = scrollContainerRef.current;
+    if (el) {
+      checkScroll();
+      el.addEventListener("scroll", checkScroll);
+    }
+
+    // Also check when the active tab changes
+    checkScroll();
+
+    return () => {
+      if (el) {
+        el.removeEventListener("scroll", checkScroll);
+      }
+    };
+  }, [activeTab]);
 
   const tileGroups = useMemo(() => {
     return Object.values(config.groups).sort((a, b) =>
@@ -61,12 +89,14 @@ export const TilePalette = () => {
           if (activeTab === group.displayName) {
             return (
               <div key={group.displayName} className="carousel-container">
-                <div
-                  className="scroll-button left"
-                  onClick={() => scroll("left")}
-                >
-                  ❮
-                </div>
+                {canScrollLeft && (
+                  <div
+                    className="scroll-button left"
+                    onClick={() => scroll("left")}
+                  >
+                    ❮
+                  </div>
+                )}
                 <div
                   className={`tile-grid ${
                     group.displayName === "backgrounds"
@@ -99,12 +129,14 @@ export const TilePalette = () => {
                     );
                   })}
                 </div>
-                <div
-                  className="scroll-button right"
-                  onClick={() => scroll("right")}
-                >
-                  ❯
-                </div>
+                {canScrollRight && (
+                  <div
+                    className="scroll-button right"
+                    onClick={() => scroll("right")}
+                  >
+                    ❯
+                  </div>
+                )}
               </div>
             );
           }
