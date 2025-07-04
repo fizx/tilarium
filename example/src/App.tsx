@@ -1,6 +1,7 @@
 import React, { useRef, useCallback, useEffect, useState } from "react";
 import { TilemapEditor, EditorActions, TilemapState } from "../../src";
-import tileset from "./tileset.json";
+import platformerTileset from "./tileset.json";
+import townTileset from "./tileset-town.json";
 import { TileConfig } from "../../src/config";
 import "./App.css";
 import pako from "pako";
@@ -36,10 +37,18 @@ const decodeState = (encoded: string): TilemapState | null => {
   }
 };
 
+type Tileset = "platformer" | "town";
+
+const tilesets: Record<Tileset, TileConfig> = {
+  platformer: platformerTileset as TileConfig,
+  town: townTileset as TileConfig,
+};
+
 function App() {
   const actionsRef = useRef<EditorActions | null>(null);
   const [initialState, setInitialState] = useState<TilemapState | undefined>();
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedTileset, setSelectedTileset] = useState<Tileset>("platformer");
 
   useEffect(() => {
     // Check for state in URL on initial load
@@ -70,6 +79,19 @@ function App() {
     window.history.pushState(null, "", `#${encodedState}`);
   }, []);
 
+  const handleTilesetChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const newTileset = event.target.value as Tileset;
+    setSelectedTileset(newTileset);
+    // when tileset changes, we should probably clear the state
+    if (actionsRef.current) {
+      actionsRef.current.loadState({
+        placedTiles: [],
+        tileToReplace: null,
+        backgroundTileId: null,
+      });
+    }
+  };
+
   const canvasStyle = {
     background: "url('./assets/dragons.png') center/cover",
   };
@@ -80,8 +102,14 @@ function App() {
 
   return (
     <div className="editor-wrapper">
+      <div className="toolbar-top">
+        <select onChange={handleTilesetChange} value={selectedTileset}>
+          <option value="platformer">Platformer</option>
+          <option value="town">Town</option>
+        </select>
+      </div>
       <TilemapEditor
-        config={tileset as TileConfig}
+        config={tilesets[selectedTileset]}
         initialState={initialState}
         canvasStyle={canvasStyle}
         onReady={handleReady}
