@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from "react";
-import { TilemapState, PlacedTile } from "./state";
+import { TilemapState, PlacedTile, TilemapAction } from "./state";
 import { TileConfig, TileDefinition } from "./config";
 
 export type Tool = "place" | "drag" | "erase" | "magic-wand";
@@ -18,7 +18,7 @@ export interface Mouse {
 interface EditorContextType {
   config: TileConfig;
   state: TilemapState;
-  dispatch: React.Dispatch<any>; // Using 'any' for now, will be replaced with specific action types
+  dispatch: React.Dispatch<TilemapAction>;
   selectedTile?: TileDefinition;
   setSelectedTile: (tile?: TileDefinition) => void;
   selectedTool: Tool;

@@ -1,6 +1,12 @@
-import React, { useReducer, useState, useEffect, useRef } from "react";
+import React, {
+  useReducer,
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+} from "react";
 import { TileConfig, TileDefinition } from "./config";
-import { TilemapState, PlacedTile } from "./state";
+import { TilemapState, PlacedTile, TilemapAction } from "./state";
 import { TilePalette } from "./components/TilePalette";
 import { Canvas } from "./components/Canvas";
 import { Toolbar } from "./components/Toolbar";
@@ -10,14 +16,14 @@ import "./TilemapEditor.css";
 
 export interface EditorActions {
   getState: () => TilemapState;
-  loadState: (state: TilemapState) => void;
+  loadState: (stateOrDelta: TilemapState | TilemapAction) => void;
 }
 
 export interface TilemapEditorProps {
   config: TileConfig;
   initialState?: TilemapState;
   onReady?: (actions: EditorActions) => void;
-  onStateChange?: (state: TilemapState) => void;
+  onStateChange?: (newState: TilemapState, delta: TilemapAction) => void;
   onCameraChange?: (camera: Camera) => void;
   onToolSelect?: (tool: Tool) => void;
   onTileSelect?: (tile?: TileDefinition) => void;
@@ -34,7 +40,10 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   onTileSelect,
   canvasStyle,
 }) => {
-  const reducer = (state: TilemapState, action: any): TilemapState => {
+  const reducer = (
+    state: TilemapState,
+    action: TilemapAction
+  ): TilemapState => {
     switch (action.type) {
       case "ADD_TILE": {
         const newTile = action.payload;
@@ -94,15 +103,20 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   const canvasRef = useRef<HTMLDivElement>(null);
   const isReady = useRef(false);
   const actionsRef = useRef<EditorActions | null>(null);
+  const stateRef = useRef(state);
+  stateRef.current = state;
 
   // Wrapped dispatch to notify of state changes
-  const dispatchAndNotify = (action: any) => {
-    const newState = reducer(state, action);
-    dispatch(action);
-    if (onStateChange && isReady.current) {
-      onStateChange(newState);
-    }
-  };
+  const dispatchAndNotify = useCallback(
+    (action: TilemapAction) => {
+      const newState = reducer(stateRef.current, action);
+      dispatch(action);
+      if (onStateChange && isReady.current) {
+        onStateChange(newState, action);
+      }
+    },
+    [onStateChange]
+  );
 
   // Wrapped state setters to fire hooks
   const setCamera = (newCamera: Camera) => {
@@ -121,13 +135,21 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   useEffect(() => {
     if (onReady) {
       onReady({
-        getState: () => state,
-        loadState: (newState) =>
-          dispatch({ type: "LOAD_STATE", payload: newState }),
+        getState: () => stateRef.current,
+        loadState: (stateOrDelta: TilemapState | TilemapAction) => {
+          const action =
+            "type" in stateOrDelta && stateOrDelta.type
+              ? stateOrDelta
+              : ({
+                  type: "LOAD_STATE",
+                  payload: stateOrDelta,
+                } as TilemapAction);
+          dispatchAndNotify(action);
+        },
       });
     }
     isReady.current = true;
-  }, []);
+  }, [onReady, dispatchAndNotify]);
 
   useEffect(() => {
     if (canvasRef.current && config.mapSize !== "infinite") {

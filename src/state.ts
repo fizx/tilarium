@@ -9,3 +9,29 @@ export interface TilemapState {
   tileToReplace: PlacedTile | null;
   backgroundTileId: string | null;
 }
+
+export interface AddTileAction {
+  type: "ADD_TILE";
+  payload: PlacedTile;
+}
+
+export interface RemoveTileAction {
+  type: "REMOVE_TILE";
+  payload: { x: number; y: number };
+}
+
+export interface SetBackgroundAction {
+  type: "SET_BACKGROUND";
+  payload: string;
+}
+
+export interface LoadStateAction {
+  type: "LOAD_STATE";
+  payload: TilemapState;
+}
+
+export type TilemapAction =
+  | AddTileAction
+  | RemoveTileAction
+  | SetBackgroundAction
+  | LoadStateAction;
