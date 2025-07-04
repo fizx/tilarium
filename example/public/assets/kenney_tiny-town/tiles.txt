@@ -79,7 +79,7 @@
 78  door_stone_open
 79  wall_stone_E
 80  fence_LEFT
-81  fence_H
+81  fence_H_alt1
 82  fence_RIGHT
 83  sign
 84  window_wood_shutters
