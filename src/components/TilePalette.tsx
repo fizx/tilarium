@@ -24,9 +24,11 @@ export const TilePalette = () => {
     );
   }, [config.groups]);
 
-  const handleSelectTile = (tile: TileDefinition) => {
+  const handleSelectTile = (tile: TileDefinition, groupName: string) => {
     setSelectedTile(tile);
-    setSelectedTool("place");
+    if (groupName !== "backgrounds") {
+      setSelectedTool("place");
+    }
   };
 
   const scroll = (direction: "left" | "right") => {
@@ -85,7 +87,9 @@ export const TilePalette = () => {
                         className={`tile-wrapper ${
                           isSelected ? "selected" : ""
                         }`}
-                        onClick={() => handleSelectTile(tile)}
+                        onClick={() =>
+                          handleSelectTile(tile, group.displayName)
+                        }
                         title={tile.displayName}
                       >
                         <div className="tile-image-wrapper">

@@ -24,9 +24,18 @@ export const CustomCursor = () => {
     switch (selectedTool) {
       case "erase":
         return (
-          <span style={{ fontSize: `${config.gridSize / camera.zoom}px` }}>
+          <div
+            style={{
+              width: config.gridSize,
+              height: config.gridSize,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: config.gridSize,
+            }}
+          >
             🧼
-          </span>
+          </div>
         );
       case "place":
         if (selectedTile) {
