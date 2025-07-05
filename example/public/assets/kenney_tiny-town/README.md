@@ -39,3 +39,7 @@ A tile's `directions` suffix is formed by combining the letters for the required
 - **Multi-tile objects**: Some objects, like `well-N` and `well-S`, are meant to be placed together as a pair.
 - **Directional-only tiles**: Some tiles like fences (`fence-EW`, `fence-SN`) only connect horizontally or vertically.
 - **Single tiles**: Tiles with no direction suffix (e.g., `mushrooms`, `beehive`) are standalone objects and do not participate in autotiling.
+
+## Fallback Behavior
+
+If the autotiling system calculates a bitmask for which there is no corresponding tile (e.g., a `dirt-NW` tile is needed but not defined in the tileset), it should use a fallback tile. The recommended fallback is the "center" tile for that group, which is the one with the `SWEN` suffix. This ensures that the terrain remains visually consistent even if specific corner or edge pieces are missing.
