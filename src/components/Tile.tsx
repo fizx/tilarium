@@ -27,10 +27,11 @@ export const Tile: React.FC<TileProps> = ({ tile }) => {
         setAnimationClass("tile-animate-in");
       }
     } else if (!tile && prevTile) {
-      if (prevTile.source === "remote") {
+      const wasRemote = prevTile.source === "remote";
+      if (wasRemote) {
         setAnimationClass("tile-animate-out");
       }
-      setTimeout(() => setDisplayTile(null), shouldFlash ? 150 : 0);
+      setTimeout(() => setDisplayTile(null), wasRemote ? 350 : 0);
     } else if (tile && prevTile && tile.displayName !== prevTile.displayName) {
       if (shouldFlash) {
         setAnimationClass("tile-animate-out");
@@ -42,7 +43,7 @@ export const Tile: React.FC<TileProps> = ({ tile }) => {
             setAnimationClass("tile-animate-in");
           }
         },
-        shouldFlash ? 150 : 0
+        shouldFlash ? 350 : 0
       );
     }
 
