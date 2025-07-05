@@ -9,29 +9,42 @@ interface TileProps {
 export const Tile: React.FC<TileProps> = ({ tile }) => {
   const { config } = useEditor();
   const { gridSize } = config;
-  const [imageUrl, setImageUrl] = useState(tile.src);
+  const [displaySrc, setDisplaySrc] = useState(tile.src);
+  const [displaySpritesheet, setDisplaySpritesheet] = useState(
+    tile.spritesheet
+  );
   const tileRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (tile.src !== imageUrl) {
+    if (
+      tile.src !== displaySrc ||
+      JSON.stringify(tile.spritesheet) !== JSON.stringify(displaySpritesheet)
+    ) {
       if (tileRef.current) {
-        tileRef.current.style.transition = "opacity 0.3s ease-in-out";
+        tileRef.current.style.transition = "opacity 0.15s ease-out";
         tileRef.current.style.opacity = "0";
       }
+
       setTimeout(() => {
-        setImageUrl(tile.src);
+        setDisplaySrc(tile.src);
+        setDisplaySpritesheet(tile.spritesheet);
         if (tileRef.current) {
+          tileRef.current.style.transition = "opacity 0.15s ease-in";
           tileRef.current.style.opacity = "1";
         }
-      }, 300);
+      }, 150);
     }
-  }, [tile.src, imageUrl]);
+  }, [tile.src, tile.spritesheet, displaySrc, displaySpritesheet]);
 
-  if (!tile.spritesheet) {
+  if (!displaySpritesheet) {
     return (
-      <div ref={tileRef} style={{ width: gridSize, height: gridSize }}>
+      <div
+        ref={tileRef}
+        className="tile"
+        style={{ width: gridSize, height: gridSize }}
+      >
         <img
-          src={imageUrl}
+          src={displaySrc}
           alt={tile.displayName}
           className="tile-image"
           style={{ width: gridSize, height: gridSize }}
@@ -41,7 +54,7 @@ export const Tile: React.FC<TileProps> = ({ tile }) => {
     );
   }
 
-  const scale = gridSize / tile.spritesheet.width;
+  const scale = gridSize / displaySpritesheet.width;
 
   const wrapperStyle: React.CSSProperties = {
     width: gridSize,
@@ -52,8 +65,8 @@ export const Tile: React.FC<TileProps> = ({ tile }) => {
 
   const imageStyle: React.CSSProperties = {
     position: "absolute",
-    left: -tile.spritesheet.x * scale,
-    top: -tile.spritesheet.y * scale,
+    left: -displaySpritesheet.x * scale,
+    top: -displaySpritesheet.y * scale,
     transform: `scale(${scale})`,
     transformOrigin: "top left",
   };
@@ -61,11 +74,12 @@ export const Tile: React.FC<TileProps> = ({ tile }) => {
   return (
     <div
       ref={tileRef}
+      className="tile"
       style={wrapperStyle}
       onDragStart={(e) => e.preventDefault()}
     >
       <img
-        src={imageUrl}
+        src={displaySrc}
         alt={tile.displayName}
         style={imageStyle}
         onDragStart={(e) => e.preventDefault()}

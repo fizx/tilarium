@@ -4,12 +4,6 @@ import { TilemapAction, TilemapState, PlacedTile } from "./state";
 
 export type Tool = "place" | "drag" | "erase" | "magic-wand";
 
-export interface FlashedTile {
-  x: number;
-  y: number;
-  id: number;
-}
-
 export interface Camera {
   x: number;
   y: number;
@@ -19,19 +13,6 @@ export interface Camera {
 export interface Mouse {
   x: number;
   y: number;
-}
-
-export interface FadingTile {
-  x: number;
-  y: number;
-  tileId: string;
-  id: number;
-}
-
-export interface FadingCoords {
-  x: number;
-  y: number;
-  id: number;
 }
 
 export interface EditorContextType {

@@ -249,28 +249,6 @@
   background-color: white;
 }
 
-.tile-fade-in {
-  animation: fadeIn 0.5s ease-out;
-}
-
-.tile-fade-out {
-  animation: fadeOut 0.5s ease-out forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+.tile {
+  transition: opacity 0.15s ease-in-out;
 }

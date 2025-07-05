@@ -24,9 +24,6 @@ export const Canvas = () => {
     setMouse,
     setTileToReplace,
     setSelectedTool,
-    flashedTiles,
-    fadingOutTiles,
-    fadingInCoords,
   } = useEditor();
   const isDragging = useRef(false);
   const isPainting = useRef(false);
@@ -487,15 +484,9 @@ export const Canvas = () => {
               .map((placedTile) => {
                 const tileDef = config.tiles[placedTile.tileId];
                 if (!tileDef) return null;
-
-                const isFadingIn = fadingInCoords.some(
-                  (c) => c.x === placedTile.x && c.y === placedTile.y
-                );
-
                 return (
                   <div
                     key={`${placedTile.x}-${placedTile.y}-${placedTile.tileId}`}
-                    className={isFadingIn ? "tile-fade-in" : ""}
                     style={{
                       position: "absolute",
                       left: placedTile.x * config.gridSize,
@@ -507,24 +498,6 @@ export const Canvas = () => {
                   </div>
                 );
               })}
-            {fadingOutTiles.map((fadingTile) => {
-              const tileDef = config.tiles[fadingTile.tileId];
-              if (!tileDef) return null;
-              return (
-                <div
-                  key={fadingTile.id}
-                  className="tile-fade-out"
-                  style={{
-                    position: "absolute",
-                    left: fadingTile.x * config.gridSize,
-                    top: fadingTile.y * config.gridSize,
-                    zIndex: tileDef.zIndex,
-                  }}
-                >
-                  <Tile tile={tileDef} />
-                </div>
-              );
-            })}
           </div>
         </div>
       </div>
