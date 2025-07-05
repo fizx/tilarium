@@ -15,7 +15,6 @@ export interface TileDefinition {
     group: string;
     neighbors: DirectionCombo;
   };
-  groupName?: string;
   src: string;
   zIndex: number;
   type: "tile" | "background";

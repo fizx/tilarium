@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { TileConfig, TileDefinition, TileGroup } from "../src/config";
+import { TileConfig, TileDefinition, TileTabGroup } from "../src/config";
 
 const TILE_WIDTH = 16;
 const TILE_HEIGHT = 16;
@@ -8,7 +8,6 @@ const TILE_SPACING = 0;
 const TILES_PER_ROW = 12;
 const IMAGE_PATH = "assets/kenney_tiny-town/Tilemap/tilemap_packed.png";
 const TILESHEET_PATH = "example/public/assets/kenney_tiny-town/Tilesheet.txt";
-const OUTPUT_PATH = "example/src/tileset-town.json";
 
 const getZIndex = (name: string): number => {
   if (
@@ -62,19 +61,23 @@ const getZIndex = (name: string): number => {
   ) {
     return 4;
   }
+  if (name.startsWith("forest")) {
+    return 1;
+  }
 
   // default z-index
   return 1;
 };
 
 const getGroupKey = (name: string): string => {
-  const groupNameMatch = name.match(/^([a-zA-Z_]+?)_/);
+  const groupNameMatch = name.match(/^([a-zA-Z_]+?)(?::|-|$)/);
   let groupKey = (groupNameMatch ? groupNameMatch[1] : "other").toLowerCase();
 
   const groupMappings: { [key: string]: string } = {
     dirt: "terrain",
     grass: "terrain",
     cobblestone: "terrain",
+    forest: "terrain",
     castle: "castles",
     parapet: "castles",
     arch: "castles",
@@ -91,8 +94,14 @@ const getGroupKey = (name: string): string => {
   return groupMappings[groupKey] || groupKey;
 };
 
-const inputFile = "example/public/assets/kenney_tiny-town/tiles.txt";
-const outputFile = "example/src/tileset-town.json";
+const scriptDir = path.dirname(__filename);
+const tilariumRoot = path.resolve(scriptDir, "..");
+
+const inputFile = path.join(
+  tilariumRoot,
+  "example/public/assets/kenney_tiny-town/tiles.txt"
+);
+const outputFile = path.join(tilariumRoot, "example/src/tileset-town.json");
 
 // Load existing config if it exists, otherwise create a new one
 let tileConfig: TileConfig;
@@ -132,6 +141,10 @@ for (const line of lines) {
   const x = tileX * (TILE_WIDTH + TILE_SPACING);
   const y = tileY * (TILE_HEIGHT + TILE_SPACING);
 
+  const autotileMatch = name.match(
+    /^(?<group>[a-zA-Z_]+?)(?::(?<variant>[a-zA-Z_]+))?(?:-(?<neighbors>[NESW]+))?$/
+  );
+
   const tileDefinition: TileDefinition = {
     displayName: name,
     src: IMAGE_PATH,
@@ -145,7 +158,18 @@ for (const line of lines) {
     },
   };
 
-  tileConfig.tiles[name] = tileDefinition;
+  if (autotileMatch && autotileMatch.groups) {
+    const { group, neighbors } = autotileMatch.groups;
+    if (group && neighbors) {
+      tileDefinition.autotile = {
+        group: group,
+        neighbors: neighbors as any,
+      };
+    }
+  }
+
+  const tileId = name;
+  tileConfig.tiles[tileId] = tileDefinition;
 
   const groupKey = getGroupKey(name);
 
@@ -153,14 +177,27 @@ for (const line of lines) {
     tileConfig.groups[groupKey] = {
       displayName: groupKey.replace(/_/g, " "),
       tileIds: [],
+      autotileGroups: [],
     };
   }
-  tileConfig.groups[groupKey].tileIds.push(name);
+  if (tileDefinition.autotile) {
+    if (
+      !tileConfig.groups[groupKey].autotileGroups.includes(
+        tileDefinition.autotile.group
+      )
+    ) {
+      tileConfig.groups[groupKey].autotileGroups.push(
+        tileDefinition.autotile.group
+      );
+    }
+  } else {
+    tileConfig.groups[groupKey].tileIds.push(tileId);
+  }
 }
 
 // Sort groups
 const sortedGroups = Object.keys(tileConfig.groups).sort();
-const newGroups: { [key: string]: TileGroup } = {};
+const newGroups: { [key: string]: TileTabGroup } = {};
 for (const groupName of sortedGroups) {
   newGroups[groupName] = tileConfig.groups[groupName];
   // sort tiles within group
