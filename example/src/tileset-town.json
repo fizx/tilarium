@@ -16,6 +16,10 @@
         "y": 0,
         "width": 16,
         "height": 16
+      },
+      "autotile": {
+        "group": "grass",
+        "neighbors": ""
       }
     },
     "grass:rough": {
@@ -28,6 +32,10 @@
         "y": 0,
         "width": 16,
         "height": 16
+      },
+      "autotile": {
+        "group": "grass",
+        "neighbors": ""
       }
     },
     "grass:flowers": {
@@ -40,6 +48,10 @@
         "y": 0,
         "width": 16,
         "height": 16
+      },
+      "autotile": {
+        "group": "grass",
+        "neighbors": ""
       }
     },
     "tree_fall:tall-S": {
@@ -1268,6 +1280,10 @@
         "y": 112,
         "width": 16,
         "height": 16
+      },
+      "autotile": {
+        "group": "wall_wood",
+        "neighbors": ""
       }
     },
     "wall_wood:door_closed": {
@@ -1280,6 +1296,10 @@
         "y": 112,
         "width": 16,
         "height": 16
+      },
+      "autotile": {
+        "group": "wall_wood",
+        "neighbors": ""
       }
     },
     "wall_wood:double_door_closed_left": {
@@ -1292,6 +1312,10 @@
         "y": 112,
         "width": 16,
         "height": 16
+      },
+      "autotile": {
+        "group": "wall_wood",
+        "neighbors": ""
       }
     },
     "wall_wood:double_door_closed_right": {
@@ -1304,6 +1328,10 @@
         "y": 112,
         "width": 16,
         "height": 16
+      },
+      "autotile": {
+        "group": "wall_wood",
+        "neighbors": ""
       }
     },
     "wall_stone:shutters": {
@@ -1316,6 +1344,10 @@
         "y": 112,
         "width": 16,
         "height": 16
+      },
+      "autotile": {
+        "group": "wall_stone",
+        "neighbors": ""
       }
     },
     "wall_stone:door_closed": {
@@ -1328,6 +1360,10 @@
         "y": 112,
         "width": 16,
         "height": 16
+      },
+      "autotile": {
+        "group": "wall_stone",
+        "neighbors": ""
       }
     },
     "wall_stone:double_door_closed_left": {
@@ -1340,6 +1376,10 @@
         "y": 112,
         "width": 16,
         "height": 16
+      },
+      "autotile": {
+        "group": "wall_stone",
+        "neighbors": ""
       }
     },
     "wall_stone:double_door_closed_right": {
@@ -1352,6 +1392,10 @@
         "y": 112,
         "width": 16,
         "height": 16
+      },
+      "autotile": {
+        "group": "wall_stone",
+        "neighbors": ""
       }
     },
     "well-S": {
@@ -1512,6 +1556,10 @@
         "y": 128,
         "width": 16,
         "height": 16
+      },
+      "autotile": {
+        "group": "parapet",
+        "neighbors": ""
       }
     },
     "parapet_ladder-SEWN": {
@@ -1932,7 +1980,22 @@
     },
     "Fences & Walls": {
       "displayName": "Fences & Walls",
-      "tileIds": [],
+      "tileIds": [
+        "fence-E",
+        "fence-EW",
+        "fence-EW",
+        "fence-N",
+        "fence-NE",
+        "fence-NW",
+        "fence-S",
+        "fence-SE",
+        "fence-SW",
+        "fence-W",
+        "fence:both-SN",
+        "fence:gate-EW",
+        "fence:left-SN",
+        "fence:right-SN"
+      ],
       "autotileGroups": [
         "fence"
       ]
@@ -1959,18 +2022,63 @@
     "Structures": {
       "displayName": "Structures",
       "tileIds": [
+        "arch-NE",
+        "arch-NW",
+        "arch-SE",
+        "arch-SW",
+        "arch:porticulis-SE",
+        "arch:porticulis-SW",
         "archery_target",
         "castle_wall",
         "castle_window",
         "parapet",
+        "parapet-E",
+        "parapet-EW",
+        "parapet-NE",
+        "parapet-NES",
+        "parapet-NEW",
+        "parapet-NEWS",
+        "parapet-NW",
+        "parapet-SE",
+        "parapet-SEW",
+        "parapet-SW",
+        "parapet-W",
+        "parapet-WNS",
+        "parapet_ladder-SEWN",
+        "roof_slate-NE",
+        "roof_slate-NEW",
+        "roof_slate-NW",
+        "roof_slate-SE",
+        "roof_slate-SEW",
+        "roof_slate-SW",
+        "roof_slate:chimney-SEW",
+        "roof_slate:peak-NEW",
+        "roof_tile-NE",
+        "roof_tile-NEW",
+        "roof_tile-NW",
+        "roof_tile-SE",
+        "roof_tile-SEW",
+        "roof_tile-SW",
+        "roof_tile:peak-NEW",
+        "roof_tile_:chimney-SEW",
+        "wall_stone-E",
+        "wall_stone-EW",
+        "wall_stone-W",
+        "wall_stone:door-EW",
         "wall_stone:door_closed",
         "wall_stone:double_door_closed_left",
         "wall_stone:double_door_closed_right",
         "wall_stone:shutters",
+        "wall_wood-E",
+        "wall_wood-EW",
+        "wall_wood-W",
+        "wall_wood:door-EW",
         "wall_wood:door_closed",
         "wall_wood:double_door_closed_left",
         "wall_wood:double_door_closed_right",
-        "wall_wood:shutters"
+        "wall_wood:shutters",
+        "well-N",
+        "well-S"
       ],
       "autotileGroups": [
         "roof_slate",
@@ -1987,23 +2095,58 @@
     "Terrain": {
       "displayName": "Terrain",
       "tileIds": [
+        "dirt-ENS",
+        "dirt-NE",
+        "dirt-NEW",
+        "dirt-NW",
+        "dirt-SE",
+        "dirt-SW",
+        "dirt-SWE",
+        "dirt-SWEN",
+        "dirt-WNS",
         "dirt:alt1-SWEN",
         "dirt:alt2-SWEN",
         "dirt:alt3-SWEN",
         "dirt:alt4-SWEN",
+        "forest_fall-E",
+        "forest_fall-N",
+        "forest_fall-NE",
+        "forest_fall-NW",
+        "forest_fall-S",
+        "forest_fall-S",
+        "forest_fall-SE",
+        "forest_fall-SW",
+        "forest_fall-SWEN",
+        "forest_fall-W",
+        "forest_green-E",
+        "forest_green-N",
+        "forest_green-NE",
+        "forest_green-NW",
+        "forest_green-S",
+        "forest_green-S",
+        "forest_green-SE",
+        "forest_green-SW",
+        "forest_green-SWEN",
+        "forest_green-W",
+        "grass:cobblestone-SWEN",
         "grass:flowers",
         "grass:rough",
         "grass:smooth",
         "mushrooms",
+        "tree_fall-N",
+        "tree_fall:tall-S",
+        "tree_green-N",
+        "tree_green:bushy-S",
+        "tree_green:tall-S",
         "vines"
       ],
       "autotileGroups": [
+        "grass",
         "tree_fall",
         "tree_green",
         "forest_green",
         "forest_fall",
-        "dirt",
-        "grass"
+        "dirt"
       ]
     }
   }

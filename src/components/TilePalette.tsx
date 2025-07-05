@@ -191,39 +191,58 @@ export const TilePalette = () => {
                   ref={scrollContainerRef}
                 >
                   {(() => {
-                    // 1. Get autotile representatives (with glow)
-                    const autotileRepTiles =
-                      group.autotileGroups?.map((ag) => {
-                        const allTilesInGroup = Object.values(
+                    const getRepTile = (
+                      groupName: string,
+                      allTiles: TileDefinition[]
+                    ) => {
+                      // Priority 1: No suffix (exact match)
+                      let repTile = allTiles.find(
+                        (t) => t.displayName === groupName
+                      );
+
+                      // Priority 2: Full cover/middle/NESW
+                      if (!repTile) {
+                        const hasAllDirections = (s: string) =>
+                          s.includes("N") &&
+                          s.includes("E") &&
+                          s.includes("S") &&
+                          s.includes("W");
+                        repTile = allTiles.find(
+                          (t) =>
+                            t.autotile && hasAllDirections(t.autotile.neighbors)
+                        );
+                      }
+
+                      // Priority 3: Any as a fallback
+                      if (!repTile) {
+                        repTile = allTiles[0];
+                      }
+                      return repTile;
+                    };
+
+                    // 1. Get representatives for each autotile group
+                    const autotileRepTiles = (group.autotileGroups || []).map(
+                      (ag) => {
+                        const tilesForThisGroup = Object.values(
                           config.tiles
                         ).filter((t) => t.autotile?.group === ag);
-                        const standaloneTile = allTilesInGroup.find(
-                          (t) =>
-                            t.autotile && (t.autotile.neighbors as any) === ""
-                        );
-                        const repTile = standaloneTile || allTilesInGroup[0];
-                        return { tile: repTile, isAutotileRep: true };
-                      }) || [];
+                        return {
+                          tile: getRepTile(ag, tilesForThisGroup),
+                          isAutotileRep: true,
+                        };
+                      }
+                    );
 
-                    // 2. Get standalone tiles (not in any autotile group)
-                    const standaloneTiles = group.tileIds.map((tileId) => {
-                      const tile = config.tiles[tileId];
-                      return { tile, isAutotileRep: false };
-                    });
+                    // 2. Get all other tiles for the tab
+                    const allOtherTiles = group.tileIds.map((tileId) => ({
+                      tile: config.tiles[tileId],
+                      isAutotileRep: false,
+                    }));
 
-                    // 3. Get all tiles belonging to the autotile groups of the current tab
-                    const allAutotileTiles =
-                      group.autotileGroups?.flatMap((ag) =>
-                        Object.values(config.tiles)
-                          .filter((t) => t.autotile?.group === ag)
-                          .map((tile) => ({ tile, isAutotileRep: false }))
-                      ) || [];
-
-                    // 4. Combine and de-duplicate, preserving the first occurrence (reps)
+                    // 3. Combine and de-duplicate, with representatives taking precedence
                     const displayTiles = [
                       ...autotileRepTiles,
-                      ...standaloneTiles,
-                      ...allAutotileTiles,
+                      ...allOtherTiles,
                     ].filter(
                       (item, index, self) =>
                         item.tile &&
@@ -232,7 +251,7 @@ export const TilePalette = () => {
                         ) === index
                     );
 
-                    // 5. Render
+                    // 4. Render
                     return displayTiles.map(({ tile, isAutotileRep }) => {
                       if (!tile) return null;
 

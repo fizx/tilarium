@@ -164,6 +164,23 @@ tileConfig.groups = {};
 const txtData = fs.readFileSync(inputFile, "utf-8");
 const lines = txtData.split("\n").filter((line) => line.trim() !== "");
 
+// --- First Pass: Identify all real autotile groups ---
+const autotileGroupNames = new Set<string>();
+const autotileRegex =
+  /^(?<group>[a-zA-Z_]+?)(?::(?<variant>[a-zA-Z_]+))?-(?<neighbors>[NESW]+)$/;
+
+for (const line of lines) {
+  const match = line.match(/^(\d+)\s+(.+)$/);
+  if (match) {
+    const name = match[2];
+    const autotileMatch = name.match(autotileRegex);
+    if (autotileMatch?.groups?.group) {
+      autotileGroupNames.add(autotileMatch.groups.group);
+    }
+  }
+}
+
+// --- Second Pass: Process and classify all tiles ---
 for (const line of lines) {
   const match = line.match(/^(\d+)\s+(.+)$/);
   if (!match) {
@@ -197,14 +214,15 @@ for (const line of lines) {
     },
   };
 
-  if (autotileMatch && autotileMatch.groups) {
+  if (
+    autotileMatch?.groups?.group &&
+    autotileGroupNames.has(autotileMatch.groups.group)
+  ) {
     const { group, neighbors } = autotileMatch.groups;
-    if (group && neighbors) {
-      tileDefinition.autotile = {
-        group: group,
-        neighbors: neighbors as any,
-      };
-    }
+    tileDefinition.autotile = {
+      group: group,
+      neighbors: (neighbors as any) || "",
+    };
   }
 
   const tileId = name;
@@ -219,6 +237,11 @@ for (const line of lines) {
       autotileGroups: [],
     };
   }
+
+  // Every tile belongs to the group's main list
+  tileConfig.groups[groupKey].tileIds.push(tileId);
+
+  // If it's an autotile, also register its group for representative selection
   if (tileDefinition.autotile) {
     if (
       !tileConfig.groups[groupKey].autotileGroups.includes(
@@ -229,8 +252,6 @@ for (const line of lines) {
         tileDefinition.autotile.group
       );
     }
-  } else {
-    tileConfig.groups[groupKey].tileIds.push(tileId);
   }
 }
 
