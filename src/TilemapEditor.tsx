@@ -66,7 +66,9 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         return { ...state, placedTiles: [...filteredState, newTile] };
       }
       case "REMOVE_TILE":
-        return {
+        console.log("reducer: REMOVE_TILE action", action);
+        console.log("reducer: state before remove", state);
+        const newState = {
           ...state,
           placedTiles: state.placedTiles.filter(
             (tile) =>
@@ -77,6 +79,8 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
               )
           ),
         };
+        console.log("reducer: state after remove", newState);
+        return newState;
       case "SET_BACKGROUND":
         return {
           ...state,
@@ -221,18 +225,24 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           payload: { x: gridX, y: gridY, tileId: selectedTile.displayName },
         });
       } else if (selectedTool === "erase") {
-        const topTile = stateRef.current.placedTiles
-          .filter((tile) => tile.x === gridX && tile.y === gridY)
-          .sort(
-            (a, b) =>
-              config.tiles[b.tileId].zIndex - config.tiles[a.tileId].zIndex
-          )[0];
+        console.log("applyToolAt: erase", { gridX, gridY });
+        const tilesAtLocation = stateRef.current.placedTiles.filter(
+          (tile) => tile.x === gridX && tile.y === gridY
+        );
+        console.log("applyToolAt: tilesAtLocation", tilesAtLocation);
+
+        const topTile = tilesAtLocation.sort(
+          (a, b) =>
+            config.tiles[b.tileId].zIndex - config.tiles[a.tileId].zIndex
+        )[0];
+        console.log("applyToolAt: topTile", topTile);
 
         if (topTile) {
           const action = {
             type: "REMOVE_TILE" as const,
             payload: { x: gridX, y: gridY, tileId: topTile.tileId },
           };
+          console.log("applyToolAt: dispatching remove action", action);
           dispatchAndNotify(action);
         }
       }

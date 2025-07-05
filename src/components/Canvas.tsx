@@ -72,12 +72,36 @@ export const Canvas = () => {
           payload: { x: gridX, y: gridY, tileId: selectedTile.displayName },
         });
       } else if (selectedTool === "erase") {
-        dispatch({ type: "REMOVE_TILE", payload: { x: gridX, y: gridY } });
+        const tilesAtLocation = state.placedTiles.filter(
+          (pt) => pt.x === gridX && pt.y === gridY
+        );
+
+        if (tilesAtLocation.length > 0) {
+          const topTile = tilesAtLocation.reduce((top, current) => {
+            const topZ = config.tiles[top.tileId]?.zIndex ?? -Infinity;
+            const currentZ = config.tiles[current.tileId]?.zIndex ?? -Infinity;
+            return currentZ > topZ ? current : top;
+          });
+
+          if (topTile) {
+            dispatch({
+              type: "REMOVE_TILE",
+              payload: { x: gridX, y: gridY, tileId: topTile.tileId },
+            });
+          }
+        }
       }
 
       lastPaintedCell.current = { x: gridX, y: gridY };
     },
-    [dispatch, selectedTile, selectedTool, config.mapSize]
+    [
+      dispatch,
+      selectedTile,
+      selectedTool,
+      config.mapSize,
+      state.placedTiles,
+      config.tiles,
+    ]
   );
 
   const getEventCoords = useCallback((e: MouseEvent | TouchEvent) => {
