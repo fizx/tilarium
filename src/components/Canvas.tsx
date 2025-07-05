@@ -8,6 +8,7 @@ import React, {
   useCallback,
 } from "react";
 import { useEditor } from "../EditorContext";
+import { PlacedTile } from "../state";
 import { Tile } from "./Tile";
 import { Background } from "./Background";
 
@@ -69,12 +70,21 @@ export const Canvas = () => {
       if (selectedTool === "place" && selectedTile) {
         dispatch({
           type: "ADD_TILE",
-          payload: { x: gridX, y: gridY, tileId: selectedTile.displayName },
+          payload: {
+            x: gridX,
+            y: gridY,
+            tileId: selectedTile.displayName,
+            source: "local",
+          },
         });
       } else if (selectedTool === "erase") {
-        const tilesAtLocation = state.placedTiles.filter(
-          (pt) => pt.x === gridX && pt.y === gridY
-        );
+        const key = `${gridX}-${gridY}`;
+        const cell = state.placedTiles.get(key);
+        if (!cell) return;
+
+        const tilesAtLocation = [...cell.values()].filter(
+          (t) => t
+        ) as PlacedTile[];
 
         if (tilesAtLocation.length > 0) {
           const topTile = tilesAtLocation.reduce((top, current) => {
@@ -86,7 +96,12 @@ export const Canvas = () => {
           if (topTile) {
             dispatch({
               type: "REMOVE_TILE",
-              payload: { x: gridX, y: gridY, tileId: topTile.tileId },
+              payload: {
+                x: gridX,
+                y: gridY,
+                tileId: topTile.tileId,
+                source: "local",
+              },
             });
           }
         }
@@ -211,16 +226,31 @@ export const Canvas = () => {
         lastMousePosition.current = { x: clientX, y: clientY };
       } else {
         if (selectedTool === "place" && selectedTile) {
-          const tileToReplace =
-            state.placedTiles.find((pt) => {
-              const existingTileDef = config.tiles[pt.tileId];
-              return (
-                pt.x === gridX &&
-                pt.y === gridY &&
-                existingTileDef?.zIndex === selectedTile.zIndex
-              );
-            }) || null;
+          const key = `${gridX}-${gridY}`;
+          const cell = state.placedTiles.get(key);
+          const tileToReplace = cell?.get(selectedTile.zIndex) || null;
           setTileToReplace(tileToReplace);
+        } else if (selectedTool === "erase") {
+          const key = `${gridX}-${gridY}`;
+          const cell = state.placedTiles.get(key);
+          if (cell) {
+            const tilesAtLocation = [...cell.values()].filter(
+              (t) => t
+            ) as PlacedTile[];
+            if (tilesAtLocation.length > 0) {
+              const topTile = tilesAtLocation.reduce((top, current) => {
+                const topZ = config.tiles[top.tileId]?.zIndex ?? -Infinity;
+                const currentZ =
+                  config.tiles[current.tileId]?.zIndex ?? -Infinity;
+                return currentZ > topZ ? current : top;
+              });
+              setTileToReplace(topTile);
+            } else {
+              setTileToReplace(null);
+            }
+          } else {
+            setTileToReplace(null);
+          }
         } else {
           setTileToReplace(null);
         }
@@ -495,33 +525,35 @@ export const Canvas = () => {
               zIndex: 3,
             }}
           >
-            {state.placedTiles
-              .filter(
-                (placedTile) =>
-                  config.tiles[placedTile.tileId]?.type === "tile" &&
-                  !(
-                    placedTile.x === state.tileToReplace?.x &&
-                    placedTile.y === state.tileToReplace?.y &&
-                    placedTile.tileId === state.tileToReplace?.tileId
-                  )
-              )
-              .map((placedTile) => {
-                const tileDef = config.tiles[placedTile.tileId];
-                if (!tileDef) return null;
-                return (
-                  <div
-                    key={`${placedTile.x}-${placedTile.y}-${placedTile.tileId}`}
-                    style={{
-                      position: "absolute",
-                      left: placedTile.x * config.gridSize,
-                      top: placedTile.y * config.gridSize,
-                      zIndex: tileDef.zIndex,
-                    }}
-                  >
-                    <Tile tile={tileDef} />
-                  </div>
-                );
-              })}
+            {Array.from(state.placedTiles.entries()).flatMap(
+              ([cellKey, cell]) =>
+                Array.from(cell.entries()).map(([zIndex, placedTile]) => {
+                  const [x, y] = cellKey.split("-").map(Number);
+
+                  return (
+                    <div
+                      key={`${cellKey}-${zIndex}`}
+                      style={{
+                        position: "absolute",
+                        left: x * config.gridSize,
+                        top: y * config.gridSize,
+                        zIndex: zIndex,
+                      }}
+                    >
+                      <Tile
+                        tile={
+                          placedTile
+                            ? {
+                                ...config.tiles[placedTile.tileId],
+                                ...placedTile,
+                              }
+                            : null
+                        }
+                      />
+                    </div>
+                  );
+                })
+            )}
           </div>
         </div>
       </div>

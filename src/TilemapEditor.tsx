@@ -6,7 +6,7 @@ import React, {
   useCallback,
 } from "react";
 import { TileConfig, TileDefinition } from "./config";
-import { TilemapState, PlacedTile, TilemapAction } from "./state";
+import { TilemapState, PlacedTile, TilemapAction, PlacedTiles } from "./state";
 import { TilePalette } from "./components/TilePalette";
 import { Canvas } from "./components/Canvas";
 import { Toolbar } from "./components/Toolbar";
@@ -47,44 +47,59 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   ): TilemapState => {
     switch (action.type) {
       case "ADD_TILE": {
-        const newTile = action.payload;
-        const newTileDef = config.tiles[newTile.tileId];
+        const { x, y, tileId, source } = action.payload;
+        const newTileDef = config.tiles[tileId];
         if (!newTileDef || newTileDef.type === "background") return state;
 
-        // Remove any existing tile with the same zIndex at the same position
-        const filteredState = state.placedTiles.filter((tile) => {
-          const existingTileDef = config.tiles[tile.tileId];
-          if (!existingTileDef) return true;
+        const newPlacedTiles = new Map(state.placedTiles);
+        const key = `${x}-${y}`;
+        const cell = new Map(newPlacedTiles.get(key));
+        cell.set(newTileDef.zIndex, { x, y, tileId, source });
+        newPlacedTiles.set(key, cell);
 
-          return !(
-            tile.x === newTile.x &&
-            tile.y === newTile.y &&
-            existingTileDef.zIndex === newTileDef.zIndex
-          );
-        });
-
-        return { ...state, placedTiles: [...filteredState, newTile] };
+        return { ...state, placedTiles: newPlacedTiles };
       }
-      case "REMOVE_TILE":
-        const newState = {
-          ...state,
-          placedTiles: state.placedTiles.filter(
-            (tile) =>
-              !(
-                tile.x === action.payload.x &&
-                tile.y === action.payload.y &&
-                tile.tileId === action.payload.tileId
-              )
-          ),
-        };
-        return newState;
+      case "REMOVE_TILE": {
+        const { x, y, tileId, source } = action.payload;
+        const tileDef = config.tiles[tileId];
+        if (!tileDef) return state;
+
+        const newPlacedTiles = new Map(state.placedTiles);
+        const key = `${x}-${y}`;
+        const cell = new Map(newPlacedTiles.get(key));
+
+        if (cell.get(tileDef.zIndex)?.tileId === tileId) {
+          cell.set(tileDef.zIndex, null);
+          newPlacedTiles.set(key, cell);
+        }
+
+        return { ...state, placedTiles: newPlacedTiles };
+      }
       case "SET_BACKGROUND":
         return {
           ...state,
           backgroundTileId: action.payload,
         };
-      case "LOAD_STATE":
-        return action.payload;
+      case "LOAD_STATE": {
+        const loadedState = action.payload;
+        if (Array.isArray(loadedState.placedTiles)) {
+          const placedTilesMap: PlacedTiles = new Map();
+          for (const tile of loadedState.placedTiles as PlacedTile[]) {
+            const tileDef = config.tiles[tile.tileId];
+            if (tileDef) {
+              const key = `${tile.x}-${tile.y}`;
+              if (!placedTilesMap.has(key)) {
+                placedTilesMap.set(key, new Map());
+              }
+              placedTilesMap
+                .get(key)!
+                .set(tileDef.zIndex, { ...tile, source: "initial" });
+            }
+          }
+          return { ...loadedState, placedTiles: placedTilesMap };
+        }
+        return loadedState;
+      }
       default:
         return state;
     }
@@ -92,11 +107,16 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
 
   const [state, dispatch] = useReducer(
     reducer,
-    initialState || {
-      placedTiles: [],
-      backgroundTileId: null,
-      tileToReplace: null,
-    }
+    initialState
+      ? reducer({ placedTiles: new Map() } as TilemapState, {
+          type: "LOAD_STATE",
+          payload: initialState,
+        })
+      : {
+          placedTiles: new Map(),
+          backgroundTileId: null,
+          tileToReplace: null,
+        }
   );
 
   const [selectedTile, rawSetSelectedTile] = useState<
@@ -159,7 +179,11 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         },
         applyRemoteDelta: (delta: TilemapAction) => {
           console.log("[client] Received remote delta:", delta);
-          dispatchRemote(delta);
+          const remoteDelta = {
+            ...delta,
+            payload: { ...(delta.payload as any), source: "remote" },
+          } as TilemapAction;
+          dispatchRemote(remoteDelta);
         },
       });
     }
@@ -220,12 +244,23 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
       if (selectedTool === "place" && selectedTile) {
         dispatchAndNotify({
           type: "ADD_TILE",
-          payload: { x: gridX, y: gridY, tileId: selectedTile.displayName },
+          payload: {
+            x: gridX,
+            y: gridY,
+            tileId: selectedTile.displayName,
+            source: "local",
+          },
         });
       } else if (selectedTool === "erase") {
-        const tilesAtLocation = stateRef.current.placedTiles.filter(
-          (tile) => tile.x === gridX && tile.y === gridY
-        );
+        const key = `${gridX}-${gridY}`;
+        const cell = stateRef.current.placedTiles.get(key);
+        if (!cell) return;
+
+        const tilesAtLocation = [...cell.values()].filter(
+          (t) => t
+        ) as PlacedTile[];
+
+        if (tilesAtLocation.length === 0) return;
 
         const topTile = tilesAtLocation.sort(
           (a, b) =>
@@ -235,7 +270,12 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         if (topTile) {
           const action = {
             type: "REMOVE_TILE" as const,
-            payload: { x: gridX, y: gridY, tileId: topTile.tileId },
+            payload: {
+              x: gridX,
+              y: gridY,
+              tileId: topTile.tileId,
+              source: "local" as const,
+            },
           };
           dispatchAndNotify(action);
         }

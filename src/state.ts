@@ -1,18 +1,28 @@
+export type TileSource = "initial" | "local" | "remote";
+
 export interface PlacedTile {
+  source: TileSource;
   x: number;
   y: number;
   tileId: string;
 }
 
+export type PlacedTiles = Map<string, Map<number, PlacedTile | null>>;
+
 export interface TilemapState {
-  placedTiles: PlacedTile[];
+  placedTiles: PlacedTiles;
   tileToReplace: PlacedTile | null;
   backgroundTileId: string | null;
 }
 
 export interface AddTileAction {
   type: "ADD_TILE";
-  payload: PlacedTile;
+  payload: {
+    x: number;
+    y: number;
+    tileId: string;
+    source: TileSource;
+  };
 }
 
 export interface RemoveTileAction {
@@ -21,6 +31,7 @@ export interface RemoveTileAction {
     x: number;
     y: number;
     tileId: string;
+    source: TileSource;
   };
 }
 

@@ -1,51 +1,73 @@
 import React, { useState, useEffect, useRef } from "react";
 import { TileDefinition } from "../config";
+import { TileSource } from "../state";
 import { useEditor } from "../EditorContext";
 
+interface EnrichedTile extends TileDefinition {
+  source: TileSource;
+}
+
 interface TileProps {
-  tile: TileDefinition;
+  tile: EnrichedTile | null;
 }
 
 export const Tile: React.FC<TileProps> = ({ tile }) => {
-  const { config } = useEditor();
-  const { gridSize } = config;
-  const [displaySrc, setDisplaySrc] = useState(tile.src);
-  const [displaySpritesheet, setDisplaySpritesheet] = useState(
-    tile.spritesheet
-  );
-  const tileRef = useRef<HTMLDivElement>(null);
+  const { gridSize } = useEditor().config;
+  const [displayTile, setDisplayTile] = useState(tile);
+  const [animationClass, setAnimationClass] = useState("");
+  const prevTileRef = useRef<EnrichedTile | null>();
 
   useEffect(() => {
-    if (
-      tile.src !== displaySrc ||
-      JSON.stringify(tile.spritesheet) !== JSON.stringify(displaySpritesheet)
-    ) {
-      if (tileRef.current) {
-        tileRef.current.style.transition = "opacity 0.15s ease-out";
-        tileRef.current.style.opacity = "0";
+    const prevTile = prevTileRef.current;
+    const shouldFlash = tile?.source === "remote";
+
+    if (tile && !prevTile) {
+      setDisplayTile(tile);
+      if (shouldFlash) {
+        setAnimationClass("tile-animate-in");
       }
-
-      setTimeout(() => {
-        setDisplaySrc(tile.src);
-        setDisplaySpritesheet(tile.spritesheet);
-        if (tileRef.current) {
-          tileRef.current.style.transition = "opacity 0.15s ease-in";
-          tileRef.current.style.opacity = "1";
-        }
-      }, 150);
+    } else if (!tile && prevTile) {
+      if (prevTile.source === "remote") {
+        setAnimationClass("tile-animate-out");
+      }
+      setTimeout(() => setDisplayTile(null), shouldFlash ? 150 : 0);
+    } else if (tile && prevTile && tile.displayName !== prevTile.displayName) {
+      if (shouldFlash) {
+        setAnimationClass("tile-animate-out");
+      }
+      setTimeout(
+        () => {
+          setDisplayTile(tile);
+          if (shouldFlash) {
+            setAnimationClass("tile-animate-in");
+          }
+        },
+        shouldFlash ? 150 : 0
+      );
     }
-  }, [tile.src, tile.spritesheet, displaySrc, displaySpritesheet]);
 
-  if (!displaySpritesheet) {
+    prevTileRef.current = tile;
+  }, [tile]);
+
+  if (!displayTile) {
+    return null;
+  }
+
+  const { displayName, src, spritesheet } = displayTile;
+
+  const style: React.CSSProperties = {
+    width: gridSize,
+    height: gridSize,
+    overflow: "hidden",
+    position: "relative",
+  };
+
+  if (!spritesheet) {
     return (
-      <div
-        ref={tileRef}
-        className="tile"
-        style={{ width: gridSize, height: gridSize }}
-      >
+      <div className={`tile ${animationClass}`} style={style}>
         <img
-          src={displaySrc}
-          alt={tile.displayName}
+          src={src}
+          alt={displayName}
           className="tile-image"
           style={{ width: gridSize, height: gridSize }}
           onDragStart={(e) => e.preventDefault()}
@@ -54,33 +76,25 @@ export const Tile: React.FC<TileProps> = ({ tile }) => {
     );
   }
 
-  const scale = gridSize / displaySpritesheet.width;
-
-  const wrapperStyle: React.CSSProperties = {
-    width: gridSize,
-    height: gridSize,
-    overflow: "hidden",
-    position: "relative",
-  };
+  const scale = gridSize / spritesheet.width;
 
   const imageStyle: React.CSSProperties = {
     position: "absolute",
-    left: -displaySpritesheet.x * scale,
-    top: -displaySpritesheet.y * scale,
+    left: -spritesheet.x * scale,
+    top: -spritesheet.y * scale,
     transform: `scale(${scale})`,
     transformOrigin: "top left",
   };
 
   return (
     <div
-      ref={tileRef}
-      className="tile"
-      style={wrapperStyle}
+      className={`tile ${animationClass}`}
+      style={style}
       onDragStart={(e) => e.preventDefault()}
     >
       <img
-        src={displaySrc}
-        alt={tile.displayName}
+        src={src}
+        alt={displayName}
         style={imageStyle}
         onDragStart={(e) => e.preventDefault()}
       />
