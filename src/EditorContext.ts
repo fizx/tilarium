@@ -37,8 +37,6 @@ export interface FadingCoords {
 export interface EditorContextType {
   config: TileConfig;
   state: TilemapState;
-  fadingOutTiles: FadingTile[];
-  fadingInCoords: FadingCoords[];
   dispatch: (action: TilemapAction) => void;
   selectedTile?: TileDefinition;
   setSelectedTile: (tile?: TileDefinition) => void;

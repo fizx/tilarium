@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { TileDefinition } from "../config";
 import { useEditor } from "../EditorContext";
 
@@ -9,16 +9,35 @@ interface TileProps {
 export const Tile: React.FC<TileProps> = ({ tile }) => {
   const { config } = useEditor();
   const { gridSize } = config;
+  const [imageUrl, setImageUrl] = useState(tile.src);
+  const tileRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (tile.src !== imageUrl) {
+      if (tileRef.current) {
+        tileRef.current.style.transition = "opacity 0.3s ease-in-out";
+        tileRef.current.style.opacity = "0";
+      }
+      setTimeout(() => {
+        setImageUrl(tile.src);
+        if (tileRef.current) {
+          tileRef.current.style.opacity = "1";
+        }
+      }, 300);
+    }
+  }, [tile.src, imageUrl]);
 
   if (!tile.spritesheet) {
     return (
-      <img
-        src={tile.src}
-        alt={tile.displayName}
-        className="tile-image"
-        style={{ width: gridSize, height: gridSize }}
-        onDragStart={(e) => e.preventDefault()}
-      />
+      <div ref={tileRef} style={{ width: gridSize, height: gridSize }}>
+        <img
+          src={imageUrl}
+          alt={tile.displayName}
+          className="tile-image"
+          style={{ width: gridSize, height: gridSize }}
+          onDragStart={(e) => e.preventDefault()}
+        />
+      </div>
     );
   }
 
@@ -40,9 +59,13 @@ export const Tile: React.FC<TileProps> = ({ tile }) => {
   };
 
   return (
-    <div style={wrapperStyle} onDragStart={(e) => e.preventDefault()}>
+    <div
+      ref={tileRef}
+      style={wrapperStyle}
+      onDragStart={(e) => e.preventDefault()}
+    >
       <img
-        src={tile.src}
+        src={imageUrl}
         alt={tile.displayName}
         style={imageStyle}
         onDragStart={(e) => e.preventDefault()}
