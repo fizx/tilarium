@@ -76,7 +76,11 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           ...state,
           placedTiles: state.placedTiles.filter(
             (tile) =>
-              !(tile.x === action.payload.x && tile.y === action.payload.y)
+              !(
+                tile.x === action.payload.x &&
+                tile.y === action.payload.y &&
+                tile.tileId === action.payload.tileId
+              )
           ),
         };
       case "SET_BACKGROUND":
@@ -213,6 +217,29 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
       }
     }
   };
+
+  const applyToolAt = useCallback(
+    (gridX: number, gridY: number) => {
+      if (selectedTool === "place") {
+        // Place logic here
+      } else if (selectedTool === "erase") {
+        const topTile = state.placedTiles
+          .filter((tile) => tile.x === gridX && tile.y === gridY)
+          .sort(
+            (a, b) =>
+              config.tiles[b.tileId].zIndex - config.tiles[a.tileId].zIndex
+          )[0];
+
+        if (topTile) {
+          dispatch({
+            type: "REMOVE_TILE",
+            payload: { x: gridX, y: gridY, tileId: topTile.tileId },
+          });
+        }
+      }
+    },
+    [dispatch, selectedTile, selectedTool, config.mapSize, state.placedTiles]
+  );
 
   return (
     <div

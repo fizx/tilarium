@@ -17,7 +17,11 @@ export interface AddTileAction {
 
 export interface RemoveTileAction {
   type: "REMOVE_TILE";
-  payload: { x: number; y: number };
+  payload: {
+    x: number;
+    y: number;
+    tileId: string;
+  };
 }
 
 export interface SetBackgroundAction {
