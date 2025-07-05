@@ -15,7 +15,8 @@ import {
   Camera,
   Tool,
   Mouse,
-  FlashedTile,
+  FadingTile,
+  FadingCoords,
 } from "./EditorContext";
 import { CustomCursor } from "./components/CustomCursor";
 import "./TilemapEditor.css";
@@ -111,7 +112,8 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   const [camera, rawSetCamera] = useState<Camera>({ x: 0, y: 0, zoom: 1 });
   const [mouse, setMouse] = useState<Mouse | null>(null);
   const [tileToReplace, setTileToReplace] = useState<PlacedTile | null>(null);
-  const [flashedTiles, setFlashedTiles] = useState<FlashedTile[]>([]);
+  const [fadingOutTiles, setFadingOutTiles] = useState<FadingTile[]>([]);
+  const [fadingInCoords, setFadingInCoords] = useState<FadingCoords[]>([]);
   const canvasRef = useRef<HTMLDivElement>(null);
   const isReady = useRef(false);
   const actionsRef = useRef<EditorActions | null>(null);
@@ -165,19 +167,45 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
               (t) => t.x === x && t.y === y
             );
 
-            let shouldFlash = false;
+            let shouldAnimate = false;
             if (delta.type === "ADD_TILE") {
-              shouldFlash =
+              shouldAnimate =
                 !existingTile || existingTile.tileId !== delta.payload.tileId;
+              if (shouldAnimate) {
+                const animId = Date.now();
+                if (existingTile) {
+                  setFadingOutTiles((current) => [
+                    ...current,
+                    { ...existingTile, id: animId },
+                  ]);
+                }
+                setFadingInCoords((current) => [
+                  ...current,
+                  { x, y, id: animId },
+                ]);
+                setTimeout(() => {
+                  setFadingOutTiles((current) =>
+                    current.filter((t) => t.id !== animId)
+                  );
+                  setFadingInCoords((current) =>
+                    current.filter((c) => c.id !== animId)
+                  );
+                }, 500);
+              }
             } else if (delta.type === "REMOVE_TILE") {
-              shouldFlash = !!existingTile;
-            }
-
-            if (shouldFlash) {
-              setFlashedTiles((current) => [
-                ...current,
-                { x, y, id: Date.now() },
-              ]);
+              shouldAnimate = !!existingTile;
+              if (shouldAnimate && existingTile) {
+                const animId = Date.now();
+                setFadingOutTiles((current) => [
+                  ...current,
+                  { ...existingTile, id: animId },
+                ]);
+                setTimeout(() => {
+                  setFadingOutTiles((current) =>
+                    current.filter((t) => t.id !== animId)
+                  );
+                }, 500);
+              }
             }
           }
           dispatchAndNotify(delta);
@@ -253,7 +281,8 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         value={{
           config,
           state: { ...state, tileToReplace },
-          flashedTiles,
+          fadingOutTiles,
+          fadingInCoords,
           dispatch: dispatchAndNotify,
           selectedTile,
           setSelectedTile: handleSelectTile,

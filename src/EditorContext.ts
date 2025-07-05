@@ -21,10 +21,24 @@ export interface Mouse {
   y: number;
 }
 
+export interface FadingTile {
+  x: number;
+  y: number;
+  tileId: string;
+  id: number;
+}
+
+export interface FadingCoords {
+  x: number;
+  y: number;
+  id: number;
+}
+
 export interface EditorContextType {
   config: TileConfig;
   state: TilemapState;
-  flashedTiles: FlashedTile[];
+  fadingOutTiles: FadingTile[];
+  fadingInCoords: FadingCoords[];
   dispatch: (action: TilemapAction) => void;
   selectedTile?: TileDefinition;
   setSelectedTile: (tile?: TileDefinition) => void;
