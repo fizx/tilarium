@@ -1,6 +1,7 @@
 import React, { createContext, useContext } from "react";
 import { TileConfig, TileDefinition } from "./config";
 import { TilemapAction, TilemapState, PlacedTile } from "./state";
+import { AutotileLookup } from "./autotile";
 
 export type Tool = "place" | "drag" | "erase" | "magic-wand";
 
@@ -30,6 +31,7 @@ export interface EditorContextType {
   setMouse: (mouse: Mouse | null) => void;
   tileToReplace: PlacedTile | null;
   setTileToReplace: (tile: PlacedTile | null) => void;
+  autotileLookup: AutotileLookup;
 }
 
 export const EditorContext = createContext<EditorContextType | null>(null);

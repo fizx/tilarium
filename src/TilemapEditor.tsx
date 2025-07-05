@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useRef,
   useCallback,
+  useMemo,
 } from "react";
 import { TileConfig, TileDefinition } from "./config";
 import { TilemapState, PlacedTile, TilemapAction, PlacedTiles } from "./state";
@@ -12,6 +13,7 @@ import { Canvas } from "./components/Canvas";
 import { Toolbar } from "./components/Toolbar";
 import { EditorContext, Camera, Tool, Mouse } from "./EditorContext";
 import { CustomCursor } from "./components/CustomCursor";
+import { createAutotileLookup, updateSurroundingTiles } from "./autotile";
 import "./TilemapEditor.css";
 
 export interface EditorActions {
@@ -41,6 +43,8 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   onTileSelect,
   canvasStyle,
 }) => {
+  const autotileLookup = useMemo(() => createAutotileLookup(config), [config]);
+
   const reducer = (
     state: TilemapState,
     action: TilemapAction
@@ -57,7 +61,15 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         cell.set(newTileDef.zIndex, { x, y, tileId, source });
         newPlacedTiles.set(key, cell);
 
-        return { ...state, placedTiles: newPlacedTiles };
+        const finalPlacedTiles = updateSurroundingTiles(
+          newPlacedTiles,
+          x,
+          y,
+          autotileLookup,
+          config
+        );
+
+        return { ...state, placedTiles: finalPlacedTiles };
       }
       case "REMOVE_TILE": {
         const { x, y, tileId, source } = action.payload;
@@ -73,7 +85,15 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           newPlacedTiles.set(key, cell);
         }
 
-        return { ...state, placedTiles: newPlacedTiles };
+        const finalPlacedTiles = updateSurroundingTiles(
+          newPlacedTiles,
+          x,
+          y,
+          autotileLookup,
+          config
+        );
+
+        return { ...state, placedTiles: finalPlacedTiles };
       }
       case "SET_BACKGROUND":
         return {
@@ -310,6 +330,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           setMouse,
           tileToReplace,
           setTileToReplace,
+          autotileLookup,
         }}
       >
         <div className="editor-container">
