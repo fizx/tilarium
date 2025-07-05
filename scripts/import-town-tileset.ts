@@ -74,24 +74,63 @@ const getGroupKey = (name: string): string => {
   let groupKey = (groupNameMatch ? groupNameMatch[1] : "other").toLowerCase();
 
   const groupMappings: { [key: string]: string } = {
-    dirt: "terrain",
-    grass: "terrain",
-    cobblestone: "terrain",
-    forest: "terrain",
-    castle: "castles",
-    parapet: "castles",
-    arch: "castles",
-    porticulis: "castles",
-    wall: "homes",
-    roof: "homes",
-    door: "homes",
-    window: "homes",
-    water: "other",
-    well: "other",
-    archery: "other",
+    // Terrain
+    grass: "Terrain",
+    dirt: "Terrain",
+    forest_green: "Terrain",
+    forest_fall: "Terrain",
+    tree_fall: "Terrain",
+    tree_green: "Terrain",
+    vines: "Terrain",
+    mushrooms: "Terrain",
+
+    // Structures
+    roof_slate: "Structures",
+    roof_tile: "Structures",
+    wall_wood: "Structures",
+    wall_stone: "Structures",
+    parapet: "Structures",
+    arch: "Structures",
+    well: "Structures",
+    castle_wall: "Structures",
+    castle_window: "Structures",
+
+    // Fences & Walls
+    fence: "Fences & Walls",
+
+    // Decorations
+    sign: "Decorations",
+    beehive: "Decorations",
+    wheelbarrow: "Decorations",
+    archery_target: "Decorations",
+    log: "Decorations",
+
+    // Items
+    coin: "Items",
+    bomb: "Items",
+    jar: "Items",
+    key: "Items",
+    bow: "Items",
+    arrow: "Items",
+    pickaxe: "Items",
+    pitchfork: "Items",
+    axe: "Items",
+    shovel: "Items",
+    scythe: "Items",
+    water_jug_empty: "Items",
+    water_jug_full: "Items",
   };
 
-  return groupMappings[groupKey] || groupKey;
+  const aGroupKey = Object.keys(groupMappings).find(
+    (k) => groupKey === k || groupKey.startsWith(k)
+  );
+  if (aGroupKey) {
+    return groupMappings[aGroupKey];
+  }
+
+  throw new Error(
+    `No group found for tile: ${name} (parsed group key: ${groupKey})`
+  );
 };
 
 const scriptDir = path.dirname(__filename);

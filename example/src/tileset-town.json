@@ -1920,200 +1920,72 @@
     }
   },
   "groups": {
-    "archery_target": {
-      "displayName": "archery target",
+    "Decorations": {
+      "displayName": "Decorations",
       "tileIds": [
-        "archery_target"
+        "beehive",
+        "log",
+        "sign",
+        "wheelbarrow"
       ],
       "autotileGroups": []
     },
-    "arrow": {
-      "displayName": "arrow",
-      "tileIds": [
-        "arrow"
-      ],
-      "autotileGroups": []
-    },
-    "axe": {
-      "displayName": "axe",
-      "tileIds": [
-        "axe"
-      ],
-      "autotileGroups": []
-    },
-    "beehive": {
-      "displayName": "beehive",
-      "tileIds": [
-        "beehive"
-      ],
-      "autotileGroups": []
-    },
-    "bomb": {
-      "displayName": "bomb",
-      "tileIds": [
-        "bomb"
-      ],
-      "autotileGroups": []
-    },
-    "bow": {
-      "displayName": "bow",
-      "tileIds": [
-        "bow"
-      ],
-      "autotileGroups": []
-    },
-    "castle_wall": {
-      "displayName": "castle wall",
-      "tileIds": [
-        "castle_wall"
-      ],
-      "autotileGroups": []
-    },
-    "castle_window": {
-      "displayName": "castle window",
-      "tileIds": [
-        "castle_window"
-      ],
-      "autotileGroups": []
-    },
-    "castles": {
-      "displayName": "castles",
-      "tileIds": [
-        "parapet"
-      ],
-      "autotileGroups": [
-        "parapet",
-        "arch"
-      ]
-    },
-    "coin": {
-      "displayName": "coin",
-      "tileIds": [
-        "coin"
-      ],
-      "autotileGroups": []
-    },
-    "fence": {
-      "displayName": "fence",
+    "Fences & Walls": {
+      "displayName": "Fences & Walls",
       "tileIds": [],
       "autotileGroups": [
         "fence"
       ]
     },
-    "forest_fall": {
-      "displayName": "forest fall",
-      "tileIds": [],
+    "Items": {
+      "displayName": "Items",
+      "tileIds": [
+        "arrow",
+        "axe",
+        "bomb",
+        "bow",
+        "coin",
+        "jar",
+        "key",
+        "pickaxe",
+        "pitchfork",
+        "scythe",
+        "shovel",
+        "water_jug_empty",
+        "water_jug_full"
+      ],
+      "autotileGroups": []
+    },
+    "Structures": {
+      "displayName": "Structures",
+      "tileIds": [
+        "archery_target",
+        "castle_wall",
+        "castle_window",
+        "parapet",
+        "wall_stone:door_closed",
+        "wall_stone:double_door_closed_left",
+        "wall_stone:double_door_closed_right",
+        "wall_stone:shutters",
+        "wall_wood:door_closed",
+        "wall_wood:double_door_closed_left",
+        "wall_wood:double_door_closed_right",
+        "wall_wood:shutters"
+      ],
       "autotileGroups": [
-        "forest_fall"
+        "roof_slate",
+        "roof_tile",
+        "roof_tile_",
+        "wall_wood",
+        "wall_stone",
+        "well",
+        "parapet",
+        "parapet_ladder",
+        "arch"
       ]
     },
-    "forest_green": {
-      "displayName": "forest green",
-      "tileIds": [],
-      "autotileGroups": [
-        "forest_green"
-      ]
-    },
-    "jar": {
-      "displayName": "jar",
-      "tileIds": [
-        "jar"
-      ],
-      "autotileGroups": []
-    },
-    "key": {
-      "displayName": "key",
-      "tileIds": [
-        "key"
-      ],
-      "autotileGroups": []
-    },
-    "log": {
-      "displayName": "log",
-      "tileIds": [
-        "log"
-      ],
-      "autotileGroups": []
-    },
-    "mushrooms": {
-      "displayName": "mushrooms",
-      "tileIds": [
-        "mushrooms"
-      ],
-      "autotileGroups": []
-    },
-    "other": {
-      "displayName": "other",
-      "tileIds": [],
-      "autotileGroups": [
-        "well"
-      ]
-    },
-    "parapet_ladder": {
-      "displayName": "parapet ladder",
-      "tileIds": [],
-      "autotileGroups": [
-        "parapet_ladder"
-      ]
-    },
-    "pickaxe": {
-      "displayName": "pickaxe",
-      "tileIds": [
-        "pickaxe"
-      ],
-      "autotileGroups": []
-    },
-    "pitchfork": {
-      "displayName": "pitchfork",
-      "tileIds": [
-        "pitchfork"
-      ],
-      "autotileGroups": []
-    },
-    "roof_slate": {
-      "displayName": "roof slate",
-      "tileIds": [],
-      "autotileGroups": [
-        "roof_slate"
-      ]
-    },
-    "roof_tile": {
-      "displayName": "roof tile",
-      "tileIds": [],
-      "autotileGroups": [
-        "roof_tile"
-      ]
-    },
-    "roof_tile_": {
-      "displayName": "roof tile ",
-      "tileIds": [],
-      "autotileGroups": [
-        "roof_tile_"
-      ]
-    },
-    "scythe": {
-      "displayName": "scythe",
-      "tileIds": [
-        "scythe"
-      ],
-      "autotileGroups": []
-    },
-    "shovel": {
-      "displayName": "shovel",
-      "tileIds": [
-        "shovel"
-      ],
-      "autotileGroups": []
-    },
-    "sign": {
-      "displayName": "sign",
-      "tileIds": [
-        "sign"
-      ],
-      "autotileGroups": []
-    },
-    "terrain": {
-      "displayName": "terrain",
+    "Terrain": {
+      "displayName": "Terrain",
       "tileIds": [
         "dirt:alt1-SWEN",
         "dirt:alt2-SWEN",
@@ -2121,78 +1993,18 @@
         "dirt:alt4-SWEN",
         "grass:flowers",
         "grass:rough",
-        "grass:smooth"
+        "grass:smooth",
+        "mushrooms",
+        "vines"
       ],
       "autotileGroups": [
+        "tree_fall",
+        "tree_green",
+        "forest_green",
+        "forest_fall",
         "dirt",
         "grass"
       ]
-    },
-    "tree_fall": {
-      "displayName": "tree fall",
-      "tileIds": [],
-      "autotileGroups": [
-        "tree_fall"
-      ]
-    },
-    "tree_green": {
-      "displayName": "tree green",
-      "tileIds": [],
-      "autotileGroups": [
-        "tree_green"
-      ]
-    },
-    "vines": {
-      "displayName": "vines",
-      "tileIds": [
-        "vines"
-      ],
-      "autotileGroups": []
-    },
-    "wall_stone": {
-      "displayName": "wall stone",
-      "tileIds": [
-        "wall_stone:door_closed",
-        "wall_stone:double_door_closed_left",
-        "wall_stone:double_door_closed_right",
-        "wall_stone:shutters"
-      ],
-      "autotileGroups": [
-        "wall_stone"
-      ]
-    },
-    "wall_wood": {
-      "displayName": "wall wood",
-      "tileIds": [
-        "wall_wood:door_closed",
-        "wall_wood:double_door_closed_left",
-        "wall_wood:double_door_closed_right",
-        "wall_wood:shutters"
-      ],
-      "autotileGroups": [
-        "wall_wood"
-      ]
-    },
-    "water_jug_empty": {
-      "displayName": "water jug empty",
-      "tileIds": [
-        "water_jug_empty"
-      ],
-      "autotileGroups": []
-    },
-    "water_jug_full": {
-      "displayName": "water jug full",
-      "tileIds": [
-        "water_jug_full"
-      ],
-      "autotileGroups": []
-    },
-    "wheelbarrow": {
-      "displayName": "wheelbarrow",
-      "tileIds": [
-        "wheelbarrow"
-      ],
-      "autotileGroups": []
     }
   }
 }

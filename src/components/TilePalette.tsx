@@ -190,29 +190,80 @@ export const TilePalette = () => {
                   }`}
                   ref={scrollContainerRef}
                 >
-                  {group.tileIds.map((tileId) => {
-                    const tile = config.tiles[tileId];
-                    if (!tile) return null;
-                    const isSelected =
-                      selectedTool === "place" &&
-                      selectedTile?.displayName === tile.displayName;
-                    return (
-                      <div
-                        key={tile.displayName}
-                        className={`tile-wrapper ${
-                          isSelected ? "selected" : ""
-                        }`}
-                        onClick={(e) =>
-                          handleSelectTile(e, tile, group.displayName)
-                        }
-                        title={tile.displayName}
-                      >
-                        <div className="tile-image-wrapper">
-                          <Tile tile={tile} />
-                        </div>
-                      </div>
+                  {(() => {
+                    // 1. Get autotile representatives (with glow)
+                    const autotileRepTiles =
+                      group.autotileGroups?.map((ag) => {
+                        const allTilesInGroup = Object.values(
+                          config.tiles
+                        ).filter((t) => t.autotile?.group === ag);
+                        const standaloneTile = allTilesInGroup.find(
+                          (t) =>
+                            t.autotile && (t.autotile.neighbors as any) === ""
+                        );
+                        const repTile = standaloneTile || allTilesInGroup[0];
+                        return { tile: repTile, isAutotileRep: true };
+                      }) || [];
+
+                    // 2. Get standalone tiles (not in any autotile group)
+                    const standaloneTiles = group.tileIds.map((tileId) => {
+                      const tile = config.tiles[tileId];
+                      return { tile, isAutotileRep: false };
+                    });
+
+                    // 3. Get all tiles belonging to the autotile groups of the current tab
+                    const allAutotileTiles =
+                      group.autotileGroups?.flatMap((ag) =>
+                        Object.values(config.tiles)
+                          .filter((t) => t.autotile?.group === ag)
+                          .map((tile) => ({ tile, isAutotileRep: false }))
+                      ) || [];
+
+                    // 4. Combine and de-duplicate, preserving the first occurrence (reps)
+                    const displayTiles = [
+                      ...autotileRepTiles,
+                      ...standaloneTiles,
+                      ...allAutotileTiles,
+                    ].filter(
+                      (item, index, self) =>
+                        item.tile &&
+                        self.findIndex(
+                          (t) => t.tile.displayName === item.tile.displayName
+                        ) === index
                     );
-                  })}
+
+                    // 5. Render
+                    return displayTiles.map(({ tile, isAutotileRep }) => {
+                      if (!tile) return null;
+
+                      const isSelected =
+                        selectedTool === "place" &&
+                        selectedTile?.displayName === tile.displayName;
+
+                      const wrapperClassName = [
+                        "tile-wrapper",
+                        isSelected ? "selected" : "",
+                        isAutotileRep ? "autotile-glow" : "",
+                      ]
+                        .filter(Boolean)
+                        .join(" ");
+
+                      return (
+                        <div
+                          key={tile.displayName}
+                          className={wrapperClassName}
+                          onClick={(e) =>
+                            handleSelectTile(e, tile, group.displayName)
+                          }
+                          title={tile.displayName}
+                        >
+                          <div className="tile-image-wrapper">
+                            <Tile tile={{ ...tile, source: "local" }} />
+                          </div>
+                        </div>
+                      );
+                    });
+                  })()}
                 </div>
                 {canScrollRight && (
                   <div
