@@ -118,6 +118,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   const isReady = useRef(false);
   const actionsRef = useRef<EditorActions | null>(null);
   const stateRef = useRef(state);
+  const lastPaintedCell = useRef<{ x: number; y: number } | null>(null);
   stateRef.current = state;
 
   // Wrapped dispatch to notify of state changes
@@ -248,10 +249,31 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
 
   const applyToolAt = useCallback(
     (gridX: number, gridY: number) => {
-      if (selectedTool === "place") {
-        // Place logic here
+      if (
+        lastPaintedCell.current?.x === gridX &&
+        lastPaintedCell.current?.y === gridY
+      ) {
+        return;
+      }
+
+      if (config.mapSize !== "infinite") {
+        if (
+          gridX < 0 ||
+          gridX >= config.mapSize.width ||
+          gridY < 0 ||
+          gridY >= config.mapSize.height
+        ) {
+          return;
+        }
+      }
+
+      if (selectedTool === "place" && selectedTile) {
+        dispatchAndNotify({
+          type: "ADD_TILE",
+          payload: { x: gridX, y: gridY, tileId: selectedTile.displayName },
+        });
       } else if (selectedTool === "erase") {
-        const topTile = state.placedTiles
+        const topTile = stateRef.current.placedTiles
           .filter((tile) => tile.x === gridX && tile.y === gridY)
           .sort(
             (a, b) =>
@@ -259,14 +281,16 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           )[0];
 
         if (topTile) {
-          dispatch({
+          dispatchAndNotify({
             type: "REMOVE_TILE",
             payload: { x: gridX, y: gridY, tileId: topTile.tileId },
           });
         }
       }
+
+      lastPaintedCell.current = { x: gridX, y: gridY };
     },
-    [dispatch, selectedTile, selectedTool, config.mapSize, state.placedTiles]
+    [dispatchAndNotify, selectedTile, selectedTool, config.mapSize]
   );
 
   return (
