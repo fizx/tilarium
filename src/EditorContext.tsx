@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from "react";
-import { TilemapState, PlacedTile, TilemapAction } from "./state";
 import { TileConfig, TileDefinition } from "./config";
+import { TilemapAction, TilemapState, PlacedTile } from "./state";
 
 export type Tool = "place" | "drag" | "erase" | "magic-wand";
 
@@ -15,7 +15,7 @@ export interface Mouse {
   y: number;
 }
 
-interface EditorContextType {
+export interface EditorContextType {
   config: TileConfig;
   state: TilemapState;
   dispatch: React.Dispatch<TilemapAction>;
