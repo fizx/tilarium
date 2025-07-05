@@ -10,13 +10,20 @@ import { TilemapState, PlacedTile, TilemapAction } from "./state";
 import { TilePalette } from "./components/TilePalette";
 import { Canvas } from "./components/Canvas";
 import { Toolbar } from "./components/Toolbar";
-import { EditorContext, Camera, Tool, Mouse } from "./EditorContext";
+import {
+  EditorContext,
+  Camera,
+  Tool,
+  Mouse,
+  FlashedTile,
+} from "./EditorContext";
 import { CustomCursor } from "./components/CustomCursor";
 import "./TilemapEditor.css";
 
 export interface EditorActions {
   getState: () => TilemapState;
   loadState: (stateOrDelta: TilemapState | TilemapAction) => void;
+  applyRemoteDelta: (delta: TilemapAction) => void;
 }
 
 export interface TilemapEditorProps {
@@ -100,6 +107,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   const [camera, rawSetCamera] = useState<Camera>({ x: 0, y: 0, zoom: 1 });
   const [mouse, setMouse] = useState<Mouse | null>(null);
   const [tileToReplace, setTileToReplace] = useState<PlacedTile | null>(null);
+  const [flashedTiles, setFlashedTiles] = useState<FlashedTile[]>([]);
   const canvasRef = useRef<HTMLDivElement>(null);
   const isReady = useRef(false);
   const actionsRef = useRef<EditorActions | null>(null);
@@ -145,6 +153,30 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
                   payload: stateOrDelta,
                 } as TilemapAction);
           dispatchAndNotify(action);
+        },
+        applyRemoteDelta: (delta: TilemapAction) => {
+          if (delta.type === "ADD_TILE" || delta.type === "REMOVE_TILE") {
+            const { x, y } = delta.payload;
+            const existingTile = stateRef.current.placedTiles.find(
+              (t) => t.x === x && t.y === y
+            );
+
+            let shouldFlash = false;
+            if (delta.type === "ADD_TILE") {
+              shouldFlash =
+                !existingTile || existingTile.tileId !== delta.payload.tileId;
+            } else if (delta.type === "REMOVE_TILE") {
+              shouldFlash = !!existingTile;
+            }
+
+            if (shouldFlash) {
+              setFlashedTiles((current) => [
+                ...current,
+                { x, y, id: Date.now() },
+              ]);
+            }
+          }
+          dispatchAndNotify(delta);
         },
       });
     }
@@ -194,6 +226,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         value={{
           config,
           state: { ...state, tileToReplace },
+          flashedTiles,
           dispatch: dispatchAndNotify,
           selectedTile,
           setSelectedTile: handleSelectTile,

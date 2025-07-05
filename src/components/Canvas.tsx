@@ -24,6 +24,7 @@ export const Canvas = () => {
     setMouse,
     setTileToReplace,
     setSelectedTool,
+    flashedTiles,
   } = useEditor();
   const isDragging = useRef(false);
   const isPainting = useRef(false);
@@ -484,9 +485,16 @@ export const Canvas = () => {
               .map((placedTile) => {
                 const tileDef = config.tiles[placedTile.tileId];
                 if (!tileDef) return null;
+
+                const isFlashed = flashedTiles.some(
+                  (f: { x: number; y: number }) =>
+                    f.x === placedTile.x && f.y === placedTile.y
+                );
+
                 return (
                   <div
                     key={`${placedTile.x}-${placedTile.y}-${placedTile.tileId}`}
+                    className={isFlashed ? "tile-flash" : ""}
                     style={{
                       position: "absolute",
                       left: placedTile.x * config.gridSize,
