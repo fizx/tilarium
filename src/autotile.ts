@@ -104,15 +104,22 @@ export const getBestFitTileIds = (
     return bestMatchIds;
   }
 
-  // 3. Fallback to any tile in the group if no subset match is found.
-  let fallbackMask = -1;
+  // 3. Fallback to the rule that requires the fewest neighbors that are not present.
+  let bestFallbackMask = -1;
+  let minMissingNeighbors = Infinity;
   let fallbackIds: string[] | undefined;
+
   for (const [ruleBitmask, tileIds] of groupLookup.entries()) {
-    if (
-      fallbackMask === -1 ||
-      countSetBits(ruleBitmask) < countSetBits(fallbackMask)
+    const missingNeighbors = countSetBits(ruleBitmask & ~bitmask);
+    if (missingNeighbors < minMissingNeighbors) {
+      minMissingNeighbors = missingNeighbors;
+      bestFallbackMask = ruleBitmask;
+      fallbackIds = tileIds;
+    } else if (
+      missingNeighbors === minMissingNeighbors &&
+      countSetBits(ruleBitmask) > countSetBits(bestFallbackMask)
     ) {
-      fallbackMask = ruleBitmask;
+      bestFallbackMask = ruleBitmask;
       fallbackIds = tileIds;
     }
   }
