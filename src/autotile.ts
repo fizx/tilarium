@@ -1,7 +1,7 @@
 import { TileConfig } from "./config";
 import { PlacedTile, PlacedTiles } from "./state";
 
-export type AutotileLookup = Map<string, Map<number, string>>;
+export type AutotileLookup = Map<string, Map<number, string[]>>;
 
 const directionToBitmask: Record<string, number> = {
   N: 1,
@@ -37,19 +37,10 @@ export const createAutotileLookup = (config: TileConfig): AutotileLookup => {
       }
 
       const groupMap = lookup.get(group)!;
-
-      // Also add the standalone tile with a 0 bitmask if it's not already there
-      if (!groupMap.has(0)) {
-        const standaloneTile = Object.values(config.tiles).find(
-          (t) =>
-            t.autotile?.group === group && (t.autotile.neighbors as any) === ""
-        );
-        if (standaloneTile) {
-          groupMap.set(0, standaloneTile.displayName);
-        }
+      if (!groupMap.has(bitmask)) {
+        groupMap.set(bitmask, []);
       }
-
-      groupMap.set(bitmask, tileId);
+      groupMap.get(bitmask)!.push(tileId);
     }
   }
 
@@ -157,16 +148,22 @@ export const updateSurroundingTiles = (
         config
       );
 
-      const newTileId = groupLookup.get(bitmask) || groupLookup.get(0);
+      const validTileIds = groupLookup.get(bitmask);
 
-      if (newTileId && currentTile && currentTile.tileId !== newTileId) {
+      if (
+        currentTile &&
+        validTileIds &&
+        !validTileIds.includes(currentTile.tileId)
+      ) {
+        // The current tile is no longer valid, so we need to replace it with the default for this bitmask
+        const newTileId = validTileIds[0];
         const newTileDef = config.tiles[newTileId];
         currentCell!.set(newTileDef.zIndex, {
           ...currentTile,
           tileId: newTileId,
         });
 
-        // Add neighbors to the queue if they haven't been visited
+        // Since the tile changed, its neighbors might need to update
         for (const [dx, dy] of bitmaskToNeighbors.map((n) => [n[0], n[1]])) {
           const nx = cx + dx;
           const ny = cy + dy;
