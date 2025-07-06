@@ -67,6 +67,7 @@
   font-size: 14px;
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 .tab-button.active {
@@ -350,4 +351,10 @@
 .tile-wrapper.autotile-glow .tile-image-wrapper {
   position: relative;
   z-index: 2; /* Ensure the tile content is on top of the glow effect */
+}
+
+@media (min-width: 768px) {
+  .tab-button {
+    font-size: 16px;
+  }
 }
