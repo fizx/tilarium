@@ -123,6 +123,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         };
       case "LOAD_STATE": {
         const loadedState = action.payload;
+
         if (Array.isArray(loadedState.placedTiles)) {
           const placedTilesMap: PlacedTiles = new Map();
           for (const tile of loadedState.placedTiles as PlacedTile[]) {

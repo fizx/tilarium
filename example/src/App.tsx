@@ -1,5 +1,10 @@
 import React, { useRef, useCallback, useEffect, useState } from "react";
-import { TilemapEditor, EditorActions, TilemapState } from "../../src";
+import {
+  TilemapEditor,
+  EditorActions,
+  TilemapState,
+  PlacedTile,
+} from "../../src";
 import platformerTileset from "./tileset.json";
 import townTileset from "./tileset-town.json";
 import { TileConfig } from "../../src/config";
@@ -16,7 +21,18 @@ interface SavedState {
 // Helper to compress and encode state for URL
 const encodeState = (state: TilemapState, tileset: Tileset): string => {
   const data: SavedState = { state, tileset };
-  const json = JSON.stringify(data);
+
+  const replacer = (key: string, value: any) => {
+    if (value instanceof Map) {
+      return {
+        _type: "map",
+        value: Array.from(value.entries()),
+      };
+    }
+    return value;
+  };
+
+  const json = JSON.stringify(data, replacer);
   const compressed = pako.deflate(json);
   const binaryString = Array.from(compressed, (byte) =>
     String.fromCharCode(byte)
@@ -37,11 +53,41 @@ const decodeState = (encoded: string): SavedState | null => {
     for (let i = 0; i < binaryString.length; i++) {
       compressed[i] = binaryString.charCodeAt(i);
     }
+    const reviver = (key: string, value: any) => {
+      if (typeof value === "object" && value !== null) {
+        if (value._type === "map") {
+          return new Map(value.value);
+        }
+      }
+      return value;
+    };
     const json = pako.inflate(compressed, { to: "string" });
-    const decoded = JSON.parse(json);
+    const decoded = JSON.parse(json, reviver);
+    console.log("[decodeState] Decoded from URL:", decoded);
 
     // New format
     if (decoded.state && decoded.tileset) {
+      const placedTilesIsObject =
+        decoded.state.placedTiles &&
+        typeof decoded.state.placedTiles === "object" &&
+        !Array.isArray(decoded.state.placedTiles) &&
+        !(decoded.state.placedTiles instanceof Map);
+
+      if (placedTilesIsObject) {
+        const placedTilesMap = new Map();
+        for (const [key, cellObj] of Object.entries(
+          decoded.state.placedTiles
+        )) {
+          const cellMap = new Map();
+          for (const [zIndex, tile] of Object.entries(
+            cellObj as Record<string, PlacedTile | null>
+          )) {
+            cellMap.set(parseInt(zIndex, 10), tile);
+          }
+          placedTilesMap.set(key, cellMap);
+        }
+        decoded.state.placedTiles = placedTilesMap;
+      }
       return decoded as SavedState;
     }
 
@@ -61,8 +107,8 @@ const decodeState = (encoded: string): SavedState | null => {
 };
 
 const tilesets: Record<Tileset, TileConfig> = {
-  platformer: platformerTileset as TileConfig,
-  town: townTileset as TileConfig,
+  platformer: platformerTileset as unknown as TileConfig,
+  town: townTileset as unknown as TileConfig,
 };
 
 function App() {
@@ -110,7 +156,7 @@ function App() {
     // when tileset changes, we should probably clear the state
     if (actionsRef.current) {
       actionsRef.current.loadState({
-        placedTiles: [],
+        placedTiles: new Map(),
         tileToReplace: null,
         backgroundTileId: null,
       });
