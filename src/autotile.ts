@@ -73,11 +73,91 @@ const countSetBits = (n: number): number => {
   return count;
 };
 
+const getRulePriority = (bitmask: number): number => {
+  const bitCount = countSetBits(bitmask);
+
+  if (bitCount === 4) return 4; // Fill (SWEN)
+  if (bitCount === 3) return 3; // T-Junctions
+  if (bitCount === 2) {
+    if (bitmask === 5 || bitmask === 10) return 2; // Straight Lines (NS or EW)
+    return 1; // Corners
+  }
+  if (bitCount === 1) return 0; // End Caps
+  return -1;
+};
+
 export const getStrictlyValidTileIds = (
   groupLookup: Map<number, string[]>,
   bitmask: number
 ): string[] | undefined => {
-  return groupLookup.get(bitmask);
+  // 1. Exact match
+  const primaryIds = groupLookup.get(bitmask);
+  if (primaryIds && primaryIds.length > 0) {
+    return primaryIds;
+  }
+
+  // 2. Best partial match
+  let bestMatchMask = -1;
+  let bestMatchIds: string[] | undefined;
+  let bestMatchPriority = -1;
+
+  for (const [ruleBitmask, tileIds] of groupLookup.entries()) {
+    if ((bitmask & ruleBitmask) === ruleBitmask) {
+      const currentBitCount = countSetBits(ruleBitmask);
+      const bestBitCount = countSetBits(bestMatchMask);
+
+      if (currentBitCount > bestBitCount) {
+        bestMatchMask = ruleBitmask;
+        bestMatchIds = tileIds;
+        bestMatchPriority = getRulePriority(ruleBitmask);
+      } else if (currentBitCount === bestBitCount) {
+        const currentPriority = getRulePriority(ruleBitmask);
+        if (currentPriority > bestMatchPriority) {
+          bestMatchMask = ruleBitmask;
+          bestMatchIds = tileIds;
+          bestMatchPriority = currentPriority;
+        }
+      }
+    }
+  }
+
+  if (bestMatchIds) {
+    return bestMatchIds;
+  }
+
+  // 3. Fallback to the rule that requires the fewest neighbors that are not present.
+  let bestFallbackMask = -1;
+  let minMissingNeighbors = Infinity;
+  let fallbackIds: string[] | undefined;
+  let bestFallbackPriority = -1;
+
+  for (const [ruleBitmask, tileIds] of groupLookup.entries()) {
+    const missingNeighbors = countSetBits(ruleBitmask & ~bitmask);
+    const currentBitCount = countSetBits(ruleBitmask);
+    const bestBitCount = countSetBits(bestFallbackMask);
+
+    if (missingNeighbors < minMissingNeighbors) {
+      minMissingNeighbors = missingNeighbors;
+      bestFallbackMask = ruleBitmask;
+      fallbackIds = tileIds;
+      bestFallbackPriority = getRulePriority(ruleBitmask);
+    } else if (missingNeighbors === minMissingNeighbors) {
+      if (currentBitCount > bestBitCount) {
+        bestFallbackMask = ruleBitmask;
+        fallbackIds = tileIds;
+        bestFallbackPriority = getRulePriority(ruleBitmask);
+      } else if (currentBitCount === bestBitCount) {
+        const currentPriority = getRulePriority(ruleBitmask);
+        if (currentPriority > bestFallbackPriority) {
+          bestFallbackMask = ruleBitmask;
+          fallbackIds = tileIds;
+          bestFallbackPriority = currentPriority;
+        }
+      }
+    }
+  }
+
+  return fallbackIds;
 };
 
 export const getBestFitTileIds = (
@@ -93,16 +173,24 @@ export const getBestFitTileIds = (
   // 2. Best partial match
   let bestMatchMask = -1;
   let bestMatchIds: string[] | undefined;
+  let bestMatchPriority = -1;
 
   for (const [ruleBitmask, tileIds] of groupLookup.entries()) {
     if ((bitmask & ruleBitmask) === ruleBitmask) {
-      // This rule is a subset of the actual neighbors.
-      if (
-        bestMatchMask === -1 ||
-        countSetBits(ruleBitmask) > countSetBits(bestMatchMask)
-      ) {
+      const currentBitCount = countSetBits(ruleBitmask);
+      const bestBitCount = countSetBits(bestMatchMask);
+
+      if (currentBitCount > bestBitCount) {
         bestMatchMask = ruleBitmask;
         bestMatchIds = tileIds;
+        bestMatchPriority = getRulePriority(ruleBitmask);
+      } else if (currentBitCount === bestBitCount) {
+        const currentPriority = getRulePriority(ruleBitmask);
+        if (currentPriority > bestMatchPriority) {
+          bestMatchMask = ruleBitmask;
+          bestMatchIds = tileIds;
+          bestMatchPriority = currentPriority;
+        }
       }
     }
   }
@@ -115,19 +203,31 @@ export const getBestFitTileIds = (
   let bestFallbackMask = -1;
   let minMissingNeighbors = Infinity;
   let fallbackIds: string[] | undefined;
+  let bestFallbackPriority = -1;
 
   for (const [ruleBitmask, tileIds] of groupLookup.entries()) {
     const missingNeighbors = countSetBits(ruleBitmask & ~bitmask);
+    const currentBitCount = countSetBits(ruleBitmask);
+    const bestBitCount = countSetBits(bestFallbackMask);
+
     if (missingNeighbors < minMissingNeighbors) {
       minMissingNeighbors = missingNeighbors;
       bestFallbackMask = ruleBitmask;
       fallbackIds = tileIds;
-    } else if (
-      missingNeighbors === minMissingNeighbors &&
-      countSetBits(ruleBitmask) > countSetBits(bestFallbackMask)
-    ) {
-      bestFallbackMask = ruleBitmask;
-      fallbackIds = tileIds;
+      bestFallbackPriority = getRulePriority(ruleBitmask);
+    } else if (missingNeighbors === minMissingNeighbors) {
+      if (currentBitCount > bestBitCount) {
+        bestFallbackMask = ruleBitmask;
+        fallbackIds = tileIds;
+        bestFallbackPriority = getRulePriority(ruleBitmask);
+      } else if (currentBitCount === bestBitCount) {
+        const currentPriority = getRulePriority(ruleBitmask);
+        if (currentPriority > bestFallbackPriority) {
+          bestFallbackMask = ruleBitmask;
+          fallbackIds = tileIds;
+          bestFallbackPriority = currentPriority;
+        }
+      }
     }
   }
 
