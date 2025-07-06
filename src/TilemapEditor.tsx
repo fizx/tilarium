@@ -61,10 +61,58 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         const newTileDef = config.tiles[tileId];
         if (!newTileDef || newTileDef.type === "background") return state;
 
-        let finalTileId = tileId;
         const newPlacedTiles = new Map(state.placedTiles);
+        const key = `${x}-${y}`;
+        const cell = new Map(newPlacedTiles.get(key));
+        const existingTile = cell.get(newTileDef.zIndex);
+        const existingTileDef = existingTile
+          ? config.tiles[existingTile.tileId]
+          : undefined;
 
-        if (newTileDef.autotile) {
+        let finalTileId = tileId;
+
+        // Check if this is a cycle operation
+        if (
+          existingTile &&
+          existingTileDef?.autotile &&
+          newTileDef.autotile &&
+          existingTileDef.autotile.group === newTileDef.autotile.group
+        ) {
+          // --- Cycle logic ---
+          const autotileGroup = newTileDef.autotile.group;
+          const groupLookup = autotileLookup.get(autotileGroup);
+          if (groupLookup) {
+            // Calculate real bitmask based on neighbors
+            let bitmask = 0;
+            for (const [dx, dy, mask] of bitmaskToNeighbors) {
+              const nx = x + dx;
+              const ny = y + dy;
+              const neighborCell = newPlacedTiles.get(`${nx}-${ny}`);
+              const neighborTile = getPlacedTileFromCell(
+                neighborCell,
+                autotileGroup,
+                config
+              );
+              if (neighborTile) {
+                bitmask |= mask;
+              }
+            }
+            const validTileIds = groupLookup.get(bitmask);
+
+            if (validTileIds && validTileIds.length > 1) {
+              const currentIndex = validTileIds.indexOf(existingTile.tileId);
+              if (currentIndex !== -1) {
+                const nextIndex = (currentIndex + 1) % validTileIds.length;
+                finalTileId = validTileIds[nextIndex];
+              } else {
+                finalTileId = validTileIds[0];
+              }
+            } else if (validTileIds) {
+              finalTileId = validTileIds[0];
+            }
+          }
+        } else if (newTileDef.autotile) {
+          // --- Probabilistic placement logic for new tiles ---
           const autotileGroup = newTileDef.autotile.group;
           const groupLookup = autotileLookup.get(autotileGroup);
 
@@ -77,8 +125,6 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           }
         }
 
-        const key = `${x}-${y}`;
-        const cell = new Map(newPlacedTiles.get(key));
         cell.set(newTileDef.zIndex, { x, y, tileId: finalTileId, source });
         newPlacedTiles.set(key, cell);
 
