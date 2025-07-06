@@ -64,16 +64,60 @@ export const chooseTileVariant = (validTileIds: string[]): string => {
   }
 };
 
-export const getValidTileIdsWithFallback = (
+const countSetBits = (n: number): number => {
+  let count = 0;
+  while (n > 0) {
+    n &= n - 1;
+    count++;
+  }
+  return count;
+};
+
+export const getBestFitTileIds = (
   groupLookup: Map<number, string[]>,
-  bitmask: number,
-  fallbackBitmask = 15
+  bitmask: number
 ): string[] | undefined => {
+  // 1. Exact match
   const primaryIds = groupLookup.get(bitmask);
   if (primaryIds && primaryIds.length > 0) {
     return primaryIds;
   }
-  return groupLookup.get(fallbackBitmask);
+
+  // 2. Best partial match
+  let bestMatchMask = -1;
+  let bestMatchIds: string[] | undefined;
+
+  for (const [ruleBitmask, tileIds] of groupLookup.entries()) {
+    if ((bitmask & ruleBitmask) === ruleBitmask) {
+      // This rule is a subset of the actual neighbors.
+      if (
+        bestMatchMask === -1 ||
+        countSetBits(ruleBitmask) > countSetBits(bestMatchMask)
+      ) {
+        bestMatchMask = ruleBitmask;
+        bestMatchIds = tileIds;
+      }
+    }
+  }
+
+  if (bestMatchIds) {
+    return bestMatchIds;
+  }
+
+  // 3. Fallback to any tile in the group if no subset match is found.
+  let fallbackMask = -1;
+  let fallbackIds: string[] | undefined;
+  for (const [ruleBitmask, tileIds] of groupLookup.entries()) {
+    if (
+      fallbackMask === -1 ||
+      countSetBits(ruleBitmask) < countSetBits(fallbackMask)
+    ) {
+      fallbackMask = ruleBitmask;
+      fallbackIds = tileIds;
+    }
+  }
+
+  return fallbackIds;
 };
 
 export const getPlacedTileFromCell = (
@@ -177,7 +221,7 @@ export const updateSurroundingTiles = (
         config
       );
 
-      const validTileIds = getValidTileIdsWithFallback(groupLookup, bitmask);
+      const validTileIds = getBestFitTileIds(groupLookup, bitmask);
 
       if (
         currentTile &&

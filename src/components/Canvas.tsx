@@ -25,6 +25,8 @@ export const Canvas = () => {
     setMouse,
     setTileToReplace,
     setSelectedTool,
+    setHoveredTile,
+    setSelectedTile,
   } = useEditor();
   const isDragging = useRef(false);
   const isPainting = useRef(false);
@@ -42,8 +44,8 @@ export const Canvas = () => {
       case "erase":
       case "place":
         return "none";
-      case "magic-wand":
-        return "pointer";
+      case "eyedropper":
+        return "crosshair";
       default:
         return "default";
     }
@@ -119,6 +121,37 @@ export const Canvas = () => {
       state.placedTiles,
       config.tiles,
     ]
+  );
+
+  const handleEyedropper = useCallback(
+    (gridX: number, gridY: number) => {
+      const key = `${gridX}-${gridY}`;
+      const cell = state.placedTiles.get(key);
+      if (!cell) return;
+
+      const tilesAtLocation = [...cell.values()].filter(
+        (t) => t
+      ) as PlacedTile[];
+
+      if (tilesAtLocation.length > 0) {
+        const topTile = tilesAtLocation.reduce((top, current) => {
+          const topZ = config.tiles[top.tileId]?.zIndex ?? -Infinity;
+          const currentZ = config.tiles[current.tileId]?.zIndex ?? -Infinity;
+          return currentZ > topZ ? current : top;
+        });
+
+        if (topTile) {
+          const tileDef = Object.values(config.tiles).find(
+            (t) => t.displayName === topTile.tileId
+          );
+          if (tileDef) {
+            setSelectedTool("place");
+            setSelectedTile(tileDef);
+          }
+        }
+      }
+    },
+    [state.placedTiles, config.tiles, setSelectedTile, setSelectedTool]
   );
 
   const getEventCoords = useCallback((e: MouseEvent | TouchEvent) => {
@@ -207,6 +240,7 @@ export const Canvas = () => {
         ) {
           setMouse(null);
           setTileToReplace(null);
+          setHoveredTile(null);
           setIsOverMap(false);
           return;
         }
@@ -220,6 +254,27 @@ export const Canvas = () => {
         gridY * (config.gridSize * camera.zoom) + camera.y + rect.top;
 
       setMouse({ x: snappedX, y: snappedY });
+
+      const key = `${gridX}-${gridY}`;
+      const cell = state.placedTiles.get(key);
+
+      if (cell) {
+        const tilesAtLocation = [...cell.values()].filter(
+          (t) => t
+        ) as PlacedTile[];
+        if (tilesAtLocation.length > 0) {
+          const topTile = tilesAtLocation.reduce((top, current) => {
+            const topZ = config.tiles[top.tileId]?.zIndex ?? -Infinity;
+            const currentZ = config.tiles[current.tileId]?.zIndex ?? -Infinity;
+            return currentZ > topZ ? current : top;
+          });
+          setHoveredTile(topTile);
+        } else {
+          setHoveredTile(null);
+        }
+      } else {
+        setHoveredTile(null);
+      }
 
       if (isPainting.current) {
         applyToolAt(gridX, gridY);
@@ -275,20 +330,45 @@ export const Canvas = () => {
       state.placedTiles,
       config.mapSize,
       setIsOverMap,
+      setHoveredTile,
     ]
   );
 
   const handleMouseDown = useCallback(
     (e: MouseEvent) => {
-      handlePanStart(e);
-      handlePaintStart(e);
+      if (selectedTool === "eyedropper") {
+        const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+        const gridX = Math.floor(
+          (e.clientX - rect.left - camera.x) / (config.gridSize * camera.zoom)
+        );
+        const gridY = Math.floor(
+          (e.clientY - rect.top - camera.y) / (config.gridSize * camera.zoom)
+        );
+        handleEyedropper(gridX, gridY);
+      } else {
+        handlePanStart(e);
+        handlePaintStart(e);
+      }
     },
-    [handlePanStart, handlePaintStart]
+    [
+      handlePanStart,
+      handlePaintStart,
+      selectedTool,
+      handleEyedropper,
+      camera.x,
+      camera.y,
+      camera.zoom,
+      config.gridSize,
+    ]
   );
 
   const handleMouseUp = useCallback(() => {
     handleInteractionEnd();
-  }, [handleInteractionEnd]);
+    setMouse(null);
+    setTileToReplace(null);
+    setIsOverMap(false);
+    setHoveredTile(null);
+  }, [setMouse, setTileToReplace, setHoveredTile]);
 
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {

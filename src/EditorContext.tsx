@@ -3,7 +3,7 @@ import { TileConfig, TileDefinition } from "./config";
 import { TilemapAction, TilemapState, PlacedTile } from "./state";
 import { AutotileLookup } from "./autotile";
 
-export type Tool = "place" | "drag" | "erase" | "magic-wand";
+export type Tool = "place" | "drag" | "erase" | "eyedropper";
 
 export interface Camera {
   x: number;
@@ -31,6 +31,8 @@ export interface EditorContextType {
   setMouse: (mouse: Mouse | null) => void;
   tileToReplace: PlacedTile | null;
   setTileToReplace: (tile: PlacedTile | null) => void;
+  hoveredTile: PlacedTile | null;
+  setHoveredTile: (tile: PlacedTile | null) => void;
   autotileLookup: AutotileLookup;
 }
 

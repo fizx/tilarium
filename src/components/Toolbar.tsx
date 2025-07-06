@@ -68,9 +68,9 @@ export const Toolbar = () => {
         onClick={() => setSelectedTool("erase")}
       />
       <ToolButton
-        tool="magic-wand"
-        emoji="✨"
-        onClick={() => setSelectedTool("magic-wand")}
+        tool="eyedropper"
+        emoji="💧"
+        onClick={() => setSelectedTool("eyedropper")}
       />
       <hr />
       <ToolButton emoji="➕" onClick={handleZoomIn} />

@@ -19,7 +19,7 @@ import {
   bitmaskToNeighbors,
   getPlacedTileFromCell,
   chooseTileVariant,
-  getValidTileIdsWithFallback,
+  getBestFitTileIds,
 } from "./autotile";
 import "./TilemapEditor.css";
 
@@ -98,10 +98,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
                 bitmask |= mask;
               }
             }
-            const validTileIds = getValidTileIdsWithFallback(
-              groupLookup,
-              bitmask
-            );
+            const validTileIds = getBestFitTileIds(groupLookup, bitmask);
 
             if (validTileIds && validTileIds.length > 1) {
               const currentIndex = validTileIds.indexOf(existingTile.tileId);
@@ -122,10 +119,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
 
           if (groupLookup) {
             const bitmask = 15; // SWEN
-            const validTileIds = getValidTileIdsWithFallback(
-              groupLookup,
-              bitmask
-            );
+            const validTileIds = getBestFitTileIds(groupLookup, bitmask);
             if (validTileIds && validTileIds.length > 0) {
               finalTileId = chooseTileVariant(validTileIds);
             }
@@ -221,6 +215,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   const [camera, rawSetCamera] = useState<Camera>({ x: 0, y: 0, zoom: 1 });
   const [mouse, setMouse] = useState<Mouse | null>(null);
   const [tileToReplace, setTileToReplace] = useState<PlacedTile | null>(null);
+  const [hoveredTile, setHoveredTile] = useState<PlacedTile | null>(null);
   const canvasRef = useRef<HTMLDivElement>(null);
   const isReady = useRef(false);
   const actionsRef = useRef<EditorActions | null>(null);
@@ -405,6 +400,8 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           setMouse,
           tileToReplace,
           setTileToReplace,
+          hoveredTile,
+          setHoveredTile,
           autotileLookup,
         }}
       >
