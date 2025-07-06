@@ -32,8 +32,10 @@ export const Canvas = () => {
   const lastPaintedCell = useRef<{ x: number; y: number } | null>(null);
   const pinchDist = useRef(0);
   const justTouched = useRef(false);
+  const [isOverMap, setIsOverMap] = useState(true);
 
   const cursor = useMemo(() => {
+    if (!isOverMap) return "default";
     switch (selectedTool) {
       case "drag":
         return "grab";
@@ -45,7 +47,7 @@ export const Canvas = () => {
       default:
         return "default";
     }
-  }, [selectedTool]);
+  }, [selectedTool, isOverMap]);
 
   const applyToolAt = useCallback(
     (gridX: number, gridY: number) => {
@@ -205,9 +207,12 @@ export const Canvas = () => {
         ) {
           setMouse(null);
           setTileToReplace(null);
+          setIsOverMap(false);
           return;
         }
       }
+
+      setIsOverMap(true);
 
       const snappedX =
         gridX * (config.gridSize * camera.zoom) + camera.x + rect.left;
@@ -269,6 +274,7 @@ export const Canvas = () => {
       setTileToReplace,
       state.placedTiles,
       config.mapSize,
+      setIsOverMap,
     ]
   );
 
@@ -369,6 +375,7 @@ export const Canvas = () => {
   const handleMouseEnter = useCallback(
     (e: MouseEvent) => {
       setMouse({ x: e.clientX, y: e.clientY });
+      setIsOverMap(true);
     },
     [setMouse]
   );
@@ -379,6 +386,7 @@ export const Canvas = () => {
     lastPaintedCell.current = null;
     setMouse(null);
     setTileToReplace(null);
+    setIsOverMap(false);
   }, [setMouse, setTileToReplace]);
 
   const handleWheel = useCallback(
