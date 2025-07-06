@@ -64,6 +64,18 @@ export const chooseTileVariant = (validTileIds: string[]): string => {
   }
 };
 
+export const getValidTileIdsWithFallback = (
+  groupLookup: Map<number, string[]>,
+  bitmask: number,
+  fallbackBitmask = 15
+): string[] | undefined => {
+  const primaryIds = groupLookup.get(bitmask);
+  if (primaryIds && primaryIds.length > 0) {
+    return primaryIds;
+  }
+  return groupLookup.get(fallbackBitmask);
+};
+
 export const getPlacedTileFromCell = (
   cell: Map<number, PlacedTile | null> | undefined,
   autotileGroup: string,
@@ -165,7 +177,7 @@ export const updateSurroundingTiles = (
         config
       );
 
-      const validTileIds = groupLookup.get(bitmask);
+      const validTileIds = getValidTileIdsWithFallback(groupLookup, bitmask);
 
       if (
         currentTile &&

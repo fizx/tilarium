@@ -19,6 +19,7 @@ import {
   bitmaskToNeighbors,
   getPlacedTileFromCell,
   chooseTileVariant,
+  getValidTileIdsWithFallback,
 } from "./autotile";
 import "./TilemapEditor.css";
 
@@ -93,11 +94,14 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
                 autotileGroup,
                 config
               );
-              if (neighborTile) {
+              if (neighborTile && neighborTile.tileId === existingTile.tileId) {
                 bitmask |= mask;
               }
             }
-            const validTileIds = groupLookup.get(bitmask);
+            const validTileIds = getValidTileIdsWithFallback(
+              groupLookup,
+              bitmask
+            );
 
             if (validTileIds && validTileIds.length > 1) {
               const currentIndex = validTileIds.indexOf(existingTile.tileId);
@@ -118,7 +122,10 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
 
           if (groupLookup) {
             const bitmask = 15; // SWEN
-            const validTileIds = groupLookup.get(bitmask);
+            const validTileIds = getValidTileIdsWithFallback(
+              groupLookup,
+              bitmask
+            );
             if (validTileIds && validTileIds.length > 0) {
               finalTileId = chooseTileVariant(validTileIds);
             }
