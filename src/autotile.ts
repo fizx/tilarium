@@ -10,7 +10,7 @@ const directionToBitmask: Record<string, number> = {
   W: 8,
 };
 
-const bitmaskToNeighbors: [number, number, number][] = [
+export const bitmaskToNeighbors: [number, number, number][] = [
   [0, -1, 1], // N
   [1, 0, 2], // E
   [0, 1, 4], // S
@@ -47,7 +47,24 @@ export const createAutotileLookup = (config: TileConfig): AutotileLookup => {
   return lookup;
 };
 
-const getPlacedTileFromCell = (
+export const chooseTileVariant = (validTileIds: string[]): string => {
+  if (validTileIds.length <= 1) {
+    return validTileIds[0];
+  }
+
+  const chance = Math.random();
+  if (chance < 0.8) {
+    // 80% chance to return the default tile
+    return validTileIds[0];
+  } else {
+    // 20% chance to return a random variant from the rest of the tiles
+    const variants = validTileIds.slice(1);
+    const randomIndex = Math.floor(Math.random() * variants.length);
+    return variants[randomIndex];
+  }
+};
+
+export const getPlacedTileFromCell = (
   cell: Map<number, PlacedTile | null> | undefined,
   autotileGroup: string,
   config: TileConfig
@@ -156,7 +173,7 @@ export const updateSurroundingTiles = (
         !validTileIds.includes(currentTile.tileId)
       ) {
         // The current tile is no longer valid, so we need to replace it with the default for this bitmask
-        const newTileId = validTileIds[0];
+        const newTileId = chooseTileVariant(validTileIds);
         const newTileDef = config.tiles[newTileId];
         currentCell!.set(newTileDef.zIndex, {
           ...currentTile,

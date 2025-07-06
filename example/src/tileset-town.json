@@ -6,8 +6,8 @@
     "height": 32
   },
   "tiles": {
-    "grass:smooth": {
-      "displayName": "grass:smooth",
+    "grass-SWEN": {
+      "displayName": "grass-SWEN",
       "src": "assets/kenney_tiny-town/Tilemap/tilemap_packed.png",
       "zIndex": 0,
       "type": "tile",
@@ -19,11 +19,11 @@
       },
       "autotile": {
         "group": "grass",
-        "neighbors": ""
+        "neighbors": "SWEN"
       }
     },
-    "grass:rough": {
-      "displayName": "grass:rough",
+    "grass:rough-SWEN": {
+      "displayName": "grass:rough-SWEN",
       "src": "assets/kenney_tiny-town/Tilemap/tilemap_packed.png",
       "zIndex": 0,
       "type": "tile",
@@ -35,11 +35,11 @@
       },
       "autotile": {
         "group": "grass",
-        "neighbors": ""
+        "neighbors": "SWEN"
       }
     },
-    "grass:flowers": {
-      "displayName": "grass:flowers",
+    "grass:flowers-SWEN": {
+      "displayName": "grass:flowers-SWEN",
       "src": "assets/kenney_tiny-town/Tilemap/tilemap_packed.png",
       "zIndex": 0,
       "type": "tile",
@@ -51,7 +51,7 @@
       },
       "autotile": {
         "group": "grass",
-        "neighbors": ""
+        "neighbors": "SWEN"
       }
     },
     "tree_fall:tall-S": {
@@ -2128,10 +2128,10 @@
         "forest_green-SW",
         "forest_green-SWEN",
         "forest_green-W",
+        "grass-SWEN",
         "grass:cobblestone-SWEN",
-        "grass:flowers",
-        "grass:rough",
-        "grass:smooth",
+        "grass:flowers-SWEN",
+        "grass:rough-SWEN",
         "mushrooms",
         "tree_fall-N",
         "tree_fall:tall-S",

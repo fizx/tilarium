@@ -13,7 +13,13 @@ import { Canvas } from "./components/Canvas";
 import { Toolbar } from "./components/Toolbar";
 import { EditorContext, Camera, Tool, Mouse } from "./EditorContext";
 import { CustomCursor } from "./components/CustomCursor";
-import { createAutotileLookup, updateSurroundingTiles } from "./autotile";
+import {
+  createAutotileLookup,
+  updateSurroundingTiles,
+  bitmaskToNeighbors,
+  getPlacedTileFromCell,
+  chooseTileVariant,
+} from "./autotile";
 import "./TilemapEditor.css";
 
 export interface EditorActions {
@@ -55,10 +61,25 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         const newTileDef = config.tiles[tileId];
         if (!newTileDef || newTileDef.type === "background") return state;
 
+        let finalTileId = tileId;
         const newPlacedTiles = new Map(state.placedTiles);
+
+        if (newTileDef.autotile) {
+          const autotileGroup = newTileDef.autotile.group;
+          const groupLookup = autotileLookup.get(autotileGroup);
+
+          if (groupLookup) {
+            const bitmask = 15; // SWEN
+            const validTileIds = groupLookup.get(bitmask);
+            if (validTileIds && validTileIds.length > 0) {
+              finalTileId = chooseTileVariant(validTileIds);
+            }
+          }
+        }
+
         const key = `${x}-${y}`;
         const cell = new Map(newPlacedTiles.get(key));
-        cell.set(newTileDef.zIndex, { x, y, tileId, source });
+        cell.set(newTileDef.zIndex, { x, y, tileId: finalTileId, source });
         newPlacedTiles.set(key, cell);
 
         const finalPlacedTiles = updateSurroundingTiles(
