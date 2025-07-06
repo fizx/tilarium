@@ -1,0 +1,14 @@
+export const tips = [
+  "Create natural-looking terrain by using autotiling tiles. Just select a tile and start painting, and they'll automatically connect!",
+  "Some tiles have variants! If you place a tile and want to see a different version, just click on it again with the place tool to cycle through its variations.",
+  "You can create depth in your maps by layering tiles. For example, you can place a path tile over a grass tile.",
+  "Use the hand tool (🖐️) to move your view of the map without accidentally placing or removing tiles.",
+  "Mix and match different tile types to add visual interest and break up repetitive patterns in your map.",
+  "Set the overall mood of your map by choosing a background tile from the palette. This will fill the entire background.",
+  "Need a closer look? Use the zoom tools (➕/➖) to get a better view of your masterpiece or to see the bigger picture.",
+  "The eraser tool (🧼) removes the top-most tile at a location. If you have overlapping tiles, you might need to click more than once.",
+  "Want to use a tile that's already on your map? The eyedropper tool (💧) lets you select any tile from the canvas to make it your active tile.",
+  "When using autotiles, try creating interesting shapes and borders. The system will automatically figure out the correct corner and edge pieces for you.",
+  "Planning a large world? You can zoom out to get a bird's-eye view of your creation and ensure everything looks just right.",
+  "Don't be afraid to experiment! The best maps come from trying out different tile combinations and layouts.",
+];

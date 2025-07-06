@@ -28,6 +28,7 @@ import {
   getBestFitTileIds,
 } from "./autotile";
 import "./TilemapEditor.css";
+import { HelpModal } from "./components/HelpModal";
 
 export interface EditorActions {
   getState: () => TilemapState;
@@ -227,6 +228,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   const [mouse, setMouse] = useState<Mouse | null>(null);
   const [tileToReplace, setTileToReplace] = useState<PlacedTile | null>(null);
   const [hoveredTile, setHoveredTile] = useState<PlacedTile | null>(null);
+  const [isHelpModalOpen, setHelpModalOpen] = useState(false);
   const canvasRef = useRef<HTMLDivElement>(null);
   const isReady = useRef(false);
   const actionsRef = useRef<EditorActions | null>(null);
@@ -410,6 +412,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           hoveredTile,
           setHoveredTile,
           autotileLookup,
+          openHelpModal: () => setHelpModalOpen(true),
         }}
       >
         <div className="editor-container">
@@ -420,6 +423,9 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           <TilePalette onSelectTile={handleSelectTile} />
         </div>
         <CustomCursor />
+        {isHelpModalOpen && (
+          <HelpModal onClose={() => setHelpModalOpen(false)} />
+        )}
       </EditorContext.Provider>
     </div>
   );

@@ -39,6 +39,7 @@ export interface EditorContextType {
   hoveredTile: PlacedTile | null;
   setHoveredTile: (tile: PlacedTile | null) => void;
   autotileLookup: AutotileLookup;
+  openHelpModal: () => void;
 }
 
 export const EditorContext = createContext<EditorContextType | null>(null);

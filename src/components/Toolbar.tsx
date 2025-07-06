@@ -28,7 +28,8 @@ const ToolButton: React.FC<ToolButtonProps> = ({
 };
 
 export const Toolbar = () => {
-  const { setSelectedTool, camera, setCamera, canvasRef } = useEditor();
+  const { setSelectedTool, camera, setCamera, canvasRef, openHelpModal } =
+    useEditor();
 
   const handleZoom = (zoomFactor: number) => {
     if (!canvasRef?.current) return;
@@ -75,6 +76,8 @@ export const Toolbar = () => {
       <hr />
       <ToolButton emoji="➕" onClick={handleZoomIn} />
       <ToolButton emoji="➖" onClick={handleZoomOut} />
+      <hr />
+      <ToolButton emoji="❓" onClick={openHelpModal} />
     </div>
   );
 };
