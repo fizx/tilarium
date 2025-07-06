@@ -1,6 +1,6 @@
-0	grass:smooth
-1	grass:rough
-2	grass:flowers
+0	grass-SWEN
+1	grass:rough-SWEN
+2	grass:flowers-SWEN
 3	tree_fall:tall-S
 4	tree_green:tall-S
 5	tree_green:bushy-S
