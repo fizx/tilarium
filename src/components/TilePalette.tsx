@@ -3,7 +3,11 @@ import { useEditor } from "../EditorContext";
 import { Tile } from "./Tile";
 import { TileDefinition } from "../config";
 
-export const TilePalette = () => {
+export const TilePalette = ({
+  onSelectTile,
+}: {
+  onSelectTile: (tile: TileDefinition, isAutotileRep: boolean) => void;
+}) => {
   const {
     config,
     selectedTile,
@@ -96,14 +100,15 @@ export const TilePalette = () => {
   const handleSelectTile = (
     e: React.MouseEvent<HTMLDivElement>,
     tile: TileDefinition,
-    groupName: string
+    groupName: string,
+    isAutotileRep: boolean
   ) => {
     e.currentTarget.scrollIntoView({
       behavior: "smooth",
       inline: "center",
       block: "nearest",
     });
-    setSelectedTile(tile);
+    onSelectTile(tile, isAutotileRep);
     if (groupName !== "backgrounds") {
       setSelectedTool("place");
     }
@@ -257,7 +262,8 @@ export const TilePalette = () => {
 
                       const isSelected =
                         selectedTool === "place" &&
-                        selectedTile?.displayName === tile.displayName;
+                        selectedTile?.definition.displayName ===
+                          tile.displayName;
 
                       const wrapperClassName = [
                         "tile-wrapper",
@@ -272,7 +278,12 @@ export const TilePalette = () => {
                           key={tile.displayName}
                           className={wrapperClassName}
                           onClick={(e) =>
-                            handleSelectTile(e, tile, group.displayName)
+                            handleSelectTile(
+                              e,
+                              tile,
+                              group.displayName,
+                              isAutotileRep
+                            )
                           }
                           title={tile.displayName}
                         >

@@ -77,8 +77,9 @@ export const Canvas = () => {
           payload: {
             x: gridX,
             y: gridY,
-            tileId: selectedTile.displayName,
+            tileId: selectedTile.definition.displayName,
             source: "local",
+            isAutotileRep: selectedTile.isAutotileRep,
           },
         });
       } else if (selectedTool === "erase") {
@@ -146,7 +147,7 @@ export const Canvas = () => {
           );
           if (tileDef) {
             setSelectedTool("place");
-            setSelectedTile(tileDef);
+            setSelectedTile({ definition: tileDef, isAutotileRep: false });
           }
         }
       }
@@ -288,7 +289,8 @@ export const Canvas = () => {
         if (selectedTool === "place" && selectedTile) {
           const key = `${gridX}-${gridY}`;
           const cell = state.placedTiles.get(key);
-          const tileToReplace = cell?.get(selectedTile.zIndex) || null;
+          const tileToReplace =
+            cell?.get(selectedTile.definition.zIndex) || null;
           setTileToReplace(tileToReplace);
         } else if (selectedTool === "erase") {
           const key = `${gridX}-${gridY}`;

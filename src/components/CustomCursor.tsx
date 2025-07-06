@@ -70,7 +70,7 @@ export const CustomCursor = () => {
         if (selectedTile) {
           return (
             <div style={cursorStyle}>
-              <Tile tile={{ ...selectedTile, source: "local" }} />
+              <Tile tile={{ ...selectedTile.definition, source: "local" }} />
             </div>
           );
         }

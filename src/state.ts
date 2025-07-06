@@ -22,6 +22,7 @@ export interface AddTileAction {
     y: number;
     tileId: string;
     source: TileSource;
+    isAutotileRep: boolean;
   };
 }
 

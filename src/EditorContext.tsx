@@ -5,6 +5,11 @@ import { AutotileLookup } from "./autotile";
 
 export type Tool = "place" | "drag" | "erase" | "eyedropper";
 
+export interface SelectedTile {
+  definition: TileDefinition;
+  isAutotileRep: boolean;
+}
+
 export interface Camera {
   x: number;
   y: number;
@@ -20,8 +25,8 @@ export interface EditorContextType {
   config: TileConfig;
   state: TilemapState;
   dispatch: React.Dispatch<TilemapAction>;
-  selectedTile?: TileDefinition;
-  setSelectedTile: (tile?: TileDefinition) => void;
+  selectedTile?: SelectedTile;
+  setSelectedTile: (tile?: SelectedTile) => void;
   selectedTool: Tool;
   setSelectedTool: (tool: Tool) => void;
   camera: Camera;

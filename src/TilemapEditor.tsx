@@ -11,7 +11,13 @@ import { TilemapState, PlacedTile, TilemapAction, PlacedTiles } from "./state";
 import { TilePalette } from "./components/TilePalette";
 import { Canvas } from "./components/Canvas";
 import { Toolbar } from "./components/Toolbar";
-import { EditorContext, Camera, Tool, Mouse } from "./EditorContext";
+import {
+  EditorContext,
+  Camera,
+  Tool,
+  Mouse,
+  SelectedTile,
+} from "./EditorContext";
 import { CustomCursor } from "./components/CustomCursor";
 import {
   createAutotileLookup,
@@ -58,7 +64,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   ): TilemapState => {
     switch (action.type) {
       case "ADD_TILE": {
-        const { x, y, tileId, source } = action.payload;
+        const { x, y, tileId, source, isAutotileRep } = action.payload;
         const newTileDef = config.tiles[tileId];
         if (!newTileDef || newTileDef.type === "background") return state;
 
@@ -83,7 +89,6 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           const autotileGroup = newTileDef.autotile.group;
           const groupLookup = autotileLookup.get(autotileGroup);
           if (groupLookup) {
-            // Calculate real bitmask based on neighbors
             let bitmask = 0;
             for (const [dx, dy, mask] of bitmaskToNeighbors) {
               const nx = x + dx;
@@ -94,7 +99,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
                 autotileGroup,
                 config
               );
-              if (neighborTile && neighborTile.tileId === existingTile.tileId) {
+              if (neighborTile) {
                 bitmask |= mask;
               }
             }
@@ -112,7 +117,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
               finalTileId = validTileIds[0];
             }
           }
-        } else if (newTileDef.autotile) {
+        } else if (isAutotileRep && newTileDef.autotile) {
           // --- Probabilistic placement logic for new tiles ---
           const autotileGroup = newTileDef.autotile.group;
           const groupLookup = autotileLookup.get(autotileGroup);
@@ -134,7 +139,11 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           x,
           y,
           autotileLookup,
-          config
+          config,
+          {
+            mode: isAutotileRep ? "best-fit" : "strict",
+            updateCenterTile: isAutotileRep,
+          }
         );
 
         return { ...state, placedTiles: finalPlacedTiles };
@@ -158,7 +167,11 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           x,
           y,
           autotileLookup,
-          config
+          config,
+          {
+            mode: "best-fit",
+            updateCenterTile: true,
+          }
         );
 
         return { ...state, placedTiles: finalPlacedTiles };
@@ -208,9 +221,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         }
   );
 
-  const [selectedTile, rawSetSelectedTile] = useState<
-    TileDefinition | undefined
-  >();
+  const [selectedTile, rawSetSelectedTile] = useState<SelectedTile>();
   const [selectedTool, rawSetSelectedTool] = useState<Tool>("drag");
   const [camera, rawSetCamera] = useState<Camera>({ x: 0, y: 0, zoom: 1 });
   const [mouse, setMouse] = useState<Mouse | null>(null);
@@ -248,9 +259,9 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
     rawSetSelectedTool(newTool);
     if (onToolSelect) onToolSelect(newTool);
   };
-  const setSelectedTile = (newTile?: TileDefinition) => {
+  const setSelectedTile = (newTile?: SelectedTile) => {
     rawSetSelectedTile(newTile);
-    if (onTileSelect) onTileSelect(newTile);
+    if (onTileSelect) onTileSelect(newTile?.definition);
   };
 
   useEffect(() => {
@@ -294,17 +305,12 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
     }
   }, [config]);
 
-  const handleSelectTile = (tile?: TileDefinition) => {
-    if (!tile) {
-      setSelectedTile(undefined);
-      return;
-    }
-
+  const handleSelectTile = (tile: TileDefinition, isAutotileRep: boolean) => {
     if (tile.type === "background") {
       dispatchAndNotify({ type: "SET_BACKGROUND", payload: tile.displayName });
       setSelectedTile(undefined);
     } else {
-      setSelectedTile(tile);
+      setSelectedTile({ definition: tile, isAutotileRep });
       if (selectedTool !== "drag") {
         setSelectedTool("place");
       }
@@ -337,8 +343,9 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           payload: {
             x: gridX,
             y: gridY,
-            tileId: selectedTile.displayName,
+            tileId: selectedTile.definition.displayName,
             source: "local",
+            isAutotileRep: selectedTile.isAutotileRep,
           },
         });
       } else if (selectedTool === "erase") {
@@ -390,7 +397,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           state: { ...state, tileToReplace },
           dispatch: dispatchAndNotify,
           selectedTile,
-          setSelectedTile: handleSelectTile,
+          setSelectedTile: rawSetSelectedTile,
           selectedTool,
           setSelectedTool,
           camera,
@@ -410,7 +417,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
             <Canvas />
             <Toolbar />
           </div>
-          <TilePalette />
+          <TilePalette onSelectTile={handleSelectTile} />
         </div>
         <CustomCursor />
       </EditorContext.Provider>

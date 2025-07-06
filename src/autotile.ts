@@ -73,6 +73,13 @@ const countSetBits = (n: number): number => {
   return count;
 };
 
+export const getStrictlyValidTileIds = (
+  groupLookup: Map<number, string[]>,
+  bitmask: number
+): string[] | undefined => {
+  return groupLookup.get(bitmask);
+};
+
 export const getBestFitTileIds = (
   groupLookup: Map<number, string[]>,
   bitmask: number
@@ -149,7 +156,11 @@ export const updateSurroundingTiles = (
   x: number,
   y: number,
   autotileLookup: AutotileLookup,
-  config: TileConfig
+  config: TileConfig,
+  options: {
+    mode: "best-fit" | "strict";
+    updateCenterTile: boolean;
+  }
 ): PlacedTiles => {
   const newPlacedTiles = new Map(
     [...placedTiles].map(([key, value]) => [key, new Map(value)])
@@ -201,6 +212,11 @@ export const updateSurroundingTiles = (
     }
 
     const [cx, cy] = queue.shift()!;
+    const isCenterTile = cx === x && cy === y;
+
+    if (isCenterTile && !options.updateCenterTile) {
+      continue;
+    }
 
     for (const autotileGroup of autotileGroupsAtXY) {
       const groupLookup = autotileLookup.get(autotileGroup);
@@ -228,7 +244,10 @@ export const updateSurroundingTiles = (
         config
       );
 
-      const validTileIds = getBestFitTileIds(groupLookup, bitmask);
+      const validTileIds =
+        options.mode === "best-fit"
+          ? getBestFitTileIds(groupLookup, bitmask)
+          : getStrictlyValidTileIds(groupLookup, bitmask);
 
       if (
         currentTile &&
