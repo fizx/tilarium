@@ -90,9 +90,11 @@ export const getStrictlyValidTileIds = (
   groupLookup: Map<number, string[]>,
   bitmask: number
 ): string[] | undefined => {
+  console.log(`[autotile] Getting strictly valid tile for bitmask: ${bitmask}`);
   // 1. Exact match
   const primaryIds = groupLookup.get(bitmask);
   if (primaryIds && primaryIds.length > 0) {
+    console.log(`[autotile]   > Found exact match:`, primaryIds);
     return primaryIds;
   }
 
@@ -107,12 +109,18 @@ export const getStrictlyValidTileIds = (
       const bestBitCount = countSetBits(bestMatchMask);
 
       if (currentBitCount > bestBitCount) {
+        console.log(
+          `[autotile]   > New best partial match (more bits): rule ${ruleBitmask} > ${bestMatchMask}`
+        );
         bestMatchMask = ruleBitmask;
         bestMatchIds = tileIds;
         bestMatchPriority = getRulePriority(ruleBitmask);
       } else if (currentBitCount === bestBitCount) {
         const currentPriority = getRulePriority(ruleBitmask);
         if (currentPriority > bestMatchPriority) {
+          console.log(
+            `[autotile]   > New best partial match (higher priority): rule ${ruleBitmask} > ${bestMatchMask}`
+          );
           bestMatchMask = ruleBitmask;
           bestMatchIds = tileIds;
           bestMatchPriority = currentPriority;
@@ -122,6 +130,10 @@ export const getStrictlyValidTileIds = (
   }
 
   if (bestMatchIds) {
+    console.log(
+      `[autotile]   > Found best partial match with rule ${bestMatchMask}:`,
+      bestMatchIds
+    );
     return bestMatchIds;
   }
 
@@ -137,26 +149,41 @@ export const getStrictlyValidTileIds = (
     const bestBitCount = countSetBits(bestFallbackMask);
 
     if (missingNeighbors < minMissingNeighbors) {
+      console.log(
+        `[autotile]   > New best fallback (fewer missing): rule ${ruleBitmask}`
+      );
       minMissingNeighbors = missingNeighbors;
       bestFallbackMask = ruleBitmask;
       fallbackIds = tileIds;
       bestFallbackPriority = getRulePriority(ruleBitmask);
     } else if (missingNeighbors === minMissingNeighbors) {
       if (currentBitCount > bestBitCount) {
+        console.log(
+          `[autotile]   > New best fallback (more bits): rule ${ruleBitmask} > ${bestFallbackMask}`
+        );
         bestFallbackMask = ruleBitmask;
         fallbackIds = tileIds;
         bestFallbackPriority = getRulePriority(ruleBitmask);
       } else if (currentBitCount === bestBitCount) {
         const currentPriority = getRulePriority(ruleBitmask);
         if (currentPriority > bestFallbackPriority) {
+          console.log(
+            `[autotile]   > New best fallback (higher priority): rule ${ruleBitmask} > ${bestFallbackMask}`
+          );
           bestFallbackMask = ruleBitmask;
           fallbackIds = tileIds;
-          bestFallbackPriority = currentPriority;
+          bestFallbackPriority = getRulePriority(ruleBitmask);
         }
       }
     }
   }
 
+  if (fallbackIds) {
+    console.log(
+      `[autotile]   > Found best fallback match with rule ${bestFallbackMask}:`,
+      fallbackIds
+    );
+  }
   return fallbackIds;
 };
 
@@ -164,9 +191,11 @@ export const getBestFitTileIds = (
   groupLookup: Map<number, string[]>,
   bitmask: number
 ): string[] | undefined => {
+  console.log(`[autotile] Getting best fit tile for bitmask: ${bitmask}`);
   // 1. Exact match
   const primaryIds = groupLookup.get(bitmask);
   if (primaryIds && primaryIds.length > 0) {
+    console.log(`[autotile]   > Found exact match:`, primaryIds);
     return primaryIds;
   }
 
@@ -181,12 +210,18 @@ export const getBestFitTileIds = (
       const bestBitCount = countSetBits(bestMatchMask);
 
       if (currentBitCount > bestBitCount) {
+        console.log(
+          `[autotile]   > New best partial match (more bits): rule ${ruleBitmask} > ${bestMatchMask}`
+        );
         bestMatchMask = ruleBitmask;
         bestMatchIds = tileIds;
         bestMatchPriority = getRulePriority(ruleBitmask);
       } else if (currentBitCount === bestBitCount) {
         const currentPriority = getRulePriority(ruleBitmask);
         if (currentPriority > bestMatchPriority) {
+          console.log(
+            `[autotile]   > New best partial match (higher priority): rule ${ruleBitmask} > ${bestMatchMask}`
+          );
           bestMatchMask = ruleBitmask;
           bestMatchIds = tileIds;
           bestMatchPriority = currentPriority;
@@ -196,6 +231,10 @@ export const getBestFitTileIds = (
   }
 
   if (bestMatchIds) {
+    console.log(
+      `[autotile]   > Found best partial match with rule ${bestMatchMask}:`,
+      bestMatchIds
+    );
     return bestMatchIds;
   }
 
@@ -211,26 +250,41 @@ export const getBestFitTileIds = (
     const bestBitCount = countSetBits(bestFallbackMask);
 
     if (missingNeighbors < minMissingNeighbors) {
+      console.log(
+        `[autotile]   > New best fallback (fewer missing): rule ${ruleBitmask}`
+      );
       minMissingNeighbors = missingNeighbors;
       bestFallbackMask = ruleBitmask;
       fallbackIds = tileIds;
       bestFallbackPriority = getRulePriority(ruleBitmask);
     } else if (missingNeighbors === minMissingNeighbors) {
       if (currentBitCount > bestBitCount) {
+        console.log(
+          `[autotile]   > New best fallback (more bits): rule ${ruleBitmask} > ${bestFallbackMask}`
+        );
         bestFallbackMask = ruleBitmask;
         fallbackIds = tileIds;
         bestFallbackPriority = getRulePriority(ruleBitmask);
       } else if (currentBitCount === bestBitCount) {
         const currentPriority = getRulePriority(ruleBitmask);
         if (currentPriority > bestFallbackPriority) {
+          console.log(
+            `[autotile]   > New best fallback (higher priority): rule ${ruleBitmask} > ${bestFallbackMask}`
+          );
           bestFallbackMask = ruleBitmask;
           fallbackIds = tileIds;
-          bestFallbackPriority = currentPriority;
+          bestFallbackPriority = getRulePriority(ruleBitmask);
         }
       }
     }
   }
 
+  if (fallbackIds) {
+    console.log(
+      `[autotile]   > Found best fallback match with rule ${bestFallbackMask}:`,
+      fallbackIds
+    );
+  }
   return fallbackIds;
 };
 
@@ -342,6 +396,10 @@ export const updateSurroundingTiles = (
 
   let iteration = 0;
   const maxIterations = 1000;
+  console.log(
+    `Autotile update started at ${x},${y} for groups:`,
+    autotileGroupsAtXY
+  );
 
   while (queue.length > 0) {
     iteration++;
@@ -387,7 +445,10 @@ export const updateSurroundingTiles = (
         !validTileIds.includes(currentTile.tileId)
       ) {
         // The current tile is no longer valid, so we need to replace it with the default for this bitmask
-        const newTileId = chooseTileVariant(validTileIds);
+        const newTileId = validTileIds[0];
+        console.log(
+          `Updating tile at ${cx},${cy} for group ${autotileGroup}. Bitmask: ${bitmask}. Old: ${currentTile.tileId}, New: ${newTileId}`
+        );
         const newTileDef = config.tiles[newTileId];
         currentCell!.set(newTileDef.zIndex, {
           ...currentTile,
@@ -407,5 +468,6 @@ export const updateSurroundingTiles = (
     }
   }
 
+  console.log("Autotile update finished.");
   return newPlacedTiles;
 };

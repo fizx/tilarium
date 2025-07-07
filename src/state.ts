@@ -15,6 +15,7 @@ export interface TilemapState {
   placedTiles: PlacedTiles;
   tileToReplace: PlacedTile | null;
   backgroundTileId: string | null;
+  sourceOfChange?: "local" | "remote" | "load";
 }
 
 export interface AddTileAction {

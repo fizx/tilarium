@@ -69,7 +69,11 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
       case "APPLY_DELTA": {
         const delta = action.payload as TilemapDelta;
         const newPlacedTiles = applyDelta(state.placedTiles, delta, "remote");
-        return { ...state, placedTiles: newPlacedTiles };
+        return {
+          ...state,
+          placedTiles: newPlacedTiles,
+          sourceOfChange: "remote",
+        };
       }
       case "ADD_TILE": {
         const { x, y, tileId, source, isAutotileRep } = action.payload;
@@ -161,7 +165,11 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           }
         );
 
-        return { ...state, placedTiles: finalPlacedTiles };
+        return {
+          ...state,
+          placedTiles: finalPlacedTiles,
+          sourceOfChange: "local",
+        };
       }
       case "REMOVE_TILE": {
         const { x, y, tileId, source } = action.payload;
@@ -189,12 +197,17 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           }
         );
 
-        return { ...state, placedTiles: finalPlacedTiles };
+        return {
+          ...state,
+          placedTiles: finalPlacedTiles,
+          sourceOfChange: "local",
+        };
       }
       case "SET_BACKGROUND":
         return {
           ...state,
           backgroundTileId: action.payload,
+          sourceOfChange: "local",
         };
       case "LOAD_STATE": {
         const loadedState = action.payload;
@@ -213,9 +226,13 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
                 .set(tileDef.zIndex, { ...tile, source: "initial" });
             }
           }
-          return { ...loadedState, placedTiles: placedTilesMap };
+          return {
+            ...loadedState,
+            placedTiles: placedTilesMap,
+            sourceOfChange: "load",
+          };
         }
-        return loadedState;
+        return { ...loadedState, sourceOfChange: "load" };
       }
       default:
         return state;
@@ -246,52 +263,36 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   const canvasRef = useRef<HTMLDivElement>(null);
   const isReady = useRef(false);
   const actionsRef = useRef<EditorActions | null>(null);
-  const stateRef = useRef(state);
+  const previousStateRef = useRef<TilemapState>(state);
   const lastPaintedCell = useRef<{ x: number; y: number } | null>(null);
-  stateRef.current = state;
 
-  const dispatchRemote = useCallback((action: TilemapAction) => {
-    dispatch(action);
-  }, []);
+  useEffect(() => {
+    // This runs after every render, so `state` is guaranteed to be up-to-date.
+    const beforeState = previousStateRef.current;
+    const afterState = state;
 
-  // Wrapped dispatch to notify of state changes
-  const dispatchAndNotify = useCallback(
-    (action: TilemapAction) => {
-      const beforeState = stateRef.current;
-      const afterState = reducer(beforeState, action);
-      dispatch(action);
-
-      if (onStateChange && isReady.current) {
-        const delta = createDelta(
-          beforeState.placedTiles,
-          afterState.placedTiles
-        );
-        if (Object.keys(delta).length > 0) {
-          onStateChange(delta);
-        }
+    if (
+      onStateChange &&
+      isReady.current &&
+      afterState.sourceOfChange === "local"
+    ) {
+      const delta = createDelta(
+        beforeState.placedTiles,
+        afterState.placedTiles
+      );
+      if (Object.keys(delta).length > 0) {
+        onStateChange(delta);
       }
-    },
-    [onStateChange]
-  );
+    }
 
-  // Wrapped state setters to fire hooks
-  const setCamera = (newCamera: Camera) => {
-    rawSetCamera(newCamera);
-    if (onCameraChange) onCameraChange(newCamera);
-  };
-  const setSelectedTool = (newTool: Tool) => {
-    rawSetSelectedTool(newTool);
-    if (onToolSelect) onToolSelect(newTool);
-  };
-  const setSelectedTile = (newTile?: SelectedTile) => {
-    rawSetSelectedTile(newTile);
-    if (onTileSelect) onTileSelect(newTile?.definition);
-  };
+    // Update the previous state for the next render.
+    previousStateRef.current = state;
+  }, [state, onStateChange]);
 
   useEffect(() => {
     if (onReady) {
       onReady({
-        getState: () => stateRef.current,
+        getState: () => state,
         loadState: (stateOrDelta: TilemapState | TilemapAction) => {
           const action =
             "type" in stateOrDelta && stateOrDelta.type
@@ -300,7 +301,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
                   type: "LOAD_STATE",
                   payload: stateOrDelta,
                 } as TilemapAction);
-          dispatchAndNotify(action);
+          dispatch(action);
         },
         applyRemoteDelta: (delta: TilemapDelta) => {
           console.log("[client] Received remote delta:", delta);
@@ -312,7 +313,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
             return;
           }
 
-          dispatchRemote({
+          dispatch({
             type: "APPLY_DELTA",
             payload: delta,
           } as TilemapAction);
@@ -320,7 +321,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
       });
     }
     isReady.current = true;
-  }, [onReady, dispatchAndNotify, dispatchRemote]);
+  }, [onReady, dispatch]);
 
   useEffect(() => {
     if (canvasRef.current && config.mapSize !== "infinite") {
@@ -328,7 +329,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
       const zoom = 1;
       const mapWidth = config.mapSize.width * config.gridSize * zoom;
       const mapHeight = config.mapSize.height * config.gridSize * zoom;
-      setCamera({
+      rawSetCamera({
         zoom,
         x: (canvasRect.width - mapWidth) / 2,
         y: (canvasRect.height - mapHeight) / 2,
@@ -338,12 +339,12 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
 
   const handleSelectTile = (tile: TileDefinition, isAutotileRep: boolean) => {
     if (tile.type === "background") {
-      dispatchAndNotify({ type: "SET_BACKGROUND", payload: tile.displayName });
-      setSelectedTile(undefined);
+      dispatch({ type: "SET_BACKGROUND", payload: tile.displayName });
+      rawSetSelectedTile(undefined);
     } else {
-      setSelectedTile({ definition: tile, isAutotileRep });
+      rawSetSelectedTile({ definition: tile, isAutotileRep });
       if (selectedTool !== "drag") {
-        setSelectedTool("place");
+        rawSetSelectedTool("place");
       }
     }
   };
@@ -369,7 +370,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
       }
 
       if (selectedTool === "place" && selectedTile) {
-        dispatchAndNotify({
+        dispatch({
           type: "ADD_TILE",
           payload: {
             x: gridX,
@@ -381,7 +382,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         });
       } else if (selectedTool === "erase") {
         const key = `${gridX}-${gridY}`;
-        const cell = stateRef.current.placedTiles.get(key);
+        const cell = state.placedTiles.get(key);
         if (!cell) return;
 
         const tilesAtLocation = [...cell.values()].filter(
@@ -405,13 +406,13 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
               source: "local" as const,
             },
           };
-          dispatchAndNotify(action);
+          dispatch(action);
         }
       }
 
       lastPaintedCell.current = { x: gridX, y: gridY };
     },
-    [dispatchAndNotify, selectedTile, selectedTool, config.mapSize]
+    [dispatch, selectedTile, selectedTool, config.mapSize]
   );
 
   return (
@@ -426,13 +427,13 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         value={{
           config,
           state: { ...state, tileToReplace },
-          dispatch: dispatchAndNotify,
+          dispatch,
           selectedTile,
           setSelectedTile: rawSetSelectedTile,
           selectedTool,
-          setSelectedTool,
+          setSelectedTool: rawSetSelectedTool,
           camera,
-          setCamera,
+          setCamera: rawSetCamera,
           canvasRef,
           mouse,
           setMouse,
