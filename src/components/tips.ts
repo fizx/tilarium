@@ -1,5 +1,6 @@
 export const tips = [
-  "Create natural-looking terrain by using autotiling tiles. Just select a tile and start painting, and they'll automatically connect!",
+  "Magic tiles with an animated border use autotiling to create natural-looking terrain. Just select one and start painting!",
+  "For more control, look for tiles to the right of the magic autotiling ones. These let you place tiles individually without automatic connections.",
   "Some tiles have variants! If you place a tile and want to see a different version, just click on it again with the place tool to cycle through its variations.",
   "You can create depth in your maps by layering tiles. For example, you can place a path tile over a grass tile.",
   "Use the hand tool (🖐️) to move your view of the map without accidentally placing or removing tiles.",
