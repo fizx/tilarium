@@ -137,8 +137,12 @@ const getGroupKey = (name: string): string => {
   if (name.startsWith("character")) return "Characters";
   if (name.startsWith("enemy") || name.startsWith("slime")) return "Enemies";
   if (name.startsWith("hud_")) return "HUD";
-  if (name.startsWith("background")) return "backgrounds";
+  if (name.startsWith("background")) {
+    console.log(`[getGroupKey] Assigning "backgrounds" to ${name}`);
+    return "backgrounds";
+  }
 
+  console.log(`[getGroupKey] Assigning "Misc" to ${name}`);
   return "Misc";
 };
 
@@ -176,6 +180,9 @@ const nameSuffixToNeighbors: Record<string, string> = {
   vertical_top: "S",
   vertical_middle: "NS",
   vertical_bottom: "N",
+  cloud_left: "E",
+  cloud_middle: "WE",
+  cloud_right: "W",
 };
 
 const inputFiles = inputPatterns.flatMap((pattern) => glob.sync(pattern));
@@ -195,6 +202,7 @@ for (const inputFile of inputFiles) {
     const groupKey = getGroupKey(name);
 
     if (!tileConfig.groups[groupKey]) {
+      console.log(`[Main Loop] Creating new group: ${groupKey}`);
       tileConfig.groups[groupKey] = {
         displayName: groupKey,
         tileIds: [],
@@ -223,17 +231,34 @@ for (const inputFile of inputFiles) {
         },
       };
 
-      const match = name.match(/terrain_(?<group>\w+)_(?<variant>.*)/);
-      if (match?.groups) {
-        const { group, variant } = match.groups;
+      const terrainMatch = name.match(/terrain_(?<group>[^_]+)_(?<variant>.+)/);
+      if (terrainMatch?.groups) {
+        console.log(`[Main Loop] Found terrain tile: ${name}`);
+        const { group, variant } = terrainMatch.groups;
         const neighbors = nameSuffixToNeighbors[variant];
         if (neighbors) {
+          console.log(
+            `[Main Loop] Assigning autotile property to ${name} with group ${group}`
+          );
           (tileDefinition as any).autotile = {
             group,
             neighbors,
           };
-          if (!tileConfig.groups[groupKey].autotileGroups.includes(group)) {
-            tileConfig.groups[groupKey].autotileGroups.push(group);
+          if (!tileConfig.groups["Terrain"]) {
+            console.error(
+              "[Main Loop] CRITICAL: 'Terrain' group does not exist when trying to add autotile group."
+            );
+          } else {
+            if (!tileConfig.groups["Terrain"].autotileGroups.includes(group)) {
+              console.log(
+                `[Main Loop] Adding autotile group '${group}' to Terrain tab.`
+              );
+              tileConfig.groups["Terrain"].autotileGroups.push(group);
+            } else {
+              console.log(
+                `[Main Loop] Autotile group '${group}' already exists in Terrain tab.`
+              );
+            }
           }
         }
       }

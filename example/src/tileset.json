@@ -3111,6 +3111,10 @@
         "y": 832,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "NWE"
       }
     },
     "terrain_dirt_block_bottom_left": {
@@ -3123,6 +3127,10 @@
         "y": 768,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "NE"
       }
     },
     "terrain_dirt_block_bottom_right": {
@@ -3135,6 +3143,10 @@
         "y": 704,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "NW"
       }
     },
     "terrain_dirt_block_center": {
@@ -3147,6 +3159,10 @@
         "y": 640,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "NSWE"
       }
     },
     "terrain_dirt_block_left": {
@@ -3159,6 +3175,10 @@
         "y": 576,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "NSE"
       }
     },
     "terrain_dirt_block_right": {
@@ -3171,6 +3191,10 @@
         "y": 512,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "NSW"
       }
     },
     "terrain_dirt_block_top": {
@@ -3183,6 +3207,10 @@
         "y": 448,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "SWE"
       }
     },
     "terrain_dirt_block_top_left": {
@@ -3195,6 +3223,10 @@
         "y": 384,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "SE"
       }
     },
     "terrain_dirt_block_top_right": {
@@ -3207,6 +3239,10 @@
         "y": 320,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "SW"
       }
     },
     "terrain_dirt_cloud": {
@@ -3243,6 +3279,10 @@
         "y": 128,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "E"
       }
     },
     "terrain_dirt_cloud_middle": {
@@ -3255,6 +3295,10 @@
         "y": 64,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "WE"
       }
     },
     "terrain_dirt_cloud_right": {
@@ -3267,6 +3311,10 @@
         "y": 0,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "W"
       }
     },
     "terrain_dirt_horizontal_left": {
@@ -3279,6 +3327,10 @@
         "y": 1088,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "E"
       }
     },
     "terrain_dirt_horizontal_middle": {
@@ -3291,6 +3343,10 @@
         "y": 1024,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "WE"
       }
     },
     "terrain_dirt_horizontal_overhang_left": {
@@ -3327,6 +3383,10 @@
         "y": 832,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "W"
       }
     },
     "terrain_dirt_ramp_long_a": {
@@ -3399,6 +3459,10 @@
         "y": 448,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "N"
       }
     },
     "terrain_dirt_vertical_middle": {
@@ -3411,6 +3475,10 @@
         "y": 384,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "NS"
       }
     },
     "terrain_dirt_vertical_top": {
@@ -3423,6 +3491,10 @@
         "y": 320,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "S"
       }
     },
     "terrain_grass_block": {
@@ -3447,6 +3519,10 @@
         "y": 192,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "grass",
+        "neighbors": "NWE"
       }
     },
     "terrain_grass_block_bottom_left": {
@@ -3459,6 +3535,10 @@
         "y": 128,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "grass",
+        "neighbors": "NE"
       }
     },
     "terrain_grass_block_bottom_right": {
@@ -3471,6 +3551,10 @@
         "y": 64,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "grass",
+        "neighbors": "NW"
       }
     },
     "terrain_grass_block_center": {
@@ -3483,6 +3567,10 @@
         "y": 0,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "grass",
+        "neighbors": "NSWE"
       }
     },
     "terrain_grass_block_left": {
@@ -3495,6 +3583,10 @@
         "y": 1088,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "grass",
+        "neighbors": "NSE"
       }
     },
     "terrain_grass_block_right": {
@@ -3507,6 +3599,10 @@
         "y": 1024,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "grass",
+        "neighbors": "NSW"
       }
     },
     "terrain_grass_block_top": {
@@ -3519,6 +3615,10 @@
         "y": 960,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "grass",
+        "neighbors": "SWE"
       }
     },
     "terrain_grass_block_top_left": {
@@ -3531,6 +3631,10 @@
         "y": 896,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "grass",
+        "neighbors": "SE"
       }
     },
     "terrain_grass_block_top_right": {
@@ -3543,6 +3647,10 @@
         "y": 832,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "grass",
+        "neighbors": "SW"
       }
     },
     "terrain_grass_cloud": {
@@ -3579,6 +3687,10 @@
         "y": 640,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "grass",
+        "neighbors": "E"
       }
     },
     "terrain_grass_cloud_middle": {
@@ -3591,6 +3703,10 @@
         "y": 576,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "grass",
+        "neighbors": "WE"
       }
     },
     "terrain_grass_cloud_right": {
@@ -3603,6 +3719,10 @@
         "y": 512,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "grass",
+        "neighbors": "W"
       }
     },
     "terrain_grass_horizontal_left": {
@@ -3615,6 +3735,10 @@
         "y": 448,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "grass",
+        "neighbors": "E"
       }
     },
     "terrain_grass_horizontal_middle": {
@@ -3627,6 +3751,10 @@
         "y": 384,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "grass",
+        "neighbors": "WE"
       }
     },
     "terrain_grass_horizontal_overhang_left": {
@@ -3663,6 +3791,10 @@
         "y": 192,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "grass",
+        "neighbors": "W"
       }
     },
     "terrain_grass_ramp_long_a": {
@@ -3735,6 +3867,10 @@
         "y": 960,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "grass",
+        "neighbors": "N"
       }
     },
     "terrain_grass_vertical_middle": {
@@ -3747,6 +3883,10 @@
         "y": 896,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "grass",
+        "neighbors": "NS"
       }
     },
     "terrain_grass_vertical_top": {
@@ -3759,6 +3899,10 @@
         "y": 832,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "grass",
+        "neighbors": "S"
       }
     },
     "terrain_purple_block": {
@@ -3783,6 +3927,10 @@
         "y": 704,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "purple",
+        "neighbors": "NWE"
       }
     },
     "terrain_purple_block_bottom_left": {
@@ -3795,6 +3943,10 @@
         "y": 640,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "purple",
+        "neighbors": "NE"
       }
     },
     "terrain_purple_block_bottom_right": {
@@ -3807,6 +3959,10 @@
         "y": 576,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "purple",
+        "neighbors": "NW"
       }
     },
     "terrain_purple_block_center": {
@@ -3819,6 +3975,10 @@
         "y": 512,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "purple",
+        "neighbors": "NSWE"
       }
     },
     "terrain_purple_block_left": {
@@ -3831,6 +3991,10 @@
         "y": 448,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "purple",
+        "neighbors": "NSE"
       }
     },
     "terrain_purple_block_right": {
@@ -3843,6 +4007,10 @@
         "y": 384,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "purple",
+        "neighbors": "NSW"
       }
     },
     "terrain_purple_block_top": {
@@ -3855,6 +4023,10 @@
         "y": 320,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "purple",
+        "neighbors": "SWE"
       }
     },
     "terrain_purple_block_top_left": {
@@ -3867,6 +4039,10 @@
         "y": 256,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "purple",
+        "neighbors": "SE"
       }
     },
     "terrain_purple_block_top_right": {
@@ -3879,6 +4055,10 @@
         "y": 192,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "purple",
+        "neighbors": "SW"
       }
     },
     "terrain_purple_cloud": {
@@ -3915,6 +4095,10 @@
         "y": 0,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "purple",
+        "neighbors": "E"
       }
     },
     "terrain_purple_cloud_middle": {
@@ -3927,6 +4111,10 @@
         "y": 1088,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "purple",
+        "neighbors": "WE"
       }
     },
     "terrain_purple_cloud_right": {
@@ -3939,6 +4127,10 @@
         "y": 1024,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "purple",
+        "neighbors": "W"
       }
     },
     "terrain_purple_horizontal_left": {
@@ -3951,6 +4143,10 @@
         "y": 960,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "purple",
+        "neighbors": "E"
       }
     },
     "terrain_purple_horizontal_middle": {
@@ -3963,6 +4159,10 @@
         "y": 896,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "purple",
+        "neighbors": "WE"
       }
     },
     "terrain_purple_horizontal_overhang_left": {
@@ -3999,6 +4199,10 @@
         "y": 704,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "purple",
+        "neighbors": "W"
       }
     },
     "terrain_purple_ramp_long_a": {
@@ -4071,6 +4275,10 @@
         "y": 320,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "purple",
+        "neighbors": "N"
       }
     },
     "terrain_purple_vertical_middle": {
@@ -4083,6 +4291,10 @@
         "y": 256,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "purple",
+        "neighbors": "NS"
       }
     },
     "terrain_purple_vertical_top": {
@@ -4095,6 +4307,10 @@
         "y": 192,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "purple",
+        "neighbors": "S"
       }
     },
     "terrain_sand_block": {
@@ -4119,6 +4335,10 @@
         "y": 64,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "sand",
+        "neighbors": "NWE"
       }
     },
     "terrain_sand_block_bottom_left": {
@@ -4131,6 +4351,10 @@
         "y": 0,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "sand",
+        "neighbors": "NE"
       }
     },
     "terrain_sand_block_bottom_right": {
@@ -4143,6 +4367,10 @@
         "y": 1088,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "sand",
+        "neighbors": "NW"
       }
     },
     "terrain_sand_block_center": {
@@ -4155,6 +4383,10 @@
         "y": 1024,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "sand",
+        "neighbors": "NSWE"
       }
     },
     "terrain_sand_block_left": {
@@ -4167,6 +4399,10 @@
         "y": 960,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "sand",
+        "neighbors": "NSE"
       }
     },
     "terrain_sand_block_right": {
@@ -4179,6 +4415,10 @@
         "y": 896,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "sand",
+        "neighbors": "NSW"
       }
     },
     "terrain_sand_block_top": {
@@ -4191,6 +4431,10 @@
         "y": 832,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "sand",
+        "neighbors": "SWE"
       }
     },
     "terrain_sand_block_top_left": {
@@ -4203,6 +4447,10 @@
         "y": 768,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "sand",
+        "neighbors": "SE"
       }
     },
     "terrain_sand_block_top_right": {
@@ -4215,6 +4463,10 @@
         "y": 704,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "sand",
+        "neighbors": "SW"
       }
     },
     "terrain_sand_cloud": {
@@ -4251,6 +4503,10 @@
         "y": 512,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "sand",
+        "neighbors": "E"
       }
     },
     "terrain_sand_cloud_middle": {
@@ -4263,6 +4519,10 @@
         "y": 448,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "sand",
+        "neighbors": "WE"
       }
     },
     "terrain_sand_cloud_right": {
@@ -4275,6 +4535,10 @@
         "y": 384,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "sand",
+        "neighbors": "W"
       }
     },
     "terrain_sand_horizontal_left": {
@@ -4287,6 +4551,10 @@
         "y": 320,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "sand",
+        "neighbors": "E"
       }
     },
     "terrain_sand_horizontal_middle": {
@@ -4299,6 +4567,10 @@
         "y": 256,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "sand",
+        "neighbors": "WE"
       }
     },
     "terrain_sand_horizontal_overhang_left": {
@@ -4335,6 +4607,10 @@
         "y": 64,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "sand",
+        "neighbors": "W"
       }
     },
     "terrain_sand_ramp_long_a": {
@@ -4407,6 +4683,10 @@
         "y": 832,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "sand",
+        "neighbors": "N"
       }
     },
     "terrain_sand_vertical_middle": {
@@ -4419,6 +4699,10 @@
         "y": 768,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "sand",
+        "neighbors": "NS"
       }
     },
     "terrain_sand_vertical_top": {
@@ -4431,6 +4715,10 @@
         "y": 704,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "sand",
+        "neighbors": "S"
       }
     },
     "terrain_snow_block": {
@@ -4455,6 +4743,10 @@
         "y": 576,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "snow",
+        "neighbors": "NWE"
       }
     },
     "terrain_snow_block_bottom_left": {
@@ -4467,6 +4759,10 @@
         "y": 512,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "snow",
+        "neighbors": "NE"
       }
     },
     "terrain_snow_block_bottom_right": {
@@ -4479,6 +4775,10 @@
         "y": 448,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "snow",
+        "neighbors": "NW"
       }
     },
     "terrain_snow_block_center": {
@@ -4491,6 +4791,10 @@
         "y": 384,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "snow",
+        "neighbors": "NSWE"
       }
     },
     "terrain_snow_block_left": {
@@ -4503,6 +4807,10 @@
         "y": 320,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "snow",
+        "neighbors": "NSE"
       }
     },
     "terrain_snow_block_right": {
@@ -4515,6 +4823,10 @@
         "y": 256,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "snow",
+        "neighbors": "NSW"
       }
     },
     "terrain_snow_block_top": {
@@ -4527,6 +4839,10 @@
         "y": 192,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "snow",
+        "neighbors": "SWE"
       }
     },
     "terrain_snow_block_top_left": {
@@ -4539,6 +4855,10 @@
         "y": 128,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "snow",
+        "neighbors": "SE"
       }
     },
     "terrain_snow_block_top_right": {
@@ -4551,6 +4871,10 @@
         "y": 64,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "snow",
+        "neighbors": "SW"
       }
     },
     "terrain_snow_cloud": {
@@ -4587,6 +4911,10 @@
         "y": 1024,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "snow",
+        "neighbors": "E"
       }
     },
     "terrain_snow_cloud_middle": {
@@ -4599,6 +4927,10 @@
         "y": 960,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "snow",
+        "neighbors": "WE"
       }
     },
     "terrain_snow_cloud_right": {
@@ -4611,6 +4943,10 @@
         "y": 896,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "snow",
+        "neighbors": "W"
       }
     },
     "terrain_snow_horizontal_left": {
@@ -4623,6 +4959,10 @@
         "y": 832,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "snow",
+        "neighbors": "E"
       }
     },
     "terrain_snow_horizontal_middle": {
@@ -4635,6 +4975,10 @@
         "y": 768,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "snow",
+        "neighbors": "WE"
       }
     },
     "terrain_snow_horizontal_overhang_left": {
@@ -4671,6 +5015,10 @@
         "y": 576,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "snow",
+        "neighbors": "W"
       }
     },
     "terrain_snow_ramp_long_a": {
@@ -4743,6 +5091,10 @@
         "y": 192,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "snow",
+        "neighbors": "N"
       }
     },
     "terrain_snow_vertical_middle": {
@@ -4755,6 +5107,10 @@
         "y": 128,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "snow",
+        "neighbors": "NS"
       }
     },
     "terrain_snow_vertical_top": {
@@ -4767,6 +5123,10 @@
         "y": 64,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "snow",
+        "neighbors": "S"
       }
     },
     "terrain_stone_block": {
@@ -4791,6 +5151,10 @@
         "y": 1088,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "stone",
+        "neighbors": "NWE"
       }
     },
     "terrain_stone_block_bottom_left": {
@@ -4803,6 +5167,10 @@
         "y": 1024,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "stone",
+        "neighbors": "NE"
       }
     },
     "terrain_stone_block_bottom_right": {
@@ -4815,6 +5183,10 @@
         "y": 960,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "stone",
+        "neighbors": "NW"
       }
     },
     "terrain_stone_block_center": {
@@ -4827,6 +5199,10 @@
         "y": 896,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "stone",
+        "neighbors": "NSWE"
       }
     },
     "terrain_stone_block_left": {
@@ -4839,6 +5215,10 @@
         "y": 832,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "stone",
+        "neighbors": "NSE"
       }
     },
     "terrain_stone_block_right": {
@@ -4851,6 +5231,10 @@
         "y": 768,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "stone",
+        "neighbors": "NSW"
       }
     },
     "terrain_stone_block_top": {
@@ -4863,6 +5247,10 @@
         "y": 704,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "stone",
+        "neighbors": "SWE"
       }
     },
     "terrain_stone_block_top_left": {
@@ -4875,6 +5263,10 @@
         "y": 640,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "stone",
+        "neighbors": "SE"
       }
     },
     "terrain_stone_block_top_right": {
@@ -4887,6 +5279,10 @@
         "y": 576,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "stone",
+        "neighbors": "SW"
       }
     },
     "terrain_stone_cloud": {
@@ -4923,6 +5319,10 @@
         "y": 384,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "stone",
+        "neighbors": "E"
       }
     },
     "terrain_stone_cloud_middle": {
@@ -4935,6 +5335,10 @@
         "y": 320,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "stone",
+        "neighbors": "WE"
       }
     },
     "terrain_stone_cloud_right": {
@@ -4947,6 +5351,10 @@
         "y": 256,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "stone",
+        "neighbors": "W"
       }
     },
     "terrain_stone_horizontal_left": {
@@ -4959,6 +5367,10 @@
         "y": 192,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "stone",
+        "neighbors": "E"
       }
     },
     "terrain_stone_horizontal_middle": {
@@ -4971,6 +5383,10 @@
         "y": 128,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "stone",
+        "neighbors": "WE"
       }
     },
     "terrain_stone_horizontal_overhang_left": {
@@ -5007,6 +5423,10 @@
         "y": 1088,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "stone",
+        "neighbors": "W"
       }
     },
     "terrain_stone_ramp_long_a": {
@@ -5079,6 +5499,10 @@
         "y": 704,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "stone",
+        "neighbors": "N"
       }
     },
     "terrain_stone_vertical_middle": {
@@ -5091,6 +5515,10 @@
         "y": 640,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "stone",
+        "neighbors": "NS"
       }
     },
     "terrain_stone_vertical_top": {
@@ -5103,6 +5531,10 @@
         "y": 576,
         "width": 64,
         "height": 64
+      },
+      "autotile": {
+        "group": "stone",
+        "neighbors": "S"
       }
     },
     "torch_off": {
@@ -5700,7 +6132,14 @@
         "terrain_stone_vertical_middle",
         "terrain_stone_vertical_top"
       ],
-      "autotileGroups": []
+      "autotileGroups": [
+        "dirt",
+        "grass",
+        "purple",
+        "sand",
+        "snow",
+        "stone"
+      ]
     }
   },
   "defaultZoom": 0.5
