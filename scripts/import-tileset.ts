@@ -154,7 +154,7 @@ if (!outputFile || inputPatterns.length === 0) {
 
 const tileConfig: TileConfig = {
   gridSize: 32,
-  mapSize: "infinite",
+  mapSize: { width: 32, height: 32 },
   tiles: {},
   groups: {},
   defaultZoom: 0.5,

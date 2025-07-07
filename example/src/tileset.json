@@ -1,6 +1,9 @@
 {
   "gridSize": 32,
-  "mapSize": "infinite",
+  "mapSize": {
+    "width": 32,
+    "height": 32
+  },
   "tiles": {
     "background_clouds": {
       "displayName": "background_clouds",
