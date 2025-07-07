@@ -29,19 +29,19 @@ import {
 } from "./autotile";
 import "./TilemapEditor.css";
 import { HelpModal } from "./components/HelpModal";
-import { PlacedTilesDelta, diffPlacedTiles } from "./delta";
+import { TilemapDelta, createDelta, applyDelta } from "./delta";
 
 export interface EditorActions {
   getState: () => TilemapState;
   loadState: (stateOrDelta: TilemapState | TilemapAction) => void;
-  applyRemoteDelta: (delta: PlacedTilesDelta) => void;
+  applyRemoteDelta: (delta: TilemapDelta) => void;
 }
 
 export interface TilemapEditorProps {
   config: TileConfig;
   initialState?: TilemapState;
   onReady?: (actions: EditorActions) => void;
-  onStateChange?: (delta: PlacedTilesDelta) => void;
+  onStateChange?: (delta: TilemapDelta) => void;
   onCameraChange?: (camera: Camera) => void;
   onToolSelect?: (tool: Tool) => void;
   onTileSelect?: (tile?: TileDefinition) => void;
@@ -66,39 +66,8 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   ): TilemapState => {
     switch (action.type) {
       case "APPLY_DELTA": {
-        const delta = action.payload as PlacedTilesDelta;
-
-        if (
-          !delta ||
-          !Array.isArray(delta.added) ||
-          !Array.isArray(delta.removed)
-        ) {
-          console.warn("Received invalid delta format, ignoring.", delta);
-          return state;
-        }
-
-        const newPlacedTiles = new Map(state.placedTiles);
-
-        for (const { x, y, tileId } of delta.removed) {
-          const tileDef = config.tiles[tileId];
-          if (!tileDef) continue;
-          const key = `${x}-${y}`;
-          const cell = new Map(newPlacedTiles.get(key));
-          if (cell.get(tileDef.zIndex)?.tileId === tileId) {
-            cell.set(tileDef.zIndex, null);
-            newPlacedTiles.set(key, cell);
-          }
-        }
-
-        for (const tile of delta.added) {
-          const tileDef = config.tiles[tile.tileId];
-          if (!tileDef) continue;
-          const key = `${tile.x}-${tile.y}`;
-          const cell = new Map(newPlacedTiles.get(key));
-          cell.set(tileDef.zIndex, tile);
-          newPlacedTiles.set(key, cell);
-        }
-
+        const delta = action.payload as TilemapDelta;
+        const newPlacedTiles = applyDelta(state.placedTiles, delta, "remote");
         return { ...state, placedTiles: newPlacedTiles };
       }
       case "ADD_TILE": {
@@ -118,6 +87,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
 
         // Check if this is a cycle operation
         if (
+          isAutotileRep &&
           existingTile &&
           existingTileDef?.autotile &&
           newTileDef.autotile &&
@@ -285,11 +255,11 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
       dispatch(action);
 
       if (onStateChange && isReady.current) {
-        const delta = diffPlacedTiles(
+        const delta = createDelta(
           beforeState.placedTiles,
           afterState.placedTiles
         );
-        if (delta.added.length > 0 || delta.removed.length > 0) {
+        if (Object.keys(delta).length > 0) {
           onStateChange(delta);
         }
       }
@@ -325,13 +295,9 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
                 } as TilemapAction);
           dispatchAndNotify(action);
         },
-        applyRemoteDelta: (delta: PlacedTilesDelta) => {
+        applyRemoteDelta: (delta: TilemapDelta) => {
           console.log("[client] Received remote delta:", delta);
-          if (
-            !delta ||
-            !Array.isArray(delta.added) ||
-            !Array.isArray(delta.removed)
-          ) {
+          if (!delta || typeof delta !== "object") {
             console.warn(
               "Received invalid delta format in applyRemoteDelta, ignoring.",
               delta
@@ -339,14 +305,9 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
             return;
           }
 
-          const remoteDelta: PlacedTilesDelta = {
-            added: delta.added.map((tile) => ({ ...tile, source: "remote" })),
-            removed: delta.removed,
-          };
-
           dispatchRemote({
             type: "APPLY_DELTA",
-            payload: remoteDelta,
+            payload: delta,
           } as TilemapAction);
         },
       });
