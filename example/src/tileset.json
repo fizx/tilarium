@@ -1,10 +1,1435 @@
 {
   "gridSize": 32,
-  "mapSize": {
-    "width": 32,
-    "height": 32
-  },
+  "mapSize": "infinite",
   "tiles": {
+    "background_clouds": {
+      "displayName": "background_clouds",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 0,
+      "type": "background",
+      "spritesheet": {
+        "x": 256,
+        "y": 512,
+        "width": 256,
+        "height": 256
+      }
+    },
+    "background_color_desert": {
+      "displayName": "background_color_desert",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 0,
+      "type": "background",
+      "spritesheet": {
+        "x": 768,
+        "y": 0,
+        "width": 256,
+        "height": 256
+      }
+    },
+    "background_color_hills": {
+      "displayName": "background_color_hills",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 0,
+      "type": "background",
+      "spritesheet": {
+        "x": 512,
+        "y": 768,
+        "width": 256,
+        "height": 256
+      }
+    },
+    "background_color_mushrooms": {
+      "displayName": "background_color_mushrooms",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 0,
+      "type": "background",
+      "spritesheet": {
+        "x": 512,
+        "y": 512,
+        "width": 256,
+        "height": 256
+      }
+    },
+    "background_color_trees": {
+      "displayName": "background_color_trees",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 0,
+      "type": "background",
+      "spritesheet": {
+        "x": 512,
+        "y": 256,
+        "width": 256,
+        "height": 256
+      }
+    },
+    "background_fade_desert": {
+      "displayName": "background_fade_desert",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 0,
+      "type": "background",
+      "spritesheet": {
+        "x": 512,
+        "y": 0,
+        "width": 256,
+        "height": 256
+      }
+    },
+    "background_fade_hills": {
+      "displayName": "background_fade_hills",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 0,
+      "type": "background",
+      "spritesheet": {
+        "x": 256,
+        "y": 768,
+        "width": 256,
+        "height": 256
+      }
+    },
+    "background_fade_mushrooms": {
+      "displayName": "background_fade_mushrooms",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 0,
+      "type": "background",
+      "spritesheet": {
+        "x": 768,
+        "y": 256,
+        "width": 256,
+        "height": 256
+      }
+    },
+    "background_fade_trees": {
+      "displayName": "background_fade_trees",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 0,
+      "type": "background",
+      "spritesheet": {
+        "x": 256,
+        "y": 256,
+        "width": 256,
+        "height": 256
+      }
+    },
+    "background_solid_cloud": {
+      "displayName": "background_solid_cloud",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 0,
+      "type": "background",
+      "spritesheet": {
+        "x": 256,
+        "y": 0,
+        "width": 256,
+        "height": 256
+      }
+    },
+    "background_solid_dirt": {
+      "displayName": "background_solid_dirt",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 0,
+      "type": "background",
+      "spritesheet": {
+        "x": 0,
+        "y": 768,
+        "width": 256,
+        "height": 256
+      }
+    },
+    "background_solid_grass": {
+      "displayName": "background_solid_grass",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 0,
+      "type": "background",
+      "spritesheet": {
+        "x": 0,
+        "y": 512,
+        "width": 256,
+        "height": 256
+      }
+    },
+    "background_solid_sand": {
+      "displayName": "background_solid_sand",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 0,
+      "type": "background",
+      "spritesheet": {
+        "x": 0,
+        "y": 256,
+        "width": 256,
+        "height": 256
+      }
+    },
+    "background_solid_sky": {
+      "displayName": "background_solid_sky",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
+      "zIndex": 0,
+      "type": "background",
+      "spritesheet": {
+        "x": 0,
+        "y": 0,
+        "width": 256,
+        "height": 256
+      }
+    },
+    "character_beige_climb_a": {
+      "displayName": "character_beige_climb_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 256,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_beige_climb_b": {
+      "displayName": "character_beige_climb_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 640,
+        "y": 384,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_beige_duck": {
+      "displayName": "character_beige_duck",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 640,
+        "y": 256,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_beige_front": {
+      "displayName": "character_beige_front",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 640,
+        "y": 128,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_beige_hit": {
+      "displayName": "character_beige_hit",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 640,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_beige_idle": {
+      "displayName": "character_beige_idle",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 512,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_beige_jump": {
+      "displayName": "character_beige_jump",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 512,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_beige_walk_a": {
+      "displayName": "character_beige_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 512,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_beige_walk_b": {
+      "displayName": "character_beige_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 512,
+        "y": 512,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_green_climb_a": {
+      "displayName": "character_green_climb_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 512,
+        "y": 384,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_green_climb_b": {
+      "displayName": "character_green_climb_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 512,
+        "y": 256,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_green_duck": {
+      "displayName": "character_green_duck",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 512,
+        "y": 128,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_green_front": {
+      "displayName": "character_green_front",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 512,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_green_hit": {
+      "displayName": "character_green_hit",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 384,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_green_idle": {
+      "displayName": "character_green_idle",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 384,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_green_jump": {
+      "displayName": "character_green_jump",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 384,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_green_walk_a": {
+      "displayName": "character_green_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 384,
+        "y": 512,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_green_walk_b": {
+      "displayName": "character_green_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 384,
+        "y": 384,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_pink_climb_a": {
+      "displayName": "character_pink_climb_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 384,
+        "y": 256,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_pink_climb_b": {
+      "displayName": "character_pink_climb_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 384,
+        "y": 128,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_pink_duck": {
+      "displayName": "character_pink_duck",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 384,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_pink_front": {
+      "displayName": "character_pink_front",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 256,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_pink_hit": {
+      "displayName": "character_pink_hit",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 640,
+        "y": 512,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_pink_idle": {
+      "displayName": "character_pink_idle",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 256,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_pink_jump": {
+      "displayName": "character_pink_jump",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 256,
+        "y": 512,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_pink_walk_a": {
+      "displayName": "character_pink_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 256,
+        "y": 384,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_pink_walk_b": {
+      "displayName": "character_pink_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 256,
+        "y": 256,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_purple_climb_a": {
+      "displayName": "character_purple_climb_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 256,
+        "y": 128,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_purple_climb_b": {
+      "displayName": "character_purple_climb_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 256,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_purple_duck": {
+      "displayName": "character_purple_duck",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 128,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_purple_front": {
+      "displayName": "character_purple_front",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 128,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_purple_hit": {
+      "displayName": "character_purple_hit",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 128,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_purple_idle": {
+      "displayName": "character_purple_idle",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 128,
+        "y": 512,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_purple_jump": {
+      "displayName": "character_purple_jump",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 128,
+        "y": 384,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_purple_walk_a": {
+      "displayName": "character_purple_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 128,
+        "y": 256,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_purple_walk_b": {
+      "displayName": "character_purple_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 128,
+        "y": 128,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_yellow_climb_a": {
+      "displayName": "character_yellow_climb_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 128,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_yellow_climb_b": {
+      "displayName": "character_yellow_climb_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 0,
+        "y": 896,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_yellow_duck": {
+      "displayName": "character_yellow_duck",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 0,
+        "y": 768,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_yellow_front": {
+      "displayName": "character_yellow_front",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 0,
+        "y": 640,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_yellow_hit": {
+      "displayName": "character_yellow_hit",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 0,
+        "y": 512,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_yellow_idle": {
+      "displayName": "character_yellow_idle",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 0,
+        "y": 384,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_yellow_jump": {
+      "displayName": "character_yellow_jump",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 0,
+        "y": 256,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_yellow_walk_a": {
+      "displayName": "character_yellow_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 0,
+        "y": 128,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "character_yellow_walk_b": {
+      "displayName": "character_yellow_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
+      "zIndex": 5,
+      "type": "tile",
+      "spritesheet": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      }
+    },
+    "barnacle_attack_a": {
+      "displayName": "barnacle_attack_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 0,
+        "y": 128,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "barnacle_attack_b": {
+      "displayName": "barnacle_attack_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 0,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "barnacle_attack_rest": {
+      "displayName": "barnacle_attack_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "bee_a": {
+      "displayName": "bee_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 192,
+        "y": 320,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "bee_b": {
+      "displayName": "bee_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 448,
+        "y": 128,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "bee_rest": {
+      "displayName": "bee_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 448,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "block_fall": {
+      "displayName": "block_fall",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 2,
+      "type": "tile",
+      "spritesheet": {
+        "x": 448,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "block_idle": {
+      "displayName": "block_idle",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 2,
+      "type": "tile",
+      "spritesheet": {
+        "x": 384,
+        "y": 448,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "block_rest": {
+      "displayName": "block_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 2,
+      "type": "tile",
+      "spritesheet": {
+        "x": 384,
+        "y": 384,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "fish_blue_rest": {
+      "displayName": "fish_blue_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 384,
+        "y": 320,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "fish_blue_swim_a": {
+      "displayName": "fish_blue_swim_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 384,
+        "y": 256,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "fish_blue_swim_b": {
+      "displayName": "fish_blue_swim_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 384,
+        "y": 192,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "fish_purple_down": {
+      "displayName": "fish_purple_down",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 384,
+        "y": 128,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "fish_purple_rest": {
+      "displayName": "fish_purple_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 384,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "fish_purple_up": {
+      "displayName": "fish_purple_up",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 384,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "fish_yellow_rest": {
+      "displayName": "fish_yellow_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 320,
+        "y": 448,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "fish_yellow_swim_a": {
+      "displayName": "fish_yellow_swim_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 320,
+        "y": 384,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "fish_yellow_swim_b": {
+      "displayName": "fish_yellow_swim_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 320,
+        "y": 320,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "fly_a": {
+      "displayName": "fly_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 320,
+        "y": 256,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "fly_b": {
+      "displayName": "fly_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 320,
+        "y": 192,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "fly_rest": {
+      "displayName": "fly_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 320,
+        "y": 128,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "frog_idle": {
+      "displayName": "frog_idle",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 320,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "frog_jump": {
+      "displayName": "frog_jump",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 320,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "frog_rest": {
+      "displayName": "frog_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 256,
+        "y": 448,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "ladybug_fly": {
+      "displayName": "ladybug_fly",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 256,
+        "y": 384,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "ladybug_rest": {
+      "displayName": "ladybug_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 256,
+        "y": 320,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "ladybug_walk_a": {
+      "displayName": "ladybug_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 256,
+        "y": 256,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "ladybug_walk_b": {
+      "displayName": "ladybug_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 256,
+        "y": 192,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "mouse_rest": {
+      "displayName": "mouse_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 256,
+        "y": 128,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "mouse_walk_a": {
+      "displayName": "mouse_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 256,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "mouse_walk_b": {
+      "displayName": "mouse_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 256,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "saw_a": {
+      "displayName": "saw_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 192,
+        "y": 448,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "saw_b": {
+      "displayName": "saw_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 192,
+        "y": 384,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "saw_rest": {
+      "displayName": "saw_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 448,
+        "y": 192,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "slime_block_jump": {
+      "displayName": "slime_block_jump",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 192,
+        "y": 256,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "slime_block_rest": {
+      "displayName": "slime_block_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 192,
+        "y": 192,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "slime_block_walk_a": {
+      "displayName": "slime_block_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 192,
+        "y": 128,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "slime_block_walk_b": {
+      "displayName": "slime_block_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 192,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "slime_fire_flat": {
+      "displayName": "slime_fire_flat",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 192,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "slime_fire_rest": {
+      "displayName": "slime_fire_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 128,
+        "y": 448,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "slime_fire_walk_a": {
+      "displayName": "slime_fire_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 128,
+        "y": 384,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "slime_fire_walk_b": {
+      "displayName": "slime_fire_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 128,
+        "y": 320,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "slime_normal_flat": {
+      "displayName": "slime_normal_flat",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 128,
+        "y": 256,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "slime_normal_rest": {
+      "displayName": "slime_normal_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 128,
+        "y": 192,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "slime_normal_walk_a": {
+      "displayName": "slime_normal_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 128,
+        "y": 128,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "slime_normal_walk_b": {
+      "displayName": "slime_normal_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 128,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "slime_spike_flat": {
+      "displayName": "slime_spike_flat",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 128,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "slime_spike_rest": {
+      "displayName": "slime_spike_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 64,
+        "y": 448,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "slime_spike_walk_a": {
+      "displayName": "slime_spike_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 64,
+        "y": 384,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "slime_spike_walk_b": {
+      "displayName": "slime_spike_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 64,
+        "y": 320,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "snail_rest": {
+      "displayName": "snail_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 64,
+        "y": 256,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "snail_shell": {
+      "displayName": "snail_shell",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 64,
+        "y": 192,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "snail_walk_a": {
+      "displayName": "snail_walk_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 64,
+        "y": 128,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "snail_walk_b": {
+      "displayName": "snail_walk_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 64,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "worm_normal_move_a": {
+      "displayName": "worm_normal_move_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 64,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "worm_normal_move_b": {
+      "displayName": "worm_normal_move_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 0,
+        "y": 448,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "worm_normal_rest": {
+      "displayName": "worm_normal_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 0,
+        "y": 384,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "worm_ring_move_a": {
+      "displayName": "worm_ring_move_a",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 0,
+        "y": 320,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "worm_ring_move_b": {
+      "displayName": "worm_ring_move_b",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 0,
+        "y": 256,
+        "width": 64,
+        "height": 64
+      }
+    },
+    "worm_ring_rest": {
+      "displayName": "worm_ring_rest",
+      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
+      "zIndex": 4,
+      "type": "tile",
+      "spritesheet": {
+        "x": 0,
+        "y": 192,
+        "width": 64,
+        "height": 64
+      }
+    },
     "block_blue": {
       "displayName": "block_blue",
       "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
@@ -500,7 +1925,7 @@
     "door_closed": {
       "displayName": "door_closed",
       "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 3,
+      "zIndex": 2,
       "type": "tile",
       "spritesheet": {
         "x": 960,
@@ -512,7 +1937,7 @@
     "door_closed_top": {
       "displayName": "door_closed_top",
       "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 3,
+      "zIndex": 2,
       "type": "tile",
       "spritesheet": {
         "x": 960,
@@ -524,7 +1949,7 @@
     "door_open": {
       "displayName": "door_open",
       "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 3,
+      "zIndex": 2,
       "type": "tile",
       "spritesheet": {
         "x": 960,
@@ -536,7 +1961,7 @@
     "door_open_top": {
       "displayName": "door_open_top",
       "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 3,
+      "zIndex": 2,
       "type": "tile",
       "spritesheet": {
         "x": 960,
@@ -740,7 +2165,7 @@
     "grass": {
       "displayName": "grass",
       "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 0,
+      "zIndex": 1,
       "type": "tile",
       "spritesheet": {
         "x": 896,
@@ -752,7 +2177,7 @@
     "grass_purple": {
       "displayName": "grass_purple",
       "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 0,
+      "zIndex": 1,
       "type": "tile",
       "spritesheet": {
         "x": 896,
@@ -1448,7 +2873,7 @@
     "saw": {
       "displayName": "saw",
       "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 3,
+      "zIndex": 4,
       "type": "tile",
       "spritesheet": {
         "x": 640,
@@ -1460,7 +2885,7 @@
     "sign": {
       "displayName": "sign",
       "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 3,
+      "zIndex": 1,
       "type": "tile",
       "spritesheet": {
         "x": 640,
@@ -1472,7 +2897,7 @@
     "sign_exit": {
       "displayName": "sign_exit",
       "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 3,
+      "zIndex": 1,
       "type": "tile",
       "spritesheet": {
         "x": 640,
@@ -1484,7 +2909,7 @@
     "sign_left": {
       "displayName": "sign_left",
       "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 3,
+      "zIndex": 1,
       "type": "tile",
       "spritesheet": {
         "x": 640,
@@ -1496,7 +2921,7 @@
     "sign_right": {
       "displayName": "sign_right",
       "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 3,
+      "zIndex": 1,
       "type": "tile",
       "spritesheet": {
         "x": 640,
@@ -1508,7 +2933,7 @@
     "snow": {
       "displayName": "snow",
       "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 0,
+      "zIndex": 1,
       "type": "tile",
       "spritesheet": {
         "x": 640,
@@ -1520,7 +2945,7 @@
     "spikes": {
       "displayName": "spikes",
       "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.png",
-      "zIndex": 3,
+      "zIndex": 4,
       "type": "tile",
       "spritesheet": {
         "x": 640,
@@ -3772,1440 +5197,149 @@
         "width": 64,
         "height": 64
       }
-    },
-    "character_beige_climb_a": {
-      "displayName": "character_beige_climb_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 256,
-        "y": 768,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_beige_climb_b": {
-      "displayName": "character_beige_climb_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 640,
-        "y": 384,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_beige_duck": {
-      "displayName": "character_beige_duck",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 640,
-        "y": 256,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_beige_front": {
-      "displayName": "character_beige_front",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 640,
-        "y": 128,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_beige_hit": {
-      "displayName": "character_beige_hit",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 640,
-        "y": 0,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_beige_idle": {
-      "displayName": "character_beige_idle",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 512,
-        "y": 896,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_beige_jump": {
-      "displayName": "character_beige_jump",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 512,
-        "y": 768,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_beige_walk_a": {
-      "displayName": "character_beige_walk_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 512,
-        "y": 640,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_beige_walk_b": {
-      "displayName": "character_beige_walk_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 512,
-        "y": 512,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_green_climb_a": {
-      "displayName": "character_green_climb_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 512,
-        "y": 384,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_green_climb_b": {
-      "displayName": "character_green_climb_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 512,
-        "y": 256,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_green_duck": {
-      "displayName": "character_green_duck",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 512,
-        "y": 128,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_green_front": {
-      "displayName": "character_green_front",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 512,
-        "y": 0,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_green_hit": {
-      "displayName": "character_green_hit",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 384,
-        "y": 896,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_green_idle": {
-      "displayName": "character_green_idle",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 384,
-        "y": 768,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_green_jump": {
-      "displayName": "character_green_jump",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 384,
-        "y": 640,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_green_walk_a": {
-      "displayName": "character_green_walk_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 384,
-        "y": 512,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_green_walk_b": {
-      "displayName": "character_green_walk_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 384,
-        "y": 384,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_pink_climb_a": {
-      "displayName": "character_pink_climb_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 384,
-        "y": 256,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_pink_climb_b": {
-      "displayName": "character_pink_climb_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 384,
-        "y": 128,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_pink_duck": {
-      "displayName": "character_pink_duck",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 384,
-        "y": 0,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_pink_front": {
-      "displayName": "character_pink_front",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 256,
-        "y": 896,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_pink_hit": {
-      "displayName": "character_pink_hit",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 640,
-        "y": 512,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_pink_idle": {
-      "displayName": "character_pink_idle",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 256,
-        "y": 640,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_pink_jump": {
-      "displayName": "character_pink_jump",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 256,
-        "y": 512,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_pink_walk_a": {
-      "displayName": "character_pink_walk_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 256,
-        "y": 384,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_pink_walk_b": {
-      "displayName": "character_pink_walk_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 256,
-        "y": 256,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_purple_climb_a": {
-      "displayName": "character_purple_climb_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 256,
-        "y": 128,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_purple_climb_b": {
-      "displayName": "character_purple_climb_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 256,
-        "y": 0,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_purple_duck": {
-      "displayName": "character_purple_duck",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 128,
-        "y": 896,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_purple_front": {
-      "displayName": "character_purple_front",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 128,
-        "y": 768,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_purple_hit": {
-      "displayName": "character_purple_hit",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 128,
-        "y": 640,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_purple_idle": {
-      "displayName": "character_purple_idle",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 128,
-        "y": 512,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_purple_jump": {
-      "displayName": "character_purple_jump",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 128,
-        "y": 384,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_purple_walk_a": {
-      "displayName": "character_purple_walk_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 128,
-        "y": 256,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_purple_walk_b": {
-      "displayName": "character_purple_walk_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 128,
-        "y": 128,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_yellow_climb_a": {
-      "displayName": "character_yellow_climb_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 128,
-        "y": 0,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_yellow_climb_b": {
-      "displayName": "character_yellow_climb_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 0,
-        "y": 896,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_yellow_duck": {
-      "displayName": "character_yellow_duck",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 0,
-        "y": 768,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_yellow_front": {
-      "displayName": "character_yellow_front",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 0,
-        "y": 640,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_yellow_hit": {
-      "displayName": "character_yellow_hit",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 0,
-        "y": 512,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_yellow_idle": {
-      "displayName": "character_yellow_idle",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 0,
-        "y": 384,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_yellow_jump": {
-      "displayName": "character_yellow_jump",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 0,
-        "y": 256,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_yellow_walk_a": {
-      "displayName": "character_yellow_walk_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 0,
-        "y": 128,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "character_yellow_walk_b": {
-      "displayName": "character_yellow_walk_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-characters-default.png",
-      "zIndex": 5,
-      "type": "tile",
-      "spritesheet": {
-        "x": 0,
-        "y": 0,
-        "width": 128,
-        "height": 128
-      }
-    },
-    "barnacle_attack_a": {
-      "displayName": "barnacle_attack_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 0,
-        "y": 128,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "barnacle_attack_b": {
-      "displayName": "barnacle_attack_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 0,
-        "y": 64,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "barnacle_attack_rest": {
-      "displayName": "barnacle_attack_rest",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 0,
-        "y": 0,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "bee_a": {
-      "displayName": "bee_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 192,
-        "y": 320,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "bee_b": {
-      "displayName": "bee_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 448,
-        "y": 128,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "bee_rest": {
-      "displayName": "bee_rest",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 448,
-        "y": 64,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "block_fall": {
-      "displayName": "block_fall",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 2,
-      "type": "tile",
-      "spritesheet": {
-        "x": 448,
-        "y": 0,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "block_idle": {
-      "displayName": "block_idle",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 2,
-      "type": "tile",
-      "spritesheet": {
-        "x": 384,
-        "y": 448,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "block_rest": {
-      "displayName": "block_rest",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 2,
-      "type": "tile",
-      "spritesheet": {
-        "x": 384,
-        "y": 384,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "fish_blue_rest": {
-      "displayName": "fish_blue_rest",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 384,
-        "y": 320,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "fish_blue_swim_a": {
-      "displayName": "fish_blue_swim_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 384,
-        "y": 256,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "fish_blue_swim_b": {
-      "displayName": "fish_blue_swim_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 384,
-        "y": 192,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "fish_purple_down": {
-      "displayName": "fish_purple_down",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 384,
-        "y": 128,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "fish_purple_rest": {
-      "displayName": "fish_purple_rest",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 384,
-        "y": 64,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "fish_purple_up": {
-      "displayName": "fish_purple_up",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 384,
-        "y": 0,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "fish_yellow_rest": {
-      "displayName": "fish_yellow_rest",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 320,
-        "y": 448,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "fish_yellow_swim_a": {
-      "displayName": "fish_yellow_swim_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 320,
-        "y": 384,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "fish_yellow_swim_b": {
-      "displayName": "fish_yellow_swim_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 320,
-        "y": 320,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "fly_a": {
-      "displayName": "fly_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 320,
-        "y": 256,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "fly_b": {
-      "displayName": "fly_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 320,
-        "y": 192,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "fly_rest": {
-      "displayName": "fly_rest",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 320,
-        "y": 128,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "frog_idle": {
-      "displayName": "frog_idle",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 320,
-        "y": 64,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "frog_jump": {
-      "displayName": "frog_jump",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 320,
-        "y": 0,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "frog_rest": {
-      "displayName": "frog_rest",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 256,
-        "y": 448,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "ladybug_fly": {
-      "displayName": "ladybug_fly",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 256,
-        "y": 384,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "ladybug_rest": {
-      "displayName": "ladybug_rest",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 256,
-        "y": 320,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "ladybug_walk_a": {
-      "displayName": "ladybug_walk_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 256,
-        "y": 256,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "ladybug_walk_b": {
-      "displayName": "ladybug_walk_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 256,
-        "y": 192,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "mouse_rest": {
-      "displayName": "mouse_rest",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 256,
-        "y": 128,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "mouse_walk_a": {
-      "displayName": "mouse_walk_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 256,
-        "y": 64,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "mouse_walk_b": {
-      "displayName": "mouse_walk_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 256,
-        "y": 0,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "saw_a": {
-      "displayName": "saw_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 3,
-      "type": "tile",
-      "spritesheet": {
-        "x": 192,
-        "y": 448,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "saw_b": {
-      "displayName": "saw_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 3,
-      "type": "tile",
-      "spritesheet": {
-        "x": 192,
-        "y": 384,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "saw_rest": {
-      "displayName": "saw_rest",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 3,
-      "type": "tile",
-      "spritesheet": {
-        "x": 448,
-        "y": 192,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "slime_block_jump": {
-      "displayName": "slime_block_jump",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 192,
-        "y": 256,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "slime_block_rest": {
-      "displayName": "slime_block_rest",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 192,
-        "y": 192,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "slime_block_walk_a": {
-      "displayName": "slime_block_walk_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 192,
-        "y": 128,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "slime_block_walk_b": {
-      "displayName": "slime_block_walk_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 192,
-        "y": 64,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "slime_fire_flat": {
-      "displayName": "slime_fire_flat",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 192,
-        "y": 0,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "slime_fire_rest": {
-      "displayName": "slime_fire_rest",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 128,
-        "y": 448,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "slime_fire_walk_a": {
-      "displayName": "slime_fire_walk_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 128,
-        "y": 384,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "slime_fire_walk_b": {
-      "displayName": "slime_fire_walk_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 128,
-        "y": 320,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "slime_normal_flat": {
-      "displayName": "slime_normal_flat",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 128,
-        "y": 256,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "slime_normal_rest": {
-      "displayName": "slime_normal_rest",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 128,
-        "y": 192,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "slime_normal_walk_a": {
-      "displayName": "slime_normal_walk_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 128,
-        "y": 128,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "slime_normal_walk_b": {
-      "displayName": "slime_normal_walk_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 128,
-        "y": 64,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "slime_spike_flat": {
-      "displayName": "slime_spike_flat",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 128,
-        "y": 0,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "slime_spike_rest": {
-      "displayName": "slime_spike_rest",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 64,
-        "y": 448,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "slime_spike_walk_a": {
-      "displayName": "slime_spike_walk_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 64,
-        "y": 384,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "slime_spike_walk_b": {
-      "displayName": "slime_spike_walk_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 64,
-        "y": 320,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "snail_rest": {
-      "displayName": "snail_rest",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 64,
-        "y": 256,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "snail_shell": {
-      "displayName": "snail_shell",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 64,
-        "y": 192,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "snail_walk_a": {
-      "displayName": "snail_walk_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 64,
-        "y": 128,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "snail_walk_b": {
-      "displayName": "snail_walk_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 64,
-        "y": 64,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "worm_normal_move_a": {
-      "displayName": "worm_normal_move_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 64,
-        "y": 0,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "worm_normal_move_b": {
-      "displayName": "worm_normal_move_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 0,
-        "y": 448,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "worm_normal_rest": {
-      "displayName": "worm_normal_rest",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 0,
-        "y": 384,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "worm_ring_move_a": {
-      "displayName": "worm_ring_move_a",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 0,
-        "y": 320,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "worm_ring_move_b": {
-      "displayName": "worm_ring_move_b",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 0,
-        "y": 256,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "worm_ring_rest": {
-      "displayName": "worm_ring_rest",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-enemies-default.png",
-      "zIndex": 4,
-      "type": "tile",
-      "spritesheet": {
-        "x": 0,
-        "y": 192,
-        "width": 64,
-        "height": 64
-      }
-    },
-    "background_clouds": {
-      "displayName": "background_clouds",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
-      "zIndex": 0,
-      "type": "background",
-      "spritesheet": {
-        "x": 256,
-        "y": 512,
-        "width": 256,
-        "height": 256
-      }
-    },
-    "background_color_desert": {
-      "displayName": "background_color_desert",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
-      "zIndex": 0,
-      "type": "background",
-      "spritesheet": {
-        "x": 768,
-        "y": 0,
-        "width": 256,
-        "height": 256
-      }
-    },
-    "background_color_hills": {
-      "displayName": "background_color_hills",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
-      "zIndex": 0,
-      "type": "background",
-      "spritesheet": {
-        "x": 512,
-        "y": 768,
-        "width": 256,
-        "height": 256
-      }
-    },
-    "background_color_mushrooms": {
-      "displayName": "background_color_mushrooms",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
-      "zIndex": 0,
-      "type": "background",
-      "spritesheet": {
-        "x": 512,
-        "y": 512,
-        "width": 256,
-        "height": 256
-      }
-    },
-    "background_color_trees": {
-      "displayName": "background_color_trees",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
-      "zIndex": 0,
-      "type": "background",
-      "spritesheet": {
-        "x": 512,
-        "y": 256,
-        "width": 256,
-        "height": 256
-      }
-    },
-    "background_fade_desert": {
-      "displayName": "background_fade_desert",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
-      "zIndex": 0,
-      "type": "background",
-      "spritesheet": {
-        "x": 512,
-        "y": 0,
-        "width": 256,
-        "height": 256
-      }
-    },
-    "background_fade_hills": {
-      "displayName": "background_fade_hills",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
-      "zIndex": 0,
-      "type": "background",
-      "spritesheet": {
-        "x": 256,
-        "y": 768,
-        "width": 256,
-        "height": 256
-      }
-    },
-    "background_fade_mushrooms": {
-      "displayName": "background_fade_mushrooms",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
-      "zIndex": 0,
-      "type": "background",
-      "spritesheet": {
-        "x": 768,
-        "y": 256,
-        "width": 256,
-        "height": 256
-      }
-    },
-    "background_fade_trees": {
-      "displayName": "background_fade_trees",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
-      "zIndex": 0,
-      "type": "background",
-      "spritesheet": {
-        "x": 256,
-        "y": 256,
-        "width": 256,
-        "height": 256
-      }
-    },
-    "background_solid_cloud": {
-      "displayName": "background_solid_cloud",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
-      "zIndex": 0,
-      "type": "background",
-      "spritesheet": {
-        "x": 256,
-        "y": 0,
-        "width": 256,
-        "height": 256
-      }
-    },
-    "background_solid_dirt": {
-      "displayName": "background_solid_dirt",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
-      "zIndex": 0,
-      "type": "background",
-      "spritesheet": {
-        "x": 0,
-        "y": 768,
-        "width": 256,
-        "height": 256
-      }
-    },
-    "background_solid_grass": {
-      "displayName": "background_solid_grass",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
-      "zIndex": 0,
-      "type": "background",
-      "spritesheet": {
-        "x": 0,
-        "y": 512,
-        "width": 256,
-        "height": 256
-      }
-    },
-    "background_solid_sand": {
-      "displayName": "background_solid_sand",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
-      "zIndex": 0,
-      "type": "background",
-      "spritesheet": {
-        "x": 0,
-        "y": 256,
-        "width": 256,
-        "height": 256
-      }
-    },
-    "background_solid_sky": {
-      "displayName": "background_solid_sky",
-      "src": "assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-backgrounds-default.png",
-      "zIndex": 0,
-      "type": "background",
-      "spritesheet": {
-        "x": 0,
-        "y": 0,
-        "width": 256,
-        "height": 256
-      }
     }
   },
   "groups": {
-    "tiles": {
-      "displayName": "tiles",
+    "backgrounds": {
+      "displayName": "backgrounds",
       "tileIds": [
+        "background_clouds",
+        "background_color_desert",
+        "background_color_hills",
+        "background_color_mushrooms",
+        "background_color_trees",
+        "background_fade_desert",
+        "background_fade_hills",
+        "background_fade_mushrooms",
+        "background_fade_trees",
+        "background_solid_cloud",
+        "background_solid_dirt",
+        "background_solid_grass",
+        "background_solid_sand",
+        "background_solid_sky"
+      ],
+      "autotileGroups": []
+    },
+    "Characters": {
+      "displayName": "Characters",
+      "tileIds": [
+        "character_beige_climb_a",
+        "character_beige_climb_b",
+        "character_beige_duck",
+        "character_beige_front",
+        "character_beige_hit",
+        "character_beige_idle",
+        "character_beige_jump",
+        "character_beige_walk_a",
+        "character_beige_walk_b",
+        "character_green_climb_a",
+        "character_green_climb_b",
+        "character_green_duck",
+        "character_green_front",
+        "character_green_hit",
+        "character_green_idle",
+        "character_green_jump",
+        "character_green_walk_a",
+        "character_green_walk_b",
+        "character_pink_climb_a",
+        "character_pink_climb_b",
+        "character_pink_duck",
+        "character_pink_front",
+        "character_pink_hit",
+        "character_pink_idle",
+        "character_pink_jump",
+        "character_pink_walk_a",
+        "character_pink_walk_b",
+        "character_purple_climb_a",
+        "character_purple_climb_b",
+        "character_purple_duck",
+        "character_purple_front",
+        "character_purple_hit",
+        "character_purple_idle",
+        "character_purple_jump",
+        "character_purple_walk_a",
+        "character_purple_walk_b",
+        "character_yellow_climb_a",
+        "character_yellow_climb_b",
+        "character_yellow_duck",
+        "character_yellow_front",
+        "character_yellow_hit",
+        "character_yellow_idle",
+        "character_yellow_jump",
+        "character_yellow_walk_a",
+        "character_yellow_walk_b"
+      ],
+      "autotileGroups": []
+    },
+    "Misc": {
+      "displayName": "Misc",
+      "tileIds": [
+        "barnacle_attack_a",
+        "barnacle_attack_b",
+        "barnacle_attack_rest",
+        "bee_a",
+        "bee_b",
+        "bee_rest",
+        "fish_blue_rest",
+        "fish_blue_swim_a",
+        "fish_blue_swim_b",
+        "fish_purple_down",
+        "fish_purple_rest",
+        "fish_purple_up",
+        "fish_yellow_rest",
+        "fish_yellow_swim_a",
+        "fish_yellow_swim_b",
+        "fly_a",
+        "fly_b",
+        "fly_rest",
+        "frog_idle",
+        "frog_jump",
+        "frog_rest",
+        "ladybug_fly",
+        "ladybug_rest",
+        "ladybug_walk_a",
+        "ladybug_walk_b",
+        "mouse_rest",
+        "mouse_walk_a",
+        "mouse_walk_b",
+        "snail_rest",
+        "snail_shell",
+        "snail_walk_a",
+        "snail_walk_b",
+        "worm_normal_move_a",
+        "worm_normal_move_b",
+        "worm_normal_rest",
+        "worm_ring_move_a",
+        "worm_ring_move_b",
+        "worm_ring_rest",
+        "chain",
+        "conveyor",
+        "flag_blue_a",
+        "flag_blue_b",
+        "flag_green_a",
+        "flag_green_b",
+        "flag_off",
+        "flag_red_a",
+        "flag_red_b",
+        "flag_yellow_a",
+        "flag_yellow_b",
+        "ramp",
+        "rop_attached",
+        "rope",
+        "snow",
+        "water",
+        "water_top",
+        "water_top_low",
+        "weight"
+      ],
+      "autotileGroups": []
+    },
+    "Blocks": {
+      "displayName": "Blocks",
+      "tileIds": [
+        "block_fall",
+        "block_idle",
+        "block_rest",
         "block_blue",
         "block_coin",
         "block_coin_active",
@@ -5227,52 +5361,137 @@
         "block_strong_exclamation",
         "block_strong_exclamation_active",
         "block_yellow",
-        "bomb",
-        "bomb_active",
         "brick_brown",
         "brick_brown_diagonal",
         "brick_grey",
         "brick_grey_diagonal",
         "bricks_brown",
-        "bricks_grey",
+        "bricks_grey"
+      ],
+      "autotileGroups": []
+    },
+    "Hazards": {
+      "displayName": "Hazards",
+      "tileIds": [
+        "saw_a",
+        "saw_b",
+        "saw_rest",
+        "bomb",
+        "bomb_active",
+        "fireball",
+        "lava",
+        "lava_top",
+        "lava_top_low",
+        "saw",
+        "spikes"
+      ],
+      "autotileGroups": []
+    },
+    "Enemies": {
+      "displayName": "Enemies",
+      "tileIds": [
+        "slime_block_jump",
+        "slime_block_rest",
+        "slime_block_walk_a",
+        "slime_block_walk_b",
+        "slime_fire_flat",
+        "slime_fire_rest",
+        "slime_fire_walk_a",
+        "slime_fire_walk_b",
+        "slime_normal_flat",
+        "slime_normal_rest",
+        "slime_normal_walk_a",
+        "slime_normal_walk_b",
+        "slime_spike_flat",
+        "slime_spike_rest",
+        "slime_spike_walk_a",
+        "slime_spike_walk_b"
+      ],
+      "autotileGroups": []
+    },
+    "Scenery": {
+      "displayName": "Scenery",
+      "tileIds": [
         "bridge",
         "bridge_logs",
         "bush",
         "cactus",
-        "chain",
+        "fence",
+        "fence_broken",
+        "grass",
+        "grass_purple",
+        "hill",
+        "hill_top",
+        "hill_top_smile",
+        "mushroom_brown",
+        "mushroom_red",
+        "rock",
+        "sign",
+        "sign_exit",
+        "sign_left",
+        "sign_right",
+        "torch_off",
+        "torch_on_a",
+        "torch_on_b",
+        "window"
+      ],
+      "autotileGroups": []
+    },
+    "Collectibles": {
+      "displayName": "Collectibles",
+      "tileIds": [
         "coin_bronze",
         "coin_bronze_side",
         "coin_gold",
         "coin_gold_side",
         "coin_silver",
         "coin_silver_side",
-        "conveyor",
-        "door_closed",
-        "door_closed_top",
-        "door_open",
-        "door_open_top",
-        "fence",
-        "fence_broken",
-        "fireball",
-        "flag_blue_a",
-        "flag_blue_b",
-        "flag_green_a",
-        "flag_green_b",
-        "flag_off",
-        "flag_red_a",
-        "flag_red_b",
-        "flag_yellow_a",
-        "flag_yellow_b",
         "gem_blue",
         "gem_green",
         "gem_red",
         "gem_yellow",
-        "grass",
-        "grass_purple",
         "heart",
-        "hill",
-        "hill_top",
-        "hill_top_smile",
+        "key_blue",
+        "key_green",
+        "key_red",
+        "key_yellow",
+        "star"
+      ],
+      "autotileGroups": []
+    },
+    "Mechanisms": {
+      "displayName": "Mechanisms",
+      "tileIds": [
+        "door_closed",
+        "door_closed_top",
+        "door_open",
+        "door_open_top",
+        "ladder_bottom",
+        "ladder_middle",
+        "ladder_top",
+        "lever",
+        "lever_left",
+        "lever_right",
+        "lock_blue",
+        "lock_green",
+        "lock_red",
+        "lock_yellow",
+        "spring",
+        "spring_out",
+        "switch_blue",
+        "switch_blue_pressed",
+        "switch_green",
+        "switch_green_pressed",
+        "switch_red",
+        "switch_red_pressed",
+        "switch_yellow",
+        "switch_yellow_pressed"
+      ],
+      "autotileGroups": []
+    },
+    "HUD": {
+      "displayName": "HUD",
+      "tileIds": [
         "hud_character_0",
         "hud_character_1",
         "hud_character_2",
@@ -5302,48 +5521,13 @@
         "hud_player_helmet_yellow",
         "hud_player_pink",
         "hud_player_purple",
-        "hud_player_yellow",
-        "key_blue",
-        "key_green",
-        "key_red",
-        "key_yellow",
-        "ladder_bottom",
-        "ladder_middle",
-        "ladder_top",
-        "lava",
-        "lava_top",
-        "lava_top_low",
-        "lever",
-        "lever_left",
-        "lever_right",
-        "lock_blue",
-        "lock_green",
-        "lock_red",
-        "lock_yellow",
-        "mushroom_brown",
-        "mushroom_red",
-        "ramp",
-        "rock",
-        "rop_attached",
-        "rope",
-        "saw",
-        "sign",
-        "sign_exit",
-        "sign_left",
-        "sign_right",
-        "snow",
-        "spikes",
-        "spring",
-        "spring_out",
-        "star",
-        "switch_blue",
-        "switch_blue_pressed",
-        "switch_green",
-        "switch_green_pressed",
-        "switch_red",
-        "switch_red_pressed",
-        "switch_yellow",
-        "switch_yellow_pressed",
+        "hud_player_yellow"
+      ],
+      "autotileGroups": []
+    },
+    "Terrain": {
+      "displayName": "Terrain",
+      "tileIds": [
         "terrain_dirt_block",
         "terrain_dirt_block_bottom",
         "terrain_dirt_block_bottom_left",
@@ -5511,150 +5695,9 @@
         "terrain_stone_ramp_short_b",
         "terrain_stone_vertical_bottom",
         "terrain_stone_vertical_middle",
-        "terrain_stone_vertical_top",
-        "torch_off",
-        "torch_on_a",
-        "torch_on_b",
-        "water",
-        "water_top",
-        "water_top_low",
-        "weight",
-        "window"
-      ]
-    },
-    "characters": {
-      "displayName": "characters",
-      "tileIds": [
-        "character_beige_climb_a",
-        "character_beige_climb_b",
-        "character_beige_duck",
-        "character_beige_front",
-        "character_beige_hit",
-        "character_beige_idle",
-        "character_beige_jump",
-        "character_beige_walk_a",
-        "character_beige_walk_b",
-        "character_green_climb_a",
-        "character_green_climb_b",
-        "character_green_duck",
-        "character_green_front",
-        "character_green_hit",
-        "character_green_idle",
-        "character_green_jump",
-        "character_green_walk_a",
-        "character_green_walk_b",
-        "character_pink_climb_a",
-        "character_pink_climb_b",
-        "character_pink_duck",
-        "character_pink_front",
-        "character_pink_hit",
-        "character_pink_idle",
-        "character_pink_jump",
-        "character_pink_walk_a",
-        "character_pink_walk_b",
-        "character_purple_climb_a",
-        "character_purple_climb_b",
-        "character_purple_duck",
-        "character_purple_front",
-        "character_purple_hit",
-        "character_purple_idle",
-        "character_purple_jump",
-        "character_purple_walk_a",
-        "character_purple_walk_b",
-        "character_yellow_climb_a",
-        "character_yellow_climb_b",
-        "character_yellow_duck",
-        "character_yellow_front",
-        "character_yellow_hit",
-        "character_yellow_idle",
-        "character_yellow_jump",
-        "character_yellow_walk_a",
-        "character_yellow_walk_b"
-      ]
-    },
-    "enemies": {
-      "displayName": "enemies",
-      "tileIds": [
-        "barnacle_attack_a",
-        "barnacle_attack_b",
-        "barnacle_attack_rest",
-        "bee_a",
-        "bee_b",
-        "bee_rest",
-        "block_fall",
-        "block_idle",
-        "block_rest",
-        "fish_blue_rest",
-        "fish_blue_swim_a",
-        "fish_blue_swim_b",
-        "fish_purple_down",
-        "fish_purple_rest",
-        "fish_purple_up",
-        "fish_yellow_rest",
-        "fish_yellow_swim_a",
-        "fish_yellow_swim_b",
-        "fly_a",
-        "fly_b",
-        "fly_rest",
-        "frog_idle",
-        "frog_jump",
-        "frog_rest",
-        "ladybug_fly",
-        "ladybug_rest",
-        "ladybug_walk_a",
-        "ladybug_walk_b",
-        "mouse_rest",
-        "mouse_walk_a",
-        "mouse_walk_b",
-        "saw_a",
-        "saw_b",
-        "saw_rest",
-        "slime_block_jump",
-        "slime_block_rest",
-        "slime_block_walk_a",
-        "slime_block_walk_b",
-        "slime_fire_flat",
-        "slime_fire_rest",
-        "slime_fire_walk_a",
-        "slime_fire_walk_b",
-        "slime_normal_flat",
-        "slime_normal_rest",
-        "slime_normal_walk_a",
-        "slime_normal_walk_b",
-        "slime_spike_flat",
-        "slime_spike_rest",
-        "slime_spike_walk_a",
-        "slime_spike_walk_b",
-        "snail_rest",
-        "snail_shell",
-        "snail_walk_a",
-        "snail_walk_b",
-        "worm_normal_move_a",
-        "worm_normal_move_b",
-        "worm_normal_rest",
-        "worm_ring_move_a",
-        "worm_ring_move_b",
-        "worm_ring_rest"
-      ]
-    },
-    "backgrounds": {
-      "displayName": "backgrounds",
-      "tileIds": [
-        "background_clouds",
-        "background_color_desert",
-        "background_color_hills",
-        "background_color_mushrooms",
-        "background_color_trees",
-        "background_fade_desert",
-        "background_fade_hills",
-        "background_fade_mushrooms",
-        "background_fade_trees",
-        "background_solid_cloud",
-        "background_solid_dirt",
-        "background_solid_grass",
-        "background_solid_sand",
-        "background_solid_sky"
-      ]
+        "terrain_stone_vertical_top"
+      ],
+      "autotileGroups": []
     }
   },
   "defaultZoom": 0.5

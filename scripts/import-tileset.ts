@@ -1,7 +1,8 @@
 import { XMLParser } from "fast-xml-parser";
 import fs from "fs";
 import path from "path";
-import { TileConfig, TileDefinition, TileGroup } from "../src/config";
+import { glob } from "glob";
+import { TileConfig, TileDefinition, TileTabGroup } from "../src/config";
 
 const getZIndex = (name: string): number => {
   // Layer 0: Background terrain and liquids
@@ -9,9 +10,7 @@ const getZIndex = (name: string): number => {
     name.startsWith("background") ||
     name.startsWith("terrain_") ||
     name.startsWith("water") ||
-    name.startsWith("lava") ||
-    name.startsWith("grass") ||
-    name.startsWith("snow")
+    name.startsWith("lava")
   ) {
     return 0;
   }
@@ -23,7 +22,10 @@ const getZIndex = (name: string): number => {
     name.startsWith("hill") ||
     name.startsWith("mushroom") ||
     name.startsWith("rock") ||
-    name.startsWith("window")
+    name.startsWith("window") ||
+    name.startsWith("grass") ||
+    name.startsWith("snow") ||
+    name.startsWith("sign")
   ) {
     return 1;
   }
@@ -36,7 +38,8 @@ const getZIndex = (name: string): number => {
     name.startsWith("conveyor") ||
     name.startsWith("ladder") ||
     name.startsWith("ramp") ||
-    name.startsWith("rop")
+    name.startsWith("rop") ||
+    name.startsWith("door_")
   ) {
     return 2;
   }
@@ -44,7 +47,6 @@ const getZIndex = (name: string): number => {
   if (
     name.startsWith("bomb") ||
     name.startsWith("coin_") ||
-    name.startsWith("door_") ||
     name.startsWith("fireball") ||
     name.startsWith("flag") ||
     name.startsWith("gem_") ||
@@ -52,32 +54,29 @@ const getZIndex = (name: string): number => {
     name.startsWith("key_") ||
     name.startsWith("lever") ||
     name.startsWith("lock_") ||
-    name.startsWith("saw") ||
-    name.startsWith("sign") ||
-    name.startsWith("spikes") ||
-    name.startsWith("spring") ||
     name.startsWith("star") ||
     name.startsWith("switch") ||
     name.startsWith("torch") ||
-    name.startsWith("weight")
+    name.startsWith("weight") ||
+    name.startsWith("spring")
   ) {
     return 3;
   }
-  // Layer 4: Enemies
+  // Layer 4: Hazards
   if (
-    name.startsWith("barnacle") ||
-    name.startsWith("bee") ||
-    name.startsWith("block") ||
+    name.startsWith("saw") ||
+    name.startsWith("spikes") ||
     name.startsWith("enemy") ||
     name.startsWith("fish") ||
     name.startsWith("fly") ||
     name.startsWith("frog") ||
     name.startsWith("ladybug") ||
     name.startsWith("mouse") ||
-    name.startsWith("saw") ||
     name.startsWith("slime") ||
     name.startsWith("snail") ||
-    name.startsWith("worm")
+    name.startsWith("worm") ||
+    name.startsWith("barnacle") ||
+    name.startsWith("bee")
   ) {
     return 4;
   }
@@ -93,73 +92,159 @@ const getZIndex = (name: string): number => {
   throw new Error(`No z-index defined for tile: ${name}`);
 };
 
-const inputFile = process.argv[2];
-const outputFile = process.argv[3];
+const getGroupKey = (name: string): string => {
+  if (name.startsWith("terrain_")) return "Terrain";
+  if (name.startsWith("block_") || name.startsWith("brick")) return "Blocks";
+  if (
+    name.startsWith("coin_") ||
+    name.startsWith("gem_") ||
+    name.startsWith("star") ||
+    name.startsWith("heart") ||
+    name.startsWith("key_")
+  )
+    return "Collectibles";
+  if (
+    name.startsWith("door_") ||
+    name.startsWith("ladder") ||
+    name.startsWith("switch") ||
+    name.startsWith("lever") ||
+    name.startsWith("lock_") ||
+    name.startsWith("spring")
+  )
+    return "Mechanisms";
+  if (
+    name.startsWith("bomb") ||
+    name.startsWith("spikes") ||
+    name.startsWith("saw") ||
+    name.startsWith("fireball") ||
+    name.startsWith("lava")
+  )
+    return "Hazards";
+  if (
+    name.startsWith("bush") ||
+    name.startsWith("cactus") ||
+    name.startsWith("fence") ||
+    name.startsWith("hill") ||
+    name.startsWith("mushroom") ||
+    name.startsWith("rock") ||
+    name.startsWith("window") ||
+    name.startsWith("grass") ||
+    name.startsWith("bridge") ||
+    name.startsWith("torch") ||
+    name.startsWith("sign")
+  )
+    return "Scenery";
+  if (name.startsWith("character")) return "Characters";
+  if (name.startsWith("enemy") || name.startsWith("slime")) return "Enemies";
+  if (name.startsWith("hud_")) return "HUD";
+  if (name.startsWith("background")) return "backgrounds";
 
-if (!inputFile || !outputFile) {
+  return "Misc";
+};
+
+const outputFile = process.argv[2];
+const inputPatterns = process.argv.slice(3);
+
+if (!outputFile || inputPatterns.length === 0) {
   console.error(
-    "Usage: ts-node scripts/import-tileset.ts <input.xml> <output.json>"
+    "Usage: ts-node scripts/import-tileset.ts <output.json> <input1.xml> [input2.xml]..."
   );
   process.exit(1);
 }
 
-// Load existing config if it exists, otherwise create a new one
-let tileConfig: TileConfig;
-if (fs.existsSync(outputFile)) {
-  const fileContent = fs.readFileSync(outputFile, "utf-8");
-  tileConfig = JSON.parse(fileContent);
-} else {
-  tileConfig = {
-    gridSize: 32,
-    mapSize: "infinite",
-    tiles: {},
-    groups: {},
-    defaultZoom: 0.5,
-  };
-}
-
-const xmlData = fs.readFileSync(inputFile, "utf-8");
-const parser = new XMLParser({
-  ignoreAttributes: false,
-  attributeNamePrefix: "",
-});
-const result = parser.parse(xmlData);
-
-const textureAtlas = result.TextureAtlas;
-const imagePath = textureAtlas.imagePath;
-const groupName = path
-  .basename(inputFile)
-  .replace("spritesheet-", "")
-  .replace("-default.xml", "")
-  .replace(".xml", "");
-
-const newGroup: TileGroup = {
-  displayName: groupName,
-  tileIds: [],
+const tileConfig: TileConfig = {
+  gridSize: 32,
+  mapSize: "infinite",
+  tiles: {},
+  groups: {},
+  defaultZoom: 0.5,
 };
 
-for (const subTexture of textureAtlas.SubTexture) {
-  const name = subTexture.name.replace(".png", "");
-  newGroup.tileIds.push(name);
+const nameSuffixToNeighbors: Record<string, string> = {
+  block_top_left: "SE",
+  block_top: "SWE",
+  block_top_right: "SW",
+  block_left: "NSE",
+  block_center: "NSWE",
+  block_right: "NSW",
+  block_bottom_left: "NE",
+  block_bottom: "NWE",
+  block_bottom_right: "NW",
+  horizontal_left: "E",
+  horizontal_middle: "WE",
+  horizontal_right: "W",
+  vertical_top: "S",
+  vertical_middle: "NS",
+  vertical_bottom: "N",
+};
 
-  tileConfig.tiles[name] = {
-    displayName: name,
-    src: path
-      .join(path.dirname(inputFile), imagePath)
-      .replace("example/public/", ""),
-    zIndex: getZIndex(name),
-    type: groupName === "backgrounds" ? "background" : "tile",
-    spritesheet: {
-      x: parseInt(subTexture.x, 10),
-      y: parseInt(subTexture.y, 10),
-      width: parseInt(subTexture.width, 10),
-      height: parseInt(subTexture.height, 10),
-    },
-  };
+const inputFiles = inputPatterns.flatMap((pattern) => glob.sync(pattern));
+
+for (const inputFile of inputFiles) {
+  const xmlData = fs.readFileSync(inputFile, "utf-8");
+  const parser = new XMLParser({
+    ignoreAttributes: false,
+    attributeNamePrefix: "",
+  });
+  const result = parser.parse(xmlData);
+  const textureAtlas = result.TextureAtlas;
+  const imagePath = textureAtlas.imagePath;
+
+  for (const subTexture of textureAtlas.SubTexture) {
+    const name = subTexture.name.replace(".png", "");
+    const groupKey = getGroupKey(name);
+
+    if (!tileConfig.groups[groupKey]) {
+      tileConfig.groups[groupKey] = {
+        displayName: groupKey,
+        tileIds: [],
+        autotileGroups: [],
+      };
+    }
+
+    if (!tileConfig.tiles[name]) {
+      tileConfig.groups[groupKey].tileIds.push(name);
+
+      const tileDefinition: TileDefinition = {
+        displayName: name,
+        src: path
+          .join(path.dirname(inputFile), imagePath)
+          .replace("example/public/", ""),
+        zIndex: getZIndex(name),
+        type:
+          getGroupKey(name).toLowerCase() === "backgrounds"
+            ? "background"
+            : "tile",
+        spritesheet: {
+          x: parseInt(subTexture.x, 10),
+          y: parseInt(subTexture.y, 10),
+          width: parseInt(subTexture.width, 10),
+          height: parseInt(subTexture.height, 10),
+        },
+      };
+
+      const match = name.match(/terrain_(?<group>\w+)_(?<variant>.*)/);
+      if (match?.groups) {
+        const { group, variant } = match.groups;
+        const neighbors = nameSuffixToNeighbors[variant];
+        if (neighbors) {
+          (tileDefinition as any).autotile = {
+            group,
+            neighbors,
+          };
+          if (!tileConfig.groups[groupKey].autotileGroups.includes(group)) {
+            tileConfig.groups[groupKey].autotileGroups.push(group);
+          }
+        }
+      }
+
+      tileConfig.tiles[name] = tileDefinition;
+    }
+  }
 }
-
-tileConfig.groups[groupName] = newGroup;
 
 fs.writeFileSync(outputFile, JSON.stringify(tileConfig, null, 2));
 
-console.log(`Successfully merged ${inputFile} into ${outputFile}`);
+console.log(
+  `Successfully processed ${inputFiles.length} files into ${outputFile}`
+);

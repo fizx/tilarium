@@ -13,8 +13,9 @@
     "dev": "vite",
     "build": "tsup",
     "build:example": "vite build",
-    "import:platformer": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' ts-node scripts/import-tileset.ts example/public/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-tiles-default.xml example/src/tileset.json",
-    "import:town": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' ts-node scripts/import-town-tileset.ts"
+    "import:platformer": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' ts-node scripts/import-tileset.ts example/src/tileset.json example/public/assets/kenney_new-platformer-pack-1.0/Spritesheets/spritesheet-*.xml",
+    "import:town": "tsx scripts/import-town-tileset.ts",
+    "lint": "tsc && eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "peerDependencies": {
     "react": "^18.2.0",
