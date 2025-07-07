@@ -42,7 +42,7 @@ export interface TilemapEditorProps {
   config: TileConfig;
   initialState?: TilemapState;
   onReady?: (actions: EditorActions) => void;
-  onStateChange?: (delta: TilemapDelta) => void;
+  onStateChange?: (newState: TilemapState) => void;
   onCameraChange?: (camera: Camera) => void;
   onToolSelect?: (tool: Tool) => void;
   onTileSelect?: (tile?: TileDefinition) => void;
@@ -280,8 +280,10 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         beforeState.placedTiles,
         afterState.placedTiles
       );
-      if (Object.keys(delta).length > 0) {
-        onStateChange(delta);
+      const backgroundChanged =
+        beforeState.backgroundTileId !== afterState.backgroundTileId;
+      if (Object.keys(delta).length > 0 || backgroundChanged) {
+        onStateChange(afterState);
       }
     }
 

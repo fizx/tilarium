@@ -65,25 +65,8 @@ const decodeState = (encoded: string): SavedState | null => {
     const decoded = JSON.parse(json, reviver);
     console.log("[decodeState] Decoded from URL:", decoded);
 
-    // New format (as of the new state protocol)
-    if (decoded.state && decoded.tileset) {
-      if (Array.isArray(decoded.state.placedTiles)) {
-        const placedTilesMap = new Map();
-        for (const tile of decoded.state.placedTiles) {
-          const tileDef =
-            tilesets[decoded.tileset].tiles[(tile as PlacedTile).tileId];
-          if (tileDef) {
-            const key = `${tile.x}-${tile.y}`;
-            if (!placedTilesMap.has(key)) {
-              placedTilesMap.set(key, new Map());
-            }
-            placedTilesMap
-              .get(key)!
-              .set(tileDef.zIndex, { ...tile, source: "initial" });
-          }
-        }
-        decoded.state.placedTiles = placedTilesMap;
-      }
+    // The reviver should have handled map restoration.
+    if (decoded && decoded.state && decoded.state.placedTiles) {
       return decoded as SavedState;
     }
 
@@ -129,10 +112,9 @@ function App() {
     [initialState]
   );
 
-  const handleStateChange = () => {
+  const handleStateChange = (newState: TilemapState) => {
     if (actionsRef.current) {
-      const currentState = actionsRef.current.getState();
-      const encodedState = encodeState(currentState, selectedTileset);
+      const encodedState = encodeState(newState, selectedTileset);
       // Use pushState to avoid adding to browser history for every change
       window.history.pushState(null, "", `#${encodedState}`);
     }
@@ -143,11 +125,14 @@ function App() {
     setSelectedTileset(newTileset);
     // when tileset changes, we should probably clear the state
     if (actionsRef.current) {
-      actionsRef.current.loadState({
+      const clearedState: TilemapState = {
         placedTiles: new Map(),
         tileToReplace: null,
         backgroundTileId: null,
-      });
+      };
+      actionsRef.current.loadState(clearedState);
+      const encodedState = encodeState(clearedState, newTileset);
+      window.history.pushState(null, "", `#${encodedState}`);
     }
   };
 
