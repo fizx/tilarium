@@ -65,38 +65,26 @@ const decodeState = (encoded: string): SavedState | null => {
     const decoded = JSON.parse(json, reviver);
     console.log("[decodeState] Decoded from URL:", decoded);
 
-    // New format
+    // New format (as of the new state protocol)
     if (decoded.state && decoded.tileset) {
-      const placedTilesIsObject =
-        decoded.state.placedTiles &&
-        typeof decoded.state.placedTiles === "object" &&
-        !Array.isArray(decoded.state.placedTiles) &&
-        !(decoded.state.placedTiles instanceof Map);
-
-      if (placedTilesIsObject) {
+      if (Array.isArray(decoded.state.placedTiles)) {
         const placedTilesMap = new Map();
-        for (const [key, cellObj] of Object.entries(
-          decoded.state.placedTiles
-        )) {
-          const cellMap = new Map();
-          for (const [zIndex, tile] of Object.entries(
-            cellObj as Record<string, PlacedTile | null>
-          )) {
-            cellMap.set(parseInt(zIndex, 10), tile);
+        for (const tile of decoded.state.placedTiles) {
+          const tileDef =
+            tilesets[decoded.tileset].tiles[(tile as PlacedTile).tileId];
+          if (tileDef) {
+            const key = `${tile.x}-${tile.y}`;
+            if (!placedTilesMap.has(key)) {
+              placedTilesMap.set(key, new Map());
+            }
+            placedTilesMap
+              .get(key)!
+              .set(tileDef.zIndex, { ...tile, source: "initial" });
           }
-          placedTilesMap.set(key, cellMap);
         }
         decoded.state.placedTiles = placedTilesMap;
       }
       return decoded as SavedState;
-    }
-
-    // Legacy format
-    if (decoded.placedTiles) {
-      return {
-        state: decoded as TilemapState,
-        tileset: "platformer", // default to platformer for old links
-      };
     }
 
     return null;
@@ -141,14 +129,14 @@ function App() {
     [initialState]
   );
 
-  const handleStateChange = useCallback(
-    (newState: TilemapState) => {
-      const encodedState = encodeState(newState, selectedTileset);
+  const handleStateChange = () => {
+    if (actionsRef.current) {
+      const currentState = actionsRef.current.getState();
+      const encodedState = encodeState(currentState, selectedTileset);
       // Use pushState to avoid adding to browser history for every change
       window.history.pushState(null, "", `#${encodedState}`);
-    },
-    [selectedTileset]
-  );
+    }
+  };
 
   const handleTilesetChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newTileset = event.target.value as Tileset;

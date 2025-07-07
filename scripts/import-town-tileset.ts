@@ -194,21 +194,21 @@ for (const line of lines) {
   const tileX = id % TILES_PER_ROW;
   const tileY = Math.floor(id / TILES_PER_ROW);
 
-  const x = tileX * (TILE_WIDTH + TILE_SPACING);
-  const y = tileY * (TILE_HEIGHT + TILE_SPACING);
+  // Strip neighbor suffix from the name for a cleaner displayName
+  const displayName = name.replace(/_([NESW]+)$/, "");
 
   const autotileMatch = name.match(
     /^(?<group>[a-zA-Z_]+?)(?::(?<variant>[a-zA-Z_]+))?(?:-(?<neighbors>[NESW]+))?$/
   );
 
   const tileDefinition: TileDefinition = {
-    displayName: name,
+    displayName: displayName,
     src: IMAGE_PATH,
     zIndex: getZIndex(name),
     type: "tile",
     spritesheet: {
-      x,
-      y,
+      x: tileX * (TILE_WIDTH + TILE_SPACING),
+      y: tileY * (TILE_HEIGHT + TILE_SPACING),
       width: TILE_WIDTH,
       height: TILE_HEIGHT,
     },

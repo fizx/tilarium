@@ -269,7 +269,10 @@ export const Canvas = () => {
             const currentZ = config.tiles[current.tileId]?.zIndex ?? -Infinity;
             return currentZ > topZ ? current : top;
           });
-          setHoveredTile(topTile);
+          const tileDef = config.tiles[topTile.tileId];
+          setHoveredTile(
+            tileDef ? { ...topTile, displayName: tileDef.displayName } : topTile
+          );
         } else {
           setHoveredTile(null);
         }

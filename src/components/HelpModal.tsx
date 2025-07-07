@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from "react";
 import { tips } from "./tips";
-import "./HelpModal.css";
 
 interface HelpModalProps {
   onClose: () => void;
