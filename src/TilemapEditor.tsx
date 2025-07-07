@@ -26,6 +26,7 @@ import {
   getPlacedTileFromCell,
   chooseTileVariant,
   getBestFitTileIds,
+  calculateBitmask,
 } from "./autotile";
 import "./TilemapEditor.css";
 import { HelpModal } from "./components/HelpModal";
@@ -131,7 +132,13 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           const groupLookup = autotileLookup.get(autotileGroup);
 
           if (groupLookup) {
-            const bitmask = 15; // SWEN
+            const bitmask = calculateBitmask(
+              x,
+              y,
+              newPlacedTiles,
+              autotileGroup,
+              config
+            );
             const validTileIds = getBestFitTileIds(groupLookup, bitmask);
             if (validTileIds && validTileIds.length > 0) {
               finalTileId = chooseTileVariant(validTileIds);

@@ -251,6 +251,45 @@ export const getPlacedTileFromCell = (
   return null;
 };
 
+export const calculateBitmask = (
+  x: number,
+  y: number,
+  placedTiles: PlacedTiles,
+  autotileGroup: string,
+  config: TileConfig
+): number => {
+  let bitmask = 0;
+  for (const [dx, dy, mask] of bitmaskToNeighbors) {
+    const nx = x + dx;
+    const ny = y + dy;
+
+    const neighborCell = placedTiles.get(`${nx}-${ny}`);
+    const neighborTile = getPlacedTileFromCell(
+      neighborCell,
+      autotileGroup,
+      config
+    );
+
+    let hasNeighbor = !!neighborTile;
+
+    if (!hasNeighbor && config.mapSize !== "infinite") {
+      if (
+        nx < 0 ||
+        nx >= config.mapSize.width ||
+        ny < 0 ||
+        ny >= config.mapSize.height
+      ) {
+        hasNeighbor = true;
+      }
+    }
+
+    if (hasNeighbor) {
+      bitmask |= mask;
+    }
+  }
+  return bitmask;
+};
+
 export const updateSurroundingTiles = (
   placedTiles: PlacedTiles,
   x: number,
@@ -322,20 +361,13 @@ export const updateSurroundingTiles = (
       const groupLookup = autotileLookup.get(autotileGroup);
       if (!groupLookup) continue;
 
-      let bitmask = 0;
-      for (const [dx, dy, mask] of bitmaskToNeighbors) {
-        const nx = cx + dx;
-        const ny = cy + dy;
-        const neighborCell = newPlacedTiles.get(`${nx}-${ny}`);
-        const neighborTile = getPlacedTileFromCell(
-          neighborCell,
-          autotileGroup,
-          config
-        );
-        if (neighborTile) {
-          bitmask |= mask;
-        }
-      }
+      const bitmask = calculateBitmask(
+        cx,
+        cy,
+        newPlacedTiles,
+        autotileGroup,
+        config
+      );
 
       const currentCell = newPlacedTiles.get(`${cx}-${cy}`);
       const currentTile = getPlacedTileFromCell(
