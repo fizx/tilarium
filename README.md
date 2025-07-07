@@ -158,3 +158,11 @@ The `onStateChange` hook provides a `TilemapState` object. Here is an example of
   "backgroundTileId": "background_sky"
 }
 ```
+
+### Collaborative Editing
+
+When building a collaborative experience with Tilarium, it's important to understand how autotiling and state changes are handled.
+
+When a user places or removes a tile, the autotiling logic is applied on the client _before_ any changes are sent to the server. The `onStateChange` callback will then provide a delta of all tiles that were modified as a result of the autotiling. This delta should be sent to the server and then broadcast to all other clients.
+
+When a client receives a delta from the server, it should apply it directly to its local state without re-running the autotiling logic. This is because the delta already represents the final, autotiled state of the map. The `applyRemoteDelta` action is designed for this purpose.

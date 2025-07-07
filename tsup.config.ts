@@ -1,7 +1,7 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ["src/index.ts", "src/TilemapEditor.css"],
+  entry: ["src/index.ts", "src/delta.ts", "src/TilemapEditor.css"],
   format: ["esm", "cjs"],
   dts: true,
   splitting: false,

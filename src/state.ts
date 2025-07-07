@@ -1,3 +1,5 @@
+import { PlacedTilesDelta } from "./delta";
+
 export type TileSource = "initial" | "local" | "remote";
 
 export interface PlacedTile {
@@ -46,8 +48,14 @@ export interface LoadStateAction {
   payload: TilemapState;
 }
 
+export interface ApplyDeltaAction {
+  type: "APPLY_DELTA";
+  payload: PlacedTilesDelta;
+}
+
 export type TilemapAction =
   | AddTileAction
   | RemoveTileAction
   | SetBackgroundAction
-  | LoadStateAction;
+  | LoadStateAction
+  | ApplyDeltaAction;

@@ -15,6 +15,6 @@
     "isolatedModules": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "example/src", "scripts"],
+  "include": ["src", "src/delta.ts", "example/src", "scripts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
