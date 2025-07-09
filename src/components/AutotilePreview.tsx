@@ -153,6 +153,57 @@ export const AutotilePreview = ({
     }
   }, [isAutotile, autotileGroup, tile, config, autotileLookup, previewSizes]);
 
+  if (tile.type === "background") {
+    if (!tile.spritesheet) {
+      return (
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            overflow: "hidden",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <img
+            src={tile.src}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
+        </div>
+      );
+    }
+
+    const { src, spritesheet } = tile;
+    const scale = Math.min(160 / spritesheet.width, 160 / spritesheet.height);
+
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
+        <img
+          src={src}
+          style={{
+            position: "absolute",
+            left: -spritesheet.x * scale,
+            top: -spritesheet.y * scale,
+            transform: `scale(${scale})`,
+            transformOrigin: "top left",
+          }}
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       className="autotile-preview-grid"
