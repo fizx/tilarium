@@ -5,6 +5,7 @@ import { Tile } from "./Tile";
 import { TileDefinition } from "../config";
 import { AutotilePreview } from "./AutotilePreview";
 import { PreviewPlaceholder } from "./PreviewPlaceholder";
+import { ScrollableContainer } from "./ScrollableContainer";
 
 export const TilePalette = ({
   onSelectTile,
@@ -23,12 +24,7 @@ export const TilePalette = ({
       a.displayName.localeCompare(b.displayName)
     )[0]?.displayName || ""
   );
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const tabsScrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
-  const [canTabsScrollLeft, setCanTabsScrollLeft] = useState(false);
-  const [canTabsScrollRight, setCanTabsScrollRight] = useState(false);
   const [preview, setPreview] = useState<{
     tile: TileDefinition;
     rect: DOMRect;
@@ -104,56 +100,6 @@ export const TilePalette = ({
     }
   }, [tileGroups, activeTab]);
 
-  useEffect(() => {
-    const checkScroll = () => {
-      const el = scrollContainerRef.current;
-      if (el) {
-        const { scrollLeft, scrollWidth, clientWidth } = el;
-        setCanScrollLeft(scrollLeft > 0);
-        setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
-      }
-    };
-
-    const el = scrollContainerRef.current;
-    if (el) {
-      checkScroll();
-      el.addEventListener("scroll", checkScroll);
-      window.addEventListener("resize", checkScroll);
-    }
-
-    return () => {
-      if (el) {
-        el.removeEventListener("scroll", checkScroll);
-        window.removeEventListener("resize", checkScroll);
-      }
-    };
-  }, []); // Now depends on the single container, not activeTab
-
-  useEffect(() => {
-    const checkTabsScroll = () => {
-      const el = tabsScrollRef.current;
-      if (el) {
-        const { scrollLeft, scrollWidth, clientWidth } = el;
-        setCanTabsScrollLeft(scrollLeft > 0);
-        setCanTabsScrollRight(scrollLeft < scrollWidth - clientWidth - 1); // -1 for subpixel rendering
-      }
-    };
-
-    const el = tabsScrollRef.current;
-    if (el) {
-      checkTabsScroll();
-      el.addEventListener("scroll", checkTabsScroll);
-      window.addEventListener("resize", checkTabsScroll);
-    }
-
-    return () => {
-      if (el) {
-        el.removeEventListener("scroll", checkTabsScroll);
-        window.removeEventListener("resize", checkTabsScroll);
-      }
-    };
-  }, [tileGroups]);
-
   const handleSelectTile = (
     e: React.MouseEvent<HTMLDivElement>,
     tile: TileDefinition,
@@ -168,26 +114,6 @@ export const TilePalette = ({
     onSelectTile(tile, isAutotileRep);
     if (groupName !== "backgrounds") {
       setSelectedTool("place");
-    }
-  };
-
-  const scroll = (direction: "left" | "right") => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = direction === "left" ? -300 : 300;
-      scrollContainerRef.current.scrollBy({
-        left: scrollAmount,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  const scrollTabs = (direction: "left" | "right") => {
-    if (tabsScrollRef.current) {
-      const scrollAmount = direction === "left" ? -150 : 150;
-      tabsScrollRef.current.scrollBy({
-        left: scrollAmount,
-        behavior: "smooth",
-      });
     }
   };
 
@@ -264,15 +190,7 @@ export const TilePalette = ({
         }}
       >
         <div className="tabs-container">
-          {canTabsScrollLeft && (
-            <div
-              className="scroll-button-tabs left"
-              onClick={() => scrollTabs("left")}
-            >
-              ❮
-            </div>
-          )}
-          <div className="tabs" ref={tabsScrollRef}>
+          <ScrollableContainer>
             {tileGroups.map((group) => (
               <button
                 key={group.displayName}
@@ -301,27 +219,11 @@ export const TilePalette = ({
                 {group.displayName}
               </button>
             ))}
-          </div>
-          {canTabsScrollRight && (
-            <div
-              className="scroll-button-tabs right"
-              onClick={() => scrollTabs("right")}
-            >
-              ❯
-            </div>
-          )}
+          </ScrollableContainer>
         </div>
         <div className="tab-content">
-          <div className="carousel-container">
-            {canScrollLeft && (
-              <div
-                className="scroll-button left"
-                onClick={() => scroll("left")}
-              >
-                ❮
-              </div>
-            )}
-            <div className="tile-grid single-view" ref={scrollContainerRef}>
+          <ScrollableContainer>
+            <div className="tile-grid-content">
               {tileGroups.map((group) => (
                 <div
                   key={group.displayName}
@@ -454,15 +356,7 @@ export const TilePalette = ({
                 </div>
               ))}
             </div>
-            {canScrollRight && (
-              <div
-                className="scroll-button right"
-                onClick={() => scroll("right")}
-              >
-                ❯
-              </div>
-            )}
-          </div>
+          </ScrollableContainer>
           {autotileGroupToShow && (
             <div
               className={`variant-drawer-overlay ${
@@ -474,23 +368,25 @@ export const TilePalette = ({
                 className="variant-drawer"
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="tile-grid">
-                  {Object.values(config.tiles)
-                    .filter((t) => t.autotile?.group === autotileGroupToShow)
-                    .map((tile) => (
-                      <div
-                        key={tile.displayName}
-                        className="tile-wrapper"
-                        onClick={(e) => {
-                          onSelectTile(tile, false);
-                          setSelectedTool("place");
-                        }}
-                        title={tile.displayName}
-                      >
-                        <Tile tile={{ ...tile, source: "local" }} />
-                      </div>
-                    ))}
-                </div>
+                <ScrollableContainer>
+                  <div className="tile-grid">
+                    {Object.values(config.tiles)
+                      .filter((t) => t.autotile?.group === autotileGroupToShow)
+                      .map((tile) => (
+                        <div
+                          key={tile.displayName}
+                          className="tile-wrapper"
+                          onClick={(e) => {
+                            onSelectTile(tile, false);
+                            setSelectedTool("place");
+                          }}
+                          title={tile.displayName}
+                        >
+                          <Tile tile={{ ...tile, source: "local" }} />
+                        </div>
+                      ))}
+                  </div>
+                </ScrollableContainer>
               </div>
             </div>
           )}
