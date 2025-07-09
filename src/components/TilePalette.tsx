@@ -36,6 +36,16 @@ export const TilePalette = ({
     null
   );
   const [variantMode, setVariantMode] = useState<"auto" | "manual">("auto");
+  const [isPreviewVisible, setIsPreviewVisible] = useState(
+    () => window.matchMedia("(min-width: 501px)").matches
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 501px)");
+    const handler = (e: MediaQueryListEvent) => setIsPreviewVisible(e.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
 
   const tileGroups = useMemo(() => {
     return Object.values(config.groups).sort((a, b) =>
@@ -83,9 +93,9 @@ export const TilePalette = ({
   }, [showVariantButton]);
 
   useEffect(() => {
-    if (variantMode === "auto") {
-      setAutotileGroupToShow(null);
-    } else if (selectedTile?.definition.autotile) {
+    // This effect now only handles *opening* the drawer when switching to manual mode.
+    // Closing the drawer is handled by direct onClick events.
+    if (variantMode === "manual" && selectedTile?.definition.autotile) {
       setAutotileGroupToShow(selectedTile.definition.autotile.group);
     }
   }, [variantMode, selectedTile]);
@@ -114,6 +124,13 @@ export const TilePalette = ({
     onSelectTile(tile, isAutotileRep);
     if (groupName !== "backgrounds") {
       setSelectedTool("place");
+    }
+    setVariantMode("auto"); // Always reset to auto mode when selecting a new tile.
+
+    // If preview is hidden, open drawer immediately for autotiles.
+    if (!isPreviewVisible && isAutotileRep && tile.autotile) {
+      setAutotileGroupToShow(tile.autotile.group);
+      setVariantMode("manual");
     }
   };
 
@@ -150,18 +167,12 @@ export const TilePalette = ({
           <div className="variants-toggle-set">
             <button
               className={`toggle-button ${
-                variantMode === "auto" ? "active" : ""
-              }`}
-              onClick={() => setVariantMode("auto")}
-              title="Autotile"
-            >
-              🪄
-            </button>
-            <button
-              className={`toggle-button ${
                 variantMode === "manual" ? "active" : ""
               }`}
-              onClick={() => setVariantMode("manual")}
+              onClick={(e) => {
+                e.stopPropagation();
+                setVariantMode("manual");
+              }}
               title="Variants"
             >
               <svg
@@ -181,8 +192,28 @@ export const TilePalette = ({
   };
 
   return (
-    <div className="palette" ref={paletteRef}>
-      <div className="preview-pane">{renderPreview()}</div>
+    <div
+      className="palette"
+      ref={paletteRef}
+      onClick={(e) => {
+        // Clicks on the palette itself (but not its children) should close the drawer
+        if (e.target === paletteRef.current && autotileGroupToShow) {
+          setAutotileGroupToShow(null);
+          setVariantMode("auto");
+        }
+      }}
+    >
+      <div
+        className="preview-pane"
+        onClick={() => {
+          if (autotileGroupToShow) {
+            setAutotileGroupToShow(null);
+            setVariantMode("auto");
+          }
+        }}
+      >
+        {renderPreview()}
+      </div>
       <div
         className="main-pane"
         onMouseLeave={() => {
@@ -362,12 +393,67 @@ export const TilePalette = ({
               className={`variant-drawer-overlay ${
                 autotileGroupToShow ? "visible" : ""
               }`}
-              onClick={() => setAutotileGroupToShow(null)}
+              onClick={() => {
+                setAutotileGroupToShow(null);
+                setVariantMode("auto");
+              }}
             >
               <div
                 className="variant-drawer"
                 onClick={(e) => e.stopPropagation()}
               >
+                <div className="variant-drawer-actions">
+                  <button
+                    className={`tool-button ${
+                      variantMode === "auto" ? "active" : ""
+                    }`}
+                    onClick={() => {
+                      if (selectedTile?.definition.autotile) {
+                        const groupName =
+                          selectedTile.definition.autotile.group;
+                        const tilesForThisGroup = Object.values(
+                          config.tiles
+                        ).filter((t) => t.autotile?.group === groupName);
+
+                        // Find representative tile using the same logic as the initial palette load
+                        let repTile = tilesForThisGroup.find(
+                          (t) => t.displayName === groupName
+                        );
+                        if (!repTile) {
+                          const hasAllDirections = (s: string) =>
+                            ["N", "E", "S", "W"].every((d) => s.includes(d));
+                          repTile = tilesForThisGroup.find(
+                            (t) =>
+                              t.autotile &&
+                              hasAllDirections(t.autotile.neighbors)
+                          );
+                        }
+                        if (!repTile && tilesForThisGroup.length > 0) {
+                          repTile = tilesForThisGroup[0];
+                        }
+
+                        if (repTile) {
+                          onSelectTile(repTile, true);
+                        }
+                      }
+                      setVariantMode("auto");
+                    }}
+                    title="Autotile"
+                  >
+                    🪄
+                  </button>
+                  <button
+                    className="tool-button close-button"
+                    onClick={() => {
+                      setAutotileGroupToShow(null);
+                      setVariantMode("auto");
+                    }}
+                    title="Close"
+                  >
+                    ❌
+                  </button>
+                </div>
+                <div className="variant-drawer-separator" />
                 <ScrollableContainer>
                   <div className="tile-grid">
                     {Object.values(config.tiles)
@@ -379,6 +465,7 @@ export const TilePalette = ({
                           onClick={(e) => {
                             onSelectTile(tile, false);
                             setSelectedTool("place");
+                            setVariantMode("manual");
                           }}
                           title={tile.displayName}
                         >

@@ -66,9 +66,8 @@
 
 .variants-toggle-set {
   position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 30px;
+  right: 30px;
   display: flex;
   border-radius: 6px;
   overflow: hidden;
@@ -103,6 +102,30 @@
   display: flex; /* Use flex to control the child grid */
   transform: scale(0.95);
   transition: transform 0.2s ease-in-out;
+  align-items: center;
+  gap: 10px;
+}
+
+.variant-drawer-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+
+.variant-drawer-toolbar .tool-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.variant-drawer-toolbar .tool-button:hover {
+  background-color: #e9e9e9;
 }
 
 .variant-drawer-overlay {
@@ -111,7 +134,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: transparent;
   z-index: 5;
   display: flex;
   justify-content: flex-start;
@@ -129,6 +152,41 @@
 
 .variant-drawer-overlay.visible .variant-drawer {
   transform: scale(1);
+}
+
+.variant-drawer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.variant-drawer-actions .tool-button {
+  background: none;
+  border: 1px solid #ccc;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.variant-drawer-actions .tool-button:hover {
+  background-color: #e9e9e9;
+}
+
+.variant-drawer-actions .tool-button.active {
+  background-color: #e9f5ff;
+  border-color: #007bff;
+}
+
+.variant-drawer-actions .close-button {
+  border-color: transparent;
+}
+
+.variant-drawer-separator {
+  width: 1px;
+  background-color: #ddd;
+  align-self: stretch;
 }
 
 .variant-drawer .carousel-container {
