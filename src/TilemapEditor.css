@@ -474,3 +474,9 @@
   display: flex;
   /* ... existing code ... */
 }
+
+@media (max-width: 500px) {
+  .preview-pane {
+    display: none;
+  }
+}
