@@ -35,8 +35,11 @@ export const TilePalette = ({
     isAutotile: boolean;
   } | null>(null);
   const paletteRef = useRef<HTMLDivElement>(null);
-  const [showAllVariants, setShowAllVariants] = useState(false);
   const [flashingGroup, setFlashingGroup] = useState<string | null>(null);
+  const [autotileGroupToShow, setAutotileGroupToShow] = useState<string | null>(
+    null
+  );
+  const [variantMode, setVariantMode] = useState<"auto" | "manual">("auto");
 
   const tileGroups = useMemo(() => {
     return Object.values(config.groups).sort((a, b) =>
@@ -65,6 +68,31 @@ export const TilePalette = ({
       ),
     [tileGroups]
   );
+
+  const showVariantButton = useMemo(
+    () =>
+      selectedTool === "place" &&
+      selectedTile &&
+      selectedTile.isAutotileRep &&
+      selectedTile.definition.autotile &&
+      (!preview ||
+        preview.tile.displayName === selectedTile.definition.displayName),
+    [selectedTool, selectedTile, preview]
+  );
+
+  useEffect(() => {
+    if (!showVariantButton) {
+      setVariantMode("auto");
+    }
+  }, [showVariantButton]);
+
+  useEffect(() => {
+    if (variantMode === "auto") {
+      setAutotileGroupToShow(null);
+    } else if (selectedTile?.definition.autotile) {
+      setAutotileGroupToShow(selectedTile.definition.autotile.group);
+    }
+  }, [variantMode, selectedTile]);
 
   useEffect(() => {
     // if the active tab is not in the tile groups, set it to the first one
@@ -185,23 +213,56 @@ export const TilePalette = ({
     }
 
     return (
-      <AutotilePreview
-        tile={tileForPreview}
-        isAutotile={isAutotileForPreview}
-      />
+      <>
+        <div className="preview-container">
+          <AutotilePreview
+            tile={tileForPreview}
+            isAutotile={isAutotileForPreview}
+          />
+        </div>
+        {showVariantButton && (
+          <div className="variants-toggle-set">
+            <button
+              className={`toggle-button ${
+                variantMode === "auto" ? "active" : ""
+              }`}
+              onClick={() => setVariantMode("auto")}
+              title="Autotile"
+            >
+              🪄
+            </button>
+            <button
+              className={`toggle-button ${
+                variantMode === "manual" ? "active" : ""
+              }`}
+              onClick={() => setVariantMode("manual")}
+              title="Variants"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3z" />
+              </svg>
+            </button>
+          </div>
+        )}
+      </>
     );
   };
 
   return (
-    <div
-      className="palette"
-      ref={paletteRef}
-      onMouseLeave={() => {
-        setPreview(null);
-      }}
-    >
+    <div className="palette" ref={paletteRef}>
       <div className="preview-pane">{renderPreview()}</div>
-      <div className="main-pane">
+      <div
+        className="main-pane"
+        onMouseLeave={() => {
+          setPreview(null);
+        }}
+      >
         <div className="tabs-container">
           {canTabsScrollLeft && (
             <div
@@ -249,15 +310,6 @@ export const TilePalette = ({
               ❯
             </div>
           )}
-          <div className="show-all-variants-toggle">
-            <input
-              type="checkbox"
-              id="show-all-variants"
-              checked={showAllVariants}
-              onChange={(e) => setShowAllVariants(e.target.checked)}
-            />
-            <label htmlFor="show-all-variants">Show Variants</label>
-          </div>
         </div>
         <div className="tab-content">
           <div className="carousel-container">
@@ -331,16 +383,13 @@ export const TilePalette = ({
                         }
                       );
 
-                      // 2. Get all other tiles for the tab, filtering out autotile members unless showAllVariants is true
+                      // 2. Get all other tiles for the tab, filtering out autotile members
                       const allOtherTiles = group.tileIds
                         .map((tileId) => ({
                           tile: config.tiles[tileId],
                           isAutotileRep: false,
                         }))
-                        .filter(({ tile }) => {
-                          if (!tile.autotile) return true;
-                          return showAllVariants;
-                        });
+                        .filter(({ tile }) => !tile.autotile);
 
                       // 3. Combine and de-duplicate, with representatives taking precedence
                       const displayTiles = [
@@ -384,7 +433,7 @@ export const TilePalette = ({
                               )
                             }
                             onMouseEnter={() => {
-                              if (paletteRef.current) {
+                              if (!selectedTile && paletteRef.current) {
                                 setPreview({
                                   tile: tile,
                                   rect: paletteRef.current.getBoundingClientRect(),
@@ -414,6 +463,37 @@ export const TilePalette = ({
               </div>
             )}
           </div>
+          {autotileGroupToShow && (
+            <div
+              className={`variant-drawer-overlay ${
+                autotileGroupToShow ? "visible" : ""
+              }`}
+              onClick={() => setAutotileGroupToShow(null)}
+            >
+              <div
+                className="variant-drawer"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="tile-grid">
+                  {Object.values(config.tiles)
+                    .filter((t) => t.autotile?.group === autotileGroupToShow)
+                    .map((tile) => (
+                      <div
+                        key={tile.displayName}
+                        className="tile-wrapper"
+                        onClick={(e) => {
+                          onSelectTile(tile, false);
+                          setSelectedTool("place");
+                        }}
+                        title={tile.displayName}
+                      >
+                        <Tile tile={{ ...tile, source: "local" }} />
+                      </div>
+                    ))}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

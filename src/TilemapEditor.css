@@ -42,11 +42,100 @@
   padding: 10px;
   border-right: 1px solid #ddd;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #f7f7f7;
   overflow: hidden;
   height: 160px; /* Give a fixed height to match the old visible state */
+  position: relative;
+}
+
+.preview-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.variants-button:hover {
+  background-color: #e9e9e9;
+}
+
+.variants-toggle-set {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  z-index: 10;
+}
+
+.toggle-button {
+  padding: 5px 10px;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.toggle-button:not(:last-child) {
+  border-right: 1px solid #ccc;
+}
+
+.toggle-button.active {
+  background-color: #e9f5ff;
+}
+
+.variant-drawer {
+  background-color: #fdfdfd;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  max-width: 90%;
+  max-height: 90%;
+  display: flex; /* Use flex to control the child grid */
+  transform: scale(0.95);
+  transition: transform 0.2s ease-in-out;
+}
+
+.variant-drawer-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+.variant-drawer-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.variant-drawer-overlay.visible .variant-drawer {
+  transform: scale(1);
+}
+
+.variant-drawer .tile-grid {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 5px;
 }
 
 .preview-placeholder {
@@ -71,6 +160,7 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
+  position: relative;
 }
 
 .tabs-container {
@@ -437,20 +527,6 @@
 .tile-wrapper.autotile-glow .tile-image-wrapper {
   position: relative;
   z-index: 2; /* Ensure the tile content is on top of the glow effect */
-}
-
-.show-all-variants-toggle {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-  padding: 0 15px;
-  font-size: 14px;
-  color: #555;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-}
-
-.show-all-variants-toggle input {
-  margin-right: 5px;
 }
 
 @media (min-width: 768px) {
