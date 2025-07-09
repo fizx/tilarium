@@ -11,6 +11,11 @@ import {
 
 type PreviewSize = { width: number; height: number };
 
+const previewCache = new Map<
+  string,
+  { tilesToRender: JSX.Element[]; gridSize: PreviewSize }
+>();
+
 interface AutotilePreviewProps {
   tile: TileDefinition;
   isAutotile: boolean;
@@ -27,6 +32,10 @@ export const AutotilePreview = ({
 
   const { tilesToRender, gridSize } = useMemo(() => {
     if (isAutotile && autotileGroup) {
+      if (previewCache.has(autotileGroup)) {
+        return previewCache.get(autotileGroup)!;
+      }
+
       const groupLookup = autotileLookup.get(autotileGroup);
       if (!groupLookup)
         return { tilesToRender: [], gridSize: { width: 1, height: 1 } };
@@ -124,10 +133,15 @@ export const AutotilePreview = ({
           break;
         }
       }
-      return {
+
+      const result = {
         tilesToRender: bestPreview.tilesToRender,
         gridSize: bestPreview.gridSize,
       };
+
+      previewCache.set(autotileGroup, result);
+
+      return result;
     } else {
       // Non-autotile logic
       const rendered = [
