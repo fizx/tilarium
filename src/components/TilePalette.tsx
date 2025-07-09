@@ -1,7 +1,9 @@
 import React, { useMemo, useState, useRef, useEffect } from "react";
+import ReactDOM from "react-dom";
 import { useEditor } from "../EditorContext";
 import { Tile } from "./Tile";
 import { TileDefinition } from "../config";
+import { AutotilePreview } from "./AutotilePreview";
 
 export const TilePalette = ({
   onSelectTile,
@@ -26,6 +28,12 @@ export const TilePalette = ({
   const [canScrollRight, setCanScrollRight] = useState(false);
   const [canTabsScrollLeft, setCanTabsScrollLeft] = useState(false);
   const [canTabsScrollRight, setCanTabsScrollRight] = useState(false);
+  const [preview, setPreview] = useState<{
+    tile: TileDefinition;
+    rect: DOMRect;
+    isAutotile: boolean;
+  } | null>(null);
+  const paletteRef = useRef<HTMLDivElement>(null);
 
   const tileGroups = useMemo(() => {
     return Object.values(config.groups).sort((a, b) =>
@@ -135,7 +143,13 @@ export const TilePalette = ({
   };
 
   return (
-    <div className="palette">
+    <div
+      className="palette"
+      ref={paletteRef}
+      onMouseLeave={() => {
+        setPreview(null);
+      }}
+    >
       <div className="tabs-container">
         {canTabsScrollLeft && (
           <div
@@ -285,6 +299,15 @@ export const TilePalette = ({
                               isAutotileRep
                             )
                           }
+                          onMouseEnter={() => {
+                            if (paletteRef.current) {
+                              setPreview({
+                                tile: tile,
+                                rect: paletteRef.current.getBoundingClientRect(),
+                                isAutotile: isAutotileRep,
+                              });
+                            }
+                          }}
                           title={tile.displayName}
                         >
                           <div className="tile-image-wrapper">
@@ -309,6 +332,54 @@ export const TilePalette = ({
           return null;
         })}
       </div>
+      {(() => {
+        const shouldShowPreview =
+          preview || (selectedTool === "place" && selectedTile);
+
+        if (!shouldShowPreview) return null;
+
+        let tileForPreview: TileDefinition;
+        let isAutotileForPreview: boolean;
+        let rectForPreview: DOMRect | undefined;
+
+        if (preview) {
+          tileForPreview = preview.tile;
+          isAutotileForPreview = preview.isAutotile;
+          rectForPreview = preview.rect;
+        } else if (selectedTool === "place" && selectedTile) {
+          tileForPreview = selectedTile.definition;
+          isAutotileForPreview = selectedTile.isAutotileRep;
+          rectForPreview = paletteRef.current?.getBoundingClientRect();
+        } else {
+          return null;
+        }
+
+        if (!rectForPreview) return null;
+
+        return ReactDOM.createPortal(
+          <div
+            className="autotile-preview-container"
+            style={{
+              position: "fixed",
+              top: `${rectForPreview.top - 10}px`,
+              left: `${rectForPreview.left}px`,
+              transform: "translateY(-100%)",
+              zIndex: 1000,
+              backgroundColor: "#fdfdfd",
+              border: "1px solid #ccc",
+              borderRadius: "4px",
+              padding: "5px",
+              boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+            }}
+          >
+            <AutotilePreview
+              tile={tileForPreview}
+              isAutotile={isAutotileForPreview}
+            />
+          </div>,
+          document.body
+        );
+      })()}
     </div>
   );
 };
