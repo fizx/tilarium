@@ -270,9 +270,7 @@ export const Canvas = () => {
             return currentZ > topZ ? current : top;
           });
           const tileDef = config.tiles[topTile.tileId];
-          setHoveredTile(
-            tileDef ? { ...topTile, displayName: tileDef.displayName } : topTile
-          );
+          setHoveredTile(topTile);
         } else {
           setHoveredTile(null);
         }
@@ -339,20 +337,50 @@ export const Canvas = () => {
     ]
   );
 
+  const mapSize = useMemo(
+    () =>
+      config.mapSize === "infinite"
+        ? null
+        : {
+            width: config.mapSize.width * config.gridSize,
+            height: config.mapSize.height * config.gridSize,
+          },
+    [config.mapSize, config.gridSize]
+  );
+
   const handleMouseDown = useCallback(
     (e: MouseEvent) => {
-      if (selectedTool === "eyedropper") {
-        const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-        const gridX = Math.floor(
-          (e.clientX - rect.left - camera.x) / (config.gridSize * camera.zoom)
-        );
-        const gridY = Math.floor(
-          (e.clientY - rect.top - camera.y) / (config.gridSize * camera.zoom)
-        );
-        handleEyedropper(gridX, gridY);
+      const target = e.target as HTMLElement;
+      if (target.closest(".map-boundary")) {
+        if (selectedTool === "place" || selectedTool === "erase") {
+          handlePaintStart(e);
+        } else if (selectedTool === "eyedropper") {
+          const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+          const gridX = Math.floor(
+            (e.clientX - rect.left - camera.x) / (config.gridSize * camera.zoom)
+          );
+          const gridY = Math.floor(
+            (e.clientY - rect.top - camera.y) / (config.gridSize * camera.zoom)
+          );
+          handleEyedropper(gridX, gridY);
+        } else {
+          handlePanStart(e);
+        }
       } else {
-        handlePanStart(e);
-        handlePaintStart(e);
+        const canvasRect = (
+          e.currentTarget as HTMLElement
+        ).getBoundingClientRect();
+        if (mapSize) {
+          const newCameraX =
+            (canvasRect.width - mapSize.width * camera.zoom) / 2;
+          const newCameraY =
+            (canvasRect.height - mapSize.height * camera.zoom) / 2;
+          setCamera({
+            ...camera,
+            x: newCameraX,
+            y: newCameraY,
+          });
+        }
       }
     },
     [
@@ -364,6 +392,8 @@ export const Canvas = () => {
       camera.y,
       camera.zoom,
       config.gridSize,
+      setCamera,
+      mapSize,
     ]
   );
 
@@ -497,17 +527,6 @@ export const Canvas = () => {
       });
     },
     [camera.x, camera.y, camera.zoom, setCamera]
-  );
-
-  const mapSize = useMemo(
-    () =>
-      config.mapSize === "infinite"
-        ? null
-        : {
-            width: config.mapSize.width * config.gridSize,
-            height: config.mapSize.height * config.gridSize,
-          },
-    [config.mapSize, config.gridSize]
   );
 
   useEffect(() => {
