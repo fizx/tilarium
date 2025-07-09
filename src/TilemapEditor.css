@@ -34,6 +34,7 @@
 
   display: flex;
   flex-direction: row;
+  align-items: flex-start; /* Prevent preview from stretching the main pane */
 }
 
 .preview-pane {
@@ -45,7 +46,24 @@
   align-items: center;
   background-color: #f7f7f7;
   overflow: hidden;
-  aspect-ratio: 1 / 1;
+  height: 160px; /* Give a fixed height to match the old visible state */
+}
+
+.preview-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #aaa;
+  text-align: center;
+  height: 100%;
+}
+
+.placeholder-icon {
+  font-size: 48px;
+  font-weight: bold;
+  line-height: 1;
+  margin-bottom: 10px;
 }
 
 .main-pane {

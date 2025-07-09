@@ -4,6 +4,7 @@ import { useEditor } from "../EditorContext";
 import { Tile } from "./Tile";
 import { TileDefinition } from "../config";
 import { AutotilePreview } from "./AutotilePreview";
+import { PreviewPlaceholder } from "./PreviewPlaceholder";
 
 export const TilePalette = ({
   onSelectTile,
@@ -166,7 +167,9 @@ export const TilePalette = ({
     const shouldShowPreview =
       preview || (selectedTool === "place" && selectedTile);
 
-    if (!shouldShowPreview) return null;
+    if (!shouldShowPreview) {
+      return <PreviewPlaceholder />;
+    }
 
     let tileForPreview: TileDefinition;
     let isAutotileForPreview: boolean;
@@ -178,7 +181,7 @@ export const TilePalette = ({
       tileForPreview = selectedTile.definition;
       isAutotileForPreview = selectedTile.isAutotileRep;
     } else {
-      return null;
+      return <PreviewPlaceholder />;
     }
 
     return (

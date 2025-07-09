@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useRef, useLayoutEffect } from "react";
 import { Tile } from "./Tile";
 import { useEditor } from "../EditorContext";
 import { TileDefinition } from "../config";
@@ -29,6 +29,8 @@ export const AutotilePreview = ({
 }: AutotilePreviewProps) => {
   const { config, autotileLookup } = useEditor();
   const autotileGroup = tile.autotile?.group;
+  const [scale, setScale] = useState(1);
+  const previewContentRef = useRef<HTMLDivElement>(null);
 
   const { tilesToRender, gridSize } = useMemo(() => {
     if (isAutotile && autotileGroup) {
@@ -143,15 +145,39 @@ export const AutotilePreview = ({
 
       return result;
     } else {
-      // Non-autotile logic
-      const rendered = [
-        <div key="0-0" style={{ gridColumn: 1, gridRow: 1 }}>
-          <Tile tile={{ ...tile, source: "local" }} />
-        </div>,
-      ];
-      return { tilesToRender: rendered, gridSize: { width: 1, height: 1 } };
+      // Non-autotile logic (1x1 tile)
+      return {
+        tilesToRender: [
+          <Tile key={tile.displayName} tile={{ ...tile, source: "local" }} />,
+        ],
+        gridSize: { width: 1, height: 1 },
+      };
     }
   }, [isAutotile, autotileGroup, tile, config, autotileLookup, previewSizes]);
+
+  useLayoutEffect(() => {
+    if (previewContentRef.current && !isAutotile) {
+      // For single tiles, no scaling is needed as we control the size
+      setScale(1);
+      return;
+    }
+
+    if (previewContentRef.current) {
+      const containerSize = 140; // 160px pane - 20px padding
+      const gridWidth = gridSize.width * config.gridSize;
+      const gridHeight = gridSize.height * config.gridSize;
+
+      if (gridWidth > containerSize || gridHeight > containerSize) {
+        const scaleValue = Math.min(
+          containerSize / gridWidth,
+          containerSize / gridHeight
+        );
+        setScale(scaleValue);
+      } else {
+        setScale(1);
+      }
+    }
+  }, [gridSize, config.gridSize, isAutotile]);
 
   if (tile.type === "background") {
     if (!tile.spritesheet) {
@@ -204,14 +230,21 @@ export const AutotilePreview = ({
     );
   }
 
+  // Handle non-autotile case separately to use the enlarged tile logic
+  if (!isAutotile) {
+    return <>{tilesToRender}</>;
+  }
+
   return (
     <div
+      ref={previewContentRef}
       className="autotile-preview-grid"
       style={{
         display: "grid",
         gridTemplateColumns: `repeat(${gridSize.width}, ${config.gridSize}px)`,
         gridTemplateRows: `repeat(${gridSize.height}, ${config.gridSize}px)`,
         pointerEvents: "none",
+        transform: `scale(${scale})`,
       }}
     >
       {tilesToRender}
