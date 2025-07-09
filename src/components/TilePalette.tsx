@@ -210,7 +210,7 @@ export const TilePalette = ({
                   if (groupRef?.current) {
                     groupRef.current.scrollIntoView({
                       behavior: "smooth",
-                      inline: "center",
+                      inline: "start",
                       block: "nearest",
                     });
                   }
