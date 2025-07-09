@@ -131,12 +131,17 @@
   transform: scale(1);
 }
 
+.variant-drawer .carousel-container {
+  flex: 1;
+  min-width: 0;
+}
+
 .variant-drawer .tile-grid {
   display: grid;
   grid-auto-flow: column;
   gap: 8px;
-  overflow-x: auto;
   padding: 5px;
+  flex-shrink: 0;
 }
 
 .preview-placeholder {

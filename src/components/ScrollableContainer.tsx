@@ -14,29 +14,30 @@ export const ScrollableContainer = ({
   const [canScrollRight, setCanScrollRight] = useState(false);
 
   useEffect(() => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+
     const checkScroll = () => {
-      const el = scrollContainerRef.current;
-      if (el) {
-        const { scrollLeft, scrollWidth, clientWidth } = el;
-        setCanScrollLeft(scrollLeft > 0);
-        setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
-      }
+      const { scrollLeft, scrollWidth, clientWidth } = el;
+      // A small tolerance is added to prevent floating point inaccuracies
+      const scrollableWidth = scrollWidth - clientWidth;
+      setCanScrollLeft(scrollLeft > 1);
+      setCanScrollRight(scrollLeft < scrollableWidth - 1);
     };
 
-    const el = scrollContainerRef.current;
-    if (el) {
-      checkScroll();
-      el.addEventListener("scroll", checkScroll, { passive: true });
-      window.addEventListener("resize", checkScroll);
-    }
+    checkScroll(); // Initial check
 
-    const timeoutId = setTimeout(checkScroll, 100);
+    // Set up observers
+    const resizeObserver = new ResizeObserver(checkScroll);
+    resizeObserver.observe(el);
+    el.addEventListener("scroll", checkScroll, { passive: true });
+
+    // A timeout can help catch cases where initial render dimensions are not final
+    const timeoutId = setTimeout(checkScroll, 150);
 
     return () => {
-      if (el) {
-        el.removeEventListener("scroll", checkScroll);
-        window.removeEventListener("resize", checkScroll);
-      }
+      resizeObserver.disconnect();
+      el.removeEventListener("scroll", checkScroll);
       clearTimeout(timeoutId);
     };
   }, [children]);
