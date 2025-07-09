@@ -35,12 +35,24 @@ export const TilePalette = ({
   } | null>(null);
   const paletteRef = useRef<HTMLDivElement>(null);
   const [showAllVariants, setShowAllVariants] = useState(false);
+  const [flashingGroup, setFlashingGroup] = useState<string | null>(null);
 
   const tileGroups = useMemo(() => {
     return Object.values(config.groups).sort((a, b) =>
       a.displayName.localeCompare(b.displayName)
     );
   }, [config.groups]);
+
+  const groupRefs = useMemo(
+    () =>
+      new Map(
+        tileGroups.map((g) => [
+          g.displayName,
+          React.createRef<HTMLDivElement>(),
+        ])
+      ),
+    [tileGroups]
+  );
 
   useEffect(() => {
     // if the active tab is not in the tile groups, set it to the first one
@@ -66,12 +78,8 @@ export const TilePalette = ({
     if (el) {
       checkScroll();
       el.addEventListener("scroll", checkScroll);
-      // listen for resize
       window.addEventListener("resize", checkScroll);
     }
-
-    // Also check when the active tab changes
-    checkScroll();
 
     return () => {
       if (el) {
@@ -79,7 +87,7 @@ export const TilePalette = ({
         window.removeEventListener("resize", checkScroll);
       }
     };
-  }, [activeTab]);
+  }, []); // Now depends on the single container, not activeTab
 
   useEffect(() => {
     const checkTabsScroll = () => {
@@ -169,11 +177,16 @@ export const TilePalette = ({
               }`}
               onClick={(e) => {
                 setActiveTab(group.displayName);
-                e.currentTarget.scrollIntoView({
-                  behavior: "smooth",
-                  inline: "center",
-                  block: "nearest",
-                });
+                setFlashingGroup(group.displayName);
+                setTimeout(() => setFlashingGroup(null), 1000); // Duration of the flash animation
+                const groupRef = groupRefs.get(group.displayName);
+                if (groupRef?.current) {
+                  groupRef.current.scrollIntoView({
+                    behavior: "smooth",
+                    inline: "center",
+                    block: "nearest",
+                  });
+                }
               }}
             >
               {group.displayName}
@@ -199,25 +212,29 @@ export const TilePalette = ({
         </div>
       </div>
       <div className="tab-content">
-        {tileGroups.map((group) => {
-          if (activeTab === group.displayName) {
-            return (
-              <div key={group.displayName} className="carousel-container">
-                {canScrollLeft && (
-                  <div
-                    className="scroll-button left"
-                    onClick={() => scroll("left")}
-                  >
-                    ❮
-                  </div>
+        <div className="carousel-container">
+          {canScrollLeft && (
+            <div className="scroll-button left" onClick={() => scroll("left")}>
+              ❮
+            </div>
+          )}
+          <div className="tile-grid single-view" ref={scrollContainerRef}>
+            {tileGroups.map((group) => (
+              <div
+                key={group.displayName}
+                className="tile-group-wrapper"
+                ref={groupRefs.get(group.displayName)}
+                data-group-name={group.displayName}
+              >
+                {flashingGroup === group.displayName && (
+                  <div className="flash-overlay"></div>
                 )}
                 <div
-                  className={`tile-grid ${
+                  className={`tile-sub-grid ${
                     group.displayName === "backgrounds"
                       ? "backgrounds-grid"
                       : ""
                   }`}
-                  ref={scrollContainerRef}
                 >
                   {(() => {
                     const getRepTile = (
@@ -333,19 +350,18 @@ export const TilePalette = ({
                     });
                   })()}
                 </div>
-                {canScrollRight && (
-                  <div
-                    className="scroll-button right"
-                    onClick={() => scroll("right")}
-                  >
-                    ❯
-                  </div>
-                )}
               </div>
-            );
-          }
-          return null;
-        })}
+            ))}
+          </div>
+          {canScrollRight && (
+            <div
+              className="scroll-button right"
+              onClick={() => scroll("right")}
+            >
+              ❯
+            </div>
+          )}
+        </div>
       </div>
       {(() => {
         const shouldShowPreview =

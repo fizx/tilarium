@@ -109,6 +109,55 @@
   display: none; /* Safari and Chrome */
 }
 
+.tile-grid.single-view {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 20px;
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.tile-group-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.tile-sub-grid {
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+  grid-auto-flow: column;
+  gap: 8px;
+}
+
+@keyframes flash-anim {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.flash-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 123, 255, 0.2);
+  z-index: 1;
+  pointer-events: none;
+  animation: flash-anim 1s ease-in-out;
+}
+
 /* Tile Styling */
 .tile-wrapper {
   display: flex;
