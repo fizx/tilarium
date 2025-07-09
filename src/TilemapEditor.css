@@ -352,6 +352,20 @@
   z-index: 2; /* Ensure the tile content is on top of the glow effect */
 }
 
+.show-all-variants-toggle {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding: 0 15px;
+  font-size: 14px;
+  color: #555;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+.show-all-variants-toggle input {
+  margin-right: 5px;
+}
+
 @media (min-width: 768px) {
   .tab-button {
     font-size: 16px;

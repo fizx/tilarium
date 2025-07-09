@@ -34,6 +34,7 @@ export const TilePalette = ({
     isAutotile: boolean;
   } | null>(null);
   const paletteRef = useRef<HTMLDivElement>(null);
+  const [showAllVariants, setShowAllVariants] = useState(false);
 
   const tileGroups = useMemo(() => {
     return Object.values(config.groups).sort((a, b) =>
@@ -187,6 +188,15 @@ export const TilePalette = ({
             ❯
           </div>
         )}
+        <div className="show-all-variants-toggle">
+          <input
+            type="checkbox"
+            id="show-all-variants"
+            checked={showAllVariants}
+            onChange={(e) => setShowAllVariants(e.target.checked)}
+          />
+          <label htmlFor="show-all-variants">Show Variants</label>
+        </div>
       </div>
       <div className="tab-content">
         {tileGroups.map((group) => {
@@ -252,11 +262,16 @@ export const TilePalette = ({
                       }
                     );
 
-                    // 2. Get all other tiles for the tab
-                    const allOtherTiles = group.tileIds.map((tileId) => ({
-                      tile: config.tiles[tileId],
-                      isAutotileRep: false,
-                    }));
+                    // 2. Get all other tiles for the tab, filtering out autotile members unless showAllVariants is true
+                    const allOtherTiles = group.tileIds
+                      .map((tileId) => ({
+                        tile: config.tiles[tileId],
+                        isAutotileRep: false,
+                      }))
+                      .filter(({ tile }) => {
+                        if (!tile.autotile) return true;
+                        return showAllVariants;
+                      });
 
                     // 3. Combine and de-duplicate, with representatives taking precedence
                     const displayTiles = [
