@@ -130,12 +130,16 @@ export const TilePalette = ({
     if (groupName !== "backgrounds") {
       setSelectedTool("place");
     }
-    setPlaceMode(preferredPlaceMode);
 
     // Open drawer immediately for autotiles.
     if (isAutotileRep && tile.autotile) {
       setAutotileGroupToShow(tile.autotile.group);
-      setPlaceMode(preferredPlaceMode);
+      setPlaceMode("autotile");
+      setPreferredPlaceMode("autotile");
+    } else {
+      setAutotileGroupToShow(null);
+      setPlaceMode("manual");
+      setPreferredPlaceMode("autotile");
     }
   };
 
@@ -182,7 +186,6 @@ export const TilePalette = ({
         // Clicks on the palette itself (but not its children) should close the drawer
         if (e.target === paletteRef.current && autotileGroupToShow) {
           setAutotileGroupToShow(null);
-          setPlaceMode(preferredPlaceMode);
         }
       }}
     >
@@ -191,7 +194,6 @@ export const TilePalette = ({
         onClick={() => {
           if (autotileGroupToShow) {
             setAutotileGroupToShow(null);
-            setPlaceMode(preferredPlaceMode);
           }
         }}
       >
@@ -378,7 +380,6 @@ export const TilePalette = ({
               }`}
               onClick={() => {
                 setAutotileGroupToShow(null);
-                setPlaceMode(preferredPlaceMode);
               }}
             >
               <div
@@ -472,7 +473,6 @@ export const TilePalette = ({
                   className="variant-drawer-close"
                   onClick={() => {
                     setAutotileGroupToShow(null);
-                    setPlaceMode(preferredPlaceMode);
                   }}
                   title="Close"
                 >

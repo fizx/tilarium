@@ -140,26 +140,30 @@ const inputFile = path.join(
   tilariumRoot,
   "example/public/assets/kenney_tiny-town/tiles.txt"
 );
-const outputFile = path.join(tilariumRoot, "example/src/tileset-town.json");
 
-// Load existing config if it exists, otherwise create a new one
-let tileConfig: TileConfig;
-if (fs.existsSync(outputFile)) {
-  const fileContent = fs.readFileSync(outputFile, "utf-8");
-  tileConfig = JSON.parse(fileContent);
-} else {
-  tileConfig = {
-    mapSize: "infinite",
-    tiles: {},
-    groups: {},
-    defaultZoom: 1,
-    gridSize: 16,
-  };
+// --- Argument Parsing ---
+const args = process.argv.slice(2);
+const variantArg = args.find((arg) => arg.startsWith("--variant="));
+const variant = variantArg ? variantArg.split("=")[1] : "infinite"; // 'infinite' or '32x32'
+
+if (variant !== "infinite" && variant !== "32x32") {
+  console.error("Invalid variant. Must be 'infinite' or '32x32'.");
+  process.exit(1);
 }
 
-// Clear existing tiles and groups to prevent duplicates on re-run
-tileConfig.tiles = {};
-tileConfig.groups = {};
+const outputFile = path.join(
+  tilariumRoot,
+  `example/src/tileset-town-${variant}.json`
+);
+
+// Create a new config from scratch based on variant.
+const tileConfig: TileConfig = {
+  mapSize: variant === "32x32" ? { width: 32, height: 32 } : "infinite",
+  tiles: {},
+  groups: {},
+  defaultZoom: 1,
+  gridSize: 16,
+};
 
 const txtData = fs.readFileSync(inputFile, "utf-8");
 const lines = txtData.split("\n").filter((line) => line.trim() !== "");

@@ -6,12 +6,13 @@ import {
   PlacedTile,
 } from "../../src";
 import platformerTileset from "./tileset.json";
-import townTileset from "./tileset-town.json";
+import townTileset32x32 from "./tileset-town-32x32.json";
+import townTilesetInfinite from "./tileset-town-infinite.json";
 import { TileConfig } from "../../src/config";
 import "./App.css";
 import pako from "pako";
 
-type Tileset = "platformer" | "town";
+type Tileset = "platformer" | "town-32x32" | "town-infinite";
 
 interface SavedState {
   tileset: Tileset;
@@ -67,6 +68,10 @@ const decodeState = (encoded: string): SavedState | null => {
 
     // The reviver should have handled map restoration.
     if (decoded && decoded.state && decoded.state.placedTiles) {
+      // Backwards compatibility for old "town" key
+      if (decoded.tileset === "town") {
+        decoded.tileset = "town-32x32";
+      }
       return decoded as SavedState;
     }
 
@@ -79,7 +84,8 @@ const decodeState = (encoded: string): SavedState | null => {
 
 const tilesets: Record<Tileset, TileConfig> = {
   platformer: platformerTileset as unknown as TileConfig,
-  town: townTileset as unknown as TileConfig,
+  "town-32x32": townTileset32x32 as unknown as TileConfig,
+  "town-infinite": townTilesetInfinite as unknown as TileConfig,
 };
 
 function App() {
@@ -149,7 +155,8 @@ function App() {
       <div className="toolbar-top">
         <select onChange={handleTilesetChange} value={selectedTileset}>
           <option value="platformer">Platformer</option>
-          <option value="town">Town</option>
+          <option value="town-32x32">Town (32x32)</option>
+          <option value="town-infinite">Town (Infinite)</option>
         </select>
       </div>
       <TilemapEditor

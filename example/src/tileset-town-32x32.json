@@ -1,6 +1,4 @@
 {
-  "gridSize": 16,
-  "defaultZoom": 1,
   "mapSize": {
     "width": 32,
     "height": 32
@@ -2149,5 +2147,7 @@
         "dirt"
       ]
     }
-  }
+  },
+  "defaultZoom": 1,
+  "gridSize": 16
 }
