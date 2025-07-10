@@ -25,10 +25,12 @@ export interface EditorContextType {
   config: TileConfig;
   state: TilemapState;
   dispatch: React.Dispatch<TilemapAction>;
-  selectedTile?: SelectedTile;
-  setSelectedTile: (tile?: SelectedTile) => void;
-  selectedTool: Tool;
-  setSelectedTool: (tool: Tool) => void;
+  selectedTile: { definition: TileDefinition; isAutotileRep: boolean } | null;
+  setSelectedTile: (
+    tile: { definition: TileDefinition; isAutotileRep: boolean } | null
+  ) => void;
+  selectedTool: "place" | "erase";
+  setSelectedTool: (tool: "place" | "erase") => void;
   camera: Camera;
   setCamera: (camera: Camera) => void;
   canvasRef: React.RefObject<HTMLDivElement>;
@@ -40,9 +42,14 @@ export interface EditorContextType {
   setHoveredTile: (tile: PlacedTile | null) => void;
   autotileLookup: AutotileLookup;
   openHelpModal: () => void;
+  placeMode: "autotile" | "manual" | "rectangle";
+  setPlaceMode: (mode: "autotile" | "manual" | "rectangle") => void;
+  applyToolAt: (gridX: number, gridY: number) => void;
 }
 
-export const EditorContext = createContext<EditorContextType | null>(null);
+export const EditorContext = createContext<EditorContextType | undefined>(
+  undefined
+);
 
 export const useEditor = () => {
   const context = useContext(EditorContext);

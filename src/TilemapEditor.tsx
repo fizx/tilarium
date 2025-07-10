@@ -253,8 +253,15 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         }
   );
 
-  const [selectedTile, rawSetSelectedTile] = useState<SelectedTile>();
-  const [selectedTool, rawSetSelectedTool] = useState<Tool>("drag");
+  const [selectedTile, rawSetSelectedTile] = useState<SelectedTile | null>(
+    null
+  );
+  const [selectedTool, rawSetSelectedTool] = useState<"place" | "erase">(
+    "place"
+  );
+  const [placeMode, setPlaceMode] = useState<
+    "autotile" | "manual" | "rectangle"
+  >("autotile");
   const [camera, rawSetCamera] = useState<Camera>({ x: 0, y: 0, zoom: 1 });
   const [mouse, setMouse] = useState<Mouse | null>(null);
   const [tileToReplace, setTileToReplace] = useState<PlacedTile | null>(null);
@@ -265,6 +272,17 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   const actionsRef = useRef<EditorActions | null>(null);
   const previousStateRef = useRef<TilemapState>(state);
   const lastPaintedCell = useRef<{ x: number; y: number } | null>(null);
+
+  useEffect(() => {
+    console.log("Initial mouse state on load:", mouse);
+  }, []);
+
+  // Rectangle drawing state
+  const [isDrawing, setIsDrawing] = useState(false);
+  const [drawStart, setDrawStart] = useState<{ x: number; y: number } | null>(
+    null
+  );
+  const [drawEnd, setDrawEnd] = useState<{ x: number; y: number } | null>(null);
 
   useEffect(() => {
     // This runs after every render, so `state` is guaranteed to be up-to-date.
@@ -342,12 +360,10 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   const handleSelectTile = (tile: TileDefinition, isAutotileRep: boolean) => {
     if (tile.type === "background") {
       dispatch({ type: "SET_BACKGROUND", payload: tile.displayName });
-      rawSetSelectedTile(undefined);
+      rawSetSelectedTile(null);
     } else {
       rawSetSelectedTile({ definition: tile, isAutotileRep });
-      if (selectedTool !== "drag") {
-        rawSetSelectedTool("place");
-      }
+      rawSetSelectedTool("place");
     }
   };
 
@@ -414,8 +430,86 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
 
       lastPaintedCell.current = { x: gridX, y: gridY };
     },
-    [dispatch, selectedTile, selectedTool, config.mapSize]
+    [dispatch, selectedTile, selectedTool, config.mapSize, state.placedTiles]
   );
+
+  const getGridCoordinates = useCallback(
+    (clientX: number, clientY: number) => {
+      if (!canvasRef.current) return null;
+      const rect = canvasRef.current.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+      const gridX = Math.floor(
+        (x - camera.x) / (config.gridSize * camera.zoom)
+      );
+      const gridY = Math.floor(
+        (y - camera.y) / (config.gridSize * camera.zoom)
+      );
+      return { x: gridX, y: gridY };
+    },
+    [camera, config.gridSize]
+  );
+
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent) => {
+      if (placeMode !== "rectangle" || !selectedTile) {
+        if (placeMode !== "rectangle") {
+          const coords = getGridCoordinates(e.clientX, e.clientY);
+          if (coords) {
+            applyToolAt(coords.x, coords.y);
+          }
+        }
+        return;
+      }
+      const coords = getGridCoordinates(e.clientX, e.clientY);
+      if (coords) {
+        setIsDrawing(true);
+        setDrawStart(coords);
+        setDrawEnd(coords);
+      }
+    },
+    [placeMode, selectedTile, getGridCoordinates, applyToolAt]
+  );
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      if (!isDrawing) return;
+      const coords = getGridCoordinates(e.clientX, e.clientY);
+      if (coords) {
+        setDrawEnd(coords);
+      }
+    },
+    [isDrawing, getGridCoordinates]
+  );
+
+  const handleMouseUp = useCallback(() => {
+    if (!isDrawing || !drawStart || !drawEnd || !selectedTile) return;
+
+    const startX = Math.min(drawStart.x, drawEnd.x);
+    const endX = Math.max(drawStart.x, drawEnd.x);
+    const startY = Math.min(drawStart.y, drawEnd.y);
+    const endY = Math.max(drawStart.y, drawEnd.y);
+
+    for (let x = startX; x <= endX; x++) {
+      for (let y = startY; y <= endY; y++) {
+        // We can dispatch multiple actions. They will be batched by React.
+        dispatch({
+          type: "ADD_TILE",
+          payload: {
+            x,
+            y,
+            tileId: selectedTile.definition.displayName,
+            source: "local",
+            isAutotileRep: false, // Force manual placement for rectangle fill
+          },
+        });
+      }
+    }
+
+    setIsDrawing(false);
+    setDrawStart(null);
+    setDrawEnd(null);
+  }, [isDrawing, drawStart, drawEnd, selectedTile, dispatch]);
 
   return (
     <div
@@ -434,6 +528,9 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           setSelectedTile: rawSetSelectedTile,
           selectedTool,
           setSelectedTool: rawSetSelectedTool,
+          placeMode,
+          setPlaceMode,
+          applyToolAt,
           camera,
           setCamera: rawSetCamera,
           canvasRef,
@@ -448,9 +545,41 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         }}
       >
         <div className="editor-container">
-          <div className="canvas-container" style={canvasStyle}>
+          <div
+            className="canvas-container"
+            style={canvasStyle}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+          >
             <Canvas />
             <Toolbar />
+            {isDrawing && drawStart && drawEnd && (
+              <div
+                className="drawing-rectangle"
+                style={{
+                  left:
+                    Math.min(drawStart.x, drawEnd.x) *
+                      config.gridSize *
+                      camera.zoom +
+                    camera.x,
+                  top:
+                    Math.min(drawStart.y, drawEnd.y) *
+                      config.gridSize *
+                      camera.zoom +
+                    camera.y,
+                  width:
+                    (Math.abs(drawStart.x - drawEnd.x) + 1) *
+                    config.gridSize *
+                    camera.zoom,
+                  height:
+                    (Math.abs(drawStart.y - drawEnd.y) + 1) *
+                    config.gridSize *
+                    camera.zoom,
+                }}
+              />
+            )}
           </div>
           <TilePalette onSelectTile={handleSelectTile} />
         </div>

@@ -16,8 +16,10 @@ export const TilePalette = ({
     config,
     selectedTile,
     setSelectedTile,
-    setSelectedTool,
     selectedTool,
+    setSelectedTool,
+    placeMode,
+    setPlaceMode,
   } = useEditor();
   const [activeTab, setActiveTab] = useState(
     Object.values(config.groups).sort((a, b) =>
@@ -35,7 +37,6 @@ export const TilePalette = ({
   const [autotileGroupToShow, setAutotileGroupToShow] = useState<string | null>(
     null
   );
-  const [variantMode, setVariantMode] = useState<"auto" | "manual">("auto");
 
   const tileGroups = useMemo(() => {
     return Object.values(config.groups).sort((a, b) =>
@@ -78,17 +79,20 @@ export const TilePalette = ({
 
   useEffect(() => {
     if (!showVariantButton) {
-      setVariantMode("auto");
+      setPlaceMode("autotile");
     }
   }, [showVariantButton]);
 
   useEffect(() => {
-    // This effect now only handles *opening* the drawer when switching to manual mode.
+    // This effect now only handles *opening* the drawer when switching to manual or rectangle mode.
     // Closing the drawer is handled by direct onClick events.
-    if (variantMode === "manual" && selectedTile?.definition.autotile) {
+    if (
+      (placeMode === "manual" || placeMode === "rectangle") &&
+      selectedTile?.definition.autotile
+    ) {
       setAutotileGroupToShow(selectedTile.definition.autotile.group);
     }
-  }, [variantMode, selectedTile]);
+  }, [placeMode, selectedTile]);
 
   useEffect(() => {
     // if the active tab is not in the tile groups, set it to the first one
@@ -99,6 +103,14 @@ export const TilePalette = ({
       setActiveTab(tileGroups[0].displayName);
     }
   }, [tileGroups, activeTab]);
+
+  useEffect(() => {
+    // Close the variant drawer if the user selects a different tool.
+    if (selectedTool !== "place") {
+      setAutotileGroupToShow(null);
+      setPlaceMode("autotile");
+    }
+  }, [selectedTool]);
 
   const handleSelectTile = (
     e: React.MouseEvent<HTMLDivElement>,
@@ -115,11 +127,12 @@ export const TilePalette = ({
     if (groupName !== "backgrounds") {
       setSelectedTool("place");
     }
-    setVariantMode("auto");
+    setPlaceMode("autotile");
 
     // Open drawer immediately for autotiles.
     if (isAutotileRep && tile.autotile) {
       setAutotileGroupToShow(tile.autotile.group);
+      setPlaceMode("autotile");
     }
   };
 
@@ -152,30 +165,6 @@ export const TilePalette = ({
             isAutotile={isAutotileForPreview}
           />
         </div>
-        {showVariantButton && (
-          <div className="variants-toggle-set">
-            <button
-              className={`toggle-button ${
-                variantMode === "manual" ? "active" : ""
-              }`}
-              onClick={(e) => {
-                e.stopPropagation();
-                setVariantMode("manual");
-              }}
-              title="Variants"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3z" />
-              </svg>
-            </button>
-          </div>
-        )}
       </>
     );
   };
@@ -188,7 +177,7 @@ export const TilePalette = ({
         // Clicks on the palette itself (but not its children) should close the drawer
         if (e.target === paletteRef.current && autotileGroupToShow) {
           setAutotileGroupToShow(null);
-          setVariantMode("auto");
+          setPlaceMode("autotile");
         }
       }}
     >
@@ -197,7 +186,7 @@ export const TilePalette = ({
         onClick={() => {
           if (autotileGroupToShow) {
             setAutotileGroupToShow(null);
-            setVariantMode("auto");
+            setPlaceMode("autotile");
           }
         }}
       >
@@ -384,7 +373,7 @@ export const TilePalette = ({
               }`}
               onClick={() => {
                 setAutotileGroupToShow(null);
-                setVariantMode("auto");
+                setPlaceMode("autotile");
               }}
             >
               <div
@@ -394,7 +383,7 @@ export const TilePalette = ({
                 <div className="variant-drawer-actions">
                   <button
                     className={`tool-button ${
-                      variantMode === "auto" ? "active" : ""
+                      placeMode === "autotile" ? "active" : ""
                     }`}
                     onClick={() => {
                       if (selectedTile?.definition.autotile) {
@@ -425,21 +414,28 @@ export const TilePalette = ({
                           onSelectTile(repTile, true);
                         }
                       }
-                      setVariantMode("auto");
+                      setPlaceMode("autotile");
                     }}
                     title="Autotile"
                   >
                     🪄
                   </button>
                   <button
-                    className="tool-button close-button"
-                    onClick={() => {
-                      setAutotileGroupToShow(null);
-                      setVariantMode("auto");
-                    }}
-                    title="Close"
+                    className={`tool-button ${
+                      placeMode === "rectangle" ? "active" : ""
+                    }`}
+                    onClick={() => setPlaceMode("rectangle")}
+                    title="Rectangle Fill"
                   >
-                    ❌
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v11a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 0 13.5v-11zM1.5 2a.5.5 0 0 0-.5.5v11a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5v-11a.5.5 0 0 0-.5-.5h-11z" />
+                    </svg>
                   </button>
                 </div>
                 <div className="variant-drawer-separator" />
@@ -454,7 +450,7 @@ export const TilePalette = ({
                           onClick={(e) => {
                             onSelectTile(tile, false);
                             setSelectedTool("place");
-                            setVariantMode("manual");
+                            setPlaceMode("manual");
                           }}
                           title={tile.displayName}
                         >
@@ -463,6 +459,16 @@ export const TilePalette = ({
                       ))}
                   </div>
                 </ScrollableContainer>
+                <button
+                  className="variant-drawer-close"
+                  onClick={() => {
+                    setAutotileGroupToShow(null);
+                    setPlaceMode("autotile");
+                  }}
+                  title="Close"
+                >
+                  &times;
+                </button>
               </div>
             </div>
           )}

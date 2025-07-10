@@ -27,6 +27,8 @@ export const Canvas = () => {
     setSelectedTool,
     setHoveredTile,
     setSelectedTile,
+    placeMode,
+    applyToolAt,
   } = useEditor();
   const isDragging = useRef(false);
   const isPainting = useRef(false);
@@ -38,122 +40,11 @@ export const Canvas = () => {
 
   const cursor = useMemo(() => {
     if (!isOverMap) return "default";
-    switch (selectedTool) {
-      case "drag":
-        return "grab";
-      case "erase":
-      case "place":
-        return "none";
-      case "eyedropper":
-        return "crosshair";
-      default:
-        return "default";
+    if (selectedTool === "place" || selectedTool === "erase") {
+      return "none";
     }
+    return "grab";
   }, [selectedTool, isOverMap]);
-
-  const applyToolAt = useCallback(
-    (gridX: number, gridY: number) => {
-      if (
-        lastPaintedCell.current?.x === gridX &&
-        lastPaintedCell.current?.y === gridY
-      ) {
-        return;
-      }
-
-      if (config.mapSize !== "infinite") {
-        if (
-          gridX < 0 ||
-          gridX >= config.mapSize.width ||
-          gridY < 0 ||
-          gridY >= config.mapSize.height
-        ) {
-          return;
-        }
-      }
-
-      if (selectedTool === "place" && selectedTile) {
-        dispatch({
-          type: "ADD_TILE",
-          payload: {
-            x: gridX,
-            y: gridY,
-            tileId: selectedTile.definition.displayName,
-            source: "local",
-            isAutotileRep: selectedTile.isAutotileRep,
-          },
-        });
-      } else if (selectedTool === "erase") {
-        const key = `${gridX}-${gridY}`;
-        const cell = state.placedTiles.get(key);
-        if (!cell) return;
-
-        const tilesAtLocation = [...cell.values()].filter(
-          (t) => t
-        ) as PlacedTile[];
-
-        if (tilesAtLocation.length > 0) {
-          const topTile = tilesAtLocation.reduce((top, current) => {
-            const topZ = config.tiles[top.tileId]?.zIndex ?? -Infinity;
-            const currentZ = config.tiles[current.tileId]?.zIndex ?? -Infinity;
-            return currentZ > topZ ? current : top;
-          });
-
-          if (topTile) {
-            dispatch({
-              type: "REMOVE_TILE",
-              payload: {
-                x: gridX,
-                y: gridY,
-                tileId: topTile.tileId,
-                source: "local",
-              },
-            });
-          }
-        }
-      }
-
-      lastPaintedCell.current = { x: gridX, y: gridY };
-    },
-    [
-      dispatch,
-      selectedTile,
-      selectedTool,
-      config.mapSize,
-      state.placedTiles,
-      config.tiles,
-    ]
-  );
-
-  const handleEyedropper = useCallback(
-    (gridX: number, gridY: number) => {
-      const key = `${gridX}-${gridY}`;
-      const cell = state.placedTiles.get(key);
-      if (!cell) return;
-
-      const tilesAtLocation = [...cell.values()].filter(
-        (t) => t
-      ) as PlacedTile[];
-
-      if (tilesAtLocation.length > 0) {
-        const topTile = tilesAtLocation.reduce((top, current) => {
-          const topZ = config.tiles[top.tileId]?.zIndex ?? -Infinity;
-          const currentZ = config.tiles[current.tileId]?.zIndex ?? -Infinity;
-          return currentZ > topZ ? current : top;
-        });
-
-        if (topTile) {
-          const tileDef = Object.values(config.tiles).find(
-            (t) => t.displayName === topTile.tileId
-          );
-          if (tileDef) {
-            setSelectedTool("place");
-            setSelectedTile({ definition: tileDef, isAutotileRep: false });
-          }
-        }
-      }
-    },
-    [state.placedTiles, config.tiles, setSelectedTile, setSelectedTool]
-  );
 
   const getEventCoords = useCallback((e: MouseEvent | TouchEvent) => {
     if ("touches" in e) {
@@ -161,20 +52,6 @@ export const Canvas = () => {
     }
     return { clientX: e.clientX, clientY: e.clientY };
   }, []);
-
-  const handlePanStart = useCallback(
-    (e: MouseEvent | TouchEvent) => {
-      if ("touches" in e && e.touches.length > 1) {
-        return;
-      }
-      if (selectedTool === "drag") {
-        isDragging.current = true;
-        const { clientX, clientY } = getEventCoords(e);
-        lastMousePosition.current = { x: clientX, y: clientY };
-      }
-    },
-    [getEventCoords, selectedTool]
-  );
 
   const handlePaintStart = useCallback(
     (e: MouseEvent | TouchEvent) => {
@@ -198,11 +75,10 @@ export const Canvas = () => {
           y * (config.gridSize * camera.zoom) + camera.y + rect.top;
 
         setMouse({ x: snappedX, y: snappedY });
-        applyToolAt(x, y);
+        // applyToolAt(x, y); // This is now handled in TilemapEditor
       }
     },
     [
-      applyToolAt,
       camera.x,
       camera.y,
       camera.zoom,
@@ -279,48 +155,18 @@ export const Canvas = () => {
       }
 
       if (isPainting.current) {
-        applyToolAt(gridX, gridY);
-      } else if (isDragging.current && selectedTool === "drag") {
+        if (placeMode !== "rectangle") {
+          applyToolAt(gridX, gridY);
+        }
+      } else if (isDragging.current) {
         setMouse(null);
         const dx = clientX - lastMousePosition.current.x;
         const dy = clientY - lastMousePosition.current.y;
         setCamera({ ...camera, x: camera.x + dx, y: camera.y + dy });
         lastMousePosition.current = { x: clientX, y: clientY };
-      } else {
-        if (selectedTool === "place" && selectedTile) {
-          const key = `${gridX}-${gridY}`;
-          const cell = state.placedTiles.get(key);
-          const tileToReplace =
-            cell?.get(selectedTile.definition.zIndex) || null;
-          setTileToReplace(tileToReplace);
-        } else if (selectedTool === "erase") {
-          const key = `${gridX}-${gridY}`;
-          const cell = state.placedTiles.get(key);
-          if (cell) {
-            const tilesAtLocation = [...cell.values()].filter(
-              (t) => t
-            ) as PlacedTile[];
-            if (tilesAtLocation.length > 0) {
-              const topTile = tilesAtLocation.reduce((top, current) => {
-                const topZ = config.tiles[top.tileId]?.zIndex ?? -Infinity;
-                const currentZ =
-                  config.tiles[current.tileId]?.zIndex ?? -Infinity;
-                return currentZ > topZ ? current : top;
-              });
-              setTileToReplace(topTile);
-            } else {
-              setTileToReplace(null);
-            }
-          } else {
-            setTileToReplace(null);
-          }
-        } else {
-          setTileToReplace(null);
-        }
       }
     },
     [
-      applyToolAt,
       camera,
       config.gridSize,
       config.tiles,
@@ -334,6 +180,8 @@ export const Canvas = () => {
       config.mapSize,
       setIsOverMap,
       setHoveredTile,
+      placeMode,
+      applyToolAt,
     ]
   );
 
@@ -354,17 +202,10 @@ export const Canvas = () => {
       if (target.closest(".map-boundary")) {
         if (selectedTool === "place" || selectedTool === "erase") {
           handlePaintStart(e);
-        } else if (selectedTool === "eyedropper") {
-          const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-          const gridX = Math.floor(
-            (e.clientX - rect.left - camera.x) / (config.gridSize * camera.zoom)
-          );
-          const gridY = Math.floor(
-            (e.clientY - rect.top - camera.y) / (config.gridSize * camera.zoom)
-          );
-          handleEyedropper(gridX, gridY);
         } else {
-          handlePanStart(e);
+          isDragging.current = true;
+          const { clientX, clientY } = getEventCoords(e);
+          lastMousePosition.current = { x: clientX, y: clientY };
         }
       } else {
         const canvasRect = (
@@ -384,16 +225,16 @@ export const Canvas = () => {
       }
     },
     [
-      handlePanStart,
       handlePaintStart,
       selectedTool,
-      handleEyedropper,
       camera.x,
       camera.y,
       camera.zoom,
       config.gridSize,
       setCamera,
       mapSize,
+      getEventCoords,
+      isDragging,
     ]
   );
 
@@ -418,16 +259,15 @@ export const Canvas = () => {
       if (e.touches.length === 2) {
         // pinch
         e.preventDefault();
-        setSelectedTool("drag");
+        // setSelectedTool("drag"); // This tool doesn't exist anymore
         const dx = e.touches[0].clientX - e.touches[1].clientX;
         const dy = e.touches[0].clientY - e.touches[1].clientY;
         pinchDist.current = Math.sqrt(dx * dx + dy * dy);
       } else {
-        handlePanStart(e);
         handlePaintStart(e);
       }
     },
-    [handlePanStart, handlePaintStart, setSelectedTool]
+    [handlePaintStart]
   );
 
   const handleTouchMove = useCallback(
