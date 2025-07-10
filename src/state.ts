@@ -59,4 +59,14 @@ export type TilemapAction =
   | RemoveTileAction
   | SetBackgroundAction
   | LoadStateAction
-  | ApplyDeltaAction;
+  | ApplyDeltaAction
+  | {
+      type: "FILL_RECTANGLE";
+      payload: {
+        startX: number;
+        startY: number;
+        endX: number;
+        endY: number;
+        tileId: string;
+      };
+    };

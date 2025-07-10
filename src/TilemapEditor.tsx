@@ -234,6 +234,43 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         }
         return { ...loadedState, sourceOfChange: "load" };
       }
+      case "FILL_RECTANGLE": {
+        const { startX, startY, endX, endY, tileId } = action.payload;
+        const tileDef = config.tiles[tileId];
+        if (!tileDef) return state;
+
+        let newPlacedTiles = new Map(state.placedTiles);
+
+        // First pass: Place all the tiles without updating neighbors
+        for (let x = startX; x <= endX; x++) {
+          for (let y = startY; y <= endY; y++) {
+            const key = `${x}-${y}`;
+            const cell = new Map(newPlacedTiles.get(key));
+            cell.set(tileDef.zIndex, { x, y, tileId, source: "local" });
+            newPlacedTiles.set(key, cell);
+          }
+        }
+
+        // Second pass: Update autotiles for the entire filled area
+        for (let x = startX; x <= endX; x++) {
+          for (let y = startY; y <= endY; y++) {
+            newPlacedTiles = updateSurroundingTiles(
+              newPlacedTiles,
+              x,
+              y,
+              autotileLookup,
+              config,
+              { mode: "best-fit", updateCenterTile: true }
+            );
+          }
+        }
+
+        return {
+          ...state,
+          placedTiles: newPlacedTiles,
+          sourceOfChange: "local",
+        };
+      }
       default:
         return state;
     }
@@ -490,21 +527,16 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
     const startY = Math.min(drawStart.y, drawEnd.y);
     const endY = Math.max(drawStart.y, drawEnd.y);
 
-    for (let x = startX; x <= endX; x++) {
-      for (let y = startY; y <= endY; y++) {
-        // We can dispatch multiple actions. They will be batched by React.
-        dispatch({
-          type: "ADD_TILE",
-          payload: {
-            x,
-            y,
-            tileId: selectedTile.definition.displayName,
-            source: "local",
-            isAutotileRep: false, // Force manual placement for rectangle fill
-          },
-        });
-      }
-    }
+    dispatch({
+      type: "FILL_RECTANGLE",
+      payload: {
+        startX,
+        startY,
+        endX,
+        endY,
+        tileId: selectedTile.definition.displayName,
+      },
+    });
 
     setIsDrawing(false);
     setDrawStart(null);
