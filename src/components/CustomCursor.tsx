@@ -35,7 +35,6 @@ export const CustomCursor = () => {
     config,
     hoveredTile,
     zoomMode,
-    snapToGrid,
     isMouseOverUI,
   } = useEditor();
 
@@ -43,10 +42,12 @@ export const CustomCursor = () => {
     return null;
   }
 
+  const shouldSnapToGrid = selectedTool === "place" || selectedTool === "erase";
+
   let cursorX = mouse.x;
   let cursorY = mouse.y;
 
-  if (snapToGrid) {
+  if (shouldSnapToGrid) {
     const gridX = Math.floor(
       (mouse.x - camera.x) / (config.gridSize * camera.zoom)
     );
@@ -66,24 +67,9 @@ export const CustomCursor = () => {
   };
 
   const renderCursorContent = () => {
-    let contentStyle: React.CSSProperties = {
+    const contentStyle: React.CSSProperties = {
       transformOrigin: "top left",
     };
-
-    // When not snapping, the tile preview should still align to the grid.
-    if (!snapToGrid && selectedTool === "place") {
-      const gridX = Math.floor(
-        (mouse.x - camera.x) / (config.gridSize * camera.zoom)
-      );
-      const gridY = Math.floor(
-        (mouse.y - camera.y) / (config.gridSize * camera.zoom)
-      );
-      const snappedX = gridX * config.gridSize * camera.zoom + camera.x;
-      const snappedY = gridY * config.gridSize * camera.zoom + camera.y;
-      contentStyle.position = "absolute";
-      contentStyle.left = snappedX - mouse.x;
-      contentStyle.top = snappedY - mouse.y;
-    }
 
     switch (selectedTool) {
       case "zoom":
@@ -109,7 +95,7 @@ export const CustomCursor = () => {
               alignItems: "center",
               justifyContent: "center",
               fontSize: config.gridSize * camera.zoom,
-              opacity: selectedTool === "erase" ? 1 : 0.5,
+              opacity: 1,
             }}
           >
             🧼

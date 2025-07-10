@@ -430,11 +430,13 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   const [placeMode, setPlaceMode] = useState<
     "autotile" | "manual" | "rectangle"
   >("autotile");
+  const [preferredPlaceMode, setPreferredPlaceMode] = useState<
+    "autotile" | "rectangle"
+  >("autotile");
   const [eraseMode, setEraseMode] = useState<"single" | "wand" | "rectangle">(
     "single"
   );
   const [zoomMode, setZoomMode] = useState<"in" | "out">("in");
-  const [snapToGrid, setSnapToGrid] = useState(false);
   const [isMouseOverUI, setIsMouseOverUI] = useState(false);
   const [camera, rawSetCamera] = useState<Camera>({ x: 0, y: 0, zoom: 1 });
   const [mouse, setMouse] = useState<Mouse | null>(null);
@@ -446,6 +448,21 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   const actionsRef = useRef<EditorActions | null>(null);
   const previousStateRef = useRef<TilemapState>(state);
   const lastPaintedCell = useRef<{ x: number; y: number } | null>(null);
+
+  const getCanvasCursor = () => {
+    if (isMouseOverUI) return "default";
+    switch (selectedTool) {
+      case "drag":
+        return "grab";
+      case "zoom":
+        return zoomMode === "in" ? "zoom-in" : "zoom-out";
+      case "place":
+      case "erase":
+        return "crosshair";
+      default:
+        return "default";
+    }
+  };
 
   useEffect(() => {
     console.log("Initial mouse state on load:", mouse);
@@ -714,7 +731,11 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
       const startY = Math.min(drawStart.y, drawEnd.y);
       const endY = Math.max(drawStart.y, drawEnd.y);
 
-      if (placeMode === "rectangle" && selectedTile) {
+      if (
+        selectedTool === "place" &&
+        placeMode === "rectangle" &&
+        selectedTile
+      ) {
         dispatch({
           type: "FILL_RECTANGLE",
           payload: {
@@ -725,7 +746,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
             tileId: selectedTile.definition.displayName,
           },
         });
-      } else if (eraseMode === "rectangle") {
+      } else if (selectedTool === "erase" && eraseMode === "rectangle") {
         dispatch({
           type: "ERASE_RECTANGLE",
           payload: { startX, startY, endX, endY },
@@ -746,6 +767,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
     eraseMode,
     state.placedTiles,
     config,
+    selectedTool,
   ]);
 
   return (
@@ -767,12 +789,12 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           setSelectedTool: rawSetSelectedTool,
           placeMode,
           setPlaceMode,
+          preferredPlaceMode,
+          setPreferredPlaceMode,
           eraseMode,
           setEraseMode,
           zoomMode,
           setZoomMode,
-          snapToGrid,
-          setSnapToGrid,
           isMouseOverUI,
           setIsMouseOverUI,
           applyToolAt,
@@ -792,7 +814,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         <div className="editor-container">
           <div
             className="canvas-container"
-            style={canvasStyle}
+            style={{ ...canvasStyle, cursor: getCanvasCursor() }}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}

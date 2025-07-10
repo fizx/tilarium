@@ -20,6 +20,8 @@ export const TilePalette = ({
     setSelectedTool,
     placeMode,
     setPlaceMode,
+    preferredPlaceMode,
+    setPreferredPlaceMode,
     setIsMouseOverUI,
   } = useEditor();
   const [activeTab, setActiveTab] = useState(
@@ -80,7 +82,7 @@ export const TilePalette = ({
 
   useEffect(() => {
     if (!showVariantButton) {
-      setPlaceMode("autotile");
+      setPlaceMode(preferredPlaceMode);
     }
   }, [showVariantButton]);
 
@@ -109,7 +111,7 @@ export const TilePalette = ({
     // Close the variant drawer if the user selects a different tool.
     if (selectedTool !== "place") {
       setAutotileGroupToShow(null);
-      setPlaceMode("autotile");
+      setPlaceMode(preferredPlaceMode);
     }
   }, [selectedTool]);
 
@@ -128,12 +130,12 @@ export const TilePalette = ({
     if (groupName !== "backgrounds") {
       setSelectedTool("place");
     }
-    setPlaceMode("autotile");
+    setPlaceMode(preferredPlaceMode);
 
     // Open drawer immediately for autotiles.
     if (isAutotileRep && tile.autotile) {
       setAutotileGroupToShow(tile.autotile.group);
-      setPlaceMode("autotile");
+      setPlaceMode(preferredPlaceMode);
     }
   };
 
@@ -180,7 +182,7 @@ export const TilePalette = ({
         // Clicks on the palette itself (but not its children) should close the drawer
         if (e.target === paletteRef.current && autotileGroupToShow) {
           setAutotileGroupToShow(null);
-          setPlaceMode("autotile");
+          setPlaceMode(preferredPlaceMode);
         }
       }}
     >
@@ -189,7 +191,7 @@ export const TilePalette = ({
         onClick={() => {
           if (autotileGroupToShow) {
             setAutotileGroupToShow(null);
-            setPlaceMode("autotile");
+            setPlaceMode(preferredPlaceMode);
           }
         }}
       >
@@ -376,7 +378,7 @@ export const TilePalette = ({
               }`}
               onClick={() => {
                 setAutotileGroupToShow(null);
-                setPlaceMode("autotile");
+                setPlaceMode(preferredPlaceMode);
               }}
             >
               <div
@@ -418,6 +420,7 @@ export const TilePalette = ({
                         }
                       }
                       setPlaceMode("autotile");
+                      setPreferredPlaceMode("autotile");
                     }}
                     title="Autotile"
                   >
@@ -427,7 +430,10 @@ export const TilePalette = ({
                     className={`tool-button ${
                       placeMode === "rectangle" ? "active" : ""
                     }`}
-                    onClick={() => setPlaceMode("rectangle")}
+                    onClick={() => {
+                      setPlaceMode("rectangle");
+                      setPreferredPlaceMode("rectangle");
+                    }}
                     title="Rectangle Fill"
                   >
                     <svg
@@ -466,7 +472,7 @@ export const TilePalette = ({
                   className="variant-drawer-close"
                   onClick={() => {
                     setAutotileGroupToShow(null);
-                    setPlaceMode("autotile");
+                    setPlaceMode(preferredPlaceMode);
                   }}
                   title="Close"
                 >

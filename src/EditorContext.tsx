@@ -46,11 +46,11 @@ export interface EditorContextType {
   setPlaceMode: (mode: "autotile" | "manual" | "rectangle") => void;
   eraseMode: "single" | "wand" | "rectangle";
   setEraseMode: (mode: "single" | "wand" | "rectangle") => void;
+  preferredPlaceMode: "autotile" | "rectangle";
+  setPreferredPlaceMode: (mode: "autotile" | "rectangle") => void;
   zoomMode: "in" | "out";
   setZoomMode: (mode: "in" | "out") => void;
   applyToolAt: (gridX: number, gridY: number) => void;
-  snapToGrid: boolean;
-  setSnapToGrid: (snap: boolean) => void;
   isMouseOverUI: boolean;
   setIsMouseOverUI: (isOver: boolean) => void;
 }
