@@ -44,6 +44,8 @@ export interface EditorContextType {
   openHelpModal: () => void;
   placeMode: "autotile" | "manual" | "rectangle";
   setPlaceMode: (mode: "autotile" | "manual" | "rectangle") => void;
+  eraseMode: "single" | "wand" | "rectangle";
+  setEraseMode: (mode: "single" | "wand" | "rectangle") => void;
   applyToolAt: (gridX: number, gridY: number) => void;
 }
 

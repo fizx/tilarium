@@ -69,4 +69,5 @@ export type TilemapAction =
         endY: number;
         tileId: string;
       };
-    };
+    }
+  | { type: "WAND_ERASE"; payload: { x: number; y: number } };

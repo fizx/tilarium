@@ -49,6 +49,20 @@ export interface TilemapEditorProps {
   canvasStyle?: React.CSSProperties;
 }
 
+const getTopTile = (
+  cell: Map<number, PlacedTile | null> | undefined,
+  config: TileConfig
+): PlacedTile | null => {
+  if (!cell) return null;
+  const tiles = [...cell.values()].filter((t) => t) as PlacedTile[];
+  if (tiles.length === 0) return null;
+  return tiles.reduce((top, current) => {
+    const topZ = config.tiles[top.tileId]?.zIndex ?? -Infinity;
+    const currentZ = config.tiles[current.tileId]?.zIndex ?? -Infinity;
+    return currentZ > topZ ? current : top;
+  });
+};
+
 export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   config,
   initialState,
@@ -271,6 +285,85 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           sourceOfChange: "local",
         };
       }
+      case "WAND_ERASE": {
+        const { x, y } = action.payload;
+        const cell = state.placedTiles.get(`${x}-${y}`);
+        if (!cell) return state;
+
+        const topTile = getTopTile(cell, config);
+        if (!topTile) return state;
+
+        const targetGroup = config.tiles[topTile.tileId].autotile?.group;
+        if (!targetGroup) return state; // Only wand erase autotiles for now
+
+        let newPlacedTiles = new Map(state.placedTiles);
+        const queue = [{ x, y }];
+        const visited = new Set([`${x}-${y}`]);
+
+        while (queue.length > 0) {
+          const { x: currentX, y: currentY } = queue.shift()!;
+          const key = `${currentX}-${currentY}`;
+          const currentCell = newPlacedTiles.get(key);
+          if (!currentCell) continue;
+
+          const currentTopTile = getTopTile(currentCell, config);
+          if (
+            currentTopTile &&
+            config.tiles[currentTopTile.tileId].autotile?.group === targetGroup
+          ) {
+            // Erase all tiles at this location that match the group
+            const tilesToKeep = new Map();
+            for (const [zIndex, tile] of currentCell.entries()) {
+              if (
+                tile &&
+                config.tiles[tile.tileId].autotile?.group !== targetGroup
+              ) {
+                tilesToKeep.set(zIndex, tile);
+              }
+            }
+            if (tilesToKeep.size > 0) {
+              newPlacedTiles.set(key, tilesToKeep);
+            } else {
+              newPlacedTiles.delete(key);
+            }
+
+            // Check neighbors
+            for (const [dx, dy] of [
+              [0, -1],
+              [1, 0],
+              [0, 1],
+              [-1, 0],
+            ]) {
+              const nx = currentX + dx;
+              const ny = currentY + dy;
+              const neighborKey = `${nx}-${ny}`;
+              if (!visited.has(neighborKey)) {
+                visited.add(neighborKey);
+                queue.push({ x: nx, y: ny });
+              }
+            }
+          }
+        }
+
+        // Update surroundings for all affected tiles after the erase
+        for (const visitedKey of visited) {
+          const [vx, vy] = visitedKey.split("-").map(Number);
+          newPlacedTiles = updateSurroundingTiles(
+            newPlacedTiles,
+            vx,
+            vy,
+            autotileLookup,
+            config,
+            { mode: "best-fit", updateCenterTile: true }
+          );
+        }
+
+        return {
+          ...state,
+          placedTiles: newPlacedTiles,
+          sourceOfChange: "local",
+        };
+      }
       default:
         return state;
     }
@@ -299,6 +392,9 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   const [placeMode, setPlaceMode] = useState<
     "autotile" | "manual" | "rectangle"
   >("autotile");
+  const [eraseMode, setEraseMode] = useState<"single" | "wand" | "rectangle">(
+    "single"
+  );
   const [camera, rawSetCamera] = useState<Camera>({ x: 0, y: 0, zoom: 1 });
   const [mouse, setMouse] = useState<Mouse | null>(null);
   const [tileToReplace, setTileToReplace] = useState<PlacedTile | null>(null);
@@ -435,7 +531,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
             isAutotileRep: selectedTile.isAutotileRep,
           },
         });
-      } else if (selectedTool === "erase") {
+      } else if (selectedTool === "erase" && eraseMode === "single") {
         const key = `${gridX}-${gridY}`;
         const cell = state.placedTiles.get(key);
         if (!cell) return;
@@ -463,11 +559,20 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           };
           dispatch(action);
         }
+      } else if (selectedTool === "erase" && eraseMode === "wand") {
+        dispatch({ type: "WAND_ERASE", payload: { x: gridX, y: gridY } });
       }
 
       lastPaintedCell.current = { x: gridX, y: gridY };
     },
-    [dispatch, selectedTile, selectedTool, config.mapSize, state.placedTiles]
+    [
+      dispatch,
+      selectedTile,
+      selectedTool,
+      config.mapSize,
+      state.placedTiles,
+      eraseMode,
+    ]
   );
 
   const getGridCoordinates = useCallback(
@@ -489,23 +594,35 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
 
   const handleMouseDown = useCallback(
     (e: React.MouseEvent) => {
-      if (placeMode !== "rectangle" || !selectedTile) {
-        if (placeMode !== "rectangle") {
-          const coords = getGridCoordinates(e.clientX, e.clientY);
-          if (coords) {
-            applyToolAt(coords.x, coords.y);
-          }
+      // Handle rectangle drawing modes for both place and erase
+      if (
+        (selectedTool === "place" &&
+          placeMode === "rectangle" &&
+          selectedTile) ||
+        (selectedTool === "erase" && eraseMode === "rectangle")
+      ) {
+        const coords = getGridCoordinates(e.clientX, e.clientY);
+        if (coords) {
+          setIsDrawing(true);
+          setDrawStart(coords);
+          setDrawEnd(coords);
         }
-        return;
-      }
-      const coords = getGridCoordinates(e.clientX, e.clientY);
-      if (coords) {
-        setIsDrawing(true);
-        setDrawStart(coords);
-        setDrawEnd(coords);
+      } else {
+        // Handle all single-tile modes
+        const coords = getGridCoordinates(e.clientX, e.clientY);
+        if (coords) {
+          applyToolAt(coords.x, coords.y);
+        }
       }
     },
-    [placeMode, selectedTile, getGridCoordinates, applyToolAt]
+    [
+      placeMode,
+      eraseMode,
+      selectedTool,
+      selectedTile,
+      getGridCoordinates,
+      applyToolAt,
+    ]
   );
 
   const handleMouseMove = useCallback(
@@ -520,28 +637,56 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   );
 
   const handleMouseUp = useCallback(() => {
-    if (!isDrawing || !drawStart || !drawEnd || !selectedTile) return;
+    if (isDrawing && drawStart && drawEnd) {
+      const startX = Math.min(drawStart.x, drawEnd.x);
+      const endX = Math.max(drawStart.x, drawEnd.x);
+      const startY = Math.min(drawStart.y, drawEnd.y);
+      const endY = Math.max(drawStart.y, drawEnd.y);
 
-    const startX = Math.min(drawStart.x, drawEnd.x);
-    const endX = Math.max(drawStart.x, drawEnd.x);
-    const startY = Math.min(drawStart.y, drawEnd.y);
-    const endY = Math.max(drawStart.y, drawEnd.y);
-
-    dispatch({
-      type: "FILL_RECTANGLE",
-      payload: {
-        startX,
-        startY,
-        endX,
-        endY,
-        tileId: selectedTile.definition.displayName,
-      },
-    });
+      if (placeMode === "rectangle" && selectedTile) {
+        dispatch({
+          type: "FILL_RECTANGLE",
+          payload: {
+            startX,
+            startY,
+            endX,
+            endY,
+            tileId: selectedTile.definition.displayName,
+          },
+        });
+      } else if (eraseMode === "rectangle") {
+        for (let x = startX; x <= endX; x++) {
+          for (let y = startY; y <= endY; y++) {
+            const key = `${x}-${y}`;
+            const cell = state.placedTiles.get(key);
+            if (cell) {
+              const topTile = getTopTile(cell, config);
+              if (topTile) {
+                dispatch({
+                  type: "REMOVE_TILE",
+                  payload: { x, y, tileId: topTile.tileId, source: "local" },
+                });
+              }
+            }
+          }
+        }
+      }
+    }
 
     setIsDrawing(false);
     setDrawStart(null);
     setDrawEnd(null);
-  }, [isDrawing, drawStart, drawEnd, selectedTile, dispatch]);
+  }, [
+    isDrawing,
+    drawStart,
+    drawEnd,
+    selectedTile,
+    dispatch,
+    placeMode,
+    eraseMode,
+    state.placedTiles,
+    config,
+  ]);
 
   return (
     <div
@@ -562,6 +707,8 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           setSelectedTool: rawSetSelectedTool,
           placeMode,
           setPlaceMode,
+          eraseMode,
+          setEraseMode,
           applyToolAt,
           camera,
           setCamera: rawSetCamera,
