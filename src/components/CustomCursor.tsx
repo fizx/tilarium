@@ -27,40 +27,89 @@ const Tooltip = () => {
 };
 
 export const CustomCursor = () => {
-  const { selectedTool, selectedTile, mouse, camera, config, hoveredTile } =
-    useEditor();
+  const {
+    selectedTool,
+    selectedTile,
+    mouse,
+    camera,
+    config,
+    hoveredTile,
+    zoomMode,
+    snapToGrid,
+    isMouseOverUI,
+  } = useEditor();
 
-  if (!mouse) {
+  if (!mouse || isMouseOverUI) {
     return null;
+  }
+
+  let cursorX = mouse.x;
+  let cursorY = mouse.y;
+
+  if (snapToGrid) {
+    const gridX = Math.floor(
+      (mouse.x - camera.x) / (config.gridSize * camera.zoom)
+    );
+    const gridY = Math.floor(
+      (mouse.y - camera.y) / (config.gridSize * camera.zoom)
+    );
+    cursorX = gridX * config.gridSize * camera.zoom + camera.x;
+    cursorY = gridY * config.gridSize * camera.zoom + camera.y;
   }
 
   const cursorStyle: React.CSSProperties = {
     position: "fixed",
-    left: mouse.x,
-    top: mouse.y,
+    left: cursorX,
+    top: cursorY,
     pointerEvents: "none",
     zIndex: 1000,
   };
 
   const renderCursorContent = () => {
-    const cursorStyle: React.CSSProperties = {
-      opacity: selectedTool === "erase" ? 1 : 0.5,
-      transform: `scale(${camera.zoom})`,
+    let contentStyle: React.CSSProperties = {
       transformOrigin: "top left",
     };
 
+    // When not snapping, the tile preview should still align to the grid.
+    if (!snapToGrid && selectedTool === "place") {
+      const gridX = Math.floor(
+        (mouse.x - camera.x) / (config.gridSize * camera.zoom)
+      );
+      const gridY = Math.floor(
+        (mouse.y - camera.y) / (config.gridSize * camera.zoom)
+      );
+      const snappedX = gridX * config.gridSize * camera.zoom + camera.x;
+      const snappedY = gridY * config.gridSize * camera.zoom + camera.y;
+      contentStyle.position = "absolute";
+      contentStyle.left = snappedX - mouse.x;
+      contentStyle.top = snappedY - mouse.y;
+    }
+
     switch (selectedTool) {
+      case "zoom":
+        return (
+          <div
+            style={{
+              ...contentStyle,
+              fontSize: "24px",
+              transform: "translate(-50%, -50%)", // Center the emoji on the cursor
+            }}
+          >
+            {zoomMode === "in" ? "🔍➕" : "🔍➖"}
+          </div>
+        );
       case "erase":
         return (
           <div
             style={{
-              ...cursorStyle,
-              width: config.gridSize,
-              height: config.gridSize,
+              ...contentStyle,
+              width: config.gridSize * camera.zoom,
+              height: config.gridSize * camera.zoom,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: config.gridSize,
+              fontSize: config.gridSize * camera.zoom,
+              opacity: selectedTool === "erase" ? 1 : 0.5,
             }}
           >
             🧼
@@ -69,7 +118,14 @@ export const CustomCursor = () => {
       case "place":
         if (selectedTile) {
           return (
-            <div style={cursorStyle}>
+            <div
+              style={{
+                ...contentStyle,
+                opacity: 0.5,
+                transform: `scale(${camera.zoom})`,
+                transformOrigin: "top left",
+              }}
+            >
               <Tile tile={{ ...selectedTile.definition, source: "local" }} />
             </div>
           );

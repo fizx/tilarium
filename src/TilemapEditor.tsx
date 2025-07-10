@@ -386,15 +386,16 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   const [selectedTile, rawSetSelectedTile] = useState<SelectedTile | null>(
     null
   );
-  const [selectedTool, rawSetSelectedTool] = useState<
-    "place" | "erase" | "drag"
-  >("drag");
+  const [selectedTool, rawSetSelectedTool] = useState<Tool>("drag");
   const [placeMode, setPlaceMode] = useState<
     "autotile" | "manual" | "rectangle"
   >("autotile");
   const [eraseMode, setEraseMode] = useState<"single" | "wand" | "rectangle">(
     "single"
   );
+  const [zoomMode, setZoomMode] = useState<"in" | "out">("in");
+  const [snapToGrid, setSnapToGrid] = useState(false);
+  const [isMouseOverUI, setIsMouseOverUI] = useState(false);
   const [camera, rawSetCamera] = useState<Camera>({ x: 0, y: 0, zoom: 1 });
   const [mouse, setMouse] = useState<Mouse | null>(null);
   const [tileToReplace, setTileToReplace] = useState<PlacedTile | null>(null);
@@ -592,8 +593,33 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
     [camera, config.gridSize]
   );
 
+  const handleZoomAtPoint = useCallback(
+    (zoomFactor: number, pointX: number, pointY: number) => {
+      if (!canvasRef.current) return;
+
+      const worldX = (pointX - camera.x) / camera.zoom;
+      const worldY = (pointY - camera.y) / camera.zoom;
+      const newZoom = Math.max(0.1, camera.zoom * zoomFactor);
+      const newCameraX = pointX - worldX * newZoom;
+      const newCameraY = pointY - worldY * newZoom;
+
+      rawSetCamera({
+        zoom: newZoom,
+        x: newCameraX,
+        y: newCameraY,
+      });
+    },
+    [camera]
+  );
+
   const handleMouseDown = useCallback(
     (e: React.MouseEvent) => {
+      if (selectedTool === "zoom") {
+        const zoomFactor = zoomMode === "in" ? 1.2 : 1 / 1.2;
+        handleZoomAtPoint(zoomFactor, e.clientX, e.clientY);
+        return;
+      }
+
       // Handle rectangle drawing modes for both place and erase
       if (
         (selectedTool === "place" &&
@@ -622,15 +648,20 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
       selectedTile,
       getGridCoordinates,
       applyToolAt,
+      zoomMode,
+      handleZoomAtPoint,
     ]
   );
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
-      if (!isDrawing) return;
-      const coords = getGridCoordinates(e.clientX, e.clientY);
-      if (coords) {
-        setDrawEnd(coords);
+      setMouse({ x: e.clientX, y: e.clientY });
+
+      if (isDrawing) {
+        const coords = getGridCoordinates(e.clientX, e.clientY);
+        if (coords) {
+          setDrawEnd(coords);
+        }
       }
     },
     [isDrawing, getGridCoordinates]
@@ -709,6 +740,12 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           setPlaceMode,
           eraseMode,
           setEraseMode,
+          zoomMode,
+          setZoomMode,
+          snapToGrid,
+          setSnapToGrid,
+          isMouseOverUI,
+          setIsMouseOverUI,
           applyToolAt,
           camera,
           setCamera: rawSetCamera,
@@ -731,6 +768,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
+            onMouseEnter={() => setIsMouseOverUI(false)}
           >
             <Canvas />
             <Toolbar />

@@ -3,7 +3,7 @@ import { TileConfig, TileDefinition } from "./config";
 import { TilemapAction, TilemapState, PlacedTile } from "./state";
 import { AutotileLookup } from "./autotile";
 
-export type Tool = "place" | "drag" | "erase" | "eyedropper";
+export type Tool = "place" | "drag" | "erase" | "eyedropper" | "zoom";
 
 export interface SelectedTile {
   definition: TileDefinition;
@@ -29,8 +29,8 @@ export interface EditorContextType {
   setSelectedTile: (
     tile: { definition: TileDefinition; isAutotileRep: boolean } | null
   ) => void;
-  selectedTool: "place" | "erase" | "drag";
-  setSelectedTool: (tool: "place" | "erase" | "drag") => void;
+  selectedTool: Tool;
+  setSelectedTool: (tool: Tool) => void;
   camera: Camera;
   setCamera: (camera: Camera) => void;
   canvasRef: React.RefObject<HTMLDivElement>;
@@ -46,7 +46,13 @@ export interface EditorContextType {
   setPlaceMode: (mode: "autotile" | "manual" | "rectangle") => void;
   eraseMode: "single" | "wand" | "rectangle";
   setEraseMode: (mode: "single" | "wand" | "rectangle") => void;
+  zoomMode: "in" | "out";
+  setZoomMode: (mode: "in" | "out") => void;
   applyToolAt: (gridX: number, gridY: number) => void;
+  snapToGrid: boolean;
+  setSnapToGrid: (snap: boolean) => void;
+  isMouseOverUI: boolean;
+  setIsMouseOverUI: (isOver: boolean) => void;
 }
 
 export const EditorContext = createContext<EditorContextType | undefined>(

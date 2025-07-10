@@ -20,6 +20,7 @@ export const TilePalette = ({
     setSelectedTool,
     placeMode,
     setPlaceMode,
+    setIsMouseOverUI,
   } = useEditor();
   const [activeTab, setActiveTab] = useState(
     Object.values(config.groups).sort((a, b) =>
@@ -173,6 +174,8 @@ export const TilePalette = ({
     <div
       className="palette"
       ref={paletteRef}
+      onMouseEnter={() => setIsMouseOverUI(true)}
+      onMouseLeave={() => setIsMouseOverUI(false)}
       onClick={(e) => {
         // Clicks on the palette itself (but not its children) should close the drawer
         if (e.target === paletteRef.current && autotileGroupToShow) {
