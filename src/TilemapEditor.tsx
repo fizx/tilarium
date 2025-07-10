@@ -386,9 +386,9 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   const [selectedTile, rawSetSelectedTile] = useState<SelectedTile | null>(
     null
   );
-  const [selectedTool, rawSetSelectedTool] = useState<"place" | "erase">(
-    "place"
-  );
+  const [selectedTool, rawSetSelectedTool] = useState<
+    "place" | "erase" | "drag"
+  >("drag");
   const [placeMode, setPlaceMode] = useState<
     "autotile" | "manual" | "rectangle"
   >("autotile");

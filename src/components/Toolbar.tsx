@@ -82,9 +82,9 @@ export const Toolbar = () => {
   return (
     <div className="toolbar">
       <ToolButton
-        tool="place"
+        tool="drag"
         emoji="🖐️"
-        onClick={() => setSelectedTool("place")}
+        onClick={() => setSelectedTool("drag")}
       />
       <ToolButton
         tool="erase"

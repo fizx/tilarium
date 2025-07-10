@@ -29,8 +29,8 @@ export interface EditorContextType {
   setSelectedTile: (
     tile: { definition: TileDefinition; isAutotileRep: boolean } | null
   ) => void;
-  selectedTool: "place" | "erase";
-  setSelectedTool: (tool: "place" | "erase") => void;
+  selectedTool: "place" | "erase" | "drag";
+  setSelectedTool: (tool: "place" | "erase" | "drag") => void;
   camera: Camera;
   setCamera: (camera: Camera) => void;
   canvasRef: React.RefObject<HTMLDivElement>;
