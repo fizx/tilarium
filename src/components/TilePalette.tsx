@@ -36,16 +36,6 @@ export const TilePalette = ({
     null
   );
   const [variantMode, setVariantMode] = useState<"auto" | "manual">("auto");
-  const [isPreviewVisible, setIsPreviewVisible] = useState(
-    () => window.matchMedia("(min-width: 501px)").matches
-  );
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 501px)");
-    const handler = (e: MediaQueryListEvent) => setIsPreviewVisible(e.matches);
-    mediaQuery.addEventListener("change", handler);
-    return () => mediaQuery.removeEventListener("change", handler);
-  }, []);
 
   const tileGroups = useMemo(() => {
     return Object.values(config.groups).sort((a, b) =>
@@ -125,12 +115,11 @@ export const TilePalette = ({
     if (groupName !== "backgrounds") {
       setSelectedTool("place");
     }
-    setVariantMode("auto"); // Always reset to auto mode when selecting a new tile.
+    setVariantMode("auto");
 
-    // If preview is hidden, open drawer immediately for autotiles.
-    if (!isPreviewVisible && isAutotileRep && tile.autotile) {
+    // Open drawer immediately for autotiles.
+    if (isAutotileRep && tile.autotile) {
       setAutotileGroupToShow(tile.autotile.group);
-      setVariantMode("manual");
     }
   };
 
