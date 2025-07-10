@@ -285,6 +285,46 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           sourceOfChange: "local",
         };
       }
+      case "ERASE_RECTANGLE": {
+        const { startX, startY, endX, endY } = action.payload;
+        let newPlacedTiles = new Map(state.placedTiles);
+
+        // First pass: Erase the top tile in each cell within the rectangle
+        for (let x = startX; x <= endX; x++) {
+          for (let y = startY; y <= endY; y++) {
+            const key = `${x}-${y}`;
+            const cell = newPlacedTiles.get(key);
+            if (cell) {
+              const topTile = getTopTile(cell, config);
+              if (topTile) {
+                const newCell = new Map(cell);
+                newCell.set(config.tiles[topTile.tileId].zIndex, null);
+                newPlacedTiles.set(key, newCell);
+              }
+            }
+          }
+        }
+
+        // Second pass: Update autotiles for the entire erased area and its surroundings
+        for (let x = startX - 1; x <= endX + 1; x++) {
+          for (let y = startY - 1; y <= endY + 1; y++) {
+            newPlacedTiles = updateSurroundingTiles(
+              newPlacedTiles,
+              x,
+              y,
+              autotileLookup,
+              config,
+              { mode: "best-fit", updateCenterTile: true }
+            );
+          }
+        }
+
+        return {
+          ...state,
+          placedTiles: newPlacedTiles,
+          sourceOfChange: "local",
+        };
+      }
       case "WAND_ERASE": {
         const { x, y } = action.payload;
         const cell = state.placedTiles.get(`${x}-${y}`);
@@ -686,21 +726,10 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           },
         });
       } else if (eraseMode === "rectangle") {
-        for (let x = startX; x <= endX; x++) {
-          for (let y = startY; y <= endY; y++) {
-            const key = `${x}-${y}`;
-            const cell = state.placedTiles.get(key);
-            if (cell) {
-              const topTile = getTopTile(cell, config);
-              if (topTile) {
-                dispatch({
-                  type: "REMOVE_TILE",
-                  payload: { x, y, tileId: topTile.tileId, source: "local" },
-                });
-              }
-            }
-          }
-        }
+        dispatch({
+          type: "ERASE_RECTANGLE",
+          payload: { startX, startY, endX, endY },
+        });
       }
     }
 

@@ -70,4 +70,13 @@ export type TilemapAction =
         tileId: string;
       };
     }
-  | { type: "WAND_ERASE"; payload: { x: number; y: number } };
+  | { type: "WAND_ERASE"; payload: { x: number; y: number } }
+  | {
+      type: "ERASE_RECTANGLE";
+      payload: {
+        startX: number;
+        startY: number;
+        endX: number;
+        endY: number;
+      };
+    };
