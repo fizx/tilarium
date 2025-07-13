@@ -41,6 +41,7 @@ export interface EditorActions {
 export interface TilemapEditorProps {
   config: TileConfig;
   initialState?: TilemapState;
+  initialCamera?: Camera;
   onReady?: (actions: EditorActions) => void;
   onStateChange?: (newState: TilemapState) => void;
   onCameraChange?: (camera: Camera) => void;
@@ -66,6 +67,7 @@ const getTopTile = (
 export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   config,
   initialState,
+  initialCamera,
   onReady,
   onStateChange,
   onCameraChange,
@@ -480,7 +482,9 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   );
   const [zoomMode, setZoomMode] = useState<"in" | "out">("in");
   const [isMouseOverUI, setIsMouseOverUI] = useState(false);
-  const [camera, rawSetCamera] = useState<Camera>({ x: 0, y: 0, zoom: 1 });
+  const [camera, rawSetCamera] = useState<Camera>(
+    initialCamera || { x: 0, y: 0, zoom: 1 }
+  );
   const [mouse, setMouse] = useState<Mouse | null>(null);
   const [tileToReplace, setTileToReplace] = useState<PlacedTile | null>(null);
   const [hoveredTile, setHoveredTile] = useState<PlacedTile | null>(null);
@@ -543,6 +547,12 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   }, [state, onStateChange]);
 
   useEffect(() => {
+    if (onCameraChange) {
+      onCameraChange(camera);
+    }
+  }, [camera, onCameraChange]);
+
+  useEffect(() => {
     if (onReady) {
       onReady({
         getState: () => state,
@@ -579,6 +589,10 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   const isInitialLoad = useRef(true);
 
   useEffect(() => {
+    if (initialCamera && isInitialLoad.current) {
+      isInitialLoad.current = false;
+      return;
+    }
     if (!canvasRef.current) return;
     const canvasRect = canvasRef.current.getBoundingClientRect();
     const zoom = config.defaultZoom || 1;
@@ -600,7 +614,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
       });
       isInitialLoad.current = false;
     }
-  }, [config]);
+  }, [config, initialCamera]);
 
   const handleSelectTile = (tile: TileDefinition, isAutotileRep: boolean) => {
     if (tile.type === "background") {

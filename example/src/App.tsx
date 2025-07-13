@@ -4,6 +4,7 @@ import {
   EditorActions,
   TilemapState,
   PlacedTile,
+  Camera,
 } from "../../src";
 import platformerTileset from "./tileset.json";
 import townTileset32x32 from "./tileset-town-32x32.json";
@@ -17,11 +18,16 @@ type Tileset = "platformer" | "town-32x32" | "town-infinite";
 interface SavedState {
   tileset: Tileset;
   state: TilemapState;
+  camera?: Camera;
 }
 
 // Helper to compress and encode state for URL
-const encodeState = (state: TilemapState, tileset: Tileset): string => {
-  const data: SavedState = { state, tileset };
+const encodeState = (
+  state: TilemapState,
+  tileset: Tileset,
+  camera?: Camera
+): string => {
+  const data: SavedState = { state, tileset, camera };
 
   const replacer = (key: string, value: any) => {
     if (value instanceof Map) {
@@ -91,8 +97,10 @@ const tilesets: Record<Tileset, TileConfig> = {
 function App() {
   const actionsRef = useRef<EditorActions | null>(null);
   const [initialState, setInitialState] = useState<TilemapState | undefined>();
+  const [initialCamera, setInitialCamera] = useState<Camera | undefined>();
   const [isLoading, setIsLoading] = useState(true);
   const [selectedTileset, setSelectedTileset] = useState<Tileset>("platformer");
+  const cameraRef = useRef<Camera | undefined>();
 
   useEffect(() => {
     // Check for state in URL on initial load
@@ -102,6 +110,10 @@ function App() {
       if (decoded) {
         setSelectedTileset(decoded.tileset);
         setInitialState(decoded.state);
+        if (decoded.camera) {
+          setInitialCamera(decoded.camera);
+          cameraRef.current = decoded.camera;
+        }
       }
     }
     setIsLoading(false);
@@ -120,8 +132,25 @@ function App() {
 
   const handleStateChange = (newState: TilemapState) => {
     if (actionsRef.current) {
-      const encodedState = encodeState(newState, selectedTileset);
+      const encodedState = encodeState(
+        newState,
+        selectedTileset,
+        cameraRef.current
+      );
       // Use pushState to avoid adding to browser history for every change
+      window.history.pushState(null, "", `#${encodedState}`);
+    }
+  };
+
+  const handleCameraChange = (newCamera: Camera) => {
+    cameraRef.current = newCamera;
+    if (actionsRef.current) {
+      const currentState = actionsRef.current.getState();
+      const encodedState = encodeState(
+        currentState,
+        selectedTileset,
+        newCamera
+      );
       window.history.pushState(null, "", `#${encodedState}`);
     }
   };
@@ -159,15 +188,19 @@ function App() {
           <option value="town-infinite">Town (Infinite)</option>
         </select>
       </div>
-      <TilemapEditor
-        config={tilesets[selectedTileset]}
-        initialState={initialState}
-        canvasStyle={canvasStyle}
-        onReady={handleReady}
-        onStateChange={handleStateChange}
-        onTileSelect={(tile) => console.log("onTileSelect", tile)}
-        onToolSelect={(tool) => console.log("onToolSelect", tool)}
-      />
+      {!isLoading && (
+        <TilemapEditor
+          config={tilesets[selectedTileset]}
+          initialState={initialState}
+          initialCamera={initialCamera}
+          canvasStyle={canvasStyle}
+          onReady={handleReady}
+          onStateChange={handleStateChange}
+          onCameraChange={handleCameraChange}
+          onTileSelect={(tile) => console.log("onTileSelect", tile)}
+          onToolSelect={(tool) => console.log("onToolSelect", tool)}
+        />
+      )}
     </div>
   );
 }
