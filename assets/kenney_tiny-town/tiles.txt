@@ -53,7 +53,7 @@
 52	roof_tile-SE
 53	roof_tile-SEW
 54	roof_tile-SW
-55	roof_tile_:chimney-SEW
+55	roof_tile:chimney-SEW
 56	fence:left-SN
 57	wheelbarrow
 58	fence:right-SN
@@ -123,8 +123,8 @@
 122	parapet-NW
 123	arch-NE
 124	arch-NW
-125	castle_window
-126	castle_wall
+125	castle:window
+126	castle:wall
 127	axe
 128	shovel
 129	scythe
