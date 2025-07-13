@@ -598,6 +598,10 @@
         "y": 48,
         "width": 16,
         "height": 16
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "SWEN"
       }
     },
     "dirt:alt2-SWEN": {
@@ -610,6 +614,10 @@
         "y": 48,
         "width": 16,
         "height": 16
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "SWEN"
       }
     },
     "dirt:alt3-SWEN": {
@@ -622,6 +630,10 @@
         "y": 48,
         "width": 16,
         "height": 16
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "SWEN"
       }
     },
     "dirt:alt4-SWEN": {
@@ -634,6 +646,10 @@
         "y": 48,
         "width": 16,
         "height": 16
+      },
+      "autotile": {
+        "group": "dirt",
+        "neighbors": "SWEN"
       }
     },
     "grass:cobblestone-SWEN": {
@@ -828,8 +844,8 @@
         "neighbors": "SW"
       }
     },
-    "roof_tile_:chimney-SEW": {
-      "displayName": "roof_tile_:chimney-SEW",
+    "roof_tile:chimney-SEW": {
+      "displayName": "roof_tile:chimney-SEW",
       "src": "assets/kenney_tiny-town/Tilemap/tilemap_packed.png",
       "zIndex": 2,
       "type": "tile",
@@ -840,7 +856,7 @@
         "height": 16
       },
       "autotile": {
-        "group": "roof_tile_",
+        "group": "roof_tile",
         "neighbors": "SEW"
       }
     },
@@ -1880,8 +1896,8 @@
         "neighbors": "NW"
       }
     },
-    "castle_window": {
-      "displayName": "castle_window",
+    "castle:window": {
+      "displayName": "castle:window",
       "src": "assets/kenney_tiny-town/Tilemap/tilemap_packed.png",
       "zIndex": 1,
       "type": "tile",
@@ -1892,8 +1908,8 @@
         "height": 16
       }
     },
-    "castle_wall": {
-      "displayName": "castle_wall",
+    "castle:wall": {
+      "displayName": "castle:wall",
       "src": "assets/kenney_tiny-town/Tilemap/tilemap_packed.png",
       "zIndex": 1,
       "type": "tile",
@@ -2027,8 +2043,8 @@
         "arch:porticulis-SE",
         "arch:porticulis-SW",
         "archery_target",
-        "castle_wall",
-        "castle_window",
+        "castle:wall",
+        "castle:window",
         "parapet",
         "parapet-E",
         "parapet-EW",
@@ -2057,8 +2073,8 @@
         "roof_tile-SE",
         "roof_tile-SEW",
         "roof_tile-SW",
+        "roof_tile:chimney-SEW",
         "roof_tile:peak-NEW",
-        "roof_tile_:chimney-SEW",
         "wall_stone-E",
         "wall_stone-EW",
         "wall_stone-W",
@@ -2081,7 +2097,6 @@
       "autotileGroups": [
         "roof_slate",
         "roof_tile",
-        "roof_tile_",
         "wall_wood",
         "wall_stone",
         "well",

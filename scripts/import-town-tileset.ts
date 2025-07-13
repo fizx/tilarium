@@ -92,6 +92,7 @@ const getGroupKey = (name: string): string => {
     parapet: "Structures",
     arch: "Structures",
     well: "Structures",
+    castle: "Structures",
     castle_wall: "Structures",
     castle_window: "Structures",
 
@@ -171,7 +172,7 @@ const lines = txtData.split("\n").filter((line) => line.trim() !== "");
 // --- First Pass: Identify all real autotile groups ---
 const autotileGroupNames = new Set<string>();
 const autotileRegex =
-  /^(?<group>[a-zA-Z_]+?)(?::(?<variant>[a-zA-Z_]+))?-(?<neighbors>[NESW]+)$/;
+  /^(?<group>[\w_]+?)(?::(?<variant>[\w_]+))?-(?<neighbors>[NESW]+)$/;
 
 for (const line of lines) {
   const match = line.match(/^(\d+)\s+(.+)$/);
@@ -202,7 +203,7 @@ for (const line of lines) {
   const displayName = name.replace(/_([NESW]+)$/, "");
 
   const autotileMatch = name.match(
-    /^(?<group>[a-zA-Z_]+?)(?::(?<variant>[a-zA-Z_]+))?(?:-(?<neighbors>[NESW]+))?$/
+    /^(?<group>[\w_]+?)(?::(?<variant>[\w_]+))?(?:-(?<neighbors>[NESW]+))?$/
   );
 
   const tileDefinition: TileDefinition = {
