@@ -29,6 +29,10 @@ export const HTML5Canvas = () => {
     zoomMode,
     setMouse,
     state,
+    applyToolAt,
+    placeMode,
+    eraseMode,
+    selectedTile,
   } = useEditor();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isDragging = useRef(false);
@@ -36,6 +40,11 @@ export const HTML5Canvas = () => {
   const pinchDist = useRef(0);
   const justTouched = useRef(false);
   const [areImagesLoaded, setAreImagesLoaded] = useState(false);
+  const [isDrawing, setIsDrawing] = useState(false);
+  const [drawStart, setDrawStart] = useState<{ x: number; y: number } | null>(
+    null
+  );
+  const [drawEnd, setDrawEnd] = useState<{ x: number; y: number } | null>(null);
 
   useEffect(() => {
     const allSources = [
@@ -103,8 +112,24 @@ export const HTML5Canvas = () => {
         lastMousePosition.current = { x: clientX, y: clientY };
         return;
       }
+
+      const coords = getGridCoordinates(clientX, clientY);
+      if (!coords) return;
+
+      if (
+        (selectedTool === "place" &&
+          placeMode === "rectangle" &&
+          selectedTile) ||
+        (selectedTool === "erase" && eraseMode === "rectangle")
+      ) {
+        setIsDrawing(true);
+        setDrawStart(coords);
+        setDrawEnd(coords);
+      } else {
+        applyToolAt(coords.x, coords.y);
+      }
     },
-    [selectedTool, zoomMode, handleZoomAtPoint]
+    [selectedTool, zoomMode, handleZoomAtPoint, getGridCoordinates, applyToolAt]
   );
 
   const handleMouseMove = useCallback(
@@ -119,14 +144,43 @@ export const HTML5Canvas = () => {
         const dy = clientY - lastMousePosition.current.y;
         setCamera({ ...camera, x: camera.x + dx, y: camera.y + dy });
         lastMousePosition.current = { x: clientX, y: clientY };
+      } else if (e.buttons === 1) {
+        const coords = getGridCoordinates(clientX, clientY);
+        if (coords) {
+          if (isDrawing) {
+            setDrawEnd(coords);
+          } else if (
+            (selectedTool === "place" || selectedTool === "erase") &&
+            placeMode !== "rectangle" &&
+            eraseMode !== "rectangle"
+          ) {
+            applyToolAt(coords.x, coords.y);
+          }
+        }
       }
     },
-    [camera, setCamera, setMouse]
+    [
+      camera,
+      setCamera,
+      setMouse,
+      getGridCoordinates,
+      isDrawing,
+      selectedTool,
+      placeMode,
+      eraseMode,
+      applyToolAt,
+    ]
   );
 
   const handleMouseUp = useCallback(() => {
+    if (isDrawing && drawStart && drawEnd) {
+      // Handle rectangle fill/erase here
+    }
     isDragging.current = false;
-  }, []);
+    setIsDrawing(false);
+    setDrawStart(null);
+    setDrawEnd(null);
+  }, [isDrawing, drawStart, drawEnd]);
 
   const handleMouseLeave = useCallback(() => {
     isDragging.current = false;
