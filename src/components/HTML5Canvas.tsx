@@ -1,6 +1,24 @@
 import React, { useRef, useEffect, useCallback, useState } from "react";
 import { useEditor } from "../EditorContext";
 
+const imageCache = new Map<string, HTMLImageElement>();
+
+const loadImage = (src: string): Promise<HTMLImageElement> => {
+  return new Promise((resolve, reject) => {
+    if (imageCache.has(src)) {
+      resolve(imageCache.get(src)!);
+      return;
+    }
+    const img = new Image();
+    img.onload = () => {
+      imageCache.set(src, img);
+      resolve(img);
+    };
+    img.onerror = (err) => reject(err);
+    img.src = src;
+  });
+};
+
 export const HTML5Canvas = () => {
   const {
     config,
@@ -10,12 +28,27 @@ export const HTML5Canvas = () => {
     selectedTool,
     zoomMode,
     setMouse,
+    state,
   } = useEditor();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isDragging = useRef(false);
   const lastMousePosition = useRef({ x: 0, y: 0 });
   const pinchDist = useRef(0);
   const justTouched = useRef(false);
+  const [areImagesLoaded, setAreImagesLoaded] = useState(false);
+
+  useEffect(() => {
+    const allSources = [
+      ...new Set(
+        Object.values(config.tiles)
+          .map((t) => t.src)
+          .filter(Boolean)
+      ),
+    ];
+    Promise.all(allSources.map(loadImage)).then(() => {
+      setAreImagesLoaded(true);
+    });
+  }, [config]);
 
   const getGridCoordinates = useCallback(
     (clientX: number, clientY: number) => {
@@ -149,6 +182,54 @@ export const HTML5Canvas = () => {
       ctx.fillStyle = "#f0f0f0";
       ctx.fillRect(mapPixelLeft, mapPixelTop, mapPixelWidth, mapPixelHeight);
 
+      // --- Drawing Tiles ---
+      if (areImagesLoaded) {
+        for (const [cellKey, cell] of state.placedTiles.entries()) {
+          const [x, y] = cellKey.split("-").map(Number);
+          // Basic culling
+          // A more robust implementation would calculate visible bounds
+          if (
+            x * gridSize >
+              -camera.x / camera.zoom + canvas.width / camera.zoom ||
+            y * gridSize >
+              -camera.y / camera.zoom + canvas.height / camera.zoom ||
+            (x + 1) * gridSize < -camera.x / camera.zoom ||
+            (y + 1) * gridSize < -camera.y / camera.zoom
+          ) {
+            continue;
+          }
+
+          for (const placedTile of cell.values()) {
+            if (!placedTile) continue;
+
+            const tileDef = config.tiles[placedTile.tileId];
+            if (!tileDef) continue;
+
+            const image = imageCache.get(tileDef.src);
+            if (!image) continue;
+
+            const destX = x * gridSize;
+            const destY = y * gridSize;
+
+            if (tileDef.spritesheet) {
+              ctx.drawImage(
+                image,
+                tileDef.spritesheet.x,
+                tileDef.spritesheet.y,
+                tileDef.spritesheet.width,
+                tileDef.spritesheet.height,
+                destX,
+                destY,
+                gridSize,
+                gridSize
+              );
+            } else {
+              ctx.drawImage(image, destX, destY, gridSize, gridSize);
+            }
+          }
+        }
+      }
+
       ctx.strokeStyle = "rgba(0, 0, 0, 0.1)";
       ctx.lineWidth = 1 / camera.zoom;
 
@@ -179,7 +260,7 @@ export const HTML5Canvas = () => {
     return () => {
       window.cancelAnimationFrame(animationFrameId);
     };
-  }, [camera, config, mapBounds]);
+  }, [camera, config, mapBounds, state.placedTiles, areImagesLoaded]);
 
   return (
     <canvas
