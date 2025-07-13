@@ -12,7 +12,7 @@ import { PlacedTile } from "../state";
 import { Tile } from "./Tile";
 import { Background } from "./Background";
 
-export const Canvas = () => {
+export const DOMCanvas = () => {
   const {
     config,
     state,
@@ -28,26 +28,33 @@ export const Canvas = () => {
     setHoveredTile,
     setSelectedTile,
     placeMode,
+    eraseMode,
+    zoomMode,
     applyToolAt,
     mapBounds,
   } = useEditor();
   const isDragging = useRef(false);
-  const isPainting = useRef(false);
   const lastMousePosition = useRef({ x: 0, y: 0 });
-  const lastPaintedCell = useRef<{ x: number; y: number } | null>(null);
   const pinchDist = useRef(0);
   const justTouched = useRef(false);
   const [isOverMap, setIsOverMap] = useState(true);
   const [isInteracting, setIsInteracting] = useState(false);
   const interactionTimeout = useRef<number | null>(null);
 
+  // State for drawing rectangles
+  const [isDrawing, setIsDrawing] = useState(false);
+  const [drawStart, setDrawStart] = useState<{ x: number; y: number } | null>(
+    null
+  );
+  const [drawEnd, setDrawEnd] = useState<{ x: number; y: number } | null>(null);
+
   const cursor = useMemo(() => {
     if (!isOverMap) return "default";
-    if (selectedTool === "place" || selectedTool === "erase") {
-      return "none";
-    }
-    return "grab";
-  }, [selectedTool, isOverMap]);
+    if (selectedTool === "drag") return "grab";
+    if (selectedTool === "zoom")
+      return zoomMode === "in" ? "zoom-in" : "zoom-out";
+    return "none"; // Hide default cursor for place/erase to show custom one
+  }, [selectedTool, isOverMap, zoomMode]);
 
   const getEventCoords = useCallback((e: MouseEvent | TouchEvent) => {
     if ("touches" in e) {
@@ -56,49 +63,42 @@ export const Canvas = () => {
     return { clientX: e.clientX, clientY: e.clientY };
   }, []);
 
-  const handlePaintStart = useCallback(
-    (e: MouseEvent | TouchEvent) => {
-      if ("touches" in e && e.touches.length > 1) {
-        return;
-      }
-      if (selectedTool === "place" || selectedTool === "erase") {
-        isPainting.current = true;
-        const { clientX, clientY } = getEventCoords(e);
-        const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-        const x = Math.floor(
-          (clientX - rect.left - camera.x) / (config.gridSize * camera.zoom)
-        );
-        const y = Math.floor(
-          (clientY - rect.top - camera.y) / (config.gridSize * camera.zoom)
-        );
-
-        const snappedX =
-          x * (config.gridSize * camera.zoom) + camera.x + rect.left;
-        const snappedY =
-          y * (config.gridSize * camera.zoom) + camera.y + rect.top;
-
-        setMouse({ x: snappedX, y: snappedY });
-        // applyToolAt(x, y); // This is now handled in TilemapEditor
-      }
+  const getGridCoordinates = useCallback(
+    (clientX: number, clientY: number) => {
+      if (!canvasRef.current) return null;
+      const rect = canvasRef.current.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+      const gridX = Math.floor(
+        (x - camera.x) / (config.gridSize * camera.zoom)
+      );
+      const gridY = Math.floor(
+        (y - camera.y) / (config.gridSize * camera.zoom)
+      );
+      return { x: gridX, y: gridY };
     },
-    [
-      camera.x,
-      camera.y,
-      camera.zoom,
-      config.gridSize,
-      getEventCoords,
-      selectedTool,
-      setMouse,
-    ]
+    [camera, config.gridSize, canvasRef]
   );
 
-  const handleInteractionEnd = useCallback(() => {
-    isDragging.current = false;
-    isPainting.current = false;
-    lastPaintedCell.current = null;
-    pinchDist.current = 0;
-    setMouse(null);
-  }, [setMouse]);
+  const handleZoomAtPoint = useCallback(
+    (zoomFactor: number, pointX: number, pointY: number) => {
+      if (!canvasRef.current) return;
+
+      const rect = canvasRef.current.getBoundingClientRect();
+      const worldX = (pointX - rect.left - camera.x) / camera.zoom;
+      const worldY = (pointY - rect.top - camera.y) / camera.zoom;
+      const newZoom = Math.max(0.1, camera.zoom * zoomFactor);
+      const newCameraX = pointX - rect.left - worldX * newZoom;
+      const newCameraY = pointY - rect.top - worldY * newZoom;
+
+      setCamera({
+        zoom: newZoom,
+        x: newCameraX,
+        y: newCameraY,
+      });
+    },
+    [camera, setCamera, canvasRef]
+  );
 
   const mapDimensions = useMemo(() => {
     if (config.mapSize !== "infinite") {
@@ -120,23 +120,23 @@ export const Canvas = () => {
   const handleInteractionMove = useCallback(
     (e: MouseEvent | TouchEvent) => {
       const { clientX, clientY } = getEventCoords(e);
-      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-      const gridX = Math.floor(
-        (clientX - rect.left - camera.x) / (config.gridSize * camera.zoom)
-      );
-      const gridY = Math.floor(
-        (clientY - rect.top - camera.y) / (config.gridSize * camera.zoom)
-      );
+      const coords = getGridCoordinates(clientX, clientY);
+
+      if (!coords) {
+        setMouse(null);
+        setHoveredTile(null);
+        setIsOverMap(false);
+        return;
+      }
 
       if (config.mapSize !== "infinite") {
         if (
-          gridX < 0 ||
-          gridX >= config.mapSize.width ||
-          gridY < 0 ||
-          gridY >= config.mapSize.height
+          coords.x < 0 ||
+          coords.x >= config.mapSize.width ||
+          coords.y < 0 ||
+          coords.y >= config.mapSize.height
         ) {
           setMouse(null);
-          setTileToReplace(null);
           setHoveredTile(null);
           setIsOverMap(false);
           return;
@@ -145,14 +145,15 @@ export const Canvas = () => {
 
       setIsOverMap(true);
 
+      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
       const snappedX =
-        gridX * (config.gridSize * camera.zoom) + camera.x + rect.left;
+        coords.x * (config.gridSize * camera.zoom) + camera.x + rect.left;
       const snappedY =
-        gridY * (config.gridSize * camera.zoom) + camera.y + rect.top;
+        coords.y * (config.gridSize * camera.zoom) + camera.y + rect.top;
 
       setMouse({ x: snappedX, y: snappedY });
 
-      const key = `${gridX}-${gridY}`;
+      const key = `${coords.x}-${coords.y}`;
       const cell = state.placedTiles.get(key);
 
       if (cell) {
@@ -165,7 +166,6 @@ export const Canvas = () => {
             const currentZ = config.tiles[current.tileId]?.zIndex ?? -Infinity;
             return currentZ > topZ ? current : top;
           });
-          const tileDef = config.tiles[topTile.tileId];
           setHoveredTile(topTile);
         } else {
           setHoveredTile(null);
@@ -174,109 +174,134 @@ export const Canvas = () => {
         setHoveredTile(null);
       }
 
-      if (isPainting.current) {
-        if (placeMode !== "rectangle") {
-          applyToolAt(gridX, gridY);
-        }
+      if (isDrawing) {
+        setDrawEnd(coords);
       } else if (isDragging.current) {
         setMouse(null);
         const dx = clientX - lastMousePosition.current.x;
         const dy = clientY - lastMousePosition.current.y;
-
-        let newCameraX = camera.x + dx;
-        let newCameraY = camera.y + dy;
-
-        if (config.mapSize === "infinite") {
-          const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-          const minCameraX =
-            rect.width -
-            (mapDimensions.left + mapDimensions.width) * camera.zoom;
-          const maxCameraX = -mapDimensions.left * camera.zoom;
-          const minCameraY =
-            rect.height -
-            (mapDimensions.top + mapDimensions.height) * camera.zoom;
-          const maxCameraY = -mapDimensions.top * camera.zoom;
-
-          newCameraX = Math.max(minCameraX, Math.min(newCameraX, maxCameraX));
-          newCameraY = Math.max(minCameraY, Math.min(newCameraY, maxCameraY));
-        }
-
-        setCamera({ ...camera, x: newCameraX, y: newCameraY });
+        setCamera({ ...camera, x: camera.x + dx, y: camera.y + dy });
         lastMousePosition.current = { x: clientX, y: clientY };
+      } else if (
+        ("buttons" in e && e.buttons === 1) ||
+        (e.type === "touchmove" &&
+          (selectedTool === "place" || selectedTool === "erase") &&
+          placeMode !== "rectangle" &&
+          eraseMode !== "rectangle")
+      ) {
+        applyToolAt(coords.x, coords.y);
       }
     },
     [
       camera,
-      config.gridSize,
-      config.tiles,
+      config,
       getEventCoords,
-      selectedTile,
-      selectedTool,
-      setCamera,
       setMouse,
-      setTileToReplace,
-      state.placedTiles,
-      config.mapSize,
-      setIsOverMap,
       setHoveredTile,
+      state.placedTiles,
+      isDrawing,
+      setDrawEnd,
+      isDragging,
+      setCamera,
+      selectedTool,
       placeMode,
+      eraseMode,
       applyToolAt,
-      mapDimensions,
     ]
   );
 
   const handleMouseDown = useCallback(
     (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.closest(".map-boundary")) {
-        if (selectedTool === "place" || selectedTool === "erase") {
-          handlePaintStart(e);
-        } else {
-          isDragging.current = true;
-          setIsInteracting(true);
-          const { clientX, clientY } = getEventCoords(e);
-          lastMousePosition.current = { x: clientX, y: clientY };
-        }
+      const { clientX, clientY } = getEventCoords(e);
+      const coords = getGridCoordinates(clientX, clientY);
+
+      if (selectedTool === "zoom") {
+        const zoomFactor = zoomMode === "in" ? 1.2 : 1 / 1.2;
+        handleZoomAtPoint(zoomFactor, clientX, clientY);
+        return;
+      }
+
+      if (selectedTool === "drag") {
+        isDragging.current = true;
+        lastMousePosition.current = { x: clientX, y: clientY };
+        return;
+      }
+
+      if (!coords) return;
+
+      // Handle rectangle drawing modes for both place and erase
+      if (
+        (selectedTool === "place" &&
+          placeMode === "rectangle" &&
+          selectedTile) ||
+        (selectedTool === "erase" && eraseMode === "rectangle")
+      ) {
+        setIsDrawing(true);
+        setDrawStart(coords);
+        setDrawEnd(coords);
       } else {
-        const canvasRect = (
-          e.currentTarget as HTMLElement
-        ).getBoundingClientRect();
-        if (config.mapSize !== "infinite") {
-          const mapSize = {
-            width: config.mapSize.width * config.gridSize,
-            height: config.mapSize.height * config.gridSize,
-          };
-          const newCameraX =
-            (canvasRect.width - mapSize.width * camera.zoom) / 2;
-          const newCameraY =
-            (canvasRect.height - mapSize.height * camera.zoom) / 2;
-          setCamera({
-            ...camera,
-            x: newCameraX,
-            y: newCameraY,
-          });
-        }
+        // Handle all single-tile modes
+        applyToolAt(coords.x, coords.y);
       }
     },
     [
-      handlePaintStart,
-      selectedTool,
-      camera.zoom,
-      setCamera,
       getEventCoords,
+      getGridCoordinates,
+      selectedTool,
+      zoomMode,
+      handleZoomAtPoint,
       isDragging,
-      config,
+      placeMode,
+      eraseMode,
+      selectedTile,
+      applyToolAt,
     ]
   );
 
   const handleMouseUp = useCallback(() => {
-    handleInteractionEnd();
-    setIsInteracting(false);
-    setMouse(null);
-    setTileToReplace(null);
-    setIsOverMap(false);
-    setHoveredTile(null);
-  }, [setMouse, setTileToReplace, setHoveredTile]);
+    if (isDrawing && drawStart && drawEnd) {
+      const startX = Math.min(drawStart.x, drawEnd.x);
+      const endX = Math.max(drawStart.x, drawEnd.x);
+      const startY = Math.min(drawStart.y, drawEnd.y);
+      const endY = Math.max(drawStart.y, drawEnd.y);
+
+      if (
+        selectedTool === "place" &&
+        placeMode === "rectangle" &&
+        selectedTile
+      ) {
+        dispatch({
+          type: "FILL_RECTANGLE",
+          payload: {
+            startX,
+            startY,
+            endX,
+            endY,
+            tileId: selectedTile.definition.displayName,
+          },
+        });
+      } else if (selectedTool === "erase" && eraseMode === "rectangle") {
+        dispatch({
+          type: "ERASE_RECTANGLE",
+          payload: { startX, startY, endX, endY },
+        });
+      }
+    }
+
+    isDragging.current = false;
+    setIsDrawing(false);
+    setDrawStart(null);
+    setDrawEnd(null);
+  }, [
+    isDrawing,
+    drawStart,
+    drawEnd,
+    selectedTile,
+    dispatch,
+    placeMode,
+    eraseMode,
+    selectedTool,
+  ]);
 
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
@@ -291,15 +316,24 @@ export const Canvas = () => {
       if (e.touches.length === 2) {
         // pinch
         e.preventDefault();
-        // setSelectedTool("drag"); // This tool doesn't exist anymore
         const dx = e.touches[0].clientX - e.touches[1].clientX;
         const dy = e.touches[0].clientY - e.touches[1].clientY;
         pinchDist.current = Math.sqrt(dx * dx + dy * dy);
-      } else {
-        handlePaintStart(e);
+      } else if (e.touches.length === 1) {
+        if (selectedTool === "drag") {
+          isDragging.current = true;
+          const { clientX, clientY } = getEventCoords(e);
+          lastMousePosition.current = { x: clientX, y: clientY };
+        } else {
+          const { clientX, clientY } = getEventCoords(e);
+          const coords = getGridCoordinates(clientX, clientY);
+          if (coords) {
+            applyToolAt(coords.x, coords.y);
+          }
+        }
       }
     },
-    [handlePaintStart]
+    [selectedTool, getEventCoords, getGridCoordinates, applyToolAt]
   );
 
   const handleTouchMove = useCallback(
@@ -347,17 +381,15 @@ export const Canvas = () => {
     [camera.x, camera.y, camera.zoom, handleInteractionMove, setCamera]
   );
 
-  const handleTouchEnd = useCallback(
-    (e: TouchEvent) => {
-      handleInteractionEnd();
-      // A brief flag to prevent ghost mousemove events on touch devices.
-      justTouched.current = true;
-      setTimeout(() => {
-        justTouched.current = false;
-      }, 200);
-    },
-    [handleInteractionEnd]
-  );
+  const handleTouchEnd = useCallback((e: TouchEvent) => {
+    isDragging.current = false;
+    pinchDist.current = 0;
+    // A brief flag to prevent ghost mousemove events on touch devices.
+    justTouched.current = true;
+    setTimeout(() => {
+      justTouched.current = false;
+    }, 200);
+  }, []);
 
   const handleMouseEnter = useCallback(
     (e: MouseEvent) => {
@@ -369,12 +401,11 @@ export const Canvas = () => {
 
   const handleMouseLeave = useCallback(() => {
     isDragging.current = false;
-    isPainting.current = false;
-    lastPaintedCell.current = null;
+    setIsDrawing(false);
     setMouse(null);
-    setTileToReplace(null);
+    setHoveredTile(null);
     setIsOverMap(false);
-  }, [setMouse, setTileToReplace]);
+  }, [setMouse, setHoveredTile]);
 
   const handleWheel = useCallback(
     (e: React.WheelEvent) => {
@@ -469,7 +500,7 @@ export const Canvas = () => {
     );
 
     return { x: gridX, y: gridY };
-  }, [camera, config.gridSize, canvasRef.current]);
+  }, [camera, config.gridSize, canvasRef]);
 
   return (
     <div
@@ -579,6 +610,38 @@ export const Canvas = () => {
           </div>
         </div>
       </div>
+      {isDrawing && drawStart && drawEnd && (
+        <div
+          className="drawing-rectangle"
+          style={{
+            position: "absolute",
+            left:
+              Math.min(drawStart.x, drawEnd.x) * config.gridSize * camera.zoom +
+              camera.x,
+            top:
+              Math.min(drawStart.y, drawEnd.y) * config.gridSize * camera.zoom +
+              camera.y,
+            width:
+              (Math.abs(drawStart.x - drawEnd.x) + 1) *
+              config.gridSize *
+              camera.zoom,
+            height:
+              (Math.abs(drawStart.y - drawEnd.y) + 1) *
+              config.gridSize *
+              camera.zoom,
+            border:
+              selectedTool === "place"
+                ? "2px solid rgba(52, 152, 219, 0.8)"
+                : "2px solid rgba(231, 76, 60, 0.8)",
+            backgroundColor:
+              selectedTool === "place"
+                ? "rgba(52, 152, 219, 0.2)"
+                : "rgba(231, 76, 60, 0.2)",
+            zIndex: 100,
+            pointerEvents: "none",
+          }}
+        />
+      )}
       {isInteracting && config.mapSize === "infinite" && (
         <div className="center-coords-overlay">
           {`x: ${centerGridCoords.x}, y: ${centerGridCoords.y}`}

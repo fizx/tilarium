@@ -9,7 +9,7 @@ import React, {
 import { TileConfig, TileDefinition } from "./config";
 import { TilemapState, PlacedTile, TilemapAction, PlacedTiles } from "./state";
 import { TilePalette } from "./components/TilePalette";
-import { Canvas } from "./components/Canvas";
+import { DOMCanvas } from "./components/DOMCanvas";
 import { Toolbar } from "./components/Toolbar";
 import {
   EditorContext,
@@ -31,6 +31,7 @@ import {
 import "./TilemapEditor.css";
 import { HelpModal } from "./components/HelpModal";
 import { TilemapDelta, createDelta, applyDelta } from "./delta";
+import { HTML5Canvas } from "./components/HTML5Canvas";
 
 export interface EditorActions {
   getState: () => TilemapState;
@@ -48,6 +49,7 @@ export interface TilemapEditorProps {
   onToolSelect?: (tool: Tool) => void;
   onTileSelect?: (tile?: TileDefinition) => void;
   canvasStyle?: React.CSSProperties;
+  renderMode?: "dom" | "canvas";
 }
 
 const getTopTile = (
@@ -74,6 +76,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   onToolSelect,
   onTileSelect,
   canvasStyle,
+  renderMode = "dom",
 }) => {
   const autotileLookup = useMemo(() => createAutotileLookup(config), [config]);
 
@@ -514,7 +517,6 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
     console.log("Initial mouse state on load:", mouse);
   }, []);
 
-  // Rectangle drawing state
   const [isDrawing, setIsDrawing] = useState(false);
   const [drawStart, setDrawStart] = useState<{ x: number; y: number } | null>(
     null
@@ -884,13 +886,9 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           <div
             className="canvas-container"
             style={{ ...canvasStyle, cursor: getCanvasCursor() }}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
             onMouseEnter={() => setIsMouseOverUI(false)}
           >
-            <Canvas />
+            {renderMode === "dom" ? <DOMCanvas /> : <HTML5Canvas />}
             <Toolbar />
             {isDrawing && drawStart && drawEnd && (
               <div

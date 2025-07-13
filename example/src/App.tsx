@@ -100,6 +100,7 @@ function App() {
   const [initialCamera, setInitialCamera] = useState<Camera | undefined>();
   const [isLoading, setIsLoading] = useState(true);
   const [selectedTileset, setSelectedTileset] = useState<Tileset>("platformer");
+  const [renderMode, setRenderMode] = useState<"dom" | "canvas">("dom");
   const cameraRef = useRef<Camera | undefined>();
 
   useEffect(() => {
@@ -171,6 +172,12 @@ function App() {
     }
   };
 
+  const handleRenderModeChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRenderMode(event.target.checked ? "canvas" : "dom");
+  };
+
   const canvasStyle = {
     background: "url('./assets/dragons.png') center/cover",
   };
@@ -187,6 +194,14 @@ function App() {
           <option value="town-32x32">Town (32x32)</option>
           <option value="town-infinite">Town (Infinite)</option>
         </select>
+        <label className="render-mode-toggle">
+          <input
+            type="checkbox"
+            checked={renderMode === "canvas"}
+            onChange={handleRenderModeChange}
+          />
+          Use Canvas Renderer
+        </label>
       </div>
       {!isLoading && (
         <TilemapEditor
@@ -199,6 +214,7 @@ function App() {
           onCameraChange={handleCameraChange}
           onTileSelect={(tile) => console.log("onTileSelect", tile)}
           onToolSelect={(tool) => console.log("onToolSelect", tool)}
+          renderMode={renderMode}
         />
       )}
     </div>
