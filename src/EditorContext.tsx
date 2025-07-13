@@ -53,6 +53,7 @@ export interface EditorContextType {
   applyToolAt: (gridX: number, gridY: number) => void;
   isMouseOverUI: boolean;
   setIsMouseOverUI: (isOver: boolean) => void;
+  mapBounds: { minX: number; minY: number; maxX: number; maxY: number };
 }
 
 export const EditorContext = createContext<EditorContextType | undefined>(

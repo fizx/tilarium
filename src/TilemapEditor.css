@@ -554,6 +554,22 @@
   background-color: white;
 }
 
+.center-coords-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 100;
+  font-size: 14px;
+  white-space: nowrap;
+  font-family: sans-serif;
+}
+
 .tile {
   position: relative;
 }

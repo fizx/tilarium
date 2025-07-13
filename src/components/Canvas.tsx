@@ -29,6 +29,7 @@ export const Canvas = () => {
     setSelectedTile,
     placeMode,
     applyToolAt,
+    mapBounds,
   } = useEditor();
   const isDragging = useRef(false);
   const isPainting = useRef(false);
@@ -37,6 +38,8 @@ export const Canvas = () => {
   const pinchDist = useRef(0);
   const justTouched = useRef(false);
   const [isOverMap, setIsOverMap] = useState(true);
+  const [isInteracting, setIsInteracting] = useState(false);
+  const interactionTimeout = useRef<number | null>(null);
 
   const cursor = useMemo(() => {
     if (!isOverMap) return "default";
@@ -96,6 +99,23 @@ export const Canvas = () => {
     pinchDist.current = 0;
     setMouse(null);
   }, [setMouse]);
+
+  const mapDimensions = useMemo(() => {
+    if (config.mapSize !== "infinite") {
+      return {
+        width: config.mapSize.width * config.gridSize,
+        height: config.mapSize.height * config.gridSize,
+        left: 0,
+        top: 0,
+      };
+    }
+    return {
+      width: (mapBounds.maxX - mapBounds.minX + 1) * config.gridSize,
+      height: (mapBounds.maxY - mapBounds.minY + 1) * config.gridSize,
+      left: mapBounds.minX * config.gridSize,
+      top: mapBounds.minY * config.gridSize,
+    };
+  }, [mapBounds, config.mapSize, config.gridSize]);
 
   const handleInteractionMove = useCallback(
     (e: MouseEvent | TouchEvent) => {
@@ -162,7 +182,26 @@ export const Canvas = () => {
         setMouse(null);
         const dx = clientX - lastMousePosition.current.x;
         const dy = clientY - lastMousePosition.current.y;
-        setCamera({ ...camera, x: camera.x + dx, y: camera.y + dy });
+
+        let newCameraX = camera.x + dx;
+        let newCameraY = camera.y + dy;
+
+        if (config.mapSize === "infinite") {
+          const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+          const minCameraX =
+            rect.width -
+            (mapDimensions.left + mapDimensions.width) * camera.zoom;
+          const maxCameraX = -mapDimensions.left * camera.zoom;
+          const minCameraY =
+            rect.height -
+            (mapDimensions.top + mapDimensions.height) * camera.zoom;
+          const maxCameraY = -mapDimensions.top * camera.zoom;
+
+          newCameraX = Math.max(minCameraX, Math.min(newCameraX, maxCameraX));
+          newCameraY = Math.max(minCameraY, Math.min(newCameraY, maxCameraY));
+        }
+
+        setCamera({ ...camera, x: newCameraX, y: newCameraY });
         lastMousePosition.current = { x: clientX, y: clientY };
       }
     },
@@ -182,18 +221,8 @@ export const Canvas = () => {
       setHoveredTile,
       placeMode,
       applyToolAt,
+      mapDimensions,
     ]
-  );
-
-  const mapSize = useMemo(
-    () =>
-      config.mapSize === "infinite"
-        ? null
-        : {
-            width: config.mapSize.width * config.gridSize,
-            height: config.mapSize.height * config.gridSize,
-          },
-    [config.mapSize, config.gridSize]
   );
 
   const handleMouseDown = useCallback(
@@ -204,6 +233,7 @@ export const Canvas = () => {
           handlePaintStart(e);
         } else {
           isDragging.current = true;
+          setIsInteracting(true);
           const { clientX, clientY } = getEventCoords(e);
           lastMousePosition.current = { x: clientX, y: clientY };
         }
@@ -211,7 +241,11 @@ export const Canvas = () => {
         const canvasRect = (
           e.currentTarget as HTMLElement
         ).getBoundingClientRect();
-        if (mapSize) {
+        if (config.mapSize !== "infinite") {
+          const mapSize = {
+            width: config.mapSize.width * config.gridSize,
+            height: config.mapSize.height * config.gridSize,
+          };
           const newCameraX =
             (canvasRect.width - mapSize.width * camera.zoom) / 2;
           const newCameraY =
@@ -227,19 +261,17 @@ export const Canvas = () => {
     [
       handlePaintStart,
       selectedTool,
-      camera.x,
-      camera.y,
       camera.zoom,
-      config.gridSize,
       setCamera,
-      mapSize,
       getEventCoords,
       isDragging,
+      config,
     ]
   );
 
   const handleMouseUp = useCallback(() => {
     handleInteractionEnd();
+    setIsInteracting(false);
     setMouse(null);
     setTileToReplace(null);
     setIsOverMap(false);
@@ -347,6 +379,15 @@ export const Canvas = () => {
   const handleWheel = useCallback(
     (e: React.WheelEvent) => {
       e.preventDefault();
+      setIsInteracting(true);
+
+      if (interactionTimeout.current) {
+        clearTimeout(interactionTimeout.current);
+      }
+      interactionTimeout.current = window.setTimeout(
+        () => setIsInteracting(false),
+        500
+      );
 
       const rect = e.currentTarget.getBoundingClientRect();
       const mouseX = e.clientX - rect.left;
@@ -355,7 +396,18 @@ export const Canvas = () => {
       const worldX = (mouseX - camera.x) / camera.zoom;
       const worldY = (mouseY - camera.y) / camera.zoom;
 
-      const newZoom = Math.max(0.1, camera.zoom - e.deltaY * 0.001);
+      const unconstrainedZoom = camera.zoom - e.deltaY * 0.001;
+      let newZoom: number;
+
+      if (config.mapSize === "infinite") {
+        // Calculate minimum zoom to fit the map to the canvas
+        const minZoomX = rect.width / mapDimensions.width;
+        const minZoomY = rect.height / mapDimensions.height;
+        const minZoom = Math.max(minZoomX, minZoomY);
+        newZoom = Math.max(minZoom, unconstrainedZoom);
+      } else {
+        newZoom = Math.max(0.1, unconstrainedZoom);
+      }
 
       const newCameraX = mouseX - worldX * newZoom;
       const newCameraY = mouseY - worldY * newZoom;
@@ -366,7 +418,7 @@ export const Canvas = () => {
         y: newCameraY,
       });
     },
-    [camera.x, camera.y, camera.zoom, setCamera]
+    [camera, setCamera, mapDimensions, config.mapSize]
   );
 
   useEffect(() => {
@@ -403,6 +455,22 @@ export const Canvas = () => {
     handleWheel,
   ]);
 
+  const centerGridCoords = useMemo(() => {
+    if (!canvasRef.current) return { x: 0, y: 0 };
+    const rect = canvasRef.current.getBoundingClientRect();
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const gridX = Math.floor(
+      (centerX - camera.x) / (config.gridSize * camera.zoom)
+    );
+    const gridY = Math.floor(
+      (centerY - camera.y) / (config.gridSize * camera.zoom)
+    );
+
+    return { x: gridX, y: gridY };
+  }, [camera, config.gridSize, canvasRef.current]);
+
   return (
     <div
       ref={canvasRef}
@@ -419,26 +487,20 @@ export const Canvas = () => {
         style={{
           transform: `translate(${camera.x}px, ${camera.y}px) scale(${camera.zoom})`,
           transformOrigin: "top left",
-          width: mapSize ? "max-content" : "100%",
-          height: mapSize ? "max-content" : "100%",
+          width: "100%",
+          height: "100%",
         }}
       >
         <div
           className="map-boundary"
-          style={
-            mapSize
-              ? {
-                  ...mapSize,
-                  position: "relative",
-                  backgroundColor: "#f0f0f0",
-                }
-              : {
-                  width: "100%",
-                  height: "100%",
-                  position: "relative",
-                  backgroundColor: "#f0f0f0",
-                }
-          }
+          style={{
+            width: mapDimensions.width,
+            height: mapDimensions.height,
+            left: mapDimensions.left,
+            top: mapDimensions.top,
+            position: "absolute",
+            backgroundColor: "#f0f0f0",
+          }}
         >
           <div
             className="background-container"
@@ -451,7 +513,12 @@ export const Canvas = () => {
               zIndex: 1,
             }}
           >
-            <Background mapSize={mapSize} />
+            <Background
+              mapSize={{
+                width: mapDimensions.width,
+                height: mapDimensions.height,
+              }}
+            />
           </div>
           <div
             className="grid-container"
@@ -463,6 +530,9 @@ export const Canvas = () => {
               height: "100%",
               backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.1) 1px, transparent 1px)`,
               backgroundSize: `${config.gridSize}px ${config.gridSize}px`,
+              backgroundPosition: `${-mapDimensions.left % config.gridSize}px ${
+                -mapDimensions.top % config.gridSize
+              }px`,
               zIndex: 2,
             }}
           />
@@ -487,8 +557,8 @@ export const Canvas = () => {
                       key={`${cellKey}-${zIndex}`}
                       style={{
                         position: "absolute",
-                        left: x * config.gridSize,
-                        top: y * config.gridSize,
+                        left: x * config.gridSize - mapDimensions.left,
+                        top: y * config.gridSize - mapDimensions.top,
                         zIndex: zIndex,
                       }}
                     >
@@ -509,6 +579,11 @@ export const Canvas = () => {
           </div>
         </div>
       </div>
+      {isInteracting && config.mapSize === "infinite" && (
+        <div className="center-coords-overlay">
+          {`x: ${centerGridCoords.x}, y: ${centerGridCoords.y}`}
+        </div>
+      )}
     </div>
   );
 };

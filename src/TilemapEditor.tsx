@@ -423,6 +423,48 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         }
   );
 
+  const mapBounds = useMemo(() => {
+    if (config.mapSize !== "infinite") {
+      return {
+        minX: 0,
+        minY: 0,
+        maxX: config.mapSize.width - 1,
+        maxY: config.mapSize.height - 1,
+      };
+    }
+
+    const padding = 100;
+
+    if (state.placedTiles.size === 0) {
+      return {
+        minX: -padding,
+        minY: -padding,
+        maxX: padding - 1,
+        maxY: padding - 1,
+      };
+    }
+
+    let minX = Infinity;
+    let minY = Infinity;
+    let maxX = -Infinity;
+    let maxY = -Infinity;
+
+    for (const key of state.placedTiles.keys()) {
+      const [x, y] = key.split("-").map(Number);
+      minX = Math.min(minX, x);
+      minY = Math.min(minY, y);
+      maxX = Math.max(maxX, x);
+      maxY = Math.max(maxY, y);
+    }
+
+    return {
+      minX: minX - padding,
+      minY: minY - padding,
+      maxX: maxX + padding,
+      maxY: maxY + padding,
+    };
+  }, [state.placedTiles, config.mapSize]);
+
   const [selectedTile, rawSetSelectedTile] = useState<SelectedTile | null>(
     null
   );
@@ -534,10 +576,14 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
     isReady.current = true;
   }, [onReady, dispatch]);
 
+  const isInitialLoad = useRef(true);
+
   useEffect(() => {
-    if (canvasRef.current && config.mapSize !== "infinite") {
-      const canvasRect = canvasRef.current.getBoundingClientRect();
-      const zoom = 1;
+    if (!canvasRef.current) return;
+    const canvasRect = canvasRef.current.getBoundingClientRect();
+    const zoom = config.defaultZoom || 1;
+
+    if (config.mapSize !== "infinite") {
       const mapWidth = config.mapSize.width * config.gridSize * zoom;
       const mapHeight = config.mapSize.height * config.gridSize * zoom;
       rawSetCamera({
@@ -545,6 +591,14 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         x: (canvasRect.width - mapWidth) / 2,
         y: (canvasRect.height - mapHeight) / 2,
       });
+    } else if (isInitialLoad.current) {
+      // For infinite maps, center the view on the origin (0,0) initially.
+      rawSetCamera({
+        zoom: zoom,
+        x: canvasRect.width / 2,
+        y: canvasRect.height / 2,
+      });
+      isInitialLoad.current = false;
     }
   }, [config]);
 
@@ -808,6 +862,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           hoveredTile,
           setHoveredTile,
           autotileLookup,
+          mapBounds,
           openHelpModal: () => setHelpModalOpen(true),
         }}
       >
