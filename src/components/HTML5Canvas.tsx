@@ -33,6 +33,7 @@ export const HTML5Canvas = () => {
     placeMode,
     eraseMode,
     selectedTile,
+    dispatch,
   } = useEditor();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isDragging = useRef(false);
@@ -174,13 +175,47 @@ export const HTML5Canvas = () => {
 
   const handleMouseUp = useCallback(() => {
     if (isDrawing && drawStart && drawEnd) {
-      // Handle rectangle fill/erase here
+      const startX = Math.min(drawStart.x, drawEnd.x);
+      const endX = Math.max(drawStart.x, drawEnd.x);
+      const startY = Math.min(drawStart.y, drawEnd.y);
+      const endY = Math.max(drawStart.y, drawEnd.y);
+
+      if (
+        selectedTool === "place" &&
+        placeMode === "rectangle" &&
+        selectedTile
+      ) {
+        dispatch({
+          type: "FILL_RECTANGLE",
+          payload: {
+            startX,
+            startY,
+            endX,
+            endY,
+            tileId: selectedTile.definition.displayName,
+          },
+        });
+      } else if (selectedTool === "erase" && eraseMode === "rectangle") {
+        dispatch({
+          type: "ERASE_RECTANGLE",
+          payload: { startX, startY, endX, endY },
+        });
+      }
     }
     isDragging.current = false;
     setIsDrawing(false);
     setDrawStart(null);
     setDrawEnd(null);
-  }, [isDrawing, drawStart, drawEnd]);
+  }, [
+    isDrawing,
+    drawStart,
+    drawEnd,
+    dispatch,
+    selectedTool,
+    placeMode,
+    eraseMode,
+    selectedTile,
+  ]);
 
   const handleMouseLeave = useCallback(() => {
     isDragging.current = false;
@@ -306,6 +341,32 @@ export const HTML5Canvas = () => {
       // Restore context state
       ctx.restore();
 
+      // --- Draw Selection Rectangle ---
+      if (isDrawing && drawStart && drawEnd) {
+        const startX = Math.min(drawStart.x, drawEnd.x);
+        const endX = Math.max(drawStart.x, drawEnd.x);
+        const startY = Math.min(drawStart.y, drawEnd.y);
+        const endY = Math.max(drawStart.y, drawEnd.y);
+
+        const rectX = startX * config.gridSize * camera.zoom + camera.x;
+        const rectY = startY * config.gridSize * camera.zoom + camera.y;
+        const rectW = (endX - startX + 1) * config.gridSize * camera.zoom;
+        const rectH = (endY - startY + 1) * config.gridSize * camera.zoom;
+
+        ctx.fillStyle =
+          selectedTool === "place"
+            ? "rgba(52, 152, 219, 0.2)"
+            : "rgba(231, 76, 60, 0.2)";
+        ctx.strokeStyle =
+          selectedTool === "place"
+            ? "rgba(52, 152, 219, 0.8)"
+            : "rgba(231, 76, 60, 0.8)";
+        ctx.lineWidth = 2;
+
+        ctx.fillRect(rectX, rectY, rectW, rectH);
+        ctx.strokeRect(rectX, rectY, rectW, rectH);
+      }
+
       animationFrameId = window.requestAnimationFrame(render);
     };
 
@@ -314,7 +375,20 @@ export const HTML5Canvas = () => {
     return () => {
       window.cancelAnimationFrame(animationFrameId);
     };
-  }, [camera, config, mapBounds, state.placedTiles, areImagesLoaded]);
+  }, [
+    camera,
+    config,
+    mapBounds,
+    state.placedTiles,
+    areImagesLoaded,
+    isDrawing,
+    drawStart,
+    drawEnd,
+    selectedTool,
+    placeMode,
+    eraseMode,
+    dispatch,
+  ]);
 
   return (
     <canvas
