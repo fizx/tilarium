@@ -43,6 +43,8 @@ export const HTML5Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isDrawingRef = useRef(false);
   const isDragging = useRef(false);
+  const previousStateRef = useRef(state);
+  const dirtyCellsRef = useRef<Set<string>>(new Set());
   const lastMousePosition = useRef({ x: 0, y: 0 });
   const pinchDist = useRef(0);
   const justTouched = useRef(false);
@@ -65,6 +67,29 @@ export const HTML5Canvas = () => {
       setAreImagesLoaded(true);
     });
   }, [config]);
+
+  useEffect(() => {
+    // Compare previous and current state to find dirty cells
+    const previousTiles = previousStateRef.current.placedTiles;
+    const currentTiles = state.placedTiles;
+
+    // Check for changed or added cells
+    for (const [key, cell] of currentTiles.entries()) {
+      const prevCell = previousTiles.get(key);
+      if (cell !== prevCell) {
+        dirtyCellsRef.current.add(key);
+      }
+    }
+
+    // Check for removed cells
+    for (const key of previousTiles.keys()) {
+      if (!currentTiles.has(key)) {
+        dirtyCellsRef.current.add(key);
+      }
+    }
+
+    previousStateRef.current = state;
+  }, [state]);
 
   const getGridCoordinates = useCallback(
     (clientX: number, clientY: number) => {
@@ -311,7 +336,9 @@ export const HTML5Canvas = () => {
       ctx.translate(camera.x, camera.y);
       ctx.scale(camera.zoom, camera.zoom);
 
-      // --- Drawing Grid ---
+      // --- Drawing Grid (runs only on initial load or full redraw) ---
+      // This part might be optimized further, but for now, we redraw the grid
+      // and background when the camera moves.
       const { gridSize } = config;
       const { minX, minY, maxX, maxY } = mapBounds;
 
@@ -326,49 +353,9 @@ export const HTML5Canvas = () => {
 
       // --- Drawing Tiles ---
       if (areImagesLoaded) {
+        // Redraw all tiles on camera move
         for (const [cellKey, cell] of state.placedTiles.entries()) {
-          const [x, y] = cellKey.split("-").map(Number);
-          // Basic culling
-          // A more robust implementation would calculate visible bounds
-          if (
-            x * gridSize >
-              -camera.x / camera.zoom + canvas.width / camera.zoom ||
-            y * gridSize >
-              -camera.y / camera.zoom + canvas.height / camera.zoom ||
-            (x + 1) * gridSize < -camera.x / camera.zoom ||
-            (y + 1) * gridSize < -camera.y / camera.zoom
-          ) {
-            continue;
-          }
-
-          for (const placedTile of cell.values()) {
-            if (!placedTile) continue;
-
-            const tileDef = config.tiles[placedTile.tileId];
-            if (!tileDef) continue;
-
-            const image = imageCache.get(tileDef.src);
-            if (!image) continue;
-
-            const destX = x * gridSize;
-            const destY = y * gridSize;
-
-            if (tileDef.spritesheet) {
-              ctx.drawImage(
-                image,
-                tileDef.spritesheet.x,
-                tileDef.spritesheet.y,
-                tileDef.spritesheet.width,
-                tileDef.spritesheet.height,
-                destX,
-                destY,
-                gridSize,
-                gridSize
-              );
-            } else {
-              ctx.drawImage(image, destX, destY, gridSize, gridSize);
-            }
-          }
+          dirtyCellsRef.current.add(cellKey);
         }
       }
 
@@ -390,6 +377,72 @@ export const HTML5Canvas = () => {
         ctx.lineTo(mapPixelLeft + mapPixelWidth, mapPixelTop + y);
         ctx.stroke();
       }
+
+      // --- Process Dirty Cells ---
+      if (areImagesLoaded) {
+        const sortedDirtyCells = Array.from(dirtyCellsRef.current).sort(
+          (a, b) => {
+            const aZ = Math.max(
+              ...[...(state.placedTiles.get(a)?.values() || [])].map(
+                (t) => config.tiles[t!.tileId]?.zIndex ?? 0
+              )
+            );
+            const bZ = Math.max(
+              ...[...(state.placedTiles.get(b)?.values() || [])].map(
+                (t) => config.tiles[t!.tileId]?.zIndex ?? 0
+              )
+            );
+            return aZ - bZ;
+          }
+        );
+
+        for (const cellKey of sortedDirtyCells) {
+          const [x, y] = cellKey.split("-").map(Number);
+          const { gridSize } = config;
+
+          ctx.clearRect(x * gridSize, y * gridSize, gridSize, gridSize);
+          ctx.fillStyle = "#f0f0f0";
+          ctx.fillRect(x * gridSize, y * gridSize, gridSize, gridSize);
+
+          const cell = state.placedTiles.get(cellKey);
+          if (cell) {
+            const sortedTiles = [...cell.values()]
+              .filter((t): t is PlacedTile => !!t)
+              .sort(
+                (a, b) =>
+                  (config.tiles[a.tileId]?.zIndex ?? 0) -
+                  (config.tiles[b.tileId]?.zIndex ?? 0)
+              );
+
+            for (const placedTile of sortedTiles) {
+              const tileDef = config.tiles[placedTile.tileId];
+              if (!tileDef) continue;
+              const image = imageCache.get(tileDef.src);
+              if (!image) continue;
+
+              const destX = x * gridSize;
+              const destY = y * gridSize;
+
+              if (tileDef.spritesheet) {
+                ctx.drawImage(
+                  image,
+                  tileDef.spritesheet.x,
+                  tileDef.spritesheet.y,
+                  tileDef.spritesheet.width,
+                  tileDef.spritesheet.height,
+                  destX,
+                  destY,
+                  gridSize,
+                  gridSize
+                );
+              } else {
+                ctx.drawImage(image, destX, destY, gridSize, gridSize);
+              }
+            }
+          }
+        }
+      }
+      dirtyCellsRef.current.clear();
 
       // Restore context state
       ctx.restore();
