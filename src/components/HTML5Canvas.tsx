@@ -41,6 +41,7 @@ export const HTML5Canvas = () => {
     hoveredTile,
   } = useEditor();
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isDrawingRef = useRef(false);
   const isDragging = useRef(false);
   const lastMousePosition = useRef({ x: 0, y: 0 });
   const pinchDist = useRef(0);
@@ -142,6 +143,7 @@ export const HTML5Canvas = () => {
           selectedTile) ||
         (selectedTool === "erase" && eraseMode === "rectangle")
       ) {
+        isDrawingRef.current = true;
         setIsDrawing(true);
         setDrawStart(coords);
         setDrawEnd(coords);
@@ -193,7 +195,7 @@ export const HTML5Canvas = () => {
       } else if (e.buttons === 1) {
         const coords = getGridCoordinates(clientX, clientY);
         if (coords) {
-          if (isDrawing) {
+          if (isDrawingRef.current) {
             setDrawEnd(coords);
           } else if (
             (selectedTool === "place" || selectedTool === "erase") &&
@@ -222,7 +224,7 @@ export const HTML5Canvas = () => {
   );
 
   const handleMouseUp = useCallback(() => {
-    if (isDrawing && drawStart && drawEnd) {
+    if (isDrawingRef.current && drawStart && drawEnd) {
       const startX = Math.min(drawStart.x, drawEnd.x);
       const endX = Math.max(drawStart.x, drawEnd.x);
       const startY = Math.min(drawStart.y, drawEnd.y);
@@ -250,6 +252,7 @@ export const HTML5Canvas = () => {
         });
       }
     }
+    isDrawingRef.current = false;
     isDragging.current = false;
     setIsDrawing(false);
     setDrawStart(null);
@@ -266,8 +269,10 @@ export const HTML5Canvas = () => {
   ]);
 
   const handleMouseLeave = useCallback(() => {
+    isDrawingRef.current = false;
     isDragging.current = false;
     setMouse(null);
+    setIsDrawing(false);
   }, [setMouse]);
 
   const handleWheel = useCallback(
