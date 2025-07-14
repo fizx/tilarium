@@ -99,7 +99,9 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         const newTileDef = config.tiles[tileId];
         if (!newTileDef || newTileDef.type === "background") return state;
 
-        const newPlacedTiles = new Map(state.placedTiles);
+        const newPlacedTiles = new Map(
+          [...state.placedTiles].map(([key, value]) => [key, new Map(value)])
+        );
         const key = `${x}-${y}`;
         const cell = new Map(newPlacedTiles.get(key));
         const existingTile = cell.get(newTileDef.zIndex);
@@ -172,21 +174,14 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         cell.set(newTileDef.zIndex, { x, y, tileId: finalTileId, source });
         newPlacedTiles.set(key, cell);
 
-        const finalPlacedTiles = updateSurroundingTiles(
-          newPlacedTiles,
-          x,
-          y,
-          autotileLookup,
-          config,
-          {
-            mode: isAutotileRep ? "best-fit" : "strict",
-            updateCenterTile: isAutotileRep,
-          }
-        );
+        updateSurroundingTiles(newPlacedTiles, x, y, autotileLookup, config, {
+          mode: isAutotileRep ? "best-fit" : "strict",
+          updateCenterTile: isAutotileRep,
+        });
 
         return {
           ...state,
-          placedTiles: finalPlacedTiles,
+          placedTiles: newPlacedTiles,
           sourceOfChange: "local",
         };
       }
@@ -195,7 +190,9 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         const tileDef = config.tiles[tileId];
         if (!tileDef) return state;
 
-        const newPlacedTiles = new Map(state.placedTiles);
+        const newPlacedTiles = new Map(
+          [...state.placedTiles].map(([key, value]) => [key, new Map(value)])
+        );
         const key = `${x}-${y}`;
         const cell = new Map(newPlacedTiles.get(key));
 
@@ -204,21 +201,14 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
           newPlacedTiles.set(key, cell);
         }
 
-        const finalPlacedTiles = updateSurroundingTiles(
-          newPlacedTiles,
-          x,
-          y,
-          autotileLookup,
-          config,
-          {
-            mode: "best-fit",
-            updateCenterTile: true,
-          }
-        );
+        updateSurroundingTiles(newPlacedTiles, x, y, autotileLookup, config, {
+          mode: "best-fit",
+          updateCenterTile: true,
+        });
 
         return {
           ...state,
-          placedTiles: finalPlacedTiles,
+          placedTiles: newPlacedTiles,
           sourceOfChange: "local",
         };
       }
@@ -254,12 +244,17 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         return { ...loadedState, sourceOfChange: "load" };
       }
       case "FILL_RECTANGLE": {
+        performance.mark("fill-rectangle-start");
+
         const { startX, startY, endX, endY, tileId } = action.payload;
         const tileDef = config.tiles[tileId];
         if (!tileDef) return state;
 
-        let newPlacedTiles = new Map(state.placedTiles);
+        const newPlacedTiles = new Map(
+          [...state.placedTiles].map(([key, value]) => [key, new Map(value)])
+        );
 
+        performance.mark("fill-rectangle-place-tiles-start");
         // First pass: Place all the tiles without updating neighbors
         for (let x = startX; x <= endX; x++) {
           for (let y = startY; y <= endY; y++) {
@@ -269,11 +264,21 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
             newPlacedTiles.set(key, cell);
           }
         }
+        performance.mark("fill-rectangle-place-tiles-end");
+        performance.measure(
+          "Fill Rectangle: Place Tiles",
+          "fill-rectangle-place-tiles-start",
+          "fill-rectangle-place-tiles-end"
+        );
 
+        performance.mark("fill-rectangle-autotile-update-total-start");
         // Second pass: Update autotiles for the entire filled area
         for (let x = startX; x <= endX; x++) {
           for (let y = startY; y <= endY; y++) {
-            newPlacedTiles = updateSurroundingTiles(
+            const markNameStart = `autotile-update-${x}-${y}-start`;
+            const markNameEnd = `autotile-update-${x}-${y}-end`;
+            performance.mark(markNameStart);
+            updateSurroundingTiles(
               newPlacedTiles,
               x,
               y,
@@ -281,8 +286,27 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
               config,
               { mode: "best-fit", updateCenterTile: true }
             );
+            performance.mark(markNameEnd);
+            performance.measure(
+              `Autotile Update @ ${x},${y}`,
+              markNameStart,
+              markNameEnd
+            );
           }
         }
+        performance.mark("fill-rectangle-autotile-update-total-end");
+        performance.measure(
+          "Fill Rectangle: Autotile Update (Total)",
+          "fill-rectangle-autotile-update-total-start",
+          "fill-rectangle-autotile-update-total-end"
+        );
+
+        performance.mark("fill-rectangle-end");
+        performance.measure(
+          "Fill Rectangle (Total)",
+          "fill-rectangle-start",
+          "fill-rectangle-end"
+        );
 
         return {
           ...state,
@@ -292,7 +316,9 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
       }
       case "ERASE_RECTANGLE": {
         const { startX, startY, endX, endY } = action.payload;
-        let newPlacedTiles = new Map(state.placedTiles);
+        const newPlacedTiles = new Map(
+          [...state.placedTiles].map(([key, value]) => [key, new Map(value)])
+        );
 
         // First pass: Erase the top tile in each cell within the rectangle
         for (let x = startX; x <= endX; x++) {
@@ -313,7 +339,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         // Second pass: Update autotiles for the entire erased area and its surroundings
         for (let x = startX - 1; x <= endX + 1; x++) {
           for (let y = startY - 1; y <= endY + 1; y++) {
-            newPlacedTiles = updateSurroundingTiles(
+            updateSurroundingTiles(
               newPlacedTiles,
               x,
               y,
@@ -341,7 +367,9 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         const targetGroup = config.tiles[topTile.tileId].autotile?.group;
         if (!targetGroup) return state; // Only wand erase autotiles for now
 
-        let newPlacedTiles = new Map(state.placedTiles);
+        const newPlacedTiles = new Map(
+          [...state.placedTiles].map(([key, value]) => [key, new Map(value)])
+        );
         const queue = [{ x, y }];
         const visited = new Set([`${x}-${y}`]);
 
@@ -393,7 +421,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
         // Update surroundings for all affected tiles after the erase
         for (const visitedKey of visited) {
           const [vx, vy] = visitedKey.split("-").map(Number);
-          newPlacedTiles = updateSurroundingTiles(
+          updateSurroundingTiles(
             newPlacedTiles,
             vx,
             vy,

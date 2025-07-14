@@ -354,10 +354,7 @@ export const updateSurroundingTiles = (
     mode: "best-fit" | "strict";
     updateCenterTile: boolean;
   }
-): PlacedTiles => {
-  const newPlacedTiles = new Map(
-    [...placedTiles].map(([key, value]) => [key, new Map(value)])
-  );
+): void => {
   const queue: [number, number][] = [[x, y]];
   const visited = new Set<string>([`${x},${y}`]);
   const autotileGroupsAtXY = new Set<string>();
@@ -373,7 +370,7 @@ export const updateSurroundingTiles = (
 
   for (const [ix, iy] of initialTiles) {
     const key = `${ix}-${iy}`;
-    const cell = newPlacedTiles.get(key);
+    const cell = placedTiles.get(key);
     if (cell) {
       for (const tile of cell.values()) {
         if (tile && config.tiles[tile.tileId]?.autotile) {
@@ -384,7 +381,7 @@ export const updateSurroundingTiles = (
   }
 
   if (autotileGroupsAtXY.size === 0) {
-    return newPlacedTiles;
+    return;
   }
 
   for (const [ix, iy] of initialTiles) {
@@ -422,12 +419,12 @@ export const updateSurroundingTiles = (
       const bitmask = calculateBitmask(
         cx,
         cy,
-        newPlacedTiles,
+        placedTiles,
         autotileGroup,
         config
       );
 
-      const currentCell = newPlacedTiles.get(`${cx}-${cy}`);
+      const currentCell = placedTiles.get(`${cx}-${cy}`);
       const currentTile = getPlacedTileFromCell(
         currentCell,
         autotileGroup,
@@ -469,5 +466,4 @@ export const updateSurroundingTiles = (
   }
 
   console.log("Autotile update finished.");
-  return newPlacedTiles;
 };
