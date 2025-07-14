@@ -134,12 +134,10 @@ export const TilePalette = ({
     // Open drawer immediately for autotiles.
     if (isAutotileRep && tile.autotile) {
       setAutotileGroupToShow(tile.autotile.group);
-      setPlaceMode("autotile");
-      setPreferredPlaceMode("autotile");
+      setPlaceMode(preferredPlaceMode);
     } else {
       setAutotileGroupToShow(null);
       setPlaceMode("manual");
-      setPreferredPlaceMode("autotile");
     }
   };
 
