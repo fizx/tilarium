@@ -9,7 +9,6 @@ import React, {
 import { TileConfig, TileDefinition } from "./config";
 import { TilemapState, PlacedTile, TilemapAction, PlacedTiles } from "./state";
 import { TilePalette } from "./components/TilePalette";
-import { DOMCanvas } from "./components/DOMCanvas";
 import { Toolbar } from "./components/Toolbar";
 import {
   EditorContext,
@@ -49,7 +48,6 @@ export interface TilemapEditorProps {
   onToolSelect?: (tool: Tool) => void;
   onTileSelect?: (tile?: TileDefinition) => void;
   canvasStyle?: React.CSSProperties;
-  renderMode?: "dom" | "canvas";
 }
 
 const getTopTile = (
@@ -76,7 +74,6 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
   onToolSelect,
   onTileSelect,
   canvasStyle,
-  renderMode = "dom",
 }) => {
   const autotileLookup = useMemo(() => createAutotileLookup(config), [config]);
 
@@ -916,7 +913,7 @@ export const TilemapEditor: React.FC<TilemapEditorProps> = ({
             style={{ ...canvasStyle, cursor: getCanvasCursor() }}
             onMouseEnter={() => setIsMouseOverUI(false)}
           >
-            {renderMode === "dom" ? <DOMCanvas /> : <HTML5Canvas />}
+            <HTML5Canvas />
             <Toolbar />
             {isDrawing && drawStart && drawEnd && (
               <div
