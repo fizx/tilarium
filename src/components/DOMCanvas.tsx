@@ -26,6 +26,7 @@ export const DOMCanvas = () => {
     setTileToReplace,
     setSelectedTool,
     setHoveredTile,
+    hoveredTile,
     setSelectedTile,
     placeMode,
     eraseMode,
@@ -227,6 +228,20 @@ export const DOMCanvas = () => {
         return;
       }
 
+      if (selectedTool === "eyedropper") {
+        if (hoveredTile) {
+          const tileDef = config.tiles[hoveredTile.tileId];
+          if (tileDef) {
+            setSelectedTile({
+              definition: tileDef,
+              isAutotileRep: !!tileDef.autotile,
+            });
+            setSelectedTool("place");
+          }
+        }
+        return;
+      }
+
       if (!coords) return;
 
       // Handle rectangle drawing modes for both place and erase
@@ -255,6 +270,10 @@ export const DOMCanvas = () => {
       eraseMode,
       selectedTile,
       applyToolAt,
+      hoveredTile,
+      config.tiles,
+      setSelectedTile,
+      setSelectedTool,
     ]
   );
 

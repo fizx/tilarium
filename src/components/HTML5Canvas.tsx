@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useCallback, useState } from "react";
 import { useEditor } from "../EditorContext";
+import { PlacedTile } from "../state";
 
 const imageCache = new Map<string, HTMLImageElement>();
 
@@ -34,6 +35,10 @@ export const HTML5Canvas = () => {
     eraseMode,
     selectedTile,
     dispatch,
+    setSelectedTile,
+    setSelectedTool,
+    setHoveredTile,
+    hoveredTile,
   } = useEditor();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isDragging = useRef(false);
@@ -114,6 +119,20 @@ export const HTML5Canvas = () => {
         return;
       }
 
+      if (selectedTool === "eyedropper") {
+        if (hoveredTile) {
+          const tileDef = config.tiles[hoveredTile.tileId];
+          if (tileDef) {
+            setSelectedTile({
+              definition: tileDef,
+              isAutotileRep: !!tileDef.autotile,
+            });
+            setSelectedTool("place");
+          }
+        }
+        return;
+      }
+
       const coords = getGridCoordinates(clientX, clientY);
       if (!coords) return;
 
@@ -138,6 +157,32 @@ export const HTML5Canvas = () => {
       e.preventDefault();
       const { clientX, clientY } = e;
       setMouse({ x: clientX, y: clientY });
+
+      const coords = getGridCoordinates(clientX, clientY);
+      if (coords) {
+        const key = `${coords.x}-${coords.y}`;
+        const cell = state.placedTiles.get(key);
+        if (cell) {
+          const tilesAtLocation = [...cell.values()].filter(
+            (t) => t
+          ) as PlacedTile[];
+          if (tilesAtLocation.length > 0) {
+            const topTile = tilesAtLocation.reduce((top, current) => {
+              const topZ = config.tiles[top.tileId]?.zIndex ?? -Infinity;
+              const currentZ =
+                config.tiles[current.tileId]?.zIndex ?? -Infinity;
+              return currentZ > topZ ? current : top;
+            });
+            setHoveredTile(topTile);
+          } else {
+            setHoveredTile(null);
+          }
+        } else {
+          setHoveredTile(null);
+        }
+      } else {
+        setHoveredTile(null);
+      }
 
       if (isDragging.current) {
         setMouse(null);
@@ -170,6 +215,9 @@ export const HTML5Canvas = () => {
       placeMode,
       eraseMode,
       applyToolAt,
+      state.placedTiles,
+      config.tiles,
+      setHoveredTile,
     ]
   );
 

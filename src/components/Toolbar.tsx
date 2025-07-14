@@ -94,6 +94,11 @@ export const Toolbar = () => {
         onSelectSubTool={setEraseMode}
         subToolIndicator={getEmojiForEraseMode(eraseMode)}
       />
+      <ToolButton
+        tool="eyedropper"
+        emoji="💧"
+        onClick={() => setSelectedTool("eyedropper")}
+      />
       <hr />
       <MultiToolButton
         tool="zoom"
