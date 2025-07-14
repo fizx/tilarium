@@ -35,6 +35,8 @@ export const DOMCanvas = () => {
     mapBounds,
   } = useEditor();
   const isDragging = useRef(false);
+  const configRef = useRef(config);
+  const stateRef = useRef(state);
   const lastMousePosition = useRef({ x: 0, y: 0 });
   const pinchDist = useRef(0);
   const justTouched = useRef(false);
@@ -48,6 +50,14 @@ export const DOMCanvas = () => {
     null
   );
   const [drawEnd, setDrawEnd] = useState<{ x: number; y: number } | null>(null);
+
+  useEffect(() => {
+    configRef.current = config;
+  }, [config]);
+
+  useEffect(() => {
+    stateRef.current = state;
+  }, [state]);
 
   const cursor = useMemo(() => {
     if (!isOverMap) return "default";
@@ -71,14 +81,14 @@ export const DOMCanvas = () => {
       const x = clientX - rect.left;
       const y = clientY - rect.top;
       const gridX = Math.floor(
-        (x - camera.x) / (config.gridSize * camera.zoom)
+        (x - camera.x) / (configRef.current.gridSize * camera.zoom)
       );
       const gridY = Math.floor(
-        (y - camera.y) / (config.gridSize * camera.zoom)
+        (y - camera.y) / (configRef.current.gridSize * camera.zoom)
       );
       return { x: gridX, y: gridY };
     },
-    [camera, config.gridSize, canvasRef]
+    [camera, canvasRef]
   );
 
   const handleZoomAtPoint = useCallback(
@@ -130,12 +140,12 @@ export const DOMCanvas = () => {
         return;
       }
 
-      if (config.mapSize !== "infinite") {
+      if (configRef.current.mapSize !== "infinite") {
         if (
           coords.x < 0 ||
-          coords.x >= config.mapSize.width ||
+          coords.x >= configRef.current.mapSize.width ||
           coords.y < 0 ||
-          coords.y >= config.mapSize.height
+          coords.y >= configRef.current.mapSize.height
         ) {
           setMouse(null);
           setHoveredTile(null);
@@ -148,14 +158,18 @@ export const DOMCanvas = () => {
 
       const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
       const snappedX =
-        coords.x * (config.gridSize * camera.zoom) + camera.x + rect.left;
+        coords.x * (configRef.current.gridSize * camera.zoom) +
+        camera.x +
+        rect.left;
       const snappedY =
-        coords.y * (config.gridSize * camera.zoom) + camera.y + rect.top;
+        coords.y * (configRef.current.gridSize * camera.zoom) +
+        camera.y +
+        rect.top;
 
       setMouse({ x: snappedX, y: snappedY });
 
       const key = `${coords.x}-${coords.y}`;
-      const cell = state.placedTiles.get(key);
+      const cell = stateRef.current.placedTiles.get(key);
 
       if (cell) {
         const tilesAtLocation = [...cell.values()].filter(
@@ -163,8 +177,10 @@ export const DOMCanvas = () => {
         ) as PlacedTile[];
         if (tilesAtLocation.length > 0) {
           const topTile = tilesAtLocation.reduce((top, current) => {
-            const topZ = config.tiles[top.tileId]?.zIndex ?? -Infinity;
-            const currentZ = config.tiles[current.tileId]?.zIndex ?? -Infinity;
+            const topZ =
+              configRef.current.tiles[top.tileId]?.zIndex ?? -Infinity;
+            const currentZ =
+              configRef.current.tiles[current.tileId]?.zIndex ?? -Infinity;
             return currentZ > topZ ? current : top;
           });
           setHoveredTile(topTile);
@@ -195,11 +211,9 @@ export const DOMCanvas = () => {
     },
     [
       camera,
-      config,
       getEventCoords,
       setMouse,
       setHoveredTile,
-      state.placedTiles,
       isDrawing,
       setDrawEnd,
       isDragging,
@@ -230,7 +244,7 @@ export const DOMCanvas = () => {
 
       if (selectedTool === "eyedropper") {
         if (hoveredTile) {
-          const tileDef = config.tiles[hoveredTile.tileId];
+          const tileDef = configRef.current.tiles[hoveredTile.tileId];
           if (tileDef) {
             setSelectedTile({
               definition: tileDef,
@@ -271,7 +285,6 @@ export const DOMCanvas = () => {
       selectedTile,
       applyToolAt,
       hoveredTile,
-      config.tiles,
       setSelectedTile,
       setSelectedTool,
     ]
